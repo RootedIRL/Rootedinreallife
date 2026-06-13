@@ -609,6 +609,63 @@ body {
   display: none;
 }
 
+/* Foundation videos */
+.fv-intro {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+.fv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.fv-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(154,138,176,0.12);
+}
+.fv-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--deep);
+}
+.fv-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.fv-body { padding: 0.85rem 1rem 1.1rem; }
+.fv-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.fv-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.fv-desc {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+.fv-bonus { border-left: 4px solid var(--gold); }
+
 /* Video placeholder */
 .video-placeholder {
   background: var(--deep);
@@ -1510,6 +1567,11 @@ body {
       </ul>
     </div>
 
+    <!-- Foundation Videos -->
+    <div class="section-label">Foundation Videos · Watch First</div>
+    <p class="fv-intro">Before our coaching begins, watch these six short videos in order. You do not need to take notes — just watch and receive. They are the foundation for everything we will do together. The seventh is a bonus on the stress response you can return to anytime.</p>
+    <div class="fv-grid" id="foundation-videos"></div>
+
     <!-- Weeks -->
     <div class="section-label">Your 6-Week Program</div>
     <div class="weeks-grid" id="weeks-container"></div>
@@ -1847,10 +1909,16 @@ body {
         <div class="download-sub">Your personalised stress + feelings guide</div>
         <div class="download-btn">Download PDF</div>
       </a>
-      <a class="download-card" href="https://drive.google.com/uc?export=download&id=1dlpMmRMbXtMezCW9l4RR5-7jDPCqPldq" target="_blank">
+      <a class="download-card" href="rooted-model-client.pdf" target="_blank">
         <span class="download-icon">✦</span>
         <div class="download-title">R.O.O.T.E.D. Model Guide</div>
         <div class="download-sub">The full model · all 6 letters · daily use</div>
+        <div class="download-btn">Download PDF</div>
+      </a>
+      <a class="download-card" href="rooted-model-worked-example.pdf" target="_blank">
+        <span class="download-icon">✝</span>
+        <div class="download-title">The Model in Motion</div>
+        <div class="download-sub">A worked example · unintentional → Bridge Thoughts → intentional</div>
         <div class="download-btn">Download PDF</div>
       </a>
       <a class="download-card" href="#" onclick="comingSoon(event)">
@@ -1959,9 +2027,36 @@ const WEEKS = [
   },
 ];
 
-// ── STATE ──────────────────────────────────────────────────────────────────
-let clientName = '';
-let progress = {};
+// ── FOUNDATION VIDEOS ───────────────────────────────────────────────────────
+const FOUNDATION_VIDEOS = [
+  { n: 1, id: 'gJETFe2HhIc', title: 'Why I Built This', desc: 'My story — and why this program exists.' },
+  { n: 2, id: '6Ios1LuERyw', title: 'The Four Temperaments', desc: 'How God wired your soul to engage the world.' },
+  { n: 3, id: '-fK8pFYcfCs', title: 'The Predominant Fault', desc: 'The one root pattern beneath the struggle.' },
+  { n: 4, id: 'qaXEHtSouxE', title: 'The Charisms', desc: 'The gifts God placed in you for others.' },
+  { n: 5, id: 'rkddcAUDoL4', title: 'The Saboteurs', desc: 'The inner patterns that block the gifts.' },
+  { n: 6, id: '0-iXhPKAjL8', title: 'The R.O.O.T.E.D. Model', desc: 'The framework for the whole journey.' },
+  { n: 7, id: 'MKa7tzVjLj0', title: 'The Stress Response', desc: 'Bonus · What your body does — and the protocol to use instead of reacting.', bonus: true },
+];
+
+function renderFoundationVideos() {
+  const grid = document.getElementById('foundation-videos');
+  if (!grid) return;
+  grid.innerHTML = FOUNDATION_VIDEOS.map(v => `
+    <div class="fv-card${v.bonus ? ' fv-bonus' : ''}">
+      <div class="fv-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/${v.id}" title="${v.title}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="fv-body">
+        <div class="fv-num">${v.bonus ? 'Bonus Video' : 'Video ' + v.n}</div>
+        <div class="fv-title">${v.title}</div>
+        <div class="fv-desc">${v.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+
 
 function getKey(id) { return `ril_${clientName}_${id}`; }
 
@@ -2036,6 +2131,7 @@ function attemptLogin() {
   loadProgress();
   loadNotes();
   setJournalLink(clientName);
+  renderFoundationVideos();
   updateProgressBar();
   setTimeout(() => { try { initCheckin(); } catch(e) { console.log('initCheckin',e); } try { initPrayer(); } catch(e) { console.log('initPrayer',e); } try { buildPastResponses(); } catch(e) { console.log('buildPast',e); } }, 100);
 
@@ -2170,7 +2266,7 @@ function toggleItem(id, el, weekIndex) {
 const CLIENT_JOURNALS = {
   'cassandra': 'https://drive.google.com/uc?export=download&id=1mnRQEdtk-E9stzOgNROhi01Yk2ZkOKZF',
   'lissette':  'https://drive.google.com/uc?export=download&id=1mnRQEdtk-E9stzOgNROhi01Yk2ZkOKZF',
-  'whitney':   'https://drive.google.com/uc?export=download&id=1IqbjUd9ooDBrPIp2ap-4fU3iMqJXtEB5',
+  'whitney':   'whitney-journal.pdf',
   'jenni':     '',
 };
 
