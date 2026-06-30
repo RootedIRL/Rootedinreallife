@@ -3,2917 +3,604 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Client Portal · Rooted in Real Life</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+<title>Rooted in Real Life</title>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --purple:       #6B5B8A;
-  --purple-light: #EDE5F5;
-  --purple-mid:   #8B7BA8;
-  --rose:         #C47B8A;
-  --rose-light:   #F7ECEF;
-  --green:        #5A7A5A;
-  --green-light:  #EAF1EA;
-  --gold:         #B8956A;
-  --gold-light:   #F5EDE0;
-  --gold-mid:     #D4A96A;
-  --ink:          #2A2230;
-  --deep:         #3D3450;
-  --parchment:    #FAF6F0;
-  --parch-dark:   #EEE4D5;
-  --border:       #D4C4E0;
-  --gray:         #888888;
-  --soft:         #F7F4FB;
-}
-
-body {
-  font-family: 'EB Garamond', serif;
-  color: var(--ink);
-  background: var(--parchment);
-  min-height: 100vh;
-}
-
-/* ── LOGIN SCREEN ─────────────────────────────────────────────────────── */
-#login-screen {
-  min-height: 100vh;
-  background: linear-gradient(160deg, var(--deep) 0%, #1A1430 55%, #2A1E3A 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.login-box {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(212,196,224,0.15);
-  padding: 3rem 2.5rem;
-  max-width: 420px;
-  width: 100%;
-  text-align: center;
-}
-
-.login-cross {
-  font-size: 1.5rem;
-  color: var(--gold);
-  opacity: 0.8;
-  margin-bottom: 1rem;
-}
-
-.login-brand {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(184,149,106,0.7);
-  margin-bottom: 1.25rem;
-}
-
-.login-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #F0EAF8;
-  margin-bottom: 0.4rem;
-}
-
-.login-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: rgba(184,149,106,0.75);
-  margin-bottom: 2rem;
-}
-
-.login-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(212,196,224,0.5);
-  display: block;
-  margin-bottom: 0.5rem;
-  text-align: left;
-}
-
-.login-input {
-  width: 100%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(212,196,224,0.2);
-  color: #F0EAF8;
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.login-input:focus { border-color: var(--gold); }
-.login-input::placeholder { color: rgba(240,234,248,0.25); }
-
-.login-btn {
-  width: 100%;
-  background: linear-gradient(135deg, var(--purple), var(--deep));
-  color: #F0EAF8;
-  border: none;
-  font-family: 'Cinzel', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 0.9rem 2rem;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  margin-bottom: 0.75rem;
-}
-.login-btn:hover { opacity: 0.88; }
-
-.login-error {
-  color: var(--rose);
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  display: none;
-}
-
-.login-scripture {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: rgba(184,149,106,0.45);
-  margin-top: 2rem;
-  line-height: 1.5;
-}
-
-/* ── PORTAL ───────────────────────────────────────────────────────────── */
-#portal { display: none; }
-
-/* Nav */
-.portal-nav {
-  background: var(--deep);
-  padding: 0 2rem;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 2px solid var(--gold);
-}
-
-.nav-brand {
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(240,234,248,0.8);
-}
-
-.nav-brand span { color: var(--gold); }
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-client {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: rgba(184,149,106,0.75);
-}
-
-.nav-logout {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(212,196,224,0.45);
-  cursor: pointer;
-  background: none;
-  border: none;
-  transition: color 0.2s;
-}
-.nav-logout:hover { color: var(--rose); }
-
-/* Portal header */
-.portal-header {
-  background: linear-gradient(135deg, var(--deep) 0%, #2A1E3A 100%);
-  padding: 3rem 2rem 2.5rem;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-
-.portal-greeting {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0.8;
-  margin-bottom: 0.6rem;
-}
-
-.portal-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #F0EAF8;
-  margin-bottom: 0.4rem;
-}
-
-.portal-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  color: rgba(184,149,106,0.75);
-  margin-bottom: 1.5rem;
-}
-
-/* Progress bar */
-.progress-wrap {
-  max-width: 500px;
-  margin: 0 auto;
-}
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Cinzel', serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(212,196,224,0.4);
-  margin-bottom: 0.4rem;
-}
-.progress-track {
-  height: 4px;
-  background: rgba(212,196,224,0.12);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--purple), var(--gold));
-  border-radius: 2px;
-  transition: width 0.5s ease;
-}
-
-/* Main content */
-.portal-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-}
-
-/* Section label */
-.section-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-  margin-bottom: 0.6rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* Start here card */
-.start-card {
-  background: linear-gradient(135deg, var(--purple-light), #F0EAF8);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--gold);
-  padding: 1.5rem 1.75rem;
-  margin-bottom: 2rem;
-}
-.start-card h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--purple);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.6rem;
-}
-.start-card p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-}
-.start-steps {
-  margin: 0.75rem 0 0 0;
-  padding: 0;
-  list-style: none;
-}
-.start-steps li {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  padding: 0.35rem 0;
-  font-size: 0.97rem;
-  line-height: 1.5;
-  color: var(--ink);
-  border-bottom: 1px solid var(--border);
-}
-.start-steps li:last-child { border-bottom: none; }
-.step-num {
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--gold);
-  min-width: 1.2rem;
-  padding-top: 2px;
-}
-
-/* Week cards */
-.weeks-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
-}
-
-.week-card {
-  background: white;
-  border: 1px solid var(--border);
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-.week-card:hover { box-shadow: 0 4px 20px rgba(107,91,138,0.1); }
-
-.week-header {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 1rem 1.25rem;
-  cursor: pointer;
-  user-select: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
-}
-.week-header.open { border-bottom-color: var(--border); }
-
-.week-num {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: white;
-  background: var(--purple);
-  padding: 0.35rem 0.65rem;
-  flex-shrink: 0;
-}
-
-.week-title-wrap { flex: 1; }
-
-.week-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-
-.week-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--gray);
-  margin-top: 0.1rem;
-}
-
-.week-progress {
-  font-family: 'Cinzel', serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-  flex-shrink: 0;
-}
-
-.week-chevron {
-  color: var(--border);
-  font-size: 0.9rem;
-  transition: transform 0.2s;
-  flex-shrink: 0;
-}
-.week-chevron.open { transform: rotate(180deg); }
-
-.week-body {
-  display: none;
-  padding: 1.25rem;
-}
-.week-body.open { display: block; }
-
-/* Resource items */
-.resource-list { display: flex; flex-direction: column; gap: 0.6rem; }
-
-.resource-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background: var(--soft);
-  border: 1px solid var(--border);
-  transition: background 0.2s;
-}
-.resource-item:hover { background: var(--purple-light); }
-
-.resource-check {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border);
-  border-radius: 50%;
-  flex-shrink: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  color: transparent;
-  transition: all 0.2s;
-}
-.resource-check.checked {
-  background: var(--green);
-  border-color: var(--green);
-  color: white;
-}
-
-.resource-icon {
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.resource-info { flex: 1; }
-
-.resource-title {
-  font-family: 'EB Garamond', serif;
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--ink);
-  line-height: 1.3;
-}
-
-.resource-desc {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--gray);
-  margin-top: 0.1rem;
-}
-
-.resource-action {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--purple);
-  border: 1px solid var(--purple);
-  padding: 0.35rem 0.75rem;
-  cursor: pointer;
-  background: none;
-  transition: all 0.2s;
-  text-decoration: none;
-  display: inline-block;
-  flex-shrink: 0;
-}
-.resource-action:hover {
-  background: var(--purple);
-  color: white;
-}
-.resource-action.gold {
-  color: var(--gold);
-  border-color: var(--gold);
-}
-.resource-action.gold:hover {
-  background: var(--gold);
-  color: white;
-}
-
-/* Downloads section */
-.downloads-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-
-.download-card {
-  background: white;
-  border: 1px solid var(--border);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  transition: box-shadow 0.2s, border-color 0.2s;
-  cursor: pointer;
-  text-decoration: none;
-}
-.download-card:hover {
-  box-shadow: 0 4px 16px rgba(107,91,138,0.12);
-  border-color: var(--purple-mid);
-}
-
-.download-icon { font-size: 1.75rem; margin-bottom: 0.6rem; display: block; }
-
-.download-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  line-height: 1.4;
-  margin-bottom: 0.3rem;
-}
-
-.download-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.82rem;
-  color: var(--gray);
-}
-
-.download-btn {
-  display: inline-block;
-  margin-top: 0.75rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 0.1rem;
-}
-
-/* Notes area */
-.notes-wrap {
-  background: white;
-  border: 1px solid var(--border);
-  padding: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.notes-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-  margin-bottom: 0.5rem;
-}
-
-.notes-area {
-  width: 100%;
-  min-height: 120px;
-  border: 1px solid var(--border);
-  background: var(--soft);
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  color: var(--ink);
-  padding: 0.75rem;
-  resize: vertical;
-  outline: none;
-  line-height: 1.6;
-}
-.notes-area:focus { border-color: var(--purple); }
-
-.notes-save {
-  margin-top: 0.6rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: white;
-  background: var(--green);
-  border: none;
-  padding: 0.5rem 1.25rem;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-.notes-save:hover { opacity: 0.85; }
-
-.notes-saved {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--green);
-  margin-left: 0.75rem;
-  display: none;
-}
-
-/* Foundation videos */
-.fv-intro {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  margin-bottom: 1.25rem;
-}
-.fv-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-.fv-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(154,138,176,0.12);
-}
-.fv-embed {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: var(--deep);
-}
-.fv-embed iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-.fv-body { padding: 0.85rem 1rem 1.1rem; }
-.fv-num {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.3rem;
-}
-.fv-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  color: var(--ink);
-  margin-bottom: 0.35rem;
-}
-.fv-desc {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 0.88rem;
-  line-height: 1.45;
-  color: var(--ink-soft);
-}
-.fv-bonus { border-left: 4px solid var(--gold); }
-
-/* Video placeholder */
-.video-placeholder {
-  background: var(--deep);
-  aspect-ratio: 16/9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  gap: 0.5rem;
-}
-.video-play { font-size: 2.5rem; opacity: 0.3; }
-.video-coming {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(184,149,106,0.5);
-}
-
-/* Examen section */
-.examen-card {
-  background: var(--gold-light);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--gold);
-  padding: 1.25rem 1.5rem;
-  margin-top: 0.75rem;
-}
-.examen-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-.examen-q {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--ink);
-  line-height: 1.65;
-  margin-bottom: 0.35rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--gold-mid);
-}
-
-/* ── Responsive ────────────────────────────────────────────────────────── */
-/* ── DAILY CHECK-IN ────────────────────────────────────────────────────── */
-.checkin-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.checkin-date {
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gray);
-}
-.checkin-streak {
-  font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
-  color: var(--rose);
-  font-weight: 600;
-}
-
-/* Progress ring */
-.ring-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0.5rem 0 1.5rem;
-  gap: 0.5rem;
-}
-.ring-svg { width: 120px; height: 120px; }
-.ring-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--gray);
-  text-align: center;
-}
-
-/* Section accordion */
-.ci-section {
-  border: 1px solid var(--border);
-  margin-bottom: 0.75rem;
-  background: white;
-  overflow: hidden;
-}
-.ci-section-hd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  cursor: pointer;
-  user-select: none;
-  background: var(--soft);
-  border-bottom: 1px solid transparent;
-  transition: background 0.2s;
-}
-.ci-section-hd:hover { background: var(--purple-light); }
-.ci-section-title {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: 0.05em;
-}
-.ci-icon { font-size: 1.1rem; }
-.ci-section-right {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.ci-done-badge {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: white;
-  background: var(--green);
-  padding: 0.25rem 0.6rem;
-}
-.ci-chevron {
-  color: var(--border);
-  font-size: 1rem;
-  transition: transform 0.2s;
-}
-.ci-chevron.open { transform: rotate(180deg); }
-.ci-section-body {
-  display: none;
-  padding: 1.25rem;
-  border-top: 1px solid var(--border);
-}
-.ci-section-body.open { display: block; }
-.ci-intro {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--gray);
-  margin-bottom: 1rem;
-}
-
-/* R.O.O.T.E.D. grid */
-.rooted-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-bottom: 1rem;
-}
-.rooted-letter {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-.letter-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: white;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.letter-content { flex: 1; }
-.letter-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-  margin-bottom: 0.15rem;
-}
-.letter-q {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--ink);
-  line-height: 1.4;
-  margin-bottom: 0.35rem;
-}
-.letter-input {
-  width: 100%;
-  min-height: 60px;
-  border: 1px solid var(--border);
-  background: var(--soft);
-  font-family: 'EB Garamond', serif;
-  font-size: 0.97rem;
-  color: var(--ink);
-  padding: 0.5rem 0.75rem;
-  resize: vertical;
-  outline: none;
-  line-height: 1.5;
-  transition: border-color 0.2s;
-}
-.letter-input:focus { border-color: var(--purple); background: white; }
-
-/* Virtue chips */
-.virtue-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.virtue-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.9rem;
-  border: 1.5px solid var(--border);
-  background: white;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.18s;
-  position: relative;
-}
-.virtue-chip:hover { border-color: var(--purple-mid); background: var(--purple-light); }
-.virtue-chip.checked {
-  background: var(--green);
-  border-color: var(--green);
-}
-.vchip-icon { font-size: 1rem; }
-.vchip-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-  transition: color 0.18s;
-}
-.virtue-chip.checked .vchip-label { color: white; }
-.vchip-check {
-  font-size: 0.75rem;
-  color: white;
-  opacity: 0;
-  transition: opacity 0.18s;
-}
-.virtue-chip.checked .vchip-check { opacity: 1; }
-
-/* Surrender */
-.surrender-wrap { margin-bottom: 1rem; }
-.surrender-label {
-  display: block;
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 0.4rem;
-}
-.surrender-input {
-  width: 100%;
-  border: 1px solid var(--border);
-  background: var(--soft);
-  font-family: 'EB Garamond', serif;
-  font-size: 1.05rem;
-  color: var(--ink);
-  padding: 0.65rem 0.9rem;
-  outline: none;
-  margin-bottom: 0.9rem;
-  transition: border-color 0.2s;
-}
-.surrender-input:focus { border-color: var(--gold); background: white; }
-.surrender-check-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-.surrender-check-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  user-select: none;
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  color: var(--ink);
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.sur-circle {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  color: transparent;
-  flex-shrink: 0;
-  transition: all 0.18s;
-}
-.sur-circle.checked {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: white;
-}
-
-/* Save button + message */
-.ci-save-btn {
-  background: var(--purple);
-  color: white;
-  border: none;
-  font-family: 'Cinzel', serif;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 0.65rem 1.5rem;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  margin-top: 0.25rem;
-}
-.ci-save-btn:hover { opacity: 0.85; }
-.ci-saved-msg {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--green);
-  margin-top: 0.4rem;
-  min-height: 1.2rem;
-}
-
-/* Day complete card */
-.day-complete {
-  background: linear-gradient(135deg, var(--deep), #1A1430);
-  padding: 2.5rem 2rem;
-  text-align: center;
-  border: 1px solid var(--border);
-  margin-top: 1rem;
-}
-.day-complete-cross {
-  font-size: 2rem;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-}
-.day-complete-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #F0EAF8;
-  margin-bottom: 0.4rem;
-}
-.day-complete-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  color: rgba(240,234,248,0.7);
-  margin-bottom: 0.75rem;
-}
-.day-complete-verse {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--gold);
-  opacity: 0.8;
-}
-
-
-@media (max-width: 600px) {
-  .portal-main { padding: 1.5rem 1rem 3rem; }
-  .portal-title { font-size: 1.4rem; }
-  .week-header { gap: 0.75rem; padding: 0.85rem 1rem; }
-  .week-title { font-size: 0.85rem; }
-  .downloads-grid { grid-template-columns: 1fr 1fr; }
-  .nav-client { display: none; }
-  .virtue-grid { gap: 0.4rem; }
-  .virtue-chip { padding: 0.4rem 0.7rem; }
-  .vchip-label { font-size: 0.55rem; }
-  .rooted-letter { flex-direction: column; gap: 0.4rem; }
-  .letter-badge { width: 28px; height: 28px; font-size: 0.75rem; }
-}
-
-/* ── PRAYER TRACKER ─────────────────────────────────────────────────────── */
-.prayer-card {
-  border: 1px solid var(--border);
-  padding: 1rem 1.25rem;
-  margin-bottom: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: white;
-}
-.prayer-card:hover { background: var(--gold-light); border-color: var(--gold); }
-.prayer-card.checked { background: var(--gold-light); border-left: 4px solid var(--gold); border-color: var(--gold); }
-.prayer-card-top {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;
-}
-.prayer-time-badge {
-  font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--gold);
-}
-.prayer-check-circle {
-  width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; color: transparent; transition: all 0.2s;
-}
-.prayer-check-circle.checked { background: var(--gold); border-color: var(--gold); color: white; }
-.prayer-label {
-  font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.06em; color: var(--ink); margin-bottom: 0.4rem;
-}
-.prayer-text {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 1rem; color: var(--ink); line-height: 1.65; margin-bottom: 0.4rem;
-}
-.prayer-scripture {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 0.85rem; color: var(--gold);
-}
-.prayer-history-wrap {
-  margin: 1rem 0 0.75rem; padding: 0.75rem;
-  background: var(--soft); border: 1px solid var(--border);
-}
-.prayer-history-label {
-  font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--purple-mid); margin-bottom: 0.6rem;
-}
-.prayer-history-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.prayer-day-dot { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
-.prayer-dot-label {
-  font-family: 'Cinzel', serif; font-size: 0.45rem; letter-spacing: 0.08em;
-  color: var(--gray); text-transform: uppercase;
-}
-.prayer-dot {
-  width: 32px; height: 32px; border-radius: 50%;
-  border: 2px solid var(--border);
-  display: flex; align-items: center; justify-content: center; font-size: 0.65rem;
-}
-.prayer-dot.both { background: var(--gold); border-color: var(--gold); color: white; }
-.prayer-dot.morning-only { background: var(--gold-light); border-color: var(--gold); color: var(--gold); }
-.prayer-dot.evening-only { background: var(--purple-light); border-color: var(--purple); color: var(--purple); }
-.prayer-dot.none { background: white; color: var(--border); }
-
-/* ── PAST RESPONSES ─────────────────────────────────────────────────────── */
-.past-responses-nav {
-  display: flex;
-  gap: 0;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-.past-nav-btn {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray);
-  padding: 0.55rem 1rem;
-  cursor: pointer;
-  border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  background: none;
-  transition: all 0.2s;
-}
-.past-nav-btn:hover { color: var(--purple); }
-.past-nav-btn.active { color: var(--purple); border-bottom-color: var(--purple); font-weight: 600; }
-
-.past-tab { display: none; }
-.past-tab.active { display: block; }
-
-.past-day-card {
-  border: 1px solid var(--border);
-  margin-bottom: 0.75rem;
-  overflow: hidden;
-}
-.past-day-hd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 1rem;
-  background: var(--soft);
-  cursor: pointer;
-  border-bottom: 1px solid transparent;
-  transition: background 0.2s;
-}
-.past-day-hd:hover { background: var(--purple-light); }
-.past-day-hd.open { border-bottom-color: var(--border); }
-.past-day-date {
-  font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--purple);
-}
-.past-day-preview {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.88rem;
-  color: var(--gray);
-  max-width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.past-day-body {
-  display: none;
-  padding: 1rem;
-}
-.past-day-body.open { display: block; }
-.past-entry {
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
-}
-.past-entry:last-child { border-bottom: none; margin-bottom: 0; }
-.past-entry-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-  margin-bottom: 0.3rem;
-}
-.past-entry-value {
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  color: var(--ink);
-  line-height: 1.6;
-  white-space: pre-wrap;
-}
-.past-empty {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--gray);
-  padding: 1rem;
-  text-align: center;
-  border: 1px solid var(--border);
-  background: var(--soft);
-}
-
-.wellness-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.wellness-card {
-  background: white;
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.wellness-card-hd {
-  background: var(--soft);
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border);
-  font-family: 'Cinzel', serif;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--purple);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.wellness-card-body { padding: 1rem; }
-
-/* Water tracker */
-.water-glasses {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.5rem;
-}
-.water-glass {
-  font-size: 1.4rem;
-  cursor: pointer;
-  opacity: 0.25;
-  transition: opacity 0.18s, transform 0.18s;
-  user-select: none;
-}
-.water-glass.filled { opacity: 1; transform: scale(1.1); }
-.water-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.88rem;
-  color: var(--gray);
-}
-
-/* Meal tracker */
-.meal-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.meal-row:last-child { border-bottom: none; }
-.meal-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold);
-  min-width: 70px;
-  padding-top: 4px;
-}
-.meal-input {
-  flex: 1;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.97rem;
-  color: var(--ink);
-  outline: none;
-  padding: 2px 4px;
-}
-.meal-input:focus { border-bottom-color: var(--gold); }
-.meal-cal {
-  width: 55px;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.97rem;
-  color: var(--purple);
-  outline: none;
-  padding: 2px 4px;
-  text-align: right;
-}
-.meal-cal:focus { border-bottom-color: var(--purple); }
-
-/* Calorie counter */
-.cal-display {
-  text-align: center;
-  padding: 0.75rem 0;
-}
-.cal-number {
-  font-family: 'Cinzel', serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--purple);
-  line-height: 1;
-}
-.cal-goal {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.88rem;
-  color: var(--gray);
-  margin-top: 0.2rem;
-}
-.cal-bar-track {
-  height: 8px;
-  background: var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0.6rem 0 0.4rem;
-}
-.cal-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), var(--gold));
-  border-radius: 4px;
-  transition: width 0.4s ease;
-}
-.cal-bar-fill.over { background: linear-gradient(90deg, var(--gold), var(--rose)); }
-
-/* Movement */
-.movement-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.movement-row:last-child { border-bottom: none; }
-.movement-label {
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.movement-check {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  color: transparent;
-  transition: all 0.18s;
-  flex-shrink: 0;
-}
-.movement-check.checked {
-  background: var(--green);
-  border-color: var(--green);
-  color: white;
-}
-.movement-mins {
-  width: 48px;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.97rem;
-  color: var(--green);
-  text-align: center;
-  outline: none;
-}
-
-/* Weight log */
-.weight-entry {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-.weight-input {
-  width: 80px;
-  border: 1px solid var(--border);
-  background: var(--soft);
-  font-family: 'Cinzel', serif;
-  font-size: 1.1rem;
-  color: var(--purple);
-  text-align: center;
-  padding: 0.4rem;
-  outline: none;
-}
-.weight-input:focus { border-color: var(--purple); }
-.weight-unit {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--gray);
-}
-.weight-history {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  max-height: 120px;
-  overflow-y: auto;
-}
-.weight-entry-row {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
-  color: var(--gray);
-  padding: 0.2rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.weight-entry-row span:first-child { color: var(--purple); font-weight: 500; }
-
-/* Mood + energy */
-.mood-sliders { display: flex; flex-direction: column; gap: 0.75rem; }
-.mood-row { display: flex; flex-direction: column; gap: 0.3rem; }
-.mood-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.mood-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-}
-.mood-val {
-  font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--purple);
-}
-.mood-slider {
-  width: 100%;
-  -webkit-appearance: none;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--border);
-  outline: none;
-  cursor: pointer;
-}
-.mood-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: var(--purple);
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(107,91,138,0.3);
-}
-
-.wellness-save-btn {
-  width: 100%;
-  background: var(--purple);
-  color: white;
-  border: none;
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 0.6rem 1rem;
-  cursor: pointer;
-  margin-top: 0.75rem;
-  transition: opacity 0.2s;
-}
-.wellness-save-btn:hover { opacity: 0.85; }
-.wellness-saved {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--green);
-  text-align: center;
-  margin-top: 0.3rem;
-  min-height: 1rem;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#FAF6F0;color:#2A2230;font-size:14px;min-height:100vh}
+button{cursor:pointer;font-family:Georgia,serif;border:none}
+button:focus{outline:2px solid #B8956A}
+textarea,input{font-family:Georgia,serif}
+textarea:focus,input:focus{outline:2px solid #B8956A;border-color:#B8956A}
+.hidden{display:none!important}
+.scroll{overflow-x:auto}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:#8B7BA8;border-radius:3px}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:6px;background:#2A2230}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 </style>
 </head>
 <body>
 
-<!-- ── LOGIN SCREEN ─────────────────────────────────────────────────────── -->
+<!-- LOGIN -->
 <div id="login-screen">
-  <div class="login-box">
-    <div class="login-cross">✝</div>
-    <div class="login-brand">Rooted in Real Life · Client Portal</div>
-    <h1 class="login-title">Welcome Back</h1>
-    <p class="login-sub">Enter your name and access code to continue.</p>
-
-    <label class="login-label">Your First Name</label>
-    <input type="text" id="client-name-input" class="login-input" placeholder="Your first name" autocomplete="off">
-
-    <label class="login-label">Access Code</label>
-    <input type="password" id="password-input" class="login-input" placeholder="Enter your code" autocomplete="off">
-
-    <button class="login-btn" onclick="attemptLogin()">Enter My Portal →</button>
-    <div class="login-error" id="login-error">That code doesn't match. Please check with Cassandra.</div>
-
-    <p class="login-scripture">"Before I formed you in the womb I knew you." — Jeremiah 1:5</p>
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#2A2230">
+    <div style="background:#FAF6F0;border-radius:8px;padding:40px 36px;max-width:360px;width:90%;text-align:center;border-top:4px solid #B8956A">
+      <div style="color:#B8956A;font-size:30px;margin-bottom:10px">&#10013;</div>
+      <div style="font-size:22px;font-weight:bold;color:#2A2230;margin-bottom:4px">Rooted in Real Life</div>
+      <div style="font-style:italic;font-size:13px;color:#8B7BA8;margin-bottom:20px">Catholic Life Coaching</div>
+      <div style="border-top:1px solid #D4C8E0;margin-bottom:20px"></div>
+      <div style="font-size:12px;color:#4A3F5C;margin-bottom:12px;text-align:left">Enter your access code to continue:</div>
+      <input id="pw-input" type="password" placeholder="Access code"
+        style="width:100%;border:1px solid #B8B4C0;border-radius:4px;padding:10px 14px;font-size:14px;color:#2A2230;background:#fff;margin-bottom:10px"
+        onkeydown="if(event.key==='Enter')tryLogin()">
+      <button onclick="tryLogin()"
+        style="width:100%;background:#6B5B8A;color:#fff;border-radius:4px;padding:11px;font-size:14px;font-weight:bold;margin-bottom:10px">
+        Enter Portal
+      </button>
+      <div id="login-error" style="color:#C47B8A;font-size:12px;display:none">
+        Incorrect access code. Please try again.
+      </div>
+      <div style="font-style:italic;font-size:11px;color:#B8B4C0;margin-top:16px">
+        "Before I formed you in the womb I knew you." — Jeremiah 1:5
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ── PORTAL ───────────────────────────────────────────────────────────── -->
-<div id="portal">
+<!-- PORTAL -->
+<div id="portal" class="hidden">
 
-  <!-- Nav -->
-  <nav class="portal-nav">
-    <div class="nav-brand">Rooted in <span>Real Life</span></div>
-    <div class="nav-right">
-      <div class="nav-client" id="nav-client-name"></div>
-      <button class="nav-logout" onclick="logout()">Sign Out</button>
-    </div>
-  </nav>
-
-  <!-- Header -->
-  <div class="portal-header">
-    <div class="portal-greeting">Everyday Holiness · Your Space</div>
-    <h1 class="portal-title" id="portal-greeting-name">Welcome, friend</h1>
-    <p class="portal-sub">Six weeks. Your temperament, your charisms, your growing edges — woven into a framework rooted in Scripture, the Catechism, and the saints.</p>
-
-    <div class="progress-wrap">
-      <div class="progress-label">
-        <span>Your Progress</span>
-        <span id="progress-pct">0% complete</span>
+  <div id="portal-header" style="background:#2A2230;border-bottom:3px solid #B8956A;position:sticky;top:0;z-index:100">
+    <div style="max-width:860px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div>
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px">ROOTED IN REAL LIFE</div>
+        <div id="header-name" style="color:#fff;font-size:17px;font-weight:bold;margin-top:1px"></div>
       </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <button id="nav-home"    onclick="showTab('home')"    style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">HOME</button>
+        <button id="nav-videos" onclick="showTab('videos')"  style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">VIDEOS</button>
+        <button id="nav-journal" onclick="showTab('journal')" style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">JOURNAL</button>
+        <button id="nav-tracker" onclick="showTab('tracker')" style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">TRACKER</button>
+        <button onclick="logout()" style="background:none;color:#4A3F5C;font-size:10px;padding:5px 10px;border-radius:4px">Sign out</button>
       </div>
     </div>
   </div>
 
-  <!-- Main -->
-  <div class="portal-main">
+  <div style="max-width:860px;margin:0 auto;padding:16px 14px 60px">
 
-    <!-- Start here -->
-    <div class="section-label">Start Here</div>
-    <div class="start-card">
-      <h3>✝ How to Navigate Your Portal</h3>
-      <p>This is your personal space for the Everyday Holiness program. Everything you need for the next six weeks lives here.</p>
-      <ul class="start-steps">
-        <li><span class="step-num">1</span>Work through each week in order. Click a week to open it.</li>
-        <li><span class="step-num">2</span>Watch the video first, then complete the worksheet for that week.</li>
-        <li><span class="step-num">3</span>Tick the circle on each item when you have completed it — your progress saves automatically.</li>
-        <li><span class="step-num">4</span>Use the notes section each week to journal your reflections. They save in your browser.</li>
-        <li><span class="step-num">5</span>Download your PDFs from the Resources section below and keep them somewhere you can return to.</li>
-        <li><span class="step-num">6</span>Your coaching sessions with Cassandra happen on Tuesdays and Thursdays. Come to each session having completed that week's video and worksheet.</li>
-      </ul>
+    <!-- HOME -->
+    <div id="tab-home">
+      <div id="welcome-banner" style="background:#2A2230;border-radius:6px;padding:20px;margin-bottom:16px;border-bottom:2px solid #B8956A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:4px">WELCOME BACK</div>
+        <div id="welcome-name" style="color:#fff;font-size:22px;font-weight:bold;margin-bottom:6px"></div>
+        <div id="welcome-verse" style="color:#B8956A;font-style:italic;font-size:12px;line-height:1.6"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:14px">
+        <div style="background:#2A2230;padding:8px 16px;color:#B8956A;font-size:9px;letter-spacing:1px">YOUR SOUL PORTRAIT</div>
+        <div id="soul-portrait-rows"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:14px">
+        <div style="background:#2A2230;padding:8px 16px;color:#B8956A;font-size:9px;letter-spacing:1px">YOUR THREE GOALS</div>
+        <div id="goals-rows"></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+        <button onclick="showTab('videos')"  style="background:#6B5B8A;color:#fff;border-radius:6px;padding:14px 10px;font-size:12px;font-weight:bold;line-height:1.6">&#9654;<br>Foundation<br>Videos</button>
+        <button onclick="showTab('journal')" style="background:#C47B8A;color:#fff;border-radius:6px;padding:14px 10px;font-size:12px;font-weight:bold;line-height:1.6">&#9998;<br>Six-Week<br>Journal</button>
+        <button onclick="showTab('tracker')" style="background:#5A7A5A;color:#fff;border-radius:6px;padding:14px 10px;font-size:12px;font-weight:bold;line-height:1.6">&#10003;<br>Virtue<br>Tracker</button>
+      </div>
+
+      <div style="background:#EDE5F5;border-left:3px solid #B8956A;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px">
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:1px;margin-bottom:4px">YOUR PATRON SAINTS</div>
+        <div id="saints-text" style="font-size:12px;color:#4A3F5C;font-style:italic;line-height:1.6"></div>
+      </div>
+
+      <div id="save-status" style="text-align:center;font-size:11px;color:#B8B4C0;font-style:italic;padding:8px">All notes save automatically to this device.</div>
     </div>
 
-    <!-- Foundation Videos -->
-    <div class="section-label">Foundation Videos · Watch First</div>
-    <p class="fv-intro">Before our coaching begins, watch these six short videos in order. You do not need to take notes — just watch and receive. They are the foundation for everything we will do together. The seventh is a bonus on the stress response you can return to anytime.</p>
-    <div class="fv-grid" id="foundation-videos"></div>
-
-    <!-- Weeks -->
-    <div class="section-label">Your 6-Week Program</div>
-    <div class="weeks-grid" id="weeks-container"></div>
-
-    <!-- Notes -->
-    <div class="section-label">This Week's Reflection Journal</div>
-    <div class="notes-wrap">
-      <div class="notes-label">Your private notes · saved automatically in your browser</div>
-      <textarea class="notes-area" id="journal-notes" placeholder="What is stirring this week? What landed from the video? What are you noticing about yourself in the ordinary moments?"></textarea>
-      <div>
-        <button class="notes-save" onclick="saveNotes()">Save Notes</button>
-        <span class="notes-saved" id="notes-saved-msg">✓ Saved</span>
+    <!-- VIDEOS -->
+    <div id="tab-videos" class="hidden">
+      <div style="background:#2A2230;border-radius:6px;padding:16px;margin-bottom:14px;border-bottom:2px solid #B8956A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:3px">FOUNDATION VIDEOS</div>
+        <div style="color:#fff;font-size:18px;font-weight:bold">Your Video Lessons</div>
+        <div style="color:#B8B4C0;font-size:12px;font-style:italic;margin-top:2px">Watch one video per week before your coaching session.</div>
       </div>
+      <div id="video-list"></div>
     </div>
 
-    <!-- Evening Examen -->
-    <!-- Daily Check-In -->
-    <div class="section-label" style="margin-top:2rem" id="daily-checkin-label">✝ Daily Check-In</div>
-
-    <div id="daily-checkin">
-
-      <!-- Day header + streak -->
-      <div class="checkin-header">
-        <div class="checkin-date" id="checkin-date"></div>
-        <div class="checkin-streak" id="checkin-streak">🔥 <span id="streak-count">0</span> day streak</div>
+    <!-- JOURNAL -->
+    <div id="tab-journal" class="hidden">
+      <div style="background:#2A2230;border-radius:6px;padding:16px;margin-bottom:14px;border-bottom:2px solid #B8956A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:3px">SIX-WEEK JOURNAL</div>
+        <div style="color:#fff;font-size:18px;font-weight:bold">Daily Morning &amp; Evening Pages</div>
+        <div style="color:#B8B4C0;font-size:12px;font-style:italic;margin-top:2px">Your notes save automatically to this device.</div>
       </div>
-
-      <!-- Progress ring -->
-      <div class="ring-wrap">
-        <svg class="ring-svg" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="52" fill="none" stroke="#EDE5F5" stroke-width="8"/>
-          <circle cx="60" cy="60" r="52" fill="none" stroke="#6B5B8A" stroke-width="8"
-                  stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327"
-                  id="ring-fill" style="transition:stroke-dashoffset 0.6s ease;transform:rotate(-90deg);transform-origin:60px 60px"/>
-          <text x="60" y="56" text-anchor="middle" font-family="Cinzel,serif" font-size="22" fill="#6B5B8A" font-weight="700" id="ring-pct">0%</text>
-          <text x="60" y="72" text-anchor="middle" font-family="Cinzel,serif" font-size="9" fill="#888" letter-spacing="1">complete</text>
-        </svg>
-        <div class="ring-label" id="ring-label">Begin your check-in below</div>
+      <div class="scroll" style="margin-bottom:12px">
+        <div id="week-tabs" style="display:flex;gap:4px;min-width:max-content"></div>
       </div>
+      <div class="scroll" style="margin-bottom:12px">
+        <div id="day-tabs" style="display:flex;gap:4px;min-width:max-content"></div>
+      </div>
+      <div id="journal-page"></div>
+    </div>
 
-      <!-- Confetti canvas -->
-      <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
-
-      <!-- R.O.O.T.E.D. Examen -->
-      <div class="ci-section" id="ci-rooted">
-        <div class="ci-section-hd" onclick="toggleSection('rooted')">
-          <div class="ci-section-title">
-            <span class="ci-icon">✝</span>
-            R.O.O.T.E.D. Examen
-          </div>
-          <div class="ci-section-right">
-            <span class="ci-done-badge" id="rooted-badge" style="display:none">✓ Done</span>
-            <span class="ci-chevron" id="rooted-chev">▾</span>
-          </div>
+    <!-- TRACKER -->
+    <div id="tab-tracker" class="hidden">
+      <div style="background:#2A2230;border-radius:6px;padding:16px;margin-bottom:14px;border-bottom:2px solid #5A7A5A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:3px">VIRTUE TRACKER</div>
+        <div style="color:#fff;font-size:18px;font-weight:bold">Six Weeks of Faithful Practice</div>
+        <div style="color:#B8B4C0;font-size:12px;font-style:italic;margin-top:2px">One mark per day. No grade. Just fidelity.</div>
+      </div>
+      <div id="tracker-grid"></div>
+      <div style="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-top:14px">
+        <div style="background:#2A2230;padding:8px 16px;color:#B8956A;font-size:9px;letter-spacing:1px">NOTES ON YOUR VIRTUE PRACTICE</div>
+        <div style="padding:12px">
+          <textarea id="virtue-notes" placeholder="What are you noticing about your virtue practice this week?"
+            style="width:100%;min-height:90px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.5"></textarea>
         </div>
-        <div class="ci-section-body" id="rooted-body">
-          <p class="ci-intro">Take 5 minutes. One letter at a time. Write what is honestly there.</p>
-          <div class="rooted-grid">
-            <div class="rooted-letter" data-letter="R">
-              <div class="letter-badge" style="background:#6B5B8A">R</div>
-              <div class="letter-content">
-                <div class="letter-name">Reality</div>
-                <div class="letter-q">What was the reality of my day? Just the facts — no story added.</div>
-                <textarea class="letter-input" id="rooted-R" placeholder="What actually happened today..."></textarea>
-              </div>
-            </div>
-            <div class="rooted-letter" data-letter="O1">
-              <div class="letter-badge" style="background:#B8956A">O</div>
-              <div class="letter-content">
-                <div class="letter-name">Origin</div>
-                <div class="letter-q">What belief is underneath what happened? What does it say about God?</div>
-                <textarea class="letter-input" id="rooted-O1" placeholder="The belief underneath..."></textarea>
-              </div>
-            </div>
-            <div class="rooted-letter" data-letter="O2">
-              <div class="letter-badge" style="background:#C47B8A">O</div>
-              <div class="letter-content">
-                <div class="letter-name">Overflow</div>
-                <div class="letter-q">What emotion is most present right now? Name it specifically.</div>
-                <textarea class="letter-input" id="rooted-O2" placeholder="What is overflowing..."></textarea>
-              </div>
-            </div>
-            <div class="rooted-letter" data-letter="T">
-              <div class="letter-badge" style="background:#5A7A5A">T</div>
-              <div class="letter-content">
-                <div class="letter-name">Turning</div>
-                <div class="letter-q">Is there a moment I can turn toward God before I sleep?</div>
-                <textarea class="letter-input" id="rooted-T" placeholder="My turning..."></textarea>
-              </div>
-            </div>
-            <div class="rooted-letter" data-letter="E">
-              <div class="letter-badge" style="background:#8B7BA8">E</div>
-              <div class="letter-content">
-                <div class="letter-name">Election</div>
-                <div class="letter-q">What free choice did I make today? Where did the pattern choose instead?</div>
-                <textarea class="letter-input" id="rooted-E" placeholder="My election..."></textarea>
-              </div>
-            </div>
-            <div class="rooted-letter" data-letter="D">
-              <div class="letter-badge" style="background:#3D3450">D</div>
-              <div class="letter-content">
-                <div class="letter-name">Dwelling</div>
-                <div class="letter-q">What does it mean to dwell in God's love right now — tonight?</div>
-                <textarea class="letter-input" id="rooted-D" placeholder="Dwelling means..."></textarea>
-              </div>
-            </div>
-          </div>
-          <button class="ci-save-btn" onclick="saveRooted()">Save My Examen ✝</button>
-          <div class="ci-saved-msg" id="rooted-saved"></div>
-        </div>
-      </div>
-
-      <!-- Prayer Tracker -->
-      <div class="ci-section" id="ci-prayer">
-        <div class="ci-section-hd" onclick="toggleSection('prayer')">
-          <div class="ci-section-title">
-            <span class="ci-icon">✝</span>
-            Daily Prayer
-          </div>
-          <div class="ci-section-right">
-            <span class="ci-done-badge" id="prayer-badge" style="display:none">✓ Done</span>
-            <span class="ci-chevron" id="prayer-chev">▾</span>
-          </div>
-        </div>
-        <div class="ci-section-body" id="prayer-body">
-
-          <!-- Morning Offering -->
-          <div class="prayer-card" id="morning-card" onclick="togglePrayer('morning')">
-            <div class="prayer-card-top">
-              <div class="prayer-time-badge">☀️ Morning</div>
-              <div class="prayer-check-circle" id="morning-circle">✓</div>
-            </div>
-            <div class="prayer-label">Fatima Morning Offering</div>
-            <div class="prayer-text" id="morning-text"></div>
-            <div class="prayer-scripture" id="morning-scripture">"I have called you by name; you are mine." — Isaiah 43:1</div>
-          </div>
-
-          <!-- Evening Prayer -->
-          <div class="prayer-card" id="evening-card" onclick="togglePrayer('evening')">
-            <div class="prayer-card-top">
-              <div class="prayer-time-badge">🌙 Evening</div>
-              <div class="prayer-check-circle" id="evening-circle">✓</div>
-            </div>
-            <div class="prayer-label">Evening Prayer + R.O.O.T.E.D. Examen</div>
-            <div class="prayer-text">
-              Find a still moment. Breathe. Choose one moment from today and walk it through.<br><br>
-              <strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple)">R — Reality</strong><br>
-              What actually happened? Just the facts — no story added.<br><br>
-              <strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)">O — Origin</strong><br>
-              What belief was underneath it? What did it say about God?<br><br>
-              <strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose)">O — Overflow</strong><br>
-              What emotion was actually there? Name it without fixing it.<br><br>
-              <strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green)">T — Turning</strong><br>
-              Was there a moment you turned toward God — or away? Name it.<br><br>
-              <strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple-mid)">E — Election</strong><br>
-              What did you choose freely today? Where did the Pleaser choose instead?<br><br>
-              <strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--deep)">D — Dwelling</strong><br>
-              What does it mean to rest in God's love right now — tonight?
-            </div>
-            <div class="prayer-scripture">"Remain in my love." — John 15:9</div>
-          </div>
-
-          <!-- Prayer history -->
-          <div class="prayer-history-wrap">
-            <div class="prayer-history-label">Your Prayer History · Last 7 Days</div>
-            <div class="prayer-history-grid" id="prayer-history-grid"></div>
-          </div>
-
-          <button class="ci-save-btn" style="background:var(--gold)" onclick="savePrayer()">Save Prayer ✝</button>
-          <div class="ci-saved-msg" id="prayer-saved"></div>
-        </div>
-      </div>
-
-      <!-- Virtue Tracker -->
-      <div class="ci-section" id="ci-virtue">
-        <div class="ci-section-hd" onclick="toggleSection('virtue')">
-          <div class="ci-section-title">
-            <span class="ci-icon">🌿</span>
-            Virtue Tracker
-          </div>
-          <div class="ci-section-right">
-            <span class="ci-done-badge" id="virtue-badge" style="display:none">✓ Done</span>
-            <span class="ci-chevron" id="virtue-chev">▾</span>
-          </div>
-        </div>
-        <div class="ci-section-body" id="virtue-body">
-          <p class="ci-intro">Tap each practice you completed today. Small and consistent beats large and occasional.</p>
-          <div class="virtue-grid" id="virtue-grid">
-            <div class="virtue-chip" data-v="prayer" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">🙏</span>
-              <span class="vchip-label">Morning Prayer</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="surrender" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">✝</span>
-              <span class="vchip-label">Daily Surrender</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="lectio" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">📖</span>
-              <span class="vchip-label">Lectio Divina</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="mortification" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">⚜️</span>
-              <span class="vchip-label">One Mortification</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="correction" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">🕊</span>
-              <span class="vchip-label">Received a Correction</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="present" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">❤️</span>
-              <span class="vchip-label">Stayed Present</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="controller" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">🛡</span>
-              <span class="vchip-label">Named the Controller</span>
-              <span class="vchip-check">✓</span>
-            </div>
-            <div class="virtue-chip" data-v="gratitude" onclick="toggleVirtue(this)">
-              <span class="vchip-icon">✨</span>
-              <span class="vchip-label">3 Gratitudes</span>
-              <span class="vchip-check">✓</span>
-            </div>
-          </div>
-          <button class="ci-save-btn" style="background:var(--green)" onclick="saveVirtue()">Save Virtue Tracker</button>
-          <div class="ci-saved-msg" id="virtue-saved"></div>
-        </div>
-      </div>
-
-      <!-- Surrender Practice -->
-      <div class="ci-section" id="ci-surrender">
-        <div class="ci-section-hd" onclick="toggleSection('surrender')">
-          <div class="ci-section-title">
-            <span class="ci-icon">🕊</span>
-            Today's Surrender
-          </div>
-          <div class="ci-section-right">
-            <span class="ci-done-badge" id="surrender-badge" style="display:none">✓ Done</span>
-            <span class="ci-chevron" id="surrender-chev">▾</span>
-          </div>
-        </div>
-        <div class="ci-section-body" id="surrender-body">
-          <p class="ci-intro" style="font-style:italic;color:#4A3F55">
-            "Lord, I give You this. I will not pick it up today."
-          </p>
-          <div class="surrender-wrap">
-            <label class="surrender-label">Today I surrender:</label>
-            <input type="text" class="surrender-input" id="surrender-text"
-                   placeholder="Name the one thing you are releasing to God today...">
-            <div class="surrender-check-row">
-              <div class="surrender-check-item" id="sur-check-1" onclick="toggleSurrenderCheck(1)">
-                <div class="sur-circle" id="sur-circle-1">✓</div>
-                <span>I said it out loud</span>
-              </div>
-              <div class="surrender-check-item" id="sur-check-2" onclick="toggleSurrenderCheck(2)">
-                <div class="sur-circle" id="sur-circle-2">✓</div>
-                <span>I gave it to God</span>
-              </div>
-              <div class="surrender-check-item" id="sur-check-3" onclick="toggleSurrenderCheck(3)">
-                <div class="sur-circle" id="sur-circle-3">✓</div>
-                <span>I did not pick it back up</span>
-              </div>
-            </div>
-          </div>
-          <button class="ci-save-btn" style="background:var(--gold)" onclick="saveSurrender()">Save My Surrender</button>
-          <div class="ci-saved-msg" id="surrender-saved"></div>
-        </div>
-      </div>
-
-      <!-- Day complete celebration -->
-      <div class="day-complete" id="day-complete" style="display:none">
-        <div class="day-complete-cross">✝</div>
-        <div class="day-complete-title">Day Complete</div>
-        <div class="day-complete-sub">You showed up today. That is the whole practice.</div>
-        <div class="day-complete-verse">"Well done, good and faithful servant." — Matthew 25:21</div>
-      </div>
-
-    </div><!-- end daily-checkin -->
-
-    <!-- Past Responses -->
-    <div class="section-label" style="margin-top:2rem">📅 Past Responses</div>
-    <div id="past-responses-wrap">
-      <div class="past-responses-nav">
-        <button class="past-nav-btn active" onclick="switchPastTab('examen',this)">R.O.O.T.E.D. Examen</button>
-        <button class="past-nav-btn" onclick="switchPastTab('virtue',this)">Virtue Tracker</button>
-        <button class="past-nav-btn" onclick="switchPastTab('surrender',this)">Surrender</button>
-        <button class="past-nav-btn" onclick="switchPastTab('prayer',this)">Prayer</button>
-      </div>
-
-      <!-- Examen history -->
-      <div class="past-tab active" id="past-examen">
-        <div id="past-examen-list"></div>
-      </div>
-
-      <!-- Virtue history -->
-      <div class="past-tab" id="past-virtue">
-        <div id="past-virtue-list"></div>
-      </div>
-
-      <!-- Surrender history -->
-      <div class="past-tab" id="past-surrender">
-        <div id="past-surrender-list"></div>
-      </div>
-
-      <!-- Prayer history -->
-      <div class="past-tab" id="past-prayer">
-        <div id="past-prayer-list"></div>
       </div>
     </div>
 
+  </div>
 
-    <!-- Downloads -->
-    <div class="section-label" style="margin-top:2rem">Your Resources · Download & Keep</div>
-    <div class="downloads-grid">
-      <a class="download-card" href="https://drive.google.com/uc?export=download&id=1S2HtbZjDgV8DPiauYIb3ZGAHcU87wYzL" target="_blank">
-        <span class="download-icon">📖</span>
-        <div class="download-title">Soul Portrait Reference Guide</div>
-        <div class="download-sub">All four assessments with virtues, saints + practices</div>
-        <div class="download-btn">Download PDF</div>
-      </a>
-      <a class="download-card" id="journal-download-card" href="#" target="_blank">
-        <span class="download-icon">📓</span>
-        <div class="download-title">Your Personalised Journal</div>
-        <div class="download-sub">6-week journal built on your Soul Portrait</div>
-        <div class="download-btn">Download PDF</div>
-      </a>
-      <a class="download-card" href="https://drive.google.com/uc?export=download&id=1bsfKgQ4VQrGdt2QprmuVf6JRb9VyB0cd" target="_blank">
-        <span class="download-icon">🛡</span>
-        <div class="download-title">Stress Response Protocol</div>
-        <div class="download-sub">Your personalised stress + feelings guide</div>
-        <div class="download-btn">Download PDF</div>
-      </a>
-      <a class="download-card" href="rooted-model-client.pdf" target="_blank">
-        <span class="download-icon">✦</span>
-        <div class="download-title">R.O.O.T.E.D. Model Guide</div>
-        <div class="download-sub">The full model · all 6 letters · daily use</div>
-        <div class="download-btn">Download PDF</div>
-      </a>
-      <a class="download-card" href="rooted-model-worked-example.pdf" target="_blank">
-        <span class="download-icon">✝</span>
-        <div class="download-title">The Model in Motion</div>
-        <div class="download-sub">A worked example · unintentional → Bridge Thoughts → intentional</div>
-        <div class="download-btn">Download PDF</div>
-      </a>
-      <a class="download-card" href="#" onclick="comingSoon(event)">
-        <span class="download-icon">🌿</span>
-        <div class="download-title">Virtue Tracker</div>
-        <div class="download-sub">Weekly virtue + fault tracking sheet</div>
-        <div class="download-btn">Download PDF</div>
-      </a>
-      <a class="download-card" href="https://rootedirl.live" target="_blank">
-        <span class="download-icon">✝</span>
-        <div class="download-title">Back to Main Site</div>
-        <div class="download-sub">rootedirl.live</div>
-        <div class="download-btn">Visit Site</div>
-      </a>
-    </div>
-
+  <div style="text-align:center;padding:16px 0 24px;border-top:1px solid #B8B4C0">
+    <div style="color:#B8956A;font-size:14px;margin-bottom:4px">&#10013;</div>
+    <div style="font-style:italic;font-size:11px;color:#B8B4C0">"Before I formed you in the womb I knew you." — Jeremiah 1:5</div>
+    <div style="font-size:10px;color:#B8B4C0;margin-top:4px">Rooted and Known &middot; Rooted in Real Life &middot; Catholic Life Coaching</div>
   </div>
 </div>
 
 <script>
-// ── DATA ───────────────────────────────────────────────────────────────────
-// CLIENT PASSWORDS — format: 'clientname': 'password'
-// Add a new entry for each client when they enroll
-const CLIENTS = {
-  'cassandra': 'rooted2026',
-  'lissette':  'lissette2026',
-  'jenni':     'jenni2026',
-  'whitney':   'whitney2026',
-  // add more clients here: 'name': 'password',
-};
+// ── Credentials (password -> client name) ──────────────────────────────────
+const CREDENTIALS = {"whitney2026": "Whitney", "lissette2026": "Lissette", "rooted2026": "Cassandra"};
 
-const WEEKS = [
-  {
-    num: 1,
-    color: '#6B5B8A',
-    title: 'Introduction to the Assessments',
-    subtitle: 'What each assessment measures · What your results mean',
-    letter: 'R — Reality',
-    items: [
-      { id: 'w1-video', type: 'video', icon: '▶', title: 'Video 1: Introduction to the Assessments', desc: 'What temperament, fault, charism, and saboteurs measure — and what your results mean', url: '' },
-      { id: 'w1-ws', type: 'worksheet', icon: '📋', title: 'Week 1 Worksheet', desc: 'Reflect on your Soul Portrait results · what landed, what surprised you', url: '' },
-      { id: 'w1-session', type: 'note', icon: '✝', title: 'Week 1 Coaching Session', desc: 'Come prepared with your worksheet completed · bring one question about your portrait', url: '' },
-    ]
-  },
-  {
-    num: 2,
-    color: '#B8956A',
-    title: 'The R.O.O.T.E.D. Model',
-    subtitle: 'All 6 letters · How to use the model in your actual day',
-    letter: 'O — Origin',
-    items: [
-      { id: 'w2-video', type: 'video', icon: '▶', title: 'Video 2: The R.O.O.T.E.D. Model', desc: 'Reality · Origin · Overflow · Turning · Election · Dwelling — and how they work together', url: '' },
-      { id: 'w2-ws', type: 'worksheet', icon: '📋', title: 'Week 2 Worksheet', desc: 'Walk one real moment from your week through the full model', url: '' },
-      { id: 'w2-session', type: 'note', icon: '✝', title: 'Week 2 Coaching Session', desc: 'We will walk through the model together with your specific temperament and fault', url: '' },
-    ]
-  },
-  {
-    num: 3,
-    color: '#C47B8A',
-    title: 'The Stress Response',
-    subtitle: 'Fight · Flight · Freeze · Fawn · The feelings wheel · Your protocol',
-    letter: 'O — Overflow',
-    items: [
-      { id: 'w3-video', type: 'video', icon: '▶', title: 'Video 3: The Stress Response', desc: 'How your nervous system responds to stress — and what to do instead of reacting', url: '' },
-      { id: 'w3-ws', type: 'worksheet', icon: '📋', title: 'Week 3 Worksheet', desc: 'Identify your primary stress response and map it to your temperament', url: '' },
-      { id: 'w3-protocol', type: 'download', icon: '🛡', title: 'Your Stress Protocol', desc: 'Your personalised 3-step protocol — download and keep somewhere visible', url: '' },
-      { id: 'w3-session', type: 'note', icon: '✝', title: 'Week 3 Coaching Session', desc: 'This session focuses on Overflow — what is actually happening inside you', url: '' },
-    ]
-  },
-  {
-    num: 4,
-    color: '#5A7A5A',
-    title: 'Virtue & the Predominant Fault',
-    subtitle: 'The root pattern · The virtue that remedies it · Daily practice',
-    letter: 'T — Turning',
-    items: [
-      { id: 'w4-video', type: 'video', icon: '▶', title: 'Video 4: Virtue & the Predominant Fault', desc: 'What your fault is, how it operates, and which virtue is the God-given remedy', url: '' },
-      { id: 'w4-ws', type: 'worksheet', icon: '📋', title: 'Week 4 Worksheet', desc: 'Name one moment this week where your fault operated — and what the Turning looked like', url: '' },
-      { id: 'w4-session', type: 'note', icon: '✝', title: 'Week 4 Coaching Session', desc: 'This session goes deep on your predominant fault and the virtue God is building in you', url: '' },
-    ]
-  },
-  {
-    num: 5,
-    color: '#8B7BA8',
-    title: 'Charisms & Your Mission',
-    subtitle: 'Your specific gifts · The Church\'s need · Where to deploy them',
-    letter: 'E — Election',
-    items: [
-      { id: 'w5-video', type: 'video', icon: '▶', title: 'Video 5: Charisms & Your Mission', desc: 'How the Holy Spirit moves through your specific gifts for the good of others', url: '' },
-      { id: 'w5-ws', type: 'worksheet', icon: '📋', title: 'Week 5 Worksheet', desc: 'Map your top charisms to your vocation, your parish, and one concrete next step', url: '' },
-      { id: 'w5-session', type: 'note', icon: '✝', title: 'Week 5 Coaching Session', desc: 'Election — making a free, deliberate choice from your charisms rather than your pattern', url: '' },
-    ]
-  },
-  {
-    num: 6,
-    color: '#3D3450',
-    title: 'Marriage & Parenting Through Temperament',
-    subtitle: 'The people you love most · Wired differently · Loved specifically',
-    letter: 'D — Dwelling',
-    items: [
-      { id: 'w6-video', type: 'video', icon: '▶', title: 'Video 6: Marriage & Parenting Through Temperament', desc: 'How temperament shapes how you love — and how to love the actual person in front of you', url: '' },
-      { id: 'w6-ws', type: 'worksheet', icon: '📋', title: 'Week 6 Worksheet', desc: 'Name your spouse\'s temperament · name each child\'s temperament · one specific gift for each', url: '' },
-      { id: 'w6-session', type: 'note', icon: '✝', title: 'Final Coaching Session', desc: 'Dwelling — integration week · how everything lives in a Tuesday · what you carry forward', url: '' },
-      { id: 'w6-complete', type: 'complete', icon: '✝', title: 'Mark Program Complete', desc: 'You did the work. Receive it.', url: '' },
-    ]
-  },
-];
+// ── Data ───────────────────────────────────────────────────────────────────
+const CLIENTS = {"Whitney": {"temperament": "Melancholic / Phlegmatic", "fault": "Vanity + Sensuality", "charisms": "Administration \u00b7 Teaching \u00b7 Prophecy \u00b7 Wisdom", "saboteurs": "Hyper-Achiever \u00b7 Pleaser", "color": "#6B5B8A", "goals": [["&#9820;", "King Goal", "Be more present and tender \u2014 close laptop by 5pm, tend home, marriage, friendships, parish."], ["&#9819;", "Queen Goal", "Care for whole self \u2014 Rosary each morning, reading at night, no phone before bed."], ["&#10013;", "Loaves & Fishes", "Edgar's conversion \u2014 pray for him by name every day, walk the walk, be the light."]], "patron_saints": "St. Teresa of Avila \u00b7 Bl. John Henry Newman \u00b7 St. Joseph \u00b7 St. Bernadette \u00b7 St. Therese of Lisieux \u00b7 St. Faustina", "week_verse": ["\"Before I formed you in the womb I knew you.\" \u2014 Jeremiah 1:5", "\"You did not choose me, but I chose you.\" \u2014 John 15:16", "\"Each of you should use whatever gift you have received to serve others.\" \u2014 1 Peter 4:10", "\"Return to me with your whole heart.\" \u2014 Joel 2:12", "\"Choose this day whom you will serve.\" \u2014 Joshua 24:15", "\"Remain in me, as I also remain in you.\" \u2014 John 15:4"]}, "Lissette": {"temperament": "Sanguine / Phlegmatic", "fault": "Pride / Vanity", "charisms": "Mercy \u00b7 Intercession", "saboteurs": "Pleaser \u00b7 Avoider", "color": "#C47B8A", "goals": [["&#9820;", "King Goal", "Marriage \u2014 intentional date nights and deeper connection with your husband."], ["&#9819;", "Queen Goal", "Family Rosary \u2014 praying together as a family each day."], ["&#10013;", "Loaves & Fishes", "Running for fitness \u2014 showing up for your body as a gift from God."]], "patron_saints": "St. Philip Neri \u00b7 St. Thomas More \u00b7 St. Francis de Sales \u00b7 Our Lady of Guadalupe", "week_verse": ["\"Before I formed you in the womb I knew you.\" \u2014 Jeremiah 1:5", "\"You did not choose me, but I chose you.\" \u2014 John 15:16", "\"Each of you should use whatever gift you have received to serve others.\" \u2014 1 Peter 4:10", "\"Return to me with your whole heart.\" \u2014 Joel 2:12", "\"Choose this day whom you will serve.\" \u2014 Joshua 24:15", "\"Remain in me, as I also remain in you.\" \u2014 John 15:4"]}, "Cassandra": {"temperament": "Choleric / Melancholic", "fault": "Fear & Control", "charisms": "Administration \u00b7 Teaching \u00b7 Encouragement \u00b7 Wisdom", "saboteurs": "Hyper-Achiever \u00b7 Controller \u00b7 Avoider", "color": "#5A7A5A", "goals": [["&#9820;", "King Goal", "Your King Goal \u2014 add details in your journal."], ["&#9819;", "Queen Goal", "Your Queen Goal \u2014 add details in your journal."], ["&#10013;", "Loaves & Fishes", "Your Loaves & Fishes Goal \u2014 held with open hands."]], "patron_saints": "St. Catherine of Siena \u00b7 St. Teresa of Avila \u00b7 Bl. Charles de Foucauld \u00b7 St. Faustina", "week_verse": ["\"Before I formed you in the womb I knew you.\" \u2014 Jeremiah 1:5", "\"You did not choose me, but I chose you.\" \u2014 John 15:16", "\"Each of you should use whatever gift you have received to serve others.\" \u2014 1 Peter 4:10", "\"Return to me with your whole heart.\" \u2014 Joel 2:12", "\"Choose this day whom you will serve.\" \u2014 Joshua 24:15", "\"Remain in me, as I also remain in you.\" \u2014 John 15:4"]}};
 
-// ── FOUNDATION VIDEOS ───────────────────────────────────────────────────────
-const FOUNDATION_VIDEOS = [
-  { n: 1, id: 'gJETFe2HhIc', title: 'Why I Built This', desc: 'My story — and why this program exists.' },
-  { n: 2, id: '6Ios1LuERyw', title: 'The Four Temperaments', desc: 'How God wired your soul to engage the world.' },
-  { n: 3, id: '-fK8pFYcfCs', title: 'The Predominant Fault', desc: 'The one root pattern beneath the struggle.' },
-  { n: 4, id: 'qaXEHtSouxE', title: 'The Charisms', desc: 'The gifts God placed in you for others.' },
-  { n: 5, id: 'rkddcAUDoL4', title: 'The Saboteurs', desc: 'The inner patterns that block the gifts.' },
-  { n: 6, id: '0-iXhPKAjL8', title: 'The R.O.O.T.E.D. Model', desc: 'The framework for the whole journey.' },
-  { n: 7, id: 'MKa7tzVjLj0', title: 'The Stress Response', desc: 'Bonus · What your body does — and the protocol to use instead of reacting.', bonus: true },
-];
+const VIDEOS = [{"num": 1, "id": "eaXgQGsbknQ", "title": "Introduction to the Assessments", "subtitle": "Your Soul Portrait & Portal Walkthrough", "duration": "15\u201318 min"}, {"num": 2, "id": "6Ios1LuERyw", "title": "The R.O.O.T.E.D. Model", "subtitle": "All 6 letters \u00b7 How to use the model daily", "duration": "18\u201322 min"}, {"num": 3, "id": "-fK8pFYcfCs", "title": "The Stress Response", "subtitle": "Fight / Flight / Freeze / Fawn \u00b7 Stress Protocol", "duration": "18\u201320 min"}, {"num": 4, "id": "qaXEHtSouxE", "title": "Virtue & the Predominant Fault", "subtitle": "The root of the struggle \u00b7 The remedy God offers", "duration": "15\u201320 min"}, {"num": 5, "id": "rkddcAUDoL4", "title": "Charisms & Your Mission", "subtitle": "The gifts given for the Church \u00b7 Your specific call", "duration": "15\u201320 min"}, {"num": 6, "id": "0-iXhPKAjL8", "title": "Marriage & Parenting Through Temperament", "subtitle": "How God wired the people you love most", "duration": "18\u201322 min"}, {"num": 7, "id": "MKa7tzVjLj0", "title": "The Stress Response Protocol", "subtitle": "Your step-by-step guide for hard days", "duration": "10\u201312 min"}];
 
-function renderFoundationVideos() {
-  const grid = document.getElementById('foundation-videos');
-  if (!grid) return;
-  grid.innerHTML = FOUNDATION_VIDEOS.map(v => `
-    <div class="fv-card${v.bonus ? ' fv-bonus' : ''}">
-      <div class="fv-embed">
-        <iframe src="https://www.youtube-nocookie.com/embed/${v.id}" title="${v.title}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="fv-body">
-        <div class="fv-num">${v.bonus ? 'Bonus Video' : 'Video ' + v.n}</div>
-        <div class="fv-title">${v.title}</div>
-        <div class="fv-desc">${v.desc}</div>
-      </div>
-    </div>`).join('');
+const WEEK_TITLES = ["Who Am I Before God?", "Where Am I Rooted?", "What Overflows From Me?", "Where Do I Need to Turn?", "What Am I Choosing?", "Where Do I Dwell?"];
+const VIRTUES     = [["Simplicity", "Do one thing today for God's eyes alone."], ["Zeal", "Pray before the feeling arrives. Rosary first."], ["Temperance", "Name one small mortification. Offer it up."], ["Abandonment", "Name one thing you are controlling. Release it."], ["Humility", "Ask for help with one thing you'd normally handle alone."], ["Fidelity", "Show up to one practice even when you don't feel like it."]];
+const WEEK_COLORS = ["#5A7A5A","#6B5B8A","#C47B8A","#B8956A","#8B7BA8","#5A7A5A"];
+const WEEK_TINTS  = ["#E0EDE0","#EAE4F5","#F5E8EC","#F5EDE0","#EDE8F5","#E0EDE0"];
+const DAYS        = ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Sabbath"];
+
+// ── State ──────────────────────────────────────────────────────────────────
+let client = null;
+let currentWeek = 0;
+let currentDay  = 0;
+
+// ── Storage ────────────────────────────────────────────────────────────────
+function sKey(suffix){ return client + "_" + suffix; }
+
+function load(suffix, fallback){
+  try{
+    const v = localStorage.getItem(sKey(suffix));
+    return v !== null ? JSON.parse(v) : fallback;
+  } catch(e){ return fallback; }
 }
 
-
-
-function getKey(id) { return `ril_${clientName}_${id}`; }
-
-function loadProgress() {
-  try {
-    const saved = localStorage.getItem(getKey('progress'));
-    progress = saved ? JSON.parse(saved) : {};
-  } catch(e) { progress = {}; }
+function save(suffix, value){
+  try{
+    localStorage.setItem(sKey(suffix), JSON.stringify(value));
+    flash();
+  } catch(e){ console.error("Save failed:",e); }
 }
 
-function saveProgress() {
-  try { localStorage.setItem(getKey('progress'), JSON.stringify(progress)); }
-  catch(e) {}
-  updateProgressBar();
+function flash(){
+  const el = document.getElementById("save-status");
+  if(!el) return;
+  el.textContent = "&#10003; Saved";
+  el.style.color = "#5A7A5A";
+  setTimeout(()=>{
+    el.textContent = "All notes save automatically to this device.";
+    el.style.color = "#B8B4C0";
+  }, 1500);
 }
 
-function updateProgressBar() {
-  const allItems = WEEKS.flatMap(w => w.items.map(i => i.id));
-  const done = allItems.filter(id => progress[id]).length;
-  const pct = Math.round(done / allItems.length * 100);
-  const fill = document.getElementById('progress-fill');
-  const label = document.getElementById('progress-pct');
-  if (fill) fill.style.width = pct + '%';
-  if (label) label.textContent = pct + '% complete';
-}
-
-function saveNotes() {
-  try {
-    const notes = document.getElementById('journal-notes').value;
-    localStorage.setItem(getKey('notes'), notes);
-    const msg = document.getElementById('notes-saved-msg');
-    msg.style.display = 'inline';
-    setTimeout(() => { msg.style.display = 'none'; }, 2000);
-  } catch(e) {}
-}
-
-function loadNotes() {
-  try {
-    const saved = localStorage.getItem(getKey('notes'));
-    if (saved) document.getElementById('journal-notes').value = saved;
-  } catch(e) {}
-}
-
-// Auto-save notes every 30 seconds
-setInterval(() => {
-  if (clientName) saveNotes();
-}, 30000);
-
-// ── LOGIN ──────────────────────────────────────────────────────────────────
-function attemptLogin() {
-  const nameInput = document.getElementById('client-name-input').value.trim().toLowerCase();
-  const pw = document.getElementById('password-input').value.trim();
-  const err = document.getElementById('login-error');
-
-  if (!nameInput) { err.style.display = 'block'; err.textContent = 'Please enter your first name.'; return; }
-
-  const expectedPw = CLIENTS[nameInput];
-  if (!expectedPw || pw !== expectedPw) {
-    err.style.display = 'block';
-    err.textContent = "That code doesn't match. Please check with Cassandra.";
-    return;
-  }
-
-  err.style.display = 'none';
-  clientName = nameInput;
-  try { localStorage.setItem('rooted_current_user', nameInput); } catch(e) {}
-  const displayName = nameInput.charAt(0).toUpperCase() + nameInput.slice(1);
-
-  document.getElementById('nav-client-name').textContent = displayName;
-  document.getElementById('portal-greeting-name').textContent = 'Welcome, ' + displayName;
-
-  loadProgress();
-  loadNotes();
-  setJournalLink(clientName);
-  renderFoundationVideos();
-  updateProgressBar();
-  setTimeout(() => { try { initCheckin(); } catch(e) { console.log('initCheckin',e); } try { initPrayer(); } catch(e) { console.log('initPrayer',e); } try { buildPastResponses(); } catch(e) { console.log('buildPast',e); } }, 100);
-
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('portal').style.display = 'block';
-  window.scrollTo(0, 0);
-}
-
-document.getElementById('password-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') attemptLogin();
-});
-document.getElementById('client-name-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') document.getElementById('password-input').focus();
-});
-
-function logout() {
-  clientName = '';
-  progress = {};
-  try { localStorage.removeItem('rooted_current_user'); } catch(e) {}
-  document.getElementById('portal').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('password-input').value = '';
-  document.getElementById('client-name-input').value = '';
-}
-
-// ── BUILD WEEKS ────────────────────────────────────────────────────────────
-function buildWeeks() {
-  const container = document.getElementById('weeks-container');
-  container.innerHTML = '';
-
-  WEEKS.forEach((week, wi) => {
-    const done = week.items.filter(i => progress[i.id]).length;
-    const total = week.items.length;
-    const isOpen = wi === 0;
-
-    const card = document.createElement('div');
-    card.className = 'week-card';
-    card.id = `week-card-${week.num}`;
-
-    const header = document.createElement('div');
-    header.className = 'week-header' + (isOpen ? ' open' : '');
-    header.innerHTML = `
-      <div class="week-num" style="background:${week.color}">Week ${week.num}</div>
-      <div class="week-title-wrap">
-        <div class="week-title">${week.title}</div>
-        <div class="week-subtitle">${week.subtitle}</div>
-      </div>
-      <div class="week-progress">${done}/${total} done</div>
-      <div class="week-chevron ${isOpen ? 'open' : ''}">▾</div>
-    `;
-
-    const body = document.createElement('div');
-    body.className = 'week-body' + (isOpen ? ' open' : '');
-
-    // Video placeholder
-    body.innerHTML = `
-      <div class="video-placeholder">
-        <div class="video-play">▶</div>
-        <div class="video-coming">Video coming soon · Cassandra will share the link when ready</div>
-      </div>
-    `;
-
-    const list = document.createElement('div');
-    list.className = 'resource-list';
-
-    week.items.forEach(item => {
-      const isChecked = !!progress[item.id];
-      const row = document.createElement('div');
-      row.className = 'resource-item';
-      row.innerHTML = `
-        <div class="resource-check ${isChecked ? 'checked' : ''}" data-id="${item.id}" onclick="toggleItem('${item.id}', this, ${wi})">
-          ${isChecked ? '✓' : ''}
-        </div>
-        <div class="resource-icon">${item.icon}</div>
-        <div class="resource-info">
-          <div class="resource-title">${item.title}</div>
-          <div class="resource-desc">${item.desc}</div>
-        </div>
-        ${item.type === 'download' || item.type === 'worksheet'
-          ? `<a class="resource-action gold" href="${item.url || '#'}" onclick="${item.url ? '' : 'comingSoon(event)'}">Download</a>`
-          : item.type === 'video'
-          ? `<button class="resource-action" onclick="comingSoon(event)">Watch</button>`
-          : ''
-        }
-      `;
-      list.appendChild(row);
-    });
-
-    body.appendChild(list);
-
-    // Week examen prompt
-    body.innerHTML += `
-      <div style="margin-top:1rem; padding:0.75rem 1rem; background:var(--purple-light); border-left:3px solid var(--purple); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.95rem; color:#4A3F55; line-height:1.65;">
-        <strong style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; font-style:normal; color:var(--purple);">This Week's R Letter: ${week.letter}</strong><br>
-        Use the Examen section below each evening this week with this letter as your focus.
-      </div>
-    `;
-
-    header.onclick = function() {
-      const open = body.classList.contains('open');
-      body.classList.toggle('open', !open);
-      header.classList.toggle('open', !open);
-      header.querySelector('.week-chevron').classList.toggle('open', !open);
-    };
-
-    card.appendChild(header);
-    card.appendChild(body);
-    container.appendChild(card);
-  });
-}
-
-function toggleItem(id, el, weekIndex) {
-  const isChecked = el.classList.contains('checked');
-  el.classList.toggle('checked', !isChecked);
-  el.textContent = isChecked ? '' : '✓';
-  progress[id] = !isChecked;
-  saveProgress();
-
-  // Update week progress label
-  const week = WEEKS[weekIndex];
-  const done = week.items.filter(i => progress[i.id]).length;
-  const total = week.items.length;
-  const card = document.getElementById(`week-card-${week.num}`);
-  if (card) {
-    const label = card.querySelector('.week-progress');
-    if (label) label.textContent = `${done}/${total} done`;
+function checkStorage(){
+  try{
+    localStorage.setItem("_rl_test","1");
+    localStorage.removeItem("_rl_test");
+    return true;
+  } catch(e){
+    setTimeout(()=>alert("Storage is disabled in your browser. Notes will not be saved. Please enable cookies or local storage in your browser settings and reload."),500);
+    return false;
   }
 }
 
-
-// Client-specific journal links
-const CLIENT_JOURNALS = {
-  'cassandra': 'https://drive.google.com/uc?export=download&id=1mnRQEdtk-E9stzOgNROhi01Yk2ZkOKZF',
-  'lissette':  'https://drive.google.com/uc?export=download&id=1mnRQEdtk-E9stzOgNROhi01Yk2ZkOKZF',
-  'whitney':   'whitney-journal.pdf',
-  'jenni':     '',
-};
-
-function setJournalLink(name) {
-  const card = document.getElementById('journal-download-card');
-  if (!card) return;
-  const link = CLIENT_JOURNALS[name];
-  if (link) {
-    card.href = link;
+// ── Login ──────────────────────────────────────────────────────────────────
+function tryLogin(){
+  const pw = document.getElementById("pw-input").value.trim();
+  const match = CREDENTIALS[pw];
+  const errEl = document.getElementById("login-error");
+  if(match){
+    errEl.style.display = "none";
+    client = match;
+    sessionStorage.setItem("rl_session", pw);
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("portal").classList.remove("hidden");
+    buildPortal();
+    showTab("home");
   } else {
-    card.onclick = (e) => { e.preventDefault(); alert('Your journal will be available soon. ✝'); };
+    errEl.style.display = "block";
+    document.getElementById("pw-input").value = "";
+    document.getElementById("pw-input").focus();
   }
 }
-function TODAY() { return new Date().toISOString().slice(0,10); }
-const DAYS  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTHS = ['January','February','March','April','May','June',
-                'July','August','September','October','November','December'];
 
-function todayKey(suffix) {
-  return getKey(`day_${TODAY()}_${suffix}`);
+function logout(){
+  sessionStorage.removeItem("rl_session");
+  client = null;
+  document.getElementById("portal").classList.add("hidden");
+  document.getElementById("login-screen").classList.remove("hidden");
+  document.getElementById("pw-input").value = "";
 }
 
-function initCheckin() {
-  // Set date display
-  const d = new Date();
-  const el = document.getElementById('checkin-date');
-  if (el) el.textContent = `${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
+function tryAutoLogin(){
+  const saved = sessionStorage.getItem("rl_session");
+  if(saved && CREDENTIALS[saved]){
+    client = CREDENTIALS[saved];
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("portal").classList.remove("hidden");
+    buildPortal();
+    showTab("home");
+  }
+}
 
-  // Load streak
-  loadStreak();
+// ── Build portal ───────────────────────────────────────────────────────────
+function buildPortal(){
+  const data = CLIENTS[client];
 
-  // Load saved rooted letters
-  ['R','O1','O2','T','E','D'].forEach(l => {
-    try {
-      const saved = localStorage.getItem(todayKey(`rooted_${l}`));
-      const el = document.getElementById(`rooted-${l}`);
-      if (saved && el) el.value = saved;
-    } catch(e) {}
+  document.getElementById("header-name").textContent = client;
+  document.getElementById("welcome-name").textContent = "Welcome back, " + client;
+
+  const weekIdx = load("current_week", 0);
+  document.getElementById("welcome-verse").textContent = data.week_verse[Math.min(weekIdx,5)];
+
+  // Soul portrait
+  const spEl = document.getElementById("soul-portrait-rows");
+  spEl.innerHTML = "";
+  [
+    ["TEMPERAMENT",       data.temperament, data.color],
+    ["PREDOMINANT FAULT", data.fault,       "#C47B8A"],
+    ["TOP CHARISMS",      data.charisms,    "#B8956A"],
+    ["SABOTEURS",         data.saboteurs,   "#8B7BA8"],
+  ].forEach(([label,value,color],i)=>{
+    const row = document.createElement("div");
+    row.style.cssText = `display:flex;border-bottom:${i<3?"1px solid #EDE5F5":"none"}`;
+    row.innerHTML = `
+      <div style="background:${color};width:110px;padding:10px 12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="color:#B8956A;font-size:8px;font-weight:bold;letter-spacing:0.5px;text-align:center;line-height:1.4">${label}</div>
+      </div>
+      <div style="padding:10px 14px;font-size:13px;color:#4A3F5C;line-height:1.5;display:flex;align-items:center">${value}</div>`;
+    spEl.appendChild(row);
   });
 
-  // Auto-save rooted on input
-  ['R','O1','O2','T','E','D'].forEach(l => {
-    const el = document.getElementById(`rooted-${l}`);
-    if (el) el.addEventListener('input', () => {
-      try { localStorage.setItem(todayKey(`rooted_${l}`), el.value); } catch(e) {}
-    });
+  // Goals
+  const goalsEl = document.getElementById("goals-rows");
+  goalsEl.innerHTML = "";
+  const gColors = [data.color,"#C47B8A","#5A7A5A"];
+  data.goals.forEach(([sym,label,text],i)=>{
+    const row = document.createElement("div");
+    row.style.cssText = `padding:12px 16px;border-bottom:${i<2?"1px solid #EDE5F5":"none"};display:flex;gap:10px;align-items:flex-start`;
+    row.innerHTML = `
+      <div style="width:30px;height:30px;background:${gColors[i]};border-radius:50%;display:flex;align-items:center;justify-content:center;color:#B8956A;font-size:14px;flex-shrink:0">${sym}</div>
+      <div>
+        <div style="font-size:9px;color:${gColors[i]};font-weight:bold;letter-spacing:0.5px;margin-bottom:2px">${label.toUpperCase()}</div>
+        <div style="font-size:13px;color:#4A3F5C;line-height:1.5;font-style:italic">${text}</div>
+      </div>`;
+    goalsEl.appendChild(row);
   });
 
-  // Load virtue chips
-  try {
-    const saved = localStorage.getItem(todayKey('virtues'));
-    if (saved) {
-      const checked = JSON.parse(saved);
-      document.querySelectorAll('.virtue-chip').forEach(chip => {
-        if (checked.includes(chip.dataset.v)) chip.classList.add('checked');
-      });
-    }
-  } catch(e) {}
+  document.getElementById("saints-text").textContent = data.patron_saints;
 
-  // Load surrender
-  try {
-    const st = localStorage.getItem(todayKey('surrender_text'));
-    const sc = localStorage.getItem(todayKey('surrender_checks'));
-    const stEl = document.getElementById('surrender-text');
-    if (st && stEl) stEl.value = st;
-    if (sc) {
-      const checks = JSON.parse(sc);
-      checks.forEach(n => {
-        const c = document.getElementById(`sur-circle-${n}`);
-        const i = document.getElementById(`sur-check-${n}`);
-        if (c) { c.classList.add('checked'); if(i) i.classList.add('active'); }
-      });
-    }
-  } catch(e) {}
-
-  // Check badges
-  checkAllBadges();
-  updateRing();
-  checkDayComplete();
-
-  // Open first section by default if nothing done yet
-  try {
-    const anyDone = localStorage.getItem(todayKey('rooted_done')) ||
-                    localStorage.getItem(todayKey('virtue_done')) ||
-                    localStorage.getItem(todayKey('surrender_done'));
-    if (!anyDone) toggleSection('rooted');
-  } catch(e) { toggleSection('rooted'); }
+  buildVideos();
+  buildJournalTabs();
+  currentWeek = load("current_week", 0);
+  currentDay  = load("current_day", 0);
+  setWeekTab(currentWeek);
+  setDayTab(currentDay);
+  buildJournalPage();
+  buildTracker();
 }
 
-function toggleSection(name) {
-  const body  = document.getElementById(`${name}-body`);
-  const chev  = document.getElementById(`${name}-chev`);
-  if (!body) return;
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  if (chev) chev.classList.toggle('open', !isOpen);
-}
+// ── Videos ─────────────────────────────────────────────────────────────────
+function buildVideos(){
+  const el = document.getElementById("video-list");
+  el.innerHTML = "";
+  const watched = load("videos_watched", {});
 
-function saveRooted() {
-  try {
-    ['R','O1','O2','T','E','D'].forEach(l => {
-      const el = document.getElementById(`rooted-${l}`);
-      if (el) localStorage.setItem(todayKey(`rooted_${l}`), el.value);
-    });
-    localStorage.setItem(todayKey('rooted_done'), '1');
-    const msg = document.getElementById('rooted-saved');
-    if (msg) { msg.textContent = '✓ Examen saved — well done.'; }
-    const badge = document.getElementById('rooted-badge');
-    if (badge) badge.style.display = 'inline-block';
-    updateRing();
-    checkDayComplete();
-    updateStreak();
-  } catch(e) {}
-}
-
-function toggleVirtue(el) {
-  el.classList.toggle('checked');
-  try {
-    const checked = [...document.querySelectorAll('.virtue-chip.checked')]
-                    .map(c => c.dataset.v);
-    localStorage.setItem(todayKey('virtues'), JSON.stringify(checked));
-  } catch(e) {}
-}
-
-function saveVirtue() {
-  try {
-    const checked = [...document.querySelectorAll('.virtue-chip.checked')]
-                    .map(c => c.dataset.v);
-    localStorage.setItem(todayKey('virtue_done'), '1');
-    localStorage.setItem(todayKey('virtues'), JSON.stringify(checked));
-    const msg = document.getElementById('virtue-saved');
-    if (msg) msg.textContent = `✓ ${checked.length} practice${checked.length !== 1 ? 's' : ''} recorded.`;
-    const badge = document.getElementById('virtue-badge');
-    if (badge) badge.style.display = 'inline-block';
-    updateRing();
-    checkDayComplete();
-    updateStreak();
-  } catch(e) {}
-}
-
-function toggleSurrenderCheck(n) {
-  const circle = document.getElementById(`sur-circle-${n}`);
-  const item   = document.getElementById(`sur-check-${n}`);
-  if (!circle) return;
-  circle.classList.toggle('checked');
-  if (item) item.classList.toggle('active');
-  try {
-    const checked = [1,2,3].filter(i => {
-      const c = document.getElementById(`sur-circle-${i}`);
-      return c && c.classList.contains('checked');
-    });
-    localStorage.setItem(todayKey('surrender_checks'), JSON.stringify(checked));
-  } catch(e) {}
-}
-
-function saveSurrender() {
-  try {
-    const text = document.getElementById('surrender-text').value;
-    localStorage.setItem(todayKey('surrender_text'), text);
-    localStorage.setItem(todayKey('surrender_done'), '1');
-    const msg = document.getElementById('surrender-saved');
-    if (msg) msg.textContent = '✓ Surrender recorded. It is in His hands.';
-    const badge = document.getElementById('surrender-badge');
-    if (badge) badge.style.display = 'inline-block';
-    updateRing();
-    checkDayComplete();
-    updateStreak();
-  } catch(e) {}
-}
-
-function checkAllBadges() {
-  try {
-    if (localStorage.getItem(todayKey('rooted_done'))) {
-      const b = document.getElementById('rooted-badge');
-      if (b) b.style.display = 'inline-block';
-    }
-    if (localStorage.getItem(todayKey('virtue_done'))) {
-      const b = document.getElementById('virtue-badge');
-      if (b) b.style.display = 'inline-block';
-    }
-    if (localStorage.getItem(todayKey('surrender_done'))) {
-      const b = document.getElementById('surrender-badge');
-      if (b) b.style.display = 'inline-block';
-    }
-  } catch(e) {}
-}
-
-function updateRing() {
-  try {
-    const sections = ['rooted','virtue','surrender','prayer'];
-    const done = sections.filter(s =>
-      localStorage.getItem(todayKey(`${s}_done`))
-    ).length;
-    const pct = Math.round(done / sections.length * 100);
-    const circumference = 327;
-    const offset = circumference - (circumference * pct / 100);
-    const fill  = document.getElementById('ring-fill');
-    const pctEl = document.getElementById('ring-pct');
-    const label = document.getElementById('ring-label');
-    if (fill)  fill.style.strokeDashoffset = offset;
-    if (pctEl) pctEl.textContent = pct + '%';
-    if (label) {
-      const msgs = ['Begin your check-in below','One section done — keep going',
-                    'Two sections done — halfway there','Three sections done — almost there!',
-                    'Day complete ✝'];
-      label.textContent = msgs[done] || msgs[0];
-    }
-  } catch(e) {}
-}
-
-function checkDayComplete() {
-  try {
-    const sections = ['rooted','virtue','surrender','prayer'];
-    const allDone = sections.every(s => localStorage.getItem(todayKey(`${s}_done`)));
-    const card = document.getElementById('day-complete');
-    if (allDone && card) {
-      card.style.display = 'block';
-      fireConfetti();
-    }
-  } catch(e) {}
-}
-
-// Streak
-function loadStreak() {
-  try {
-    const streak = parseInt(localStorage.getItem(getKey('streak')) || '0');
-    const el = document.getElementById('streak-count');
-    if (el) el.textContent = streak;
-  } catch(e) {}
-}
-
-function updateStreak() {
-  try {
-    const sections = ['rooted','virtue','surrender'];
-    const allDone = sections.every(s => localStorage.getItem(todayKey(`${s}_done`)));
-    if (!allDone) return;
-    const lastDay = localStorage.getItem(getKey('streak_last'));
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yKey = yesterday.toISOString().slice(0,10);
-    let streak = parseInt(localStorage.getItem(getKey('streak')) || '0');
-    if (lastDay === TODAY()) return; // already counted today
-    if (lastDay === yKey) {
-      streak += 1;
-    } else if (lastDay !== TODAY()) {
-      streak = 1;
-    }
-    localStorage.setItem(getKey('streak'), streak);
-    localStorage.setItem(getKey('streak_last'), TODAY());
-    const el = document.getElementById('streak-count');
-    if (el) el.textContent = streak;
-  } catch(e) {}
-}
-
-// Confetti
-function fireConfetti() {
-  const canvas = document.getElementById('confetti-canvas');
-  if (!canvas) return;
-  canvas.style.display = 'block';
-  const ctx = canvas.getContext('2d');
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const pieces = Array.from({length: 80}, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * -canvas.height,
-    w: 8 + Math.random() * 8,
-    h: 4 + Math.random() * 4,
-    r: Math.random() * Math.PI * 2,
-    dr: (Math.random() - 0.5) * 0.2,
-    dy: 2 + Math.random() * 3,
-    dx: (Math.random() - 0.5) * 2,
-    color: ['#6B5B8A','#B8956A','#C47B8A','#5A7A5A','#8B7BA8','#D4A96A'][
-             Math.floor(Math.random() * 6)],
-  }));
-  let frame = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    pieces.forEach(p => {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.r);
-      ctx.fillStyle = p.color;
-      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-      ctx.restore();
-      p.y += p.dy; p.x += p.dx; p.r += p.dr;
-    });
-    frame++;
-    if (frame < 120) requestAnimationFrame(draw);
-    else { ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display='none'; }
-  }
-  draw();
-}
-
-function comingSoon(e) {
-  e.preventDefault();
-  alert('This resource will be available soon. Cassandra will let you know when it\'s ready. ✝');
-}
-
-
-// ── PAST RESPONSES ─────────────────────────────────────────────────────────
-const ROOTED_NAMES = ['Reality','Origin','Overflow','Turning','Election','Dwelling'];
-const ROOTED_IDS   = ['R','O1','O2','T','E','D'];
-
-function switchPastTab(name, btn) {
-  document.querySelectorAll('.past-nav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.past-tab').forEach(t => t.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  const tab = document.getElementById(`past-${name}`);
-  if (tab) tab.classList.add('active');
-}
-
-function buildPastResponses() {
-  buildPastExamen();
-  buildPastVirtue();
-  buildPastSurrender();
-  buildPastPrayerList();
-}
-
-function getPastDays(n) {
-  const days = [];
-  for (let i = 1; i <= n; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    days.push(d.toISOString().slice(0,10));
-  }
-  return days;
-}
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
-}
-
-function buildPastExamen() {
-  const container = document.getElementById('past-examen-list');
-  if (!container) return;
-  const days = getPastDays(30);
-  const cards = [];
-
-  days.forEach(date => {
-    const entries = ROOTED_IDS.map((id, i) => {
-      try {
-        return localStorage.getItem(`ril_${clientName}_day_${date}_rooted_${id}`) || '';
-      } catch(e) { return ''; }
-    });
-    if (!entries.some(e => e.trim())) return;
-
-    const preview = entries.find(e => e.trim()) || '';
-    const id = `past-ex-${date}`;
-    cards.push(`
-      <div class="past-day-card">
-        <div class="past-day-hd" onclick="togglePastCard('${id}',this)">
-          <div class="past-day-date">${formatDate(date)}</div>
-          <div class="past-day-preview">${preview.slice(0,50)}${preview.length>50?'…':''}</div>
+  VIDEOS.forEach(v=>{
+    const isWatched = !!watched[v.num];
+    const card = document.createElement("div");
+    card.style.cssText = "background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:12px";
+    card.innerHTML = `
+      <div style="background:#2A2230;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="toggleVideo(${v.num})">
+        <div>
+          <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:2px">VIDEO ${v.num} &middot; ${v.duration}</div>
+          <div style="color:#fff;font-size:14px;font-weight:bold">${v.title}</div>
+          <div style="color:#B8B4C0;font-size:11px;font-style:italic;margin-top:1px">${v.subtitle}</div>
         </div>
-        <div class="past-day-body" id="${id}">
-          ${ROOTED_IDS.map((rid, i) => entries[i].trim() ? `
-            <div class="past-entry">
-              <div class="past-entry-label">${rid === 'O1' ? 'O' : rid === 'O2' ? 'O' : rid} — ${ROOTED_NAMES[i]}</div>
-              <div class="past-entry-value">${entries[i]}</div>
-            </div>` : '').join('')}
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          ${isWatched?'<span style="color:#5A7A5A;font-size:11px;font-weight:bold">&#10003; Watched</span>':''}
+          <div id="arrow-${v.num}" style="color:#B8956A;font-size:18px">&#9654;</div>
         </div>
-      </div>`);
+      </div>
+      <div id="vp-${v.num}" style="display:none;padding:14px">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:flex-end">
+          <button onclick="markWatched(${v.num})"
+            style="background:${isWatched?'#5A7A5A':'#6B5B8A'};color:#fff;border-radius:4px;padding:7px 16px;font-size:12px;font-weight:bold">
+            ${isWatched?'&#10003; Marked as Watched':'Mark as Watched'}
+          </button>
+        </div>
+      </div>`;
+    el.appendChild(card);
   });
-
-  container.innerHTML = cards.length > 0 ? cards.join('')
-    : '<div class="past-empty">No examen entries yet. Your responses will appear here after you save them.</div>';
 }
 
-function buildPastVirtue() {
-  const container = document.getElementById('past-virtue-list');
-  if (!container) return;
-  const days = getPastDays(30);
-  const cards = [];
-  const VIRTUE_LABELS = {
-    prayer: '🙏 Morning Prayer', surrender: '✝ Daily Surrender',
-    lectio: '📖 Lectio Divina', mortification: '⚜️ One Mortification',
-    correction: '🕊 Received a Correction', present: '❤️ Stayed Present',
-    controller: '🛡 Named the Controller', gratitude: '✨ 3 Gratitudes'
-  };
-
-  days.forEach(date => {
-    try {
-      const saved = localStorage.getItem(`ril_${clientName}_day_${date}_virtues`);
-      if (!saved) return;
-      const checked = JSON.parse(saved);
-      if (!checked.length) return;
-      const id = `past-vt-${date}`;
-      cards.push(`
-        <div class="past-day-card">
-          <div class="past-day-hd" onclick="togglePastCard('${id}',this)">
-            <div class="past-day-date">${formatDate(date)}</div>
-            <div class="past-day-preview">${checked.length} practice${checked.length!==1?'s':''} completed</div>
-          </div>
-          <div class="past-day-body" id="${id}">
-            <div class="past-entry">
-              <div class="past-entry-label">Practices Completed</div>
-              <div class="past-entry-value">${checked.map(v => VIRTUE_LABELS[v] || v).join('\n')}</div>
-            </div>
-          </div>
-        </div>`);
-    } catch(e) {}
-  });
-
-  container.innerHTML = cards.length > 0 ? cards.join('')
-    : '<div class="past-empty">No virtue tracking yet. Your entries will appear here after you save them.</div>';
-}
-
-function buildPastSurrender() {
-  const container = document.getElementById('past-surrender-list');
-  if (!container) return;
-  const days = getPastDays(30);
-  const cards = [];
-
-  days.forEach(date => {
-    try {
-      const text = localStorage.getItem(`ril_${clientName}_day_${date}_surrender_text`);
-      if (!text || !text.trim()) return;
-      const checksRaw = localStorage.getItem(`ril_${clientName}_day_${date}_surrender_checks`);
-      const checks = checksRaw ? JSON.parse(checksRaw) : [];
-      const checkLabels = ['Said it out loud','Gave it to God','Did not pick it back up'];
-      const id = `past-sr-${date}`;
-      cards.push(`
-        <div class="past-day-card">
-          <div class="past-day-hd" onclick="togglePastCard('${id}',this)">
-            <div class="past-day-date">${formatDate(date)}</div>
-            <div class="past-day-preview">${text.slice(0,60)}${text.length>60?'…':''}</div>
-          </div>
-          <div class="past-day-body" id="${id}">
-            <div class="past-entry">
-              <div class="past-entry-label">I Surrendered</div>
-              <div class="past-entry-value">${text}</div>
-            </div>
-            ${checks.length ? `<div class="past-entry">
-              <div class="past-entry-label">Completed</div>
-              <div class="past-entry-value">${checks.map(n => '✓ ' + checkLabels[n-1]).join('\n')}</div>
-            </div>` : ''}
-          </div>
-        </div>`);
-    } catch(e) {}
-  });
-
-  container.innerHTML = cards.length > 0 ? cards.join('')
-    : '<div class="past-empty">No surrender entries yet. Your entries will appear here after you save them.</div>';
-}
-
-function buildPastPrayerList() {
-  const container = document.getElementById('past-prayer-list');
-  if (!container) return;
-  const days = getPastDays(30);
-  const cards = [];
-
-  days.forEach(date => {
-    try {
-      const saved = localStorage.getItem(`ril_${clientName}_day_${date}_prayer`);
-      if (!saved) return;
-      const data = JSON.parse(saved);
-      if (!data.morning && !data.evening) return;
-      const id = `past-pr-${date}`;
-      cards.push(`
-        <div class="past-day-card">
-          <div class="past-day-hd" onclick="togglePastCard('${id}',this)">
-            <div class="past-day-date">${formatDate(date)}</div>
-            <div class="past-day-preview">
-              ${data.morning ? '☀️ Morning' : ''} ${data.morning && data.evening ? '+' : ''} ${data.evening ? '🌙 Evening' : ''}
-            </div>
-          </div>
-          <div class="past-day-body" id="${id}">
-            <div class="past-entry">
-              <div class="past-entry-label">Prayer Completed</div>
-              <div class="past-entry-value">${[data.morning && '☀️ Morning Offering', data.evening && '🌙 Evening Prayer'].filter(Boolean).join('\n')}</div>
-            </div>
-          </div>
-        </div>`);
-    } catch(e) {}
-  });
-
-  container.innerHTML = cards.length > 0 ? cards.join('')
-    : '<div class="past-empty">No prayer history yet. Your entries will appear here after you save them.</div>';
-}
-
-function togglePastCard(id, hd) {
-  const body = document.getElementById(id);
-  if (!body) return;
-  body.classList.toggle('open');
-  if (hd) hd.classList.toggle('open');
-}
-const MORNING_OFFERING = 'O Jesus, I offer You my prayers, works, joys and sufferings, all that this day may bring, be they good or bad — for the love of God, for the conversion of sinners, the reparation of those who sin against the Sacred Heart of Jesus and the Immaculate Heart of Mary. Amen.';
-
-const MORNING_PRAYERS = [
-  { offering: MORNING_OFFERING, scripture: 'Isaiah 43:1 · "I have called you by name; you are mine."', adoration: 'Before you give anything today — to your baby, to anyone — receive God\'s love first. You do not have to earn it. Just receive it.' },
-  { offering: MORNING_OFFERING, scripture: 'Psalm 139:14 · "I am fearfully and wonderfully made."', adoration: 'God knows every part of this day before it begins. Offer it all — the good and the hard — before it arrives.' },
-  { offering: MORNING_OFFERING, scripture: 'Philippians 4:13 · "I can do all things through him who strengthens me."', adoration: 'The ordinary moments of today are sacred ground. Offer them now before they scatter.' },
-  { offering: MORNING_OFFERING, scripture: 'Romans 8:28 · "All things work together for good for those who love God."', adoration: 'Even what is hard today is held by Him. Offer the whole day — good and bad — with open hands.' },
-  { offering: MORNING_OFFERING, scripture: 'John 15:4 · "Remain in me, and I will remain in you."', adoration: 'You cannot do today alone. Nor do you have to. Offer it to Him before you begin.' },
-  { offering: MORNING_OFFERING, scripture: 'Jeremiah 29:11 · "I know the plans I have for you, declares the Lord."', adoration: 'He planned this day before you were born. Trust it to Him.' },
-  { offering: MORNING_OFFERING, scripture: 'Matthew 6:33 · "Seek first the kingdom of God."', adoration: 'Before the list, the baby, the needs — seek Him first. This prayer is that act.' },
-];
-
-function getPrayerForDay() {
-  const weekNum = Math.max(0, (currentWeekFromPortal() - 1));
-  const dayOfWeek = new Date().getDay(); // 0-6
-  const idx = Math.min(weekNum * 2 + Math.floor(dayOfWeek / 3), MORNING_PRAYERS.length - 1);
-  return MORNING_PRAYERS[idx];
-}
-
-function currentWeekFromPortal() {
-  try {
-    const prog = JSON.parse(localStorage.getItem(getKey('progress')) || '{}');
-    const weeks = [1,2,3,4,5,6];
-    for (const w of weeks) {
-      const weekItems = [`w${w}-video`,`w${w}-ws`,`w${w}-session`];
-      if (!weekItems.every(id => prog[id])) return w;
+function toggleVideo(num){
+  VIDEOS.forEach(v=>{
+    const p=document.getElementById("vp-"+v.num);
+    const a=document.getElementById("arrow-"+v.num);
+    if(v.num===num){
+      const open=p.style.display!=="none";
+      p.style.display=open?"none":"block";
+      a.innerHTML=open?"&#9654;":"&#9660;";
+    } else {
+      p.style.display="none";
+      a.innerHTML="&#9654;";
     }
-    return 6;
-  } catch(e) { return 1; }
+  });
 }
 
-function initPrayer() {
-  const prayer = getPrayerForDay();
-  const prayerEl = document.getElementById('morning-text');
-  if (prayerEl && prayer) {
-    prayerEl.innerHTML =
-      `<strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">Morning Intention</strong>${prayer.adoration}<br><br><strong style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:block;margin:0.5rem 0 0.3rem">Fatima Morning Offering</strong><em>${prayer.offering}</em>`;
+function markWatched(num){
+  const w=load("videos_watched",{});
+  w[num]=true;
+  save("videos_watched",w);
+  buildVideos();
+}
+
+// ── Journal ────────────────────────────────────────────────────────────────
+function buildJournalTabs(){
+  const wEl=document.getElementById("week-tabs");
+  wEl.innerHTML="";
+  WEEK_TITLES.forEach((_,i)=>{
+    const b=document.createElement("button");
+    b.id="week-tab-"+i;
+    b.style.cssText=`flex:0 0 auto;padding:7px 13px;border-radius:4px;font-size:11px;font-weight:bold;border:1px solid ${WEEK_COLORS[i]};background:transparent;color:#4A3F5C`;
+    b.textContent="Wk "+(i+1);
+    b.onclick=()=>{setWeekTab(i);setDayTab(0);buildJournalPage();};
+    wEl.appendChild(b);
+  });
+
+  const dEl=document.getElementById("day-tabs");
+  dEl.innerHTML="";
+  DAYS.forEach((d,i)=>{
+    const b=document.createElement("button");
+    b.id="day-tab-"+i;
+    b.style.cssText=`flex:0 0 auto;padding:6px 12px;border-radius:4px;font-size:11px;font-weight:bold;border:1px solid #B8B4C0;background:transparent;color:#4A3F5C`;
+    b.textContent=d;
+    b.onclick=()=>{setDayTab(i);buildJournalPage();};
+    dEl.appendChild(b);
+  });
+}
+
+function setWeekTab(i){
+  currentWeek=i;
+  save("current_week",i);
+  const data=CLIENTS[client];
+  document.getElementById("welcome-verse").textContent=data.week_verse[Math.min(i,5)];
+  WEEK_TITLES.forEach((_,j)=>{
+    const b=document.getElementById("week-tab-"+j);
+    if(!b)return;
+    b.style.background=j===i?WEEK_COLORS[j]:"transparent";
+    b.style.color=j===i?"#fff":"#4A3F5C";
+  });
+}
+
+function setDayTab(i){
+  currentDay=i;
+  save("current_day",i);
+  DAYS.forEach((_,j)=>{
+    const b=document.getElementById("day-tab-"+j);
+    if(!b)return;
+    b.style.background=j===i?WEEK_COLORS[currentWeek]:"transparent";
+    b.style.color=j===i?"#fff":"#4A3F5C";
+    b.style.borderColor=j===i?WEEK_COLORS[currentWeek]:"#B8B4C0";
+  });
+}
+
+function jKey(w,d,p){return "j_w"+w+"_d"+d+"_"+p;}
+
+function escH(str){
+  return (str||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function buildJournalPage(){
+  const el=document.getElementById("journal-page");
+  const w=currentWeek,d=currentDay;
+  const color=WEEK_COLORS[w],tint=WEEK_TINTS[w];
+  const isSab=(d===6);
+  const [virtue,vp]=VIRTUES[w];
+
+  // Morning
+  const mor=document.createElement("div");
+  mor.style.cssText="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:12px";
+  mor.innerHTML=`
+    <div style="background:${color};padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="color:#B8956A;font-size:9px;letter-spacing:1px">WEEK ${w+1} &middot; ${isSab?"SABBATH":"DAY "+(d+1)}</div>
+        <div style="color:#fff;font-size:14px;font-weight:bold">Morning Page</div>
+      </div>
+      <div style="color:#B8956A;font-size:22px">${isSab?"&#10013;":"&#9728;"}</div>
+    </div>
+    <div style="padding:14px">
+      <div style="background:${tint};border-left:3px solid ${color};padding:8px 12px;border-radius:0 4px 4px 0;margin-bottom:12px">
+        <div style="font-size:9px;color:${color};font-weight:bold;letter-spacing:1px;margin-bottom:3px">THIS WEEK'S VIRTUE</div>
+        <div style="font-size:13px;color:#2A2230;font-weight:bold">${virtue}</div>
+        <div style="font-size:12px;color:#4A3F5C;font-style:italic;margin-top:2px">${vp}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div>
+          <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:4px">DATE</div>
+          <input type="text" placeholder="Today's date"
+            value="${escH(load(jKey(w,d,"date"),""))}"
+            oninput="save('${jKey(w,d,"date")}',this.value)"
+            style="width:100%;border:1px solid #B8B4C0;border-radius:4px;padding:7px 10px;font-size:12px;color:#2A2230;background:#FAF6F0">
+        </div>
+        <div>
+          <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:4px">TODAY'S INTENTION</div>
+          <input type="text" placeholder="One word or phrase…"
+            value="${escH(load(jKey(w,d,"intention"),""))}"
+            oninput="save('${jKey(w,d,"intention")}',this.value)"
+            style="width:100%;border:1px solid #B8B4C0;border-radius:4px;padding:7px 10px;font-size:12px;color:#2A2230;background:#FAF6F0">
+        </div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">MORNING REFLECTION</div>
+        <textarea
+          oninput="save('${jKey(w,d,"morning")}',this.value)"
+          placeholder="Write here — uncensored, unedited. This is your conversation with God."
+          style="width:100%;min-height:${isSab?150:120}px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.6">${escH(load(jKey(w,d,"morning"),""))}</textarea>
+      </div>
+    </div>`;
+  el.innerHTML="";
+  el.appendChild(mor);
+
+  // Evening
+  const eve=document.createElement("div");
+  eve.style.cssText="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:12px";
+  const examLetters=[
+    ["R","Reality","What was actually true today — not the story about it, just the facts?"],
+    ["O","Origin","Where did my strongest feeling today come from — past, temperament, wound?"],
+    ["O","Overflow","What was overflowing from me today — fear, love, control, peace?"],
+    ["T","Turning","Where did I turn toward God today? Where did I turn away?"],
+    ["E","Election","What did I choose today? What did I want to choose but didn't?"],
+    ["D","Dwelling","Where did I feel most rooted and known today?"],
+  ];
+
+  eve.innerHTML=`
+    <div style="background:#2A2230;padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="color:#B8956A;font-size:9px;letter-spacing:1px">WEEK ${w+1} &middot; ${isSab?"SABBATH":"DAY "+(d+1)}</div>
+        <div style="color:#fff;font-size:14px;font-weight:bold">Evening Examen</div>
+      </div>
+      <div style="color:#B8956A;font-size:22px">&#10013;</div>
+    </div>
+    <div style="padding:14px">
+      <div style="margin-bottom:12px">
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">EVENING REFLECTION</div>
+        <textarea oninput="save('${jKey(w,d,"eq")}',this.value)"
+          placeholder="How was today — really?"
+          style="width:100%;min-height:70px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.6">${escH(load(jKey(w,d,"eq"),""))}</textarea>
+      </div>
+      <div style="font-size:9px;color:${color};font-weight:bold;letter-spacing:1px;margin-bottom:8px">R.O.O.T.E.D. EXAMEN</div>
+      ${examLetters.map(([letter,word,prompt],ri)=>`
+        <div style="display:flex;gap:8px;margin-bottom:10px">
+          <div style="width:24px;height:24px;background:${color};border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;flex-shrink:0;margin-top:2px">${letter}</div>
+          <div style="flex:1">
+            <div style="font-size:11px;color:#2A2230;font-weight:bold;margin-bottom:3px">${word} <span style="font-weight:normal;font-style:italic;color:#4A3F5C;font-size:10px">— ${prompt}</span></div>
+            <textarea oninput="save('${jKey(w,d,"ex"+ri)}',this.value)"
+              placeholder="Write here…"
+              style="width:100%;min-height:${isSab?65:50}px;border:1px solid #B8B4C0;border-radius:4px;padding:7px 9px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.5">${escH(load(jKey(w,d,"ex"+ri),""))}</textarea>
+          </div>
+        </div>`).join("")}
+      ${w>=2?`
+      <div style="margin-top:4px;margin-bottom:12px">
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">BRIDGE THOUGHT</div>
+        <textarea oninput="save('${jKey(w,d,"bridge")}',this.value)"
+          placeholder="What Bridge Thought is God offering you tonight?"
+          style="width:100%;min-height:60px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.6">${escH(load(jKey(w,d,"bridge"),""))}</textarea>
+      </div>`:""}
+      <div style="background:${tint};border-left:3px solid ${color};padding:10px 12px;border-radius:0 4px 4px 0">
+        <div style="font-size:9px;color:${color};font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">EVENING GIFT — Name one moment of grace from today.</div>
+        <textarea oninput="save('${jKey(w,d,"gift")}',this.value)"
+          placeholder="However small…"
+          style="width:100%;min-height:50px;border:1px solid ${color}60;border-radius:4px;padding:7px 9px;font-size:12px;color:#2A2230;background:transparent;resize:vertical;line-height:1.5">${escH(load(jKey(w,d,"gift"),""))}</textarea>
+      </div>
+    </div>`;
+  el.appendChild(eve);
+}
+
+// ── Tracker ────────────────────────────────────────────────────────────────
+function buildTracker(){
+  const el=document.getElementById("tracker-grid");
+  el.innerHTML="";
+  const checks=load("tracker_checks",{});
+  const DS=["S","M","T","W","T","F","Sa"];
+
+  const hdr=document.createElement("div");
+  hdr.style.cssText="background:#2A2230;padding:7px 14px;border-radius:4px 4px 0 0;display:grid;grid-template-columns:1fr repeat(7,34px);gap:4px;align-items:center";
+  hdr.innerHTML=`<div style="color:#B8956A;font-size:9px;letter-spacing:1px;font-weight:bold">WEEK / VIRTUE</div>`+
+    DS.map(d=>`<div style="color:#B8956A;font-size:9px;font-weight:bold;text-align:center">${d}</div>`).join("");
+  el.appendChild(hdr);
+
+  VIRTUES.forEach(([virtue,practice],wi)=>{
+    const row=document.createElement("div");
+    row.style.cssText=`background:${wi%2===0?"#FAF6F0":"#EDE5F5"};display:grid;grid-template-columns:1fr repeat(7,34px);gap:4px;align-items:center;padding:6px 14px;border-bottom:1px solid #D4C8E0`;
+    let inner=`<div>
+      <div style="font-size:8px;color:${WEEK_COLORS[wi]};font-weight:bold;letter-spacing:0.5px">WK ${wi+1} — ${virtue.toUpperCase()}</div>
+      <div style="font-size:11px;color:#4A3F5C;font-style:italic;margin-top:1px">${practice}</div>
+    </div>`;
+    DS.forEach((_,di)=>{
+      const k=`t_w${wi}_d${di}`;
+      const chk=!!checks[k];
+      inner+=`<div style="display:flex;align-items:center;justify-content:center">
+        <div onclick="toggleTracker(${wi},${di})"
+          style="width:26px;height:26px;border-radius:50%;border:2px solid ${chk?WEEK_COLORS[wi]:"#B8B4C0"};background:${chk?WEEK_COLORS[wi]:"transparent"};display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:13px;font-weight:bold">
+          ${chk?"&#10003;":""}
+        </div>
+      </div>`;
+    });
+    row.innerHTML=inner;
+    el.appendChild(row);
+  });
+
+  const total=Object.values(load("tracker_checks",{})).filter(Boolean).length;
+  const tot=document.createElement("div");
+  tot.style.cssText="background:#2A2230;padding:8px 14px;border-radius:0 0 4px 4px;display:flex;justify-content:space-between;align-items:center";
+  tot.innerHTML=`<div style="color:#B8B4C0;font-size:11px;font-style:italic">Total days of faithful practice</div>
+    <div style="color:#B8956A;font-size:14px;font-weight:bold">${total} / 42</div>`;
+  el.appendChild(tot);
+
+  const vn=document.getElementById("virtue-notes");
+  if(vn){
+    vn.value=load("virtue_notes","")||"";
+    vn.oninput=()=>save("virtue_notes",vn.value);
   }
-  const scriptureEl = document.getElementById('morning-scripture');
-  if (scriptureEl && prayer) scriptureEl.textContent = prayer.scripture;
-
-  // Load today's prayer state
-  try {
-    const saved = localStorage.getItem(todayKey('prayer'));
-    if (saved) {
-      const data = JSON.parse(saved);
-      if (data.morning) {
-        document.getElementById('morning-card')?.classList.add('checked');
-        document.getElementById('morning-circle')?.classList.add('checked');
-      }
-      if (data.evening) {
-        document.getElementById('evening-card')?.classList.add('checked');
-        document.getElementById('evening-circle')?.classList.add('checked');
-      }
-      if (data.morning && data.evening) {
-        const badge = document.getElementById('prayer-badge');
-        if (badge) badge.style.display = 'inline-block';
-      }
-    }
-  } catch(e) {}
-
-  buildPrayerHistory();
 }
 
-function togglePrayer(type) {
-  const card   = document.getElementById(`${type}-card`);
-  const circle = document.getElementById(`${type}-circle`);
-  if (!card) return;
-  const isChecked = card.classList.contains('checked');
-  card.classList.toggle('checked', !isChecked);
-  if (circle) {
-    circle.classList.toggle('checked', !isChecked);
-  }
+function toggleTracker(wi,di){
+  const checks=load("tracker_checks",{});
+  const k=`t_w${wi}_d${di}`;
+  checks[k]=!checks[k];
+  save("tracker_checks",checks);
+  buildTracker();
 }
 
-function savePrayer() {
-  try {
-    const morning = document.getElementById('morning-card')?.classList.contains('checked') || false;
-    const evening = document.getElementById('evening-card')?.classList.contains('checked') || false;
-    localStorage.setItem(todayKey('prayer'), JSON.stringify({ morning, evening }));
-    if (morning || evening) {
-      localStorage.setItem(todayKey('prayer_done'), '1');
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function showTab(tab){
+  ["home","videos","journal","tracker"].forEach(t=>{
+    document.getElementById("tab-"+t).classList.toggle("hidden",t!==tab);
+    const nav=document.getElementById("nav-"+t);
+    if(nav){
+      nav.style.background=t===tab?"#B8956A":"none";
+      nav.style.color=t===tab?"#2A2230":"#B8B4C0";
     }
-
-    if (morning && evening) {
-      const badge = document.getElementById('prayer-badge');
-      if (badge) badge.style.display = 'inline-block';
-    }
-
-    const msg = document.getElementById('prayer-saved');
-    if (msg) {
-      const done = [morning && 'Morning', evening && 'Evening'].filter(Boolean);
-      msg.textContent = done.length > 0
-        ? `✓ ${done.join(' + ')} prayer saved. ✝`
-        : '✓ Saved.';
-    }
-
-    buildPrayerHistory();
-    updateRing();
-    checkDayComplete();
-  } catch(e) {}
+  });
 }
 
-function buildPrayerHistory() {
-  const grid = document.getElementById('prayer-history-grid');
-  if (!grid) return;
-  const days = [];
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    const key = d.toISOString().slice(0, 10);
-    const dayName = ['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()];
-    try {
-      const saved = localStorage.getItem(`ril_${clientName}_day_${key}_prayer`);
-      const data = saved ? JSON.parse(saved) : {};
-      const cls = data.morning && data.evening ? 'both'
-                : data.morning ? 'morning-only'
-                : data.evening ? 'evening-only'
-                : 'none';
-      const icon = data.morning && data.evening ? '✝'
-                 : data.morning ? '☀' : data.evening ? '🌙' : '';
-      days.push(`<div class="prayer-day-dot">
-        <div class="prayer-dot ${cls}">${icon}</div>
-        <div class="prayer-dot-label">${dayName}</div>
-      </div>`);
-    } catch(e) {
-      days.push(`<div class="prayer-day-dot">
-        <div class="prayer-dot none"></div>
-        <div class="prayer-dot-label">${dayName}</div>
-      </div>`);
-    }
-  }
-  grid.innerHTML = days.join('');
-}
-
-// ── STAY LOGGED IN + DAY ROLLOVER ──────────────────────────────────────
-// Auto-login if the client logged in before on this device
-(function() {
-  try {
-    const savedUser = localStorage.getItem('rooted_current_user');
-    if (savedUser && CLIENTS[savedUser]) {
-      document.getElementById('client-name-input').value = savedUser;
-      document.getElementById('password-input').value = CLIENTS[savedUser];
-      attemptLogin();
-    }
-  } catch(e) {}
-})();
-
-// If the tab stays open past midnight (common on iPhone Safari),
-// refresh so the new day starts with fresh fields.
-let UI_DAY = TODAY();
-function checkDayRollover() {
-  if (TODAY() !== UI_DAY) { location.reload(); }
-}
-document.addEventListener('visibilitychange', function() {
-  if (!document.hidden) checkDayRollover();
-});
-window.addEventListener('focus', checkDayRollover);
-setInterval(checkDayRollover, 60000);
-
+// ── Init ───────────────────────────────────────────────────────────────────
+checkStorage();
+tryAutoLogin();
 </script>
 </body>
 </html>
