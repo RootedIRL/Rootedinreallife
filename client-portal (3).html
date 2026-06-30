@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooted in Real Life</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#FAF6F0;color:#2A2230;font-size:14px;min-height:100vh}
+button{cursor:pointer;font-family:Georgia,serif;border:none}
+button:focus{outline:2px solid #B8956A}
+textarea,input{font-family:Georgia,serif}
+textarea:focus,input:focus{outline:2px solid #B8956A;border-color:#B8956A}
+.hidden{display:none!important}
+.scroll{overflow-x:auto}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:#8B7BA8;border-radius:3px}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:6px;background:#2A2230}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#2A2230">
+    <div style="background:#FAF6F0;border-radius:8px;padding:40px 36px;max-width:360px;width:90%;text-align:center;border-top:4px solid #B8956A">
+      <div style="color:#B8956A;font-size:30px;margin-bottom:10px">&#10013;</div>
+      <div style="font-size:22px;font-weight:bold;color:#2A2230;margin-bottom:4px">Rooted in Real Life</div>
+      <div style="font-style:italic;font-size:13px;color:#8B7BA8;margin-bottom:20px">Catholic Life Coaching</div>
+      <div style="border-top:1px solid #D4C8E0;margin-bottom:20px"></div>
+      <div style="font-size:12px;color:#4A3F5C;margin-bottom:12px;text-align:left">Enter your access code to continue:</div>
+      <input id="pw-input" type="password" placeholder="Access code"
+        style="width:100%;border:1px solid #B8B4C0;border-radius:4px;padding:10px 14px;font-size:14px;color:#2A2230;background:#fff;margin-bottom:10px"
+        onkeydown="if(event.key==='Enter')tryLogin()">
+      <button onclick="tryLogin()"
+        style="width:100%;background:#6B5B8A;color:#fff;border-radius:4px;padding:11px;font-size:14px;font-weight:bold;margin-bottom:10px">
+        Enter Portal
+      </button>
+      <div id="login-error" style="color:#C47B8A;font-size:12px;display:none">
+        Incorrect access code. Please try again.
+      </div>
+      <div style="font-style:italic;font-size:11px;color:#B8B4C0;margin-top:16px">
+        "Before I formed you in the womb I knew you." — Jeremiah 1:5
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTAL -->
+<div id="portal" class="hidden">
+
+  <div id="portal-header" style="background:#2A2230;border-bottom:3px solid #B8956A;position:sticky;top:0;z-index:100">
+    <div style="max-width:860px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div>
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px">ROOTED IN REAL LIFE</div>
+        <div id="header-name" style="color:#fff;font-size:17px;font-weight:bold;margin-top:1px"></div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <button id="nav-home"    onclick="showTab('home')"    style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">HOME</button>
+        <button id="nav-videos" onclick="showTab('videos')"  style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">VIDEOS</button>
+        <button id="nav-journal" onclick="showTab('journal')" style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">JOURNAL</button>
+        <button id="nav-tracker" onclick="showTab('tracker')" style="background:none;color:#B8B4C0;font-size:11px;font-weight:bold;padding:5px 10px;border-radius:4px;letter-spacing:0.5px">TRACKER</button>
+        <button onclick="logout()" style="background:none;color:#4A3F5C;font-size:10px;padding:5px 10px;border-radius:4px">Sign out</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:860px;margin:0 auto;padding:16px 14px 60px">
+
+    <!-- HOME -->
+    <div id="tab-home">
+      <div id="welcome-banner" style="background:#2A2230;border-radius:6px;padding:20px;margin-bottom:16px;border-bottom:2px solid #B8956A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:4px">WELCOME BACK</div>
+        <div id="welcome-name" style="color:#fff;font-size:22px;font-weight:bold;margin-bottom:6px"></div>
+        <div id="welcome-verse" style="color:#B8956A;font-style:italic;font-size:12px;line-height:1.6"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:14px">
+        <div style="background:#2A2230;padding:8px 16px;color:#B8956A;font-size:9px;letter-spacing:1px">YOUR SOUL PORTRAIT</div>
+        <div id="soul-portrait-rows"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:14px">
+        <div style="background:#2A2230;padding:8px 16px;color:#B8956A;font-size:9px;letter-spacing:1px">YOUR THREE GOALS</div>
+        <div id="goals-rows"></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+        <button onclick="showTab('videos')"  style="background:#6B5B8A;color:#fff;border-radius:6px;padding:14px 10px;font-size:12px;font-weight:bold;line-height:1.6">&#9654;<br>Foundation<br>Videos</button>
+        <button onclick="showTab('journal')" style="background:#C47B8A;color:#fff;border-radius:6px;padding:14px 10px;font-size:12px;font-weight:bold;line-height:1.6">&#9998;<br>Six-Week<br>Journal</button>
+        <button onclick="showTab('tracker')" style="background:#5A7A5A;color:#fff;border-radius:6px;padding:14px 10px;font-size:12px;font-weight:bold;line-height:1.6">&#10003;<br>Virtue<br>Tracker</button>
+      </div>
+
+      <div style="background:#EDE5F5;border-left:3px solid #B8956A;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px">
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:1px;margin-bottom:4px">YOUR PATRON SAINTS</div>
+        <div id="saints-text" style="font-size:12px;color:#4A3F5C;font-style:italic;line-height:1.6"></div>
+      </div>
+
+      <div id="save-status" style="text-align:center;font-size:11px;color:#B8B4C0;font-style:italic;padding:8px">All notes save automatically to this device.</div>
+    </div>
+
+    <!-- VIDEOS -->
+    <div id="tab-videos" class="hidden">
+      <div style="background:#2A2230;border-radius:6px;padding:16px;margin-bottom:14px;border-bottom:2px solid #B8956A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:3px">FOUNDATION VIDEOS</div>
+        <div style="color:#fff;font-size:18px;font-weight:bold">Your Video Lessons</div>
+        <div style="color:#B8B4C0;font-size:12px;font-style:italic;margin-top:2px">Watch one video per week before your coaching session.</div>
+      </div>
+      <div id="video-list"></div>
+    </div>
+
+    <!-- JOURNAL -->
+    <div id="tab-journal" class="hidden">
+      <div style="background:#2A2230;border-radius:6px;padding:16px;margin-bottom:14px;border-bottom:2px solid #B8956A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:3px">SIX-WEEK JOURNAL</div>
+        <div style="color:#fff;font-size:18px;font-weight:bold">Daily Morning &amp; Evening Pages</div>
+        <div style="color:#B8B4C0;font-size:12px;font-style:italic;margin-top:2px">Your notes save automatically to this device.</div>
+      </div>
+      <div class="scroll" style="margin-bottom:12px">
+        <div id="week-tabs" style="display:flex;gap:4px;min-width:max-content"></div>
+      </div>
+      <div class="scroll" style="margin-bottom:12px">
+        <div id="day-tabs" style="display:flex;gap:4px;min-width:max-content"></div>
+      </div>
+      <div id="journal-page"></div>
+    </div>
+
+    <!-- TRACKER -->
+    <div id="tab-tracker" class="hidden">
+      <div style="background:#2A2230;border-radius:6px;padding:16px;margin-bottom:14px;border-bottom:2px solid #5A7A5A">
+        <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:3px">VIRTUE TRACKER</div>
+        <div style="color:#fff;font-size:18px;font-weight:bold">Six Weeks of Faithful Practice</div>
+        <div style="color:#B8B4C0;font-size:12px;font-style:italic;margin-top:2px">One mark per day. No grade. Just fidelity.</div>
+      </div>
+      <div id="tracker-grid"></div>
+      <div style="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-top:14px">
+        <div style="background:#2A2230;padding:8px 16px;color:#B8956A;font-size:9px;letter-spacing:1px">NOTES ON YOUR VIRTUE PRACTICE</div>
+        <div style="padding:12px">
+          <textarea id="virtue-notes" placeholder="What are you noticing about your virtue practice this week?"
+            style="width:100%;min-height:90px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.5"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;padding:16px 0 24px;border-top:1px solid #B8B4C0">
+    <div style="color:#B8956A;font-size:14px;margin-bottom:4px">&#10013;</div>
+    <div style="font-style:italic;font-size:11px;color:#B8B4C0">"Before I formed you in the womb I knew you." — Jeremiah 1:5</div>
+    <div style="font-size:10px;color:#B8B4C0;margin-top:4px">Rooted and Known &middot; Rooted in Real Life &middot; Catholic Life Coaching</div>
+  </div>
+</div>
+
+<script>
+// ── Credentials (password -> client name) ──────────────────────────────────
+const CREDENTIALS = {"whitney2026": "Whitney", "lissette2026": "Lissette", "rooted2026": "Cassandra"};
+
+// ── Data ───────────────────────────────────────────────────────────────────
+const CLIENTS = {"Whitney": {"temperament": "Melancholic / Phlegmatic", "fault": "Vanity + Sensuality", "charisms": "Administration \u00b7 Teaching \u00b7 Prophecy \u00b7 Wisdom", "saboteurs": "Hyper-Achiever \u00b7 Pleaser", "color": "#6B5B8A", "goals": [["&#9820;", "King Goal", "Be more present and tender \u2014 close laptop by 5pm, tend home, marriage, friendships, parish."], ["&#9819;", "Queen Goal", "Care for whole self \u2014 Rosary each morning, reading at night, no phone before bed."], ["&#10013;", "Loaves & Fishes", "Edgar's conversion \u2014 pray for him by name every day, walk the walk, be the light."]], "patron_saints": "St. Teresa of Avila \u00b7 Bl. John Henry Newman \u00b7 St. Joseph \u00b7 St. Bernadette \u00b7 St. Therese of Lisieux \u00b7 St. Faustina", "week_verse": ["\"Before I formed you in the womb I knew you.\" \u2014 Jeremiah 1:5", "\"You did not choose me, but I chose you.\" \u2014 John 15:16", "\"Each of you should use whatever gift you have received to serve others.\" \u2014 1 Peter 4:10", "\"Return to me with your whole heart.\" \u2014 Joel 2:12", "\"Choose this day whom you will serve.\" \u2014 Joshua 24:15", "\"Remain in me, as I also remain in you.\" \u2014 John 15:4"]}, "Lissette": {"temperament": "Sanguine / Phlegmatic", "fault": "Pride / Vanity", "charisms": "Mercy \u00b7 Intercession", "saboteurs": "Pleaser \u00b7 Avoider", "color": "#C47B8A", "goals": [["&#9820;", "King Goal", "Marriage \u2014 intentional date nights and deeper connection with your husband."], ["&#9819;", "Queen Goal", "Family Rosary \u2014 praying together as a family each day."], ["&#10013;", "Loaves & Fishes", "Running for fitness \u2014 showing up for your body as a gift from God."]], "patron_saints": "St. Philip Neri \u00b7 St. Thomas More \u00b7 St. Francis de Sales \u00b7 Our Lady of Guadalupe", "week_verse": ["\"Before I formed you in the womb I knew you.\" \u2014 Jeremiah 1:5", "\"You did not choose me, but I chose you.\" \u2014 John 15:16", "\"Each of you should use whatever gift you have received to serve others.\" \u2014 1 Peter 4:10", "\"Return to me with your whole heart.\" \u2014 Joel 2:12", "\"Choose this day whom you will serve.\" \u2014 Joshua 24:15", "\"Remain in me, as I also remain in you.\" \u2014 John 15:4"]}, "Cassandra": {"temperament": "Choleric / Melancholic", "fault": "Fear & Control", "charisms": "Administration \u00b7 Teaching \u00b7 Encouragement \u00b7 Wisdom", "saboteurs": "Hyper-Achiever \u00b7 Controller \u00b7 Avoider", "color": "#5A7A5A", "goals": [["&#9820;", "King Goal", "Your King Goal \u2014 add details in your journal."], ["&#9819;", "Queen Goal", "Your Queen Goal \u2014 add details in your journal."], ["&#10013;", "Loaves & Fishes", "Your Loaves & Fishes Goal \u2014 held with open hands."]], "patron_saints": "St. Catherine of Siena \u00b7 St. Teresa of Avila \u00b7 Bl. Charles de Foucauld \u00b7 St. Faustina", "week_verse": ["\"Before I formed you in the womb I knew you.\" \u2014 Jeremiah 1:5", "\"You did not choose me, but I chose you.\" \u2014 John 15:16", "\"Each of you should use whatever gift you have received to serve others.\" \u2014 1 Peter 4:10", "\"Return to me with your whole heart.\" \u2014 Joel 2:12", "\"Choose this day whom you will serve.\" \u2014 Joshua 24:15", "\"Remain in me, as I also remain in you.\" \u2014 John 15:4"]}};
+
+const VIDEOS = [{"num": 1, "id": "eaXgQGsbknQ", "title": "Introduction to the Assessments", "subtitle": "Your Soul Portrait & Portal Walkthrough", "duration": "15\u201318 min"}, {"num": 2, "id": "6Ios1LuERyw", "title": "The R.O.O.T.E.D. Model", "subtitle": "All 6 letters \u00b7 How to use the model daily", "duration": "18\u201322 min"}, {"num": 3, "id": "-fK8pFYcfCs", "title": "The Stress Response", "subtitle": "Fight / Flight / Freeze / Fawn \u00b7 Stress Protocol", "duration": "18\u201320 min"}, {"num": 4, "id": "qaXEHtSouxE", "title": "Virtue & the Predominant Fault", "subtitle": "The root of the struggle \u00b7 The remedy God offers", "duration": "15\u201320 min"}, {"num": 5, "id": "rkddcAUDoL4", "title": "Charisms & Your Mission", "subtitle": "The gifts given for the Church \u00b7 Your specific call", "duration": "15\u201320 min"}, {"num": 6, "id": "0-iXhPKAjL8", "title": "Marriage & Parenting Through Temperament", "subtitle": "How God wired the people you love most", "duration": "18\u201322 min"}, {"num": 7, "id": "MKa7tzVjLj0", "title": "The Stress Response Protocol", "subtitle": "Your step-by-step guide for hard days", "duration": "10\u201312 min"}];
+
+const WEEK_TITLES = ["Who Am I Before God?", "Where Am I Rooted?", "What Overflows From Me?", "Where Do I Need to Turn?", "What Am I Choosing?", "Where Do I Dwell?"];
+const VIRTUES     = [["Simplicity", "Do one thing today for God's eyes alone."], ["Zeal", "Pray before the feeling arrives. Rosary first."], ["Temperance", "Name one small mortification. Offer it up."], ["Abandonment", "Name one thing you are controlling. Release it."], ["Humility", "Ask for help with one thing you'd normally handle alone."], ["Fidelity", "Show up to one practice even when you don't feel like it."]];
+const WEEK_COLORS = ["#5A7A5A","#6B5B8A","#C47B8A","#B8956A","#8B7BA8","#5A7A5A"];
+const WEEK_TINTS  = ["#E0EDE0","#EAE4F5","#F5E8EC","#F5EDE0","#EDE8F5","#E0EDE0"];
+const DAYS        = ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Sabbath"];
+
+// ── State ──────────────────────────────────────────────────────────────────
+let client = null;
+let currentWeek = 0;
+let currentDay  = 0;
+
+// ── Storage ────────────────────────────────────────────────────────────────
+function sKey(suffix){ return client + "_" + suffix; }
+
+function load(suffix, fallback){
+  try{
+    const v = localStorage.getItem(sKey(suffix));
+    return v !== null ? JSON.parse(v) : fallback;
+  } catch(e){ return fallback; }
+}
+
+function save(suffix, value){
+  try{
+    localStorage.setItem(sKey(suffix), JSON.stringify(value));
+    flash();
+  } catch(e){ console.error("Save failed:",e); }
+}
+
+function flash(){
+  const el = document.getElementById("save-status");
+  if(!el) return;
+  el.textContent = "&#10003; Saved";
+  el.style.color = "#5A7A5A";
+  setTimeout(()=>{
+    el.textContent = "All notes save automatically to this device.";
+    el.style.color = "#B8B4C0";
+  }, 1500);
+}
+
+function checkStorage(){
+  try{
+    localStorage.setItem("_rl_test","1");
+    localStorage.removeItem("_rl_test");
+    return true;
+  } catch(e){
+    setTimeout(()=>alert("Storage is disabled in your browser. Notes will not be saved. Please enable cookies or local storage in your browser settings and reload."),500);
+    return false;
+  }
+}
+
+// ── Login ──────────────────────────────────────────────────────────────────
+function tryLogin(){
+  const pw = document.getElementById("pw-input").value.trim();
+  const match = CREDENTIALS[pw];
+  const errEl = document.getElementById("login-error");
+  if(match){
+    errEl.style.display = "none";
+    client = match;
+    sessionStorage.setItem("rl_session", pw);
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("portal").classList.remove("hidden");
+    buildPortal();
+    showTab("home");
+  } else {
+    errEl.style.display = "block";
+    document.getElementById("pw-input").value = "";
+    document.getElementById("pw-input").focus();
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem("rl_session");
+  client = null;
+  document.getElementById("portal").classList.add("hidden");
+  document.getElementById("login-screen").classList.remove("hidden");
+  document.getElementById("pw-input").value = "";
+}
+
+function tryAutoLogin(){
+  const saved = sessionStorage.getItem("rl_session");
+  if(saved && CREDENTIALS[saved]){
+    client = CREDENTIALS[saved];
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("portal").classList.remove("hidden");
+    buildPortal();
+    showTab("home");
+  }
+}
+
+// ── Build portal ───────────────────────────────────────────────────────────
+function buildPortal(){
+  const data = CLIENTS[client];
+
+  document.getElementById("header-name").textContent = client;
+  document.getElementById("welcome-name").textContent = "Welcome back, " + client;
+
+  const weekIdx = load("current_week", 0);
+  document.getElementById("welcome-verse").textContent = data.week_verse[Math.min(weekIdx,5)];
+
+  // Soul portrait
+  const spEl = document.getElementById("soul-portrait-rows");
+  spEl.innerHTML = "";
+  [
+    ["TEMPERAMENT",       data.temperament, data.color],
+    ["PREDOMINANT FAULT", data.fault,       "#C47B8A"],
+    ["TOP CHARISMS",      data.charisms,    "#B8956A"],
+    ["SABOTEURS",         data.saboteurs,   "#8B7BA8"],
+  ].forEach(([label,value,color],i)=>{
+    const row = document.createElement("div");
+    row.style.cssText = `display:flex;border-bottom:${i<3?"1px solid #EDE5F5":"none"}`;
+    row.innerHTML = `
+      <div style="background:${color};width:110px;padding:10px 12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="color:#B8956A;font-size:8px;font-weight:bold;letter-spacing:0.5px;text-align:center;line-height:1.4">${label}</div>
+      </div>
+      <div style="padding:10px 14px;font-size:13px;color:#4A3F5C;line-height:1.5;display:flex;align-items:center">${value}</div>`;
+    spEl.appendChild(row);
+  });
+
+  // Goals
+  const goalsEl = document.getElementById("goals-rows");
+  goalsEl.innerHTML = "";
+  const gColors = [data.color,"#C47B8A","#5A7A5A"];
+  data.goals.forEach(([sym,label,text],i)=>{
+    const row = document.createElement("div");
+    row.style.cssText = `padding:12px 16px;border-bottom:${i<2?"1px solid #EDE5F5":"none"};display:flex;gap:10px;align-items:flex-start`;
+    row.innerHTML = `
+      <div style="width:30px;height:30px;background:${gColors[i]};border-radius:50%;display:flex;align-items:center;justify-content:center;color:#B8956A;font-size:14px;flex-shrink:0">${sym}</div>
+      <div>
+        <div style="font-size:9px;color:${gColors[i]};font-weight:bold;letter-spacing:0.5px;margin-bottom:2px">${label.toUpperCase()}</div>
+        <div style="font-size:13px;color:#4A3F5C;line-height:1.5;font-style:italic">${text}</div>
+      </div>`;
+    goalsEl.appendChild(row);
+  });
+
+  document.getElementById("saints-text").textContent = data.patron_saints;
+
+  buildVideos();
+  buildJournalTabs();
+  currentWeek = load("current_week", 0);
+  currentDay  = load("current_day", 0);
+  setWeekTab(currentWeek);
+  setDayTab(currentDay);
+  buildJournalPage();
+  buildTracker();
+}
+
+// ── Videos ─────────────────────────────────────────────────────────────────
+function buildVideos(){
+  const el = document.getElementById("video-list");
+  el.innerHTML = "";
+  const watched = load("videos_watched", {});
+
+  VIDEOS.forEach(v=>{
+    const isWatched = !!watched[v.num];
+    const card = document.createElement("div");
+    card.style.cssText = "background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:12px";
+    card.innerHTML = `
+      <div style="background:#2A2230;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="toggleVideo(${v.num})">
+        <div>
+          <div style="color:#B8956A;font-size:10px;letter-spacing:1px;margin-bottom:2px">VIDEO ${v.num} &middot; ${v.duration}</div>
+          <div style="color:#fff;font-size:14px;font-weight:bold">${v.title}</div>
+          <div style="color:#B8B4C0;font-size:11px;font-style:italic;margin-top:1px">${v.subtitle}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          ${isWatched?'<span style="color:#5A7A5A;font-size:11px;font-weight:bold">&#10003; Watched</span>':''}
+          <div id="arrow-${v.num}" style="color:#B8956A;font-size:18px">&#9654;</div>
+        </div>
+      </div>
+      <div id="vp-${v.num}" style="display:none;padding:14px">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:flex-end">
+          <button onclick="markWatched(${v.num})"
+            style="background:${isWatched?'#5A7A5A':'#6B5B8A'};color:#fff;border-radius:4px;padding:7px 16px;font-size:12px;font-weight:bold">
+            ${isWatched?'&#10003; Marked as Watched':'Mark as Watched'}
+          </button>
+        </div>
+      </div>`;
+    el.appendChild(card);
+  });
+}
+
+function toggleVideo(num){
+  VIDEOS.forEach(v=>{
+    const p=document.getElementById("vp-"+v.num);
+    const a=document.getElementById("arrow-"+v.num);
+    if(v.num===num){
+      const open=p.style.display!=="none";
+      p.style.display=open?"none":"block";
+      a.innerHTML=open?"&#9654;":"&#9660;";
+    } else {
+      p.style.display="none";
+      a.innerHTML="&#9654;";
+    }
+  });
+}
+
+function markWatched(num){
+  const w=load("videos_watched",{});
+  w[num]=true;
+  save("videos_watched",w);
+  buildVideos();
+}
+
+// ── Journal ────────────────────────────────────────────────────────────────
+function buildJournalTabs(){
+  const wEl=document.getElementById("week-tabs");
+  wEl.innerHTML="";
+  WEEK_TITLES.forEach((_,i)=>{
+    const b=document.createElement("button");
+    b.id="week-tab-"+i;
+    b.style.cssText=`flex:0 0 auto;padding:7px 13px;border-radius:4px;font-size:11px;font-weight:bold;border:1px solid ${WEEK_COLORS[i]};background:transparent;color:#4A3F5C`;
+    b.textContent="Wk "+(i+1);
+    b.onclick=()=>{setWeekTab(i);setDayTab(0);buildJournalPage();};
+    wEl.appendChild(b);
+  });
+
+  const dEl=document.getElementById("day-tabs");
+  dEl.innerHTML="";
+  DAYS.forEach((d,i)=>{
+    const b=document.createElement("button");
+    b.id="day-tab-"+i;
+    b.style.cssText=`flex:0 0 auto;padding:6px 12px;border-radius:4px;font-size:11px;font-weight:bold;border:1px solid #B8B4C0;background:transparent;color:#4A3F5C`;
+    b.textContent=d;
+    b.onclick=()=>{setDayTab(i);buildJournalPage();};
+    dEl.appendChild(b);
+  });
+}
+
+function setWeekTab(i){
+  currentWeek=i;
+  save("current_week",i);
+  const data=CLIENTS[client];
+  document.getElementById("welcome-verse").textContent=data.week_verse[Math.min(i,5)];
+  WEEK_TITLES.forEach((_,j)=>{
+    const b=document.getElementById("week-tab-"+j);
+    if(!b)return;
+    b.style.background=j===i?WEEK_COLORS[j]:"transparent";
+    b.style.color=j===i?"#fff":"#4A3F5C";
+  });
+}
+
+function setDayTab(i){
+  currentDay=i;
+  save("current_day",i);
+  DAYS.forEach((_,j)=>{
+    const b=document.getElementById("day-tab-"+j);
+    if(!b)return;
+    b.style.background=j===i?WEEK_COLORS[currentWeek]:"transparent";
+    b.style.color=j===i?"#fff":"#4A3F5C";
+    b.style.borderColor=j===i?WEEK_COLORS[currentWeek]:"#B8B4C0";
+  });
+}
+
+function jKey(w,d,p){return "j_w"+w+"_d"+d+"_"+p;}
+
+function escH(str){
+  return (str||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function buildJournalPage(){
+  const el=document.getElementById("journal-page");
+  const w=currentWeek,d=currentDay;
+  const color=WEEK_COLORS[w],tint=WEEK_TINTS[w];
+  const isSab=(d===6);
+  const [virtue,vp]=VIRTUES[w];
+
+  // Morning
+  const mor=document.createElement("div");
+  mor.style.cssText="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:12px";
+  mor.innerHTML=`
+    <div style="background:${color};padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="color:#B8956A;font-size:9px;letter-spacing:1px">WEEK ${w+1} &middot; ${isSab?"SABBATH":"DAY "+(d+1)}</div>
+        <div style="color:#fff;font-size:14px;font-weight:bold">Morning Page</div>
+      </div>
+      <div style="color:#B8956A;font-size:22px">${isSab?"&#10013;":"&#9728;"}</div>
+    </div>
+    <div style="padding:14px">
+      <div style="background:${tint};border-left:3px solid ${color};padding:8px 12px;border-radius:0 4px 4px 0;margin-bottom:12px">
+        <div style="font-size:9px;color:${color};font-weight:bold;letter-spacing:1px;margin-bottom:3px">THIS WEEK'S VIRTUE</div>
+        <div style="font-size:13px;color:#2A2230;font-weight:bold">${virtue}</div>
+        <div style="font-size:12px;color:#4A3F5C;font-style:italic;margin-top:2px">${vp}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div>
+          <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:4px">DATE</div>
+          <input type="text" placeholder="Today's date"
+            value="${escH(load(jKey(w,d,"date"),""))}"
+            oninput="save('${jKey(w,d,"date")}',this.value)"
+            style="width:100%;border:1px solid #B8B4C0;border-radius:4px;padding:7px 10px;font-size:12px;color:#2A2230;background:#FAF6F0">
+        </div>
+        <div>
+          <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:4px">TODAY'S INTENTION</div>
+          <input type="text" placeholder="One word or phrase…"
+            value="${escH(load(jKey(w,d,"intention"),""))}"
+            oninput="save('${jKey(w,d,"intention")}',this.value)"
+            style="width:100%;border:1px solid #B8B4C0;border-radius:4px;padding:7px 10px;font-size:12px;color:#2A2230;background:#FAF6F0">
+        </div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">MORNING REFLECTION</div>
+        <textarea
+          oninput="save('${jKey(w,d,"morning")}',this.value)"
+          placeholder="Write here — uncensored, unedited. This is your conversation with God."
+          style="width:100%;min-height:${isSab?150:120}px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.6">${escH(load(jKey(w,d,"morning"),""))}</textarea>
+      </div>
+    </div>`;
+  el.innerHTML="";
+  el.appendChild(mor);
+
+  // Evening
+  const eve=document.createElement("div");
+  eve.style.cssText="background:#fff;border-radius:6px;border:1px solid #B8B4C0;overflow:hidden;margin-bottom:12px";
+  const examLetters=[
+    ["R","Reality","What was actually true today — not the story about it, just the facts?"],
+    ["O","Origin","Where did my strongest feeling today come from — past, temperament, wound?"],
+    ["O","Overflow","What was overflowing from me today — fear, love, control, peace?"],
+    ["T","Turning","Where did I turn toward God today? Where did I turn away?"],
+    ["E","Election","What did I choose today? What did I want to choose but didn't?"],
+    ["D","Dwelling","Where did I feel most rooted and known today?"],
+  ];
+
+  eve.innerHTML=`
+    <div style="background:#2A2230;padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="color:#B8956A;font-size:9px;letter-spacing:1px">WEEK ${w+1} &middot; ${isSab?"SABBATH":"DAY "+(d+1)}</div>
+        <div style="color:#fff;font-size:14px;font-weight:bold">Evening Examen</div>
+      </div>
+      <div style="color:#B8956A;font-size:22px">&#10013;</div>
+    </div>
+    <div style="padding:14px">
+      <div style="margin-bottom:12px">
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">EVENING REFLECTION</div>
+        <textarea oninput="save('${jKey(w,d,"eq")}',this.value)"
+          placeholder="How was today — really?"
+          style="width:100%;min-height:70px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.6">${escH(load(jKey(w,d,"eq"),""))}</textarea>
+      </div>
+      <div style="font-size:9px;color:${color};font-weight:bold;letter-spacing:1px;margin-bottom:8px">R.O.O.T.E.D. EXAMEN</div>
+      ${examLetters.map(([letter,word,prompt],ri)=>`
+        <div style="display:flex;gap:8px;margin-bottom:10px">
+          <div style="width:24px;height:24px;background:${color};border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;flex-shrink:0;margin-top:2px">${letter}</div>
+          <div style="flex:1">
+            <div style="font-size:11px;color:#2A2230;font-weight:bold;margin-bottom:3px">${word} <span style="font-weight:normal;font-style:italic;color:#4A3F5C;font-size:10px">— ${prompt}</span></div>
+            <textarea oninput="save('${jKey(w,d,"ex"+ri)}',this.value)"
+              placeholder="Write here…"
+              style="width:100%;min-height:${isSab?65:50}px;border:1px solid #B8B4C0;border-radius:4px;padding:7px 9px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.5">${escH(load(jKey(w,d,"ex"+ri),""))}</textarea>
+          </div>
+        </div>`).join("")}
+      ${w>=2?`
+      <div style="margin-top:4px;margin-bottom:12px">
+        <div style="font-size:9px;color:#B8956A;font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">BRIDGE THOUGHT</div>
+        <textarea oninput="save('${jKey(w,d,"bridge")}',this.value)"
+          placeholder="What Bridge Thought is God offering you tonight?"
+          style="width:100%;min-height:60px;border:1px solid #B8B4C0;border-radius:4px;padding:8px 10px;font-size:12px;color:#2A2230;background:#FAF6F0;resize:vertical;line-height:1.6">${escH(load(jKey(w,d,"bridge"),""))}</textarea>
+      </div>`:""}
+      <div style="background:${tint};border-left:3px solid ${color};padding:10px 12px;border-radius:0 4px 4px 0">
+        <div style="font-size:9px;color:${color};font-weight:bold;letter-spacing:0.5px;margin-bottom:5px">EVENING GIFT — Name one moment of grace from today.</div>
+        <textarea oninput="save('${jKey(w,d,"gift")}',this.value)"
+          placeholder="However small…"
+          style="width:100%;min-height:50px;border:1px solid ${color}60;border-radius:4px;padding:7px 9px;font-size:12px;color:#2A2230;background:transparent;resize:vertical;line-height:1.5">${escH(load(jKey(w,d,"gift"),""))}</textarea>
+      </div>
+    </div>`;
+  el.appendChild(eve);
+}
+
+// ── Tracker ────────────────────────────────────────────────────────────────
+function buildTracker(){
+  const el=document.getElementById("tracker-grid");
+  el.innerHTML="";
+  const checks=load("tracker_checks",{});
+  const DS=["S","M","T","W","T","F","Sa"];
+
+  const hdr=document.createElement("div");
+  hdr.style.cssText="background:#2A2230;padding:7px 14px;border-radius:4px 4px 0 0;display:grid;grid-template-columns:1fr repeat(7,34px);gap:4px;align-items:center";
+  hdr.innerHTML=`<div style="color:#B8956A;font-size:9px;letter-spacing:1px;font-weight:bold">WEEK / VIRTUE</div>`+
+    DS.map(d=>`<div style="color:#B8956A;font-size:9px;font-weight:bold;text-align:center">${d}</div>`).join("");
+  el.appendChild(hdr);
+
+  VIRTUES.forEach(([virtue,practice],wi)=>{
+    const row=document.createElement("div");
+    row.style.cssText=`background:${wi%2===0?"#FAF6F0":"#EDE5F5"};display:grid;grid-template-columns:1fr repeat(7,34px);gap:4px;align-items:center;padding:6px 14px;border-bottom:1px solid #D4C8E0`;
+    let inner=`<div>
+      <div style="font-size:8px;color:${WEEK_COLORS[wi]};font-weight:bold;letter-spacing:0.5px">WK ${wi+1} — ${virtue.toUpperCase()}</div>
+      <div style="font-size:11px;color:#4A3F5C;font-style:italic;margin-top:1px">${practice}</div>
+    </div>`;
+    DS.forEach((_,di)=>{
+      const k=`t_w${wi}_d${di}`;
+      const chk=!!checks[k];
+      inner+=`<div style="display:flex;align-items:center;justify-content:center">
+        <div onclick="toggleTracker(${wi},${di})"
+          style="width:26px;height:26px;border-radius:50%;border:2px solid ${chk?WEEK_COLORS[wi]:"#B8B4C0"};background:${chk?WEEK_COLORS[wi]:"transparent"};display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:13px;font-weight:bold">
+          ${chk?"&#10003;":""}
+        </div>
+      </div>`;
+    });
+    row.innerHTML=inner;
+    el.appendChild(row);
+  });
+
+  const total=Object.values(load("tracker_checks",{})).filter(Boolean).length;
+  const tot=document.createElement("div");
+  tot.style.cssText="background:#2A2230;padding:8px 14px;border-radius:0 0 4px 4px;display:flex;justify-content:space-between;align-items:center";
+  tot.innerHTML=`<div style="color:#B8B4C0;font-size:11px;font-style:italic">Total days of faithful practice</div>
+    <div style="color:#B8956A;font-size:14px;font-weight:bold">${total} / 42</div>`;
+  el.appendChild(tot);
+
+  const vn=document.getElementById("virtue-notes");
+  if(vn){
+    vn.value=load("virtue_notes","")||"";
+    vn.oninput=()=>save("virtue_notes",vn.value);
+  }
+}
+
+function toggleTracker(wi,di){
+  const checks=load("tracker_checks",{});
+  const k=`t_w${wi}_d${di}`;
+  checks[k]=!checks[k];
+  save("tracker_checks",checks);
+  buildTracker();
+}
+
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function showTab(tab){
+  ["home","videos","journal","tracker"].forEach(t=>{
+    document.getElementById("tab-"+t).classList.toggle("hidden",t!==tab);
+    const nav=document.getElementById("nav-"+t);
+    if(nav){
+      nav.style.background=t===tab?"#B8956A":"none";
+      nav.style.color=t===tab?"#2A2230":"#B8B4C0";
+    }
+  });
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+checkStorage();
+tryAutoLogin();
+</script>
+</body>
+</html>
