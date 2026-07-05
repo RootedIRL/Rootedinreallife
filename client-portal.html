@@ -1957,9 +1957,10 @@ const WEEKS = [
     title: 'Introduction to the Assessments',
     subtitle: 'What each assessment measures · What your results mean',
     letter: 'R — Reality',
+    videoId: 'eaXgQGsbknQ',
     items: [
-      { id: 'w1-video', type: 'video', icon: '▶', title: 'Video 1: Introduction to the Assessments', desc: 'What temperament, fault, charism, and saboteurs measure — and what your results mean', url: '' },
-      { id: 'w1-ws', type: 'worksheet', icon: '📋', title: 'Week 1 Worksheet', desc: 'Reflect on your Soul Portrait results · what landed, what surprised you', url: '' },
+      { id: 'w1-video', type: 'video', icon: '▶', title: 'Video 1: Introduction to the Assessments', desc: 'What temperament, fault, charism, and saboteurs measure — and what your results mean', url: 'eaXgQGsbknQ' },
+      { id: 'w1-ws', type: 'worksheet', icon: '📋', title: 'Week 1 Worksheet', desc: 'Reflect on your Soul Portrait results · what landed, what surprised you', url: 'Week1_Worksheet_EverydayHoliness.pdf' },
       { id: 'w1-session', type: 'note', icon: '✝', title: 'Week 1 Coaching Session', desc: 'Come prepared with your worksheet completed · bring one question about your portrait', url: '' },
     ]
   },
@@ -1969,6 +1970,7 @@ const WEEKS = [
     title: 'The R.O.O.T.E.D. Model',
     subtitle: 'All 6 letters · How to use the model in your actual day',
     letter: 'O — Origin',
+    videoId: '',
     items: [
       { id: 'w2-video', type: 'video', icon: '▶', title: 'Video 2: The R.O.O.T.E.D. Model', desc: 'Reality · Origin · Overflow · Turning · Election · Dwelling — and how they work together', url: '' },
       { id: 'w2-ws', type: 'worksheet', icon: '📋', title: 'Week 2 Worksheet', desc: 'Walk one real moment from your week through the full model', url: '' },
@@ -1981,6 +1983,7 @@ const WEEKS = [
     title: 'The Stress Response',
     subtitle: 'Fight · Flight · Freeze · Fawn · The feelings wheel · Your protocol',
     letter: 'O — Overflow',
+    videoId: '',
     items: [
       { id: 'w3-video', type: 'video', icon: '▶', title: 'Video 3: The Stress Response', desc: 'How your nervous system responds to stress — and what to do instead of reacting', url: '' },
       { id: 'w3-ws', type: 'worksheet', icon: '📋', title: 'Week 3 Worksheet', desc: 'Identify your primary stress response and map it to your temperament', url: '' },
@@ -1994,6 +1997,7 @@ const WEEKS = [
     title: 'Virtue & the Predominant Fault',
     subtitle: 'The root pattern · The virtue that remedies it · Daily practice',
     letter: 'T — Turning',
+    videoId: '',
     items: [
       { id: 'w4-video', type: 'video', icon: '▶', title: 'Video 4: Virtue & the Predominant Fault', desc: 'What your fault is, how it operates, and which virtue is the God-given remedy', url: '' },
       { id: 'w4-ws', type: 'worksheet', icon: '📋', title: 'Week 4 Worksheet', desc: 'Name one moment this week where your fault operated — and what the Turning looked like', url: '' },
@@ -2006,6 +2010,7 @@ const WEEKS = [
     title: 'Charisms & Your Mission',
     subtitle: 'Your specific gifts · The Church\'s need · Where to deploy them',
     letter: 'E — Election',
+    videoId: '',
     items: [
       { id: 'w5-video', type: 'video', icon: '▶', title: 'Video 5: Charisms & Your Mission', desc: 'How the Holy Spirit moves through your specific gifts for the good of others', url: '' },
       { id: 'w5-ws', type: 'worksheet', icon: '📋', title: 'Week 5 Worksheet', desc: 'Map your top charisms to your vocation, your parish, and one concrete next step', url: '' },
@@ -2018,6 +2023,7 @@ const WEEKS = [
     title: 'Marriage & Parenting Through Temperament',
     subtitle: 'The people you love most · Wired differently · Loved specifically',
     letter: 'D — Dwelling',
+    videoId: '',
     items: [
       { id: 'w6-video', type: 'video', icon: '▶', title: 'Video 6: Marriage & Parenting Through Temperament', desc: 'How temperament shapes how you love — and how to love the actual person in front of you', url: '' },
       { id: 'w6-ws', type: 'worksheet', icon: '📋', title: 'Week 6 Worksheet', desc: 'Name your spouse\'s temperament · name each child\'s temperament · one specific gift for each', url: '' },
@@ -2037,6 +2043,27 @@ const FOUNDATION_VIDEOS = [
   { n: 6, id: '0-iXhPKAjL8', title: 'The R.O.O.T.E.D. Model', desc: 'The framework for the whole journey.' },
   { n: 7, id: 'MKa7tzVjLj0', title: 'The Stress Response', desc: 'Bonus · What your body does — and the protocol to use instead of reacting.', bonus: true },
 ];
+
+// Toggle an embedded lesson video open/closed beneath its row
+function toggleLessonVideo(id, videoId, btn) {
+  const row = btn.closest('.resource-item');
+  let embed = row.nextElementSibling;
+  if (embed && embed.classList.contains('lesson-embed')) {
+    embed.remove();
+    btn.textContent = 'Watch';
+    return;
+  }
+  const div = document.createElement('div');
+  div.className = 'lesson-embed';
+  div.innerHTML = `
+    <div class="fv-embed" style="margin:0.5rem 0 0.75rem;">
+      <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" title="Lesson video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>`;
+  row.parentNode.insertBefore(div, row.nextSibling);
+  btn.textContent = 'Hide';
+}
 
 function renderFoundationVideos() {
   const grid = document.getElementById('foundation-videos');
@@ -2132,6 +2159,7 @@ function attemptLogin() {
   loadNotes();
   setJournalLink(clientName);
   renderFoundationVideos();
+  buildWeeks();
   updateProgressBar();
   setTimeout(() => { try { initCheckin(); } catch(e) { console.log('initCheckin',e); } try { initPrayer(); } catch(e) { console.log('initPrayer',e); } try { buildPastResponses(); } catch(e) { console.log('buildPast',e); } }, 100);
 
@@ -2186,13 +2214,25 @@ function buildWeeks() {
     const body = document.createElement('div');
     body.className = 'week-body' + (isOpen ? ' open' : '');
 
-    // Video placeholder
-    body.innerHTML = `
-      <div class="video-placeholder">
-        <div class="video-play">▶</div>
-        <div class="video-coming">Video coming soon · Cassandra will share the link when ready</div>
-      </div>
-    `;
+    // Video: embed if a videoId exists, else show "coming soon" placeholder
+    if (week.videoId) {
+      body.innerHTML = `
+        <div class="week-video-wrap" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#2A2230;margin-bottom:1rem">
+          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+            src="https://www.youtube-nocookie.com/embed/${week.videoId}?rel=0&modestbranding=1"
+            title="Week ${week.num} lesson video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+      `;
+    } else {
+      body.innerHTML = `
+        <div class="video-placeholder">
+          <div class="video-play">▶</div>
+          <div class="video-coming">Video coming soon · Cassandra will share the link when ready</div>
+        </div>
+      `;
+    }
 
     const list = document.createElement('div');
     list.className = 'resource-list';
@@ -2213,7 +2253,9 @@ function buildWeeks() {
         ${item.type === 'download' || item.type === 'worksheet'
           ? `<a class="resource-action gold" href="${item.url || '#'}" onclick="${item.url ? '' : 'comingSoon(event)'}">Download</a>`
           : item.type === 'video'
-          ? `<button class="resource-action" onclick="comingSoon(event)">Watch</button>`
+          ? (item.url
+             ? `<button class="resource-action" onclick="toggleLessonVideo('${item.id}','${item.url}',this)">Watch</button>`
+             : `<button class="resource-action" onclick="comingSoon(event)">Watch</button>`)
           : ''
         }
       `;
