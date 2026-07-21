@@ -1970,10 +1970,11 @@ const WEEKS = [
     title: 'The R.O.O.T.E.D. Model',
     subtitle: 'All 6 letters · How to use the model in your actual day',
     letter: 'O — Origin',
-    videoId: '',
+    videoId: 'pElC2HX19vo',
+    videoId2: 'i-_K-AK5hzQ',
     items: [
       { id: 'w2-video', type: 'video', icon: '▶', title: 'Video 2: The R.O.O.T.E.D. Model', desc: 'Reality · Origin · Overflow · Turning · Election · Dwelling — and how they work together', url: '' },
-      { id: 'w2-ws', type: 'worksheet', icon: '📋', title: 'Week 2 Worksheet', desc: 'Walk one real moment from your week through the full model', url: '' },
+      { id: 'w2-ws', type: 'worksheet', icon: '📋', title: 'Week 2 Worksheet', desc: 'Walk one real moment from your week through the full model', url: 'Week2_Worksheet_EverydayHoliness.pdf' },
       { id: 'w2-session', type: 'note', icon: '✝', title: 'Week 2 Coaching Session', desc: 'We will walk through the model together with your specific temperament and fault', url: '' },
     ]
   },
@@ -1983,10 +1984,11 @@ const WEEKS = [
     title: 'The Stress Response',
     subtitle: 'Fight · Flight · Freeze · Fawn · The feelings wheel · Your protocol',
     letter: 'O — Overflow',
-    videoId: '',
+    videoId: 'UhPzvSV7UUg',
     items: [
       { id: 'w3-video', type: 'video', icon: '▶', title: 'Video 3: The Stress Response', desc: 'How your nervous system responds to stress — and what to do instead of reacting', url: '' },
-      { id: 'w3-ws', type: 'worksheet', icon: '📋', title: 'Week 3 Worksheet', desc: 'Identify your primary stress response and map it to your temperament', url: '' },
+      { id: 'w3-ws', type: 'worksheet', icon: '📋', title: 'Week 3 Worksheet', desc: 'Identify your primary stress response and map it to your temperament', url: 'Week3_Worksheet_EverydayHoliness.pdf' },
+      { id: 'w3-vicevirtue', type: 'worksheet', icon: '📋', title: 'Vice & Virtue Guide', desc: 'Name the feeling, find the virtue to work on, take one small step', url: 'ViceAndVirtue_Guide_EverydayHoliness.pdf' },
       { id: 'w3-protocol', type: 'download', icon: '🛡', title: 'Your Stress Protocol', desc: 'Your personalised 3-step protocol — download and keep somewhere visible', url: '' },
       { id: 'w3-session', type: 'note', icon: '✝', title: 'Week 3 Coaching Session', desc: 'This session focuses on Overflow — what is actually happening inside you', url: '' },
     ]
@@ -2214,17 +2216,22 @@ function buildWeeks() {
     const body = document.createElement('div');
     body.className = 'week-body' + (isOpen ? ' open' : '');
 
-    // Video: embed if a videoId exists, else show "coming soon" placeholder
+    // Video: embed when a videoId exists, else show "coming soon"
     if (week.videoId) {
-      body.innerHTML = `
+      const videoFrame = (id, label) => `
+        ${label ? `<div style="font-size:0.8rem;letter-spacing:0.05em;color:#8B7BA8;font-weight:600;margin:0 0 0.4rem">${label}</div>` : ''}
         <div class="week-video-wrap" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#2A2230;margin-bottom:1rem">
           <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
-            src="https://www.youtube-nocookie.com/embed/${week.videoId}?rel=0&modestbranding=1"
+            src="https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1"
             title="Week ${week.num} lesson video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen loading="lazy"></iframe>
-        </div>
-      `;
+        </div>`;
+      if (week.videoId2) {
+        body.innerHTML = videoFrame(week.videoId, 'Part 1') + videoFrame(week.videoId2, 'Part 2');
+      } else {
+        body.innerHTML = videoFrame(week.videoId, '');
+      }
     } else {
       body.innerHTML = `
         <div class="video-placeholder">
