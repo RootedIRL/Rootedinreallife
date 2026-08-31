@@ -362,6 +362,20 @@ h2.section-title em{font-style:italic;color:var(--gold)}
   font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--gold-mid);
 }
+.t-label{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold-mid);margin-bottom:28px;
+}
+.t-body{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.7vw,19px);
+  color:rgba(255,255,255,0.82);line-height:1.75;font-weight:300;
+  text-align:left;max-width:680px;margin:28px auto 0;
+}
+.t-body p{margin-bottom:16px;}
+.t-name{
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);margin-top:28px;text-align:center;
+}
 
 /* ── MEET CASSANDRA ──────────────────────────────────────── */
 #coach{background:var(--parch-dark)}
@@ -1098,12 +1112,31 @@ footer{
 <section id="testimonial">
   <div class="testimonial-inner reveal">
     <div class="t-cross">✝</div>
+    <div class="t-label">A Word From a Client</div>
     <p class="t-quote">
-      "I finally have a name for what I've been carrying. 
-      And for the first time, I understand why I do what I do — 
-      and what God is actually asking me to do instead."
+      "Through ROOTED, I've learned so much more about myself — how I behave and
+      tend to react, and best of all, how to gently correct myself, all with Jesus
+      in the center."
     </p>
-    <div class="t-attr">— Testimonial Client &nbsp;·&nbsp; Everyday Holiness Program</div>
+    <div class="t-body">
+      <p>
+        The last few years, my life was slowly disconnecting more and more from what I
+        thought was my well-established faith life — coping through subsequent life changes:
+        marriage, motherhood, moving across the country, far from my family and friends.
+        I was barely holding on to the basics.
+      </p>
+      <p>
+        Jesus, of course, never let go, and used all my little attempts to keep me going.
+        He guided me to Cassandra and her program, ROOTED. And praise God for that!
+      </p>
+      <p>
+        Through ROOTED, I've learned so much more about myself, how I behave and tend to
+        react, and best of all how to gently correct myself, all with Jesus in the center.
+        The results, thus far, have been most powerful in my marriage. Best of all, I was
+        able to move at my own pace and fit it all into my busy life.
+      </p>
+    </div>
+    <div class="t-name">— Lissette Slankard</div>
   </div>
 </section>
 
@@ -1113,7 +1146,13 @@ footer{
     <div class="section-label reveal">Your Coach</div>
     <div class="coach-grid">
       <div class="coach-portrait reveal">
-        <img src="cassandra.jpg" alt="Cassandra, Catholic Life Coach" style="width:100%;border-radius:4px;object-fit:cover;aspect-ratio:3/4;">
+        <!-- TO ADD YOUR PHOTO: replace the div below with:
+             <img src="your-photo.jpg" alt="Cassandra" style="width:100%;border-radius:4px;object-fit:cover;aspect-ratio:3/4;">
+        -->
+        <div style="width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#6B5B8A,#C47B8A);border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style='font-family:serif;font-size:2rem;color:rgba(255,255,255,0.4);'>✝</span></div>
+        <div class="coach-portrait-placeholder" style="display:none">
+          Add your photo here
+        </div>
         <div class="coach-cross-accent">✝</div>
       </div>
       <div class="reveal">
@@ -1128,8 +1167,7 @@ footer{
         </p>
         <p class="coach-bio">
           Rooted in Real Life is the framework I built from the Catechism,
-          the saints, Ignatian spirituality, the Benedictine way of learning,
-          and five years of interior work.
+          the saints, Ignatian spirituality, and five years of interior work.
           It is grounded in the teaching and tradition of the Church —
           because holiness is not acquired in a weekend.
           It is grown, slowly, in the ordinary.
@@ -1143,7 +1181,6 @@ footer{
         <div class="coach-credentials">
           <span class="cred">Catholic Life Coach</span>
           <span class="cred">Ignatian Spirituality</span>
-          <span class="cred">Benedictine Way of Learning</span>
           <span class="cred">Church Teaching &amp; Tradition</span>
           <span class="cred">R.O.O.T.E.D. Model</span>
           <span class="cred">Chico, CA</span>
