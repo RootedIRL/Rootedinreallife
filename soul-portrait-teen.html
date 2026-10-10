@@ -21,55 +21,58 @@ header.top h1{margin:2px 0 0;font-family:var(--display);font-weight:600;font-siz
 header.top p{margin:2px 0 0;font-style:italic;font-size:15px;opacity:.92}
 .progress{height:6px;background:var(--parch-dk)}
 .progress>div{height:100%;width:0;background:var(--wheat);transition:width .35s ease}
-main{max-width:640px;margin:0 auto;padding:22px 16px 90px}
+main{max-width:640px;margin:0 auto;padding:22px 16px 100px}
 .kicker{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);font-weight:700;margin:0 0 6px}
 h2{font-family:var(--display);color:var(--purple);font-size:26px;line-height:1.2;margin:0 0 6px;font-weight:600}
-.intro{font-style:italic;color:var(--ink-light);margin:0 0 20px}
-.card{background:#fff;border:1px solid var(--parch-dk);border-radius:12px;padding:18px 16px;margin:0 0 16px;box-shadow:0 1px 0 rgba(42,34,48,.04)}
-.card label.q,.card .q{display:block;font-size:20px;color:var(--ink);margin:0 0 4px;font-weight:500}
+.intro{font-style:italic;color:var(--ink-light);margin:0 0 6px}
+.scripture{font-style:italic;color:var(--wheat);font-size:16px;margin:0 0 18px}
+.card{background:#fff;border:1px solid var(--parch-dk);border-radius:12px;padding:16px;margin:0 0 14px;box-shadow:0 1px 0 rgba(42,34,48,.04)}
+.card.missing{border-color:var(--rose);box-shadow:0 0 0 3px rgba(196,123,138,.25)}
+.num{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a7f98;font-weight:700;margin:0 0 4px}
+.q{display:block;font-size:20px;color:var(--ink);margin:0 0 12px;font-weight:500}
 .hint{font-family:var(--sans);font-size:13px;color:#7a6f88;margin:0 0 12px}
-input[type=text],select,textarea{width:100%;font:inherit;font-size:18px;padding:12px;border:1.5px solid #d8cfe6;border-radius:10px;background:var(--parchment);color:var(--ink)}
-textarea{min-height:104px;resize:vertical}
+input[type=text],input[type=email],select,textarea{width:100%;font:inherit;font-size:18px;padding:12px;border:1.5px solid #d8cfe6;border-radius:10px;background:var(--parchment);color:var(--ink)}
+textarea{min-height:96px;resize:vertical}
 input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid rgba(139,123,168,.45);outline-offset:1px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--sans);font-size:15px;padding:10px 14px;border-radius:999px;border:1.5px solid #d8cfe6;background:var(--parchment);color:var(--ink-light);cursor:pointer;min-height:44px}
-.chip[aria-pressed=true]{background:var(--purple);border-color:var(--purple);color:#fff}
-.choices{display:grid;gap:8px}
-.choice{font-family:var(--sans);font-size:16px;text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid #d8cfe6;background:var(--parchment);color:var(--ink);cursor:pointer;min-height:48px}
-.choice[aria-pressed=true]{background:var(--parch-dk);border-color:var(--purple);color:var(--purple);font-weight:600}
 .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .scale button{font-family:var(--sans);font-size:18px;font-weight:600;padding:12px 0;border-radius:10px;border:1.5px solid #d8cfe6;background:var(--parchment);color:var(--ink-light);cursor:pointer;min-height:48px}
 .scale button[aria-pressed=true]{background:var(--rose);border-color:var(--rose);color:#fff}
 .scale-ends{display:flex;justify-content:space-between;font-family:var(--sans);font-size:12px;color:#7a6f88;margin-top:6px}
-.nav{position:fixed;left:0;right:0;bottom:0;background:var(--mid-purple);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
-.nav .inner{display:flex;gap:10px;width:100%;max-width:640px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--mid-purple);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:5}
+.nav .inner{display:flex;gap:10px;width:100%;max-width:640px;align-items:center}
 .btn{font-family:var(--sans);font-size:16px;font-weight:700;border:0;border-radius:10px;padding:13px 18px;cursor:pointer;min-height:48px}
 .btn.primary{background:var(--wheat);color:#fff;flex:1}
 .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)}
 .btn.solid{background:var(--purple);color:#fff}
 .btn.line{background:#fff;color:var(--purple);border:1.5px solid var(--purple)}
 .btn[disabled]{opacity:.5;cursor:default}
+.warn{font-family:var(--sans);font-size:14px;color:#fff;background:var(--rose);border-radius:8px;padding:8px 12px;margin:0 0 12px;display:none}
 details.parents{margin:16px 0 0;font-family:var(--sans);font-size:14px;color:var(--ink-light)}
 details.parents summary{cursor:pointer;color:var(--purple);font-weight:700}
-.verse{font-style:italic;color:var(--wheat);text-align:center;margin:26px 0 4px;font-size:21px}
+.verse{font-style:italic;color:var(--wheat);text-align:center;margin:24px 0 4px;font-size:21px}
 .verse small{display:block;font-style:normal;font-family:var(--sans);font-size:12px;color:#8a7f98;letter-spacing:.08em;margin-top:2px}
 /* results */
-.portrait-head{text-align:center;margin:0 0 18px}
-.portrait-head .cross{color:var(--wheat);font-size:26px}
-.sec{border-left:5px solid var(--purple);background:#fff;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 14px;border-top:1px solid var(--parch-dk);border-right:1px solid var(--parch-dk);border-bottom:1px solid var(--parch-dk)}
-.sec h3{font-family:var(--display);font-size:17px;color:var(--purple);margin:0 0 6px;font-weight:600}
-.sec p{margin:4px 0}
-.sec .label{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a7f98;font-weight:700;margin-top:10px;display:block}
-.sec .yours{background:var(--parchment);border-radius:8px;padding:8px 10px;font-style:italic}
-.sec .prompt{color:var(--green)}
-.gauge{height:8px;background:var(--parch-dk);border-radius:99px;overflow:hidden;margin:6px 0 2px}
-.gauge>div{height:100%;background:var(--rose)}
-.callout{background:var(--parch-dk);border-radius:12px;padding:14px 16px;margin:0 0 14px}
-.callout b{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);display:block}
-.care{background:#fff;border:1.5px solid var(--rose);border-radius:12px;padding:14px 16px;margin:18px 0;font-family:var(--sans);font-size:15px}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
-.toast{font-family:var(--sans);font-size:13px;color:var(--green);min-height:18px}
-@media print{header.top,.progress,.nav,.actions,.toast{display:none}body{background:#fff}main{padding:0}}
+.res{background:#fff;border:1px solid var(--parch-dk);border-left:5px solid var(--purple);border-radius:0 12px 12px 0;padding:16px;margin:0 0 16px}
+.res h3{font-family:var(--display);font-size:16px;letter-spacing:.06em;color:var(--purple);margin:0 0 8px;font-weight:600}
+.hl{font-family:var(--display);font-size:22px;color:var(--ink);background:var(--parch-dk);border-radius:10px;padding:10px 14px;text-align:center;margin:4px 0 4px}
+.tag-line{text-align:center;font-style:italic;color:var(--ink-light);margin:0 0 12px}
+.res p{margin:8px 0}
+.lbl{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a7f98;font-weight:700;margin:12px 0 2px;display:block}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tags span{background:var(--purple);color:#fff;font-family:var(--sans);font-size:12px;padding:4px 10px;border-radius:999px}
+.try{background:var(--parchment);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:8px 12px;margin:10px 0 0;font-size:17px}
+.try b{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:block}
+.barrow{margin:8px 0 0}
+.barrow .bl{display:flex;justify-content:space-between;font-family:var(--sans);font-size:13px;color:var(--ink-light)}
+.bar{height:8px;background:var(--parch-dk);border-radius:99px;overflow:hidden;margin-top:3px}
+.bar>div{height:100%;background:var(--rose);border-radius:99px}
+.second{margin-top:12px;padding-top:10px;border-top:1px dashed #d8cfe6}
+.closing{background:var(--mid-purple);color:#fff;border-radius:12px;padding:20px 18px;text-align:center;font-style:italic;margin:6px 0 14px}
+.closing small{display:block;font-style:normal;font-family:var(--sans);font-size:12px;opacity:.85;margin-top:10px}
+.care{background:#fff;border:1.5px solid var(--rose);border-radius:12px;padding:14px 16px;margin:16px 0;font-family:var(--sans);font-size:14px}
+.status{font-family:var(--sans);font-size:14px;margin:0 0 14px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+@media print{header.top,.progress,.nav,.actions,.status{display:none}body{background:#fff}main{padding:0}}
 </style>
 </head>
 <body>
@@ -86,394 +89,471 @@ details.parents summary{cursor:pointer;color:var(--purple);font-weight:700}
 (function(){
 "use strict";
 
-/* ------------------------------------------------------------------
-   CONTENT
-   Each section quietly maps to one stage of the R.O.O.T.E.D. Model:
-   Reality, Origin, Overflow, Turning, Election, Dwelling.
-   The framework is never named on screen (public-facing = invisible).
-------------------------------------------------------------------- */
-var SECTIONS = [
- { id:"reality", title:"Where I Am Right Now",
-   intro:"No right answers here. Just tell the truth about this season.",
-   verse:["Come to me, all you who are weary.","Matthew 11:28"],
-   prompt:"Pick one thing you noticed about yourself here. What would it feel like to say it out loud to someone safe?",
-   qs:[
-    {id:"weather",type:"choice",q:"If your life right now were weather, what would it be?",
-      options:["Sunny and clear","Partly cloudy","Foggy, hard to see","Stormy","Changes every hour"]},
-    {id:"words",type:"text",q:"Three words that describe this season of your life.",hint:"Example: busy, lonely, hopeful"},
-    {id:"headspace",type:"multi",q:"What has been taking up the most space in your head lately?",hint:"Pick as many as are true.",
-      options:["School","Friends","Family","How I look","Social media","My future","Faith","Money","Sports or activities","Dating or crushes","Loss or grief","Something else"]},
-    {id:"s_reality",type:"scale",q:"Most days I know what's going on inside me.",lo:"Not really",hi:"Very much"}
-   ]},
- { id:"origin", title:"Where I Come From",
-   intro:"The people and moments that shaped you matter. Share what feels okay to share.",
-   verse:["You formed my inmost being.","Psalm 139:13"],
-   prompt:"Which message you picked up deserves a second look? Is it actually true, or just loud?",
-   qs:[
-    {id:"shaped",type:"long",q:"Who has shaped you the most, and how?",hint:"A parent, a friend, a coach, a grandparent, a hard season. Anything."},
-    {id:"messages",type:"multi",q:"Which messages have you picked up about who you have to be?",hint:"Pick any that sound familiar.",
-      options:["I'm too much","I'm not enough","I have to be the strong one","I have to be perfect","I'm the funny one","I'm the quiet one","I have to earn love","I'm fine, don't worry about me","I'm a disappointment","I'm only worth what I do"]},
-    {id:"faithhome",type:"choice",q:"Growing up, how was faith part of your home?",
-      options:["Central and really lived out","Present, but quiet","On and off","Not really part of it","It's complicated"]},
-    {id:"s_origin",type:"scale",q:"At least one person at home really knows and understands me.",lo:"Not really",hi:"Very much"}
-   ]},
- { id:"overflow", title:"What Spills Out",
-   intro:"Big feelings always go somewhere. Let's notice where yours go, with no judgment.",
-   verse:["Cast all your anxiety on him.","1 Peter 5:7"],
-   prompt:"Your go-to reaction is not a flaw. It is a clue about what you need. What might yours be telling you?",
-   qs:[
-    {id:"stress",type:"multi",q:"When I'm stressed or hurt, I tend to...",hint:"Pick what's most like you.",
-      options:["Go quiet","Snap at people","Scroll or binge shows","Say yes to everything","Overwork","Cry","Joke it off","Stay super busy","Sleep a lot","Get really hard on myself"]},
-    {id:"whereigo",type:"choice",q:"After a really hard day, where do you usually go?",
-      options:["My room, alone","My phone","A friend","Family","Prayer or God","Honestly, nowhere"]},
-    {id:"adults",type:"long",q:"What do you wish the adults in your life understood about how you feel?"},
-    {id:"s_overflow",type:"scale",q:"When big feelings hit, I can name them and handle them without exploding or shutting down.",lo:"Rarely",hi:"Usually"}
-   ]},
- { id:"turning", title:"What I Keep Turning Over",
-   intro:"Everyone has thoughts that loop. Bringing them into the light takes away some of their power.",
-   verse:["Take every thought captive.","2 Corinthians 10:5"],
-   prompt:"Try this: write the loop thought on paper, then write what you would say to a friend who thought it.",
-   qs:[
-    {id:"loop",type:"text",q:"A thought that keeps looping in my head lately is...",hint:"Short is fine."},
-    {id:"loopabout",type:"choice",q:"That thought is mostly about...",
-      options:["Me","Other people","My future","God","Something in my past"]},
-    {id:"kindtruth",type:"long",q:"If you could answer that thought with something kind and true, what would you say?",hint:"It's okay if you're not sure yet. Write what comes to mind."},
-    {id:"s_turning",type:"scale",q:"The way I talk to myself is mostly kind.",lo:"Rarely",hi:"Usually"}
-   ]},
- { id:"election", title:"Who I'm Becoming",
-   intro:"You are not a problem to fix. You are someone who was chosen and made on purpose.",
-   verse:["I have called you by name; you are mine.","Isaiah 43:1"],
-   prompt:"Which strength do you downplay the most? What would change if you owned it?",
-   qs:[
-    {id:"strengths",type:"multi",q:"Which of these are true about you?",hint:"Choose up to five. Be generous with yourself.",max:5,
-      options:["Kind","Creative","Funny","Loyal","Curious","Brave","A natural leader","Good listener","Determined","Artistic","Athletic","Gentle","Organized","Faithful","Encouraging","Deep thinker"]},
-    {id:"himself",type:"long",q:"Describe a moment when you felt most like yourself."},
-    {id:"want",type:"choice",q:"Right now, what do you want most?",
-      options:["Confidence","Peace","Real friends","Clarity about my future","To feel closer to God","To feel understood","Freedom from anxiety"]},
-    {id:"s_election",type:"scale",q:"I believe I matter to God, even on my worst days.",lo:"Hard to believe",hi:"I believe it"}
-   ]},
- { id:"dwelling", title:"Where I Rest",
-   intro:"Last stop. Let's look at where you find peace and who has your back.",
-   verse:["Be still, and know that I am God.","Psalm 46:10"],
-   prompt:"Rest is part of being rooted. What is one small way you could practice it this week?",
-   qs:[
-    {id:"prayer",type:"choice",q:"Which sounds closest to your prayer life?",
-      options:["I pray often","Sometimes","Mostly when I need something","I want to, but I don't know how","Not really right now"]},
-    {id:"people",type:"multi",q:"Who could you go to if you needed help?",hint:"Pick everyone who applies.",
-      options:["Mom","Dad","A sibling","A friend","A grandparent","A mentor or youth leader","A priest or youth minister","A counselor","Nobody right now"]},
-    {id:"goodday",type:"long",q:"What would a really good, peaceful day look like for you?"},
-    {id:"hope",type:"text",q:"One hope I have for the next six weeks.",hint:"Big or small."},
-    {id:"s_dwelling",type:"scale",q:"I have a place or people where I can fully relax and be myself.",lo:"Not really",hi:"Very much"}
-   ]}
+/* =========================== SETTINGS =========================== */
+var FORM_ENDPOINT="https://formspree.io/f/xdeazlzl";
+/* true  = teen sees the names and descriptions of their four results.
+   false = teen sees only unlabeled bars and a "Cassandra will be in touch" note
+           (same as the adult version). */
+var SHOW_RESULT_NAMES=true;
+var COACH_CONTACT="cassandra@rootedinreallife.com";
+var STORE_KEY="rirl_teen_assessments_v2";
+
+/* ============================ QUESTIONS ========================== */
+var T=[
+ {id:"t1",g:"choleric",q:"In group projects or on a team, I naturally take charge, and it bugs me when nobody leads."},
+ {id:"t2",g:"choleric",q:"When I set a goal, I go after it with intense energy, even if it means skipping rest."},
+ {id:"t3",g:"choleric",q:"I say things straight, and sometimes it comes out harsher than I meant."},
+ {id:"t4",g:"choleric",q:"I get irritated or angry when things don't go the way I planned."},
+ {id:"t5",g:"choleric",q:"I make decisions fast and don't need a lot of time to think them over."},
+ {id:"t6",g:"melancholic",q:"I think deeply about ideas, feelings, and the meaning behind things."},
+ {id:"t7",g:"melancholic",q:"I hold myself and others to high standards, and it bothers me when things aren't done right."},
+ {id:"t8",g:"melancholic",q:"I sometimes feel a quiet sadness, or a sense that something is missing, even when things are fine."},
+ {id:"t9",g:"melancholic",q:"I keep my inner world private and only open up to people I deeply trust."},
+ {id:"t10",g:"melancholic",q:"I notice beauty, sadness, and sacred things that other people often miss."},
+ {id:"t11",g:"sanguine",q:"I easily start conversations with new people and feel energized around others."},
+ {id:"t12",g:"sanguine",q:"I live in the moment. The past and the future rarely weigh on me."},
+ {id:"t13",g:"sanguine",q:"My mood can flip fast. I can go from laughing to upset and back again in minutes."},
+ {id:"t14",g:"sanguine",q:"I have a hard time sticking with things once they turn into routine."},
+ {id:"t15",g:"sanguine",q:"I lift people's spirits with my energy and enthusiasm without even trying."},
+ {id:"t16",g:"phlegmatic",q:"I prefer peace and calm. I rarely argue or push my opinion."},
+ {id:"t17",g:"phlegmatic",q:"I take my time before answering and rarely speak without thinking first."},
+ {id:"t18",g:"phlegmatic",q:"I have a hard time getting myself going unless someone is counting on me."},
+ {id:"t19",g:"phlegmatic",q:"I'm steady and consistent. People know they can count on me."},
+ {id:"t20",g:"phlegmatic",q:"I avoid conflict, even when standing up for something would be better for everyone."}
+];
+var F=[
+ {id:"f1",g:"pride",q:"It's hard for me to take correction or criticism without getting defensive."},
+ {id:"f2",g:"pride",q:"I quietly compare myself to others and feel good when I come out ahead."},
+ {id:"f3",g:"pride",q:"Admitting I'm wrong feels really hard. It takes huge effort."},
+ {id:"f4",g:"vanity",q:"What other people think of me strongly affects my peace and my mood."},
+ {id:"f5",g:"vanity",q:"I often change how I act so people will like me or won't be upset with me."},
+ {id:"f6",g:"vanity",q:"How I come across, in person or online, matters so much to me that it shapes my choices."},
+ {id:"f7",g:"sloth",q:"I put off prayer, Mass, or other things I know would help me grow."},
+ {id:"f8",g:"sloth",q:"When faith feels dry or boring, I tend to give up."},
+ {id:"f9",g:"sloth",q:"I often know the right thing to do but can't make myself start."},
+ {id:"f10",g:"sensuality",q:"I pick comfort or fun, like my phone, games, or sleeping in, when I know I should do something harder."},
+ {id:"f11",g:"sensuality",q:"Screens, snacks, or entertainment often pull me away from homework, chores, or prayer."},
+ {id:"f12",g:"sensuality",q:"It's really hard for me to give up something I enjoy, even for a good reason."},
+ {id:"f13",g:"anger",q:"I hold onto resentment toward people who hurt me or let me down."},
+ {id:"f14",g:"anger",q:"I snap or react harshly when I'm frustrated, and then I regret it."},
+ {id:"f15",g:"anger",q:"I replay arguments or unfair moments in my head for a long time."},
+ {id:"f16",g:"fear",q:"Fear of failing, being rejected, or what's ahead often controls my choices."},
+ {id:"f17",g:"fear",q:"It's hard for me to trust God fully. I feel like I have to control how things turn out."},
+ {id:"f18",g:"fear",q:"I worry a lot about things I can't change."}
+];
+var C=[
+ {id:"c1",g:"teaching",q:"I can explain things in a way that helps other people actually get it."},
+ {id:"c2",g:"teaching",q:"People tell me my explanations helped them understand something about life or faith."},
+ {id:"c3",g:"encouragement",q:"I notice when someone is discouraged, and I naturally help them find hope."},
+ {id:"c4",g:"encouragement",q:"People often say I make them feel more confident and like they matter."},
+ {id:"c5",g:"mercy",q:"I'm strongly drawn to people who are hurting, left out, or forgotten."},
+ {id:"c6",g:"mercy",q:"Helping people in need feels like the most natural way for me to live my faith."},
+ {id:"c7",g:"prophecy",q:"I feel I have to speak up for what's true, even when it's uncomfortable."},
+ {id:"c8",g:"prophecy",q:"I can often sense what a group needs to hear to get back on track."},
+ {id:"c9",g:"administration",q:"I'm good at organizing people, plans, and details to get something done."},
+ {id:"c10",g:"administration",q:"I notice what's missing or messy in a group and naturally think of how to fix it."},
+ {id:"c11",g:"intercession",q:"I'm drawn to praying for others, and it feels like I'm fighting for them in prayer."},
+ {id:"c12",g:"intercession",q:"People ask me to pray for them, and it seems to mean a lot to them."},
+ {id:"c13",g:"hospitality",q:"Making people feel welcome, safe, and included brings me real joy."},
+ {id:"c14",g:"hospitality",q:"Wherever I am, new people quickly start to feel like they belong."},
+ {id:"c15",g:"wisdom",q:"When things get confusing, people come to me and I seem to know what to do."},
+ {id:"c16",g:"wisdom",q:"I can see below the surface of a situation to what is really going on."}
+];
+var S=[
+ {id:"s1",g:"judge",q:"I have a harsh inner voice that points out my mistakes and what's wrong with me."},
+ {id:"s2",g:"judge",q:"I judge other people quickly and get frustrated when they don't measure up."},
+ {id:"s3",g:"hyperachiever",q:"I feel like my worth depends on my grades, performance, or achievements."},
+ {id:"s4",g:"hyperachiever",q:"I find it hard to rest without feeling guilty or anxious about what I should be doing."},
+ {id:"s5",g:"pleaser",q:"I put other people's needs first so much that I lose track of what I actually want."},
+ {id:"s6",g:"pleaser",q:"I feel resentful when my help isn't noticed, even though I offered it freely."},
+ {id:"s7",g:"controller",q:"When I can't control how things turn out, I feel really anxious or responsible for fixing it."},
+ {id:"s8",g:"controller",q:"I trust my own way of doing things much more than other people's, so it's hard to let others help."},
+ {id:"s9",g:"avoider",q:"When there's conflict or a hard feeling, I go quiet or pull away."},
+ {id:"s10",g:"avoider",q:"I'd rather focus on what's fun and avoid sitting with pain, grief, or hard things."},
+ {id:"s11",g:"victim",q:"When things go wrong, I often feel like life is unfair to me in a way it isn't to others."},
+ {id:"s12",g:"victim",q:"I sometimes notice I share my struggles partly to get attention or comfort."},
+ {id:"s13",g:"hyperrational",q:"I handle everything with logic and facts. Feelings and gut instincts feel unreliable."},
+ {id:"s14",g:"hyperrational",q:"I feel uncomfortable, or brush it off, when conversations get very emotional or mystical."}
 ];
 
-var STORE_KEY="rirl_teen_soul_portrait_v1";
-/* ===== SETUP: where portraits are sent =====
-   Paste your form-service endpoint below (see setup note). Until it is set,
-   the page still works but cannot email you. */
-var FORM_ENDPOINT="https://formspree.io/f/xdeazlzl";   /* e.g. "https://api.web3forms.com/submit" or your Formspree URL */
-var FORM_ACCESS_KEY=""; /* Web3Forms only: your public access key. Leave empty for Formspree. */
-var state={step:0,name:"",email:"",age:"",consent:false,sent:false,a:{}};
-var app=document.getElementById("app"), nav=document.getElementById("nav"), bar=document.getElementById("bar");
-var TOTAL=SECTIONS.length+2; /* welcome + sections + results */
+var STEPS=[
+ {key:"t",qs:T,title:"Temperament",sub:"How God wired your soul to respond to the world",verse:["God does not make you a saint in spite of your temperament, but through it.","Fr. Conrad Hock"]},
+ {key:"f",qs:F,title:"Predominant Fault",sub:"The pattern that most gets in the way of your holiness",verse:["Know your predominant fault and fight it with all your might.","St. Francis de Sales"]},
+ {key:"c",qs:C,title:"Charism",sub:"The gifts the Holy Spirit gave you to use for others",verse:["To each is given the manifestation of the Spirit for the common good.","1 Corinthians 12:7"]},
+ {key:"s",qs:S,title:"Saboteurs",sub:"Thought patterns that can undermine your peace and mission",verse:["Be sober, be watchful.","1 Peter 5:8"]}
+];
 
-function load(){try{var s=localStorage.getItem(STORE_KEY);if(s){var o=JSON.parse(s);if(o&&typeof o==="object"){state.name=o.name||"";state.email=o.email||"";state.age=o.age||"";state.consent=!!o.consent;state.sent=!!o.sent;state.a=o.a||{};state.step=Math.min(o.step||0,TOTAL-1);}}}catch(e){}}
+/* ============================ RESULT TEXT ======================== */
+var TEMP={
+ choleric:{label:"Choleric",tag:"The Leader: bold, driven, decisive",
+  desc:"<strong>Strengths:</strong> a natural leader, decisive, energetic, and goal-driven. You can inspire people to act.<br><br><strong>Your path:</strong> God is shaping your drive into service. The virtue to grow in is <em>meekness</em>, which is not weakness but strength under God's control. Your impatience with what's wrong can become holy zeal, and your boldness can become courage.<br><br><strong>Watch out for:</strong> pride, bossiness, impatience, anger, and treating people like tools for the goal.",
+  saints:["St. Paul","St. Ignatius of Loyola","St. Catherine of Siena","St. Thomas More"],virtues:["Meekness","Humility","Patience","Kindness to the weak"]},
+ melancholic:{label:"Melancholic",tag:"The Idealist: deep, reflective, ordered",
+  desc:"<strong>Strengths:</strong> a deep thinker, sensitive to beauty and truth, idealistic, and faithful. You are capable of real depth in prayer.<br><br><strong>Your path:</strong> you are called to receive <em>joy</em> as a gift, trusting that God is good even when something feels unfinished inside. Your capacity to feel deeply can unite you to Christ, and your love of truth makes you a natural contemplative.<br><br><strong>Watch out for:</strong> being too hard on yourself, self-pity, worry, and having trouble forgiving yourself or others.",
+  saints:["St. John the Apostle","St. Teresa of Avila","Bl. John Henry Newman","St. Therese of Lisieux"],virtues:["Joy","Trust","Self-forgiveness","Surrender to God's plan"]},
+ sanguine:{label:"Sanguine",tag:"The Enthusiast: warm, expressive, present",
+  desc:"<strong>Strengths:</strong> naturally joyful and relational. You make people feel loved and welcome, and you're a great encourager and community-builder.<br><br><strong>Your path:</strong> you are called to deepen your joy through <em>quiet time with God</em> and faithfulness, so that your love for people is shaped by seeking God's face, not just people's approval. Your warmth can become real charity and your enthusiasm holy fervor.<br><br><strong>Watch out for:</strong> being scattered, staying on the surface, skipping prayer, craving attention, and avoiding small sacrifices.",
+  saints:["St. Peter","St. Philip Neri","St. Francis de Sales","Bl. Pier Giorgio Frassati"],virtues:["Quiet recollection","Faithfulness","Small sacrifices","Consistency"]},
+ phlegmatic:{label:"Phlegmatic",tag:"The Peacemaker: steady, loyal, serene",
+  desc:"<strong>Strengths:</strong> deeply faithful, patient, and consistent. You listen well and hold groups together through quiet steadiness.<br><br><strong>Your path:</strong> you are called to move past spiritual <em>laziness</em> through brave love: not waiting to feel like it, but choosing to act for God and others. Your peace can become real contemplative calm and your loyalty heroic perseverance.<br><br><strong>Watch out for:</strong> spiritual laziness, indifference, stubborn passivity, dodging necessary conflict, and waiting for others to start.",
+  saints:["St. Joseph","St. Bernadette","St. John XXIII","St. Thomas Aquinas"],virtues:["Holy zeal","Courage","Generosity","Taking initiative for good"]}
+};
+var FAULT={
+ pride:{label:"Pride",tag:"Disordered self-importance",
+  remedy:"Grow in humility: welcome correction, say sorry quickly, and serve in small hidden ways. Ask God for the grace to “decrease” so Christ can increase. The Litany of Humility is a great prayer for this.",
+  practice:"Once a day, take correction without defending yourself."},
+ vanity:{label:"Vanity",tag:"Needing human approval",
+  remedy:"Practice doing things for God's eyes alone. When you feel the pull for approval, pray, “Lord, I'm doing this for You.” Let go of how it turns out.",
+  practice:"Do one kind thing a day that nobody will ever know about."},
+ sloth:{label:"Spiritual Sloth",tag:"Resisting the good things of the spiritual life",
+  remedy:"Don't wait to feel like praying. Pick a set time and show up, especially when it's dry. Faithfulness matters more than feelings.",
+  practice:"Pray 10 minutes in silence each day, even when it feels boring."},
+ sensuality:{label:"Love of Comfort",tag:"Too attached to ease and pleasure",
+  remedy:"Small chosen sacrifices train your will. They aren't punishment. Practice choosing the harder thing in little ways so you're strong when it counts.",
+  practice:"Pick one daily comfort to give up for a little while, like your phone for the first 20 minutes of the morning."},
+ anger:{label:"Anger & Resentment",tag:"Holding onto hurt",
+  remedy:"Take a slow breath before you respond. Forgiveness is a decision you can make again and again, even when your feelings lag behind.",
+  practice:"Pray for someone who hurt you, by name, for 30 days."},
+ fear:{label:"Fear & Control",tag:"Relying on yourself instead of trusting God",
+  remedy:"Practice trusting God with specific things. Naming what you're trying to control, and handing it to Him, builds trust over time.",
+  practice:"Each morning write: “Lord, I surrender ___ to You today.”"}
+};
+var CHARISM={
+ teaching:{label:"Teaching",tag:"Helping others truly understand the truth",
+  desc:"You help people meet God through understanding. This could look like explaining faith to friends, leading a small group, writing, or mentoring younger kids."},
+ encouragement:{label:"Encouragement",tag:"Waking up hope and purpose in others",
+  desc:"You lift people up. Look for ways to be the friend who helps others keep going: in youth group, on your team, or one-on-one."},
+ mercy:{label:"Mercy",tag:"Serving Christ in people who are hurting",
+  desc:"You come alive when you're helping someone in need. Service projects, visiting the lonely or sick, and food drives are places your gift can grow."},
+ prophecy:{label:"Prophecy",tag:"Speaking truth that redirects and convicts",
+  desc:"You feel God's heart on issues and feel pushed to speak. Learn to speak with love as well as courage. Writing, speaking, and standing up for others are natural channels."},
+ administration:{label:"Administration",tag:"Bringing order for the sake of the mission",
+  desc:"You see how things could work better. Planning events, organizing a service project, or leading a team can be real ministry for you."},
+ intercession:{label:"Intercession",tag:"Praying with power for others",
+  desc:"Prayer isn't a chore for you. It's a calling. Adoration, prayer groups, and being the friend people ask to pray for them are your places to shine."},
+ hospitality:{label:"Hospitality",tag:"Making people feel they belong",
+  desc:"You make people feel at home. Welcoming new kids, hosting, and helping others feel included are how God uses you."},
+ wisdom:{label:"Wisdom",tag:"Seeing clearly and guiding others",
+  desc:"You see beneath the surface. Friends and family may come to you when things get complicated. Pray for discernment, and stay humble about your gift."}
+};
+var SAB={
+ judge:{label:"The Judge",tag:"The inner critic that condemns you and others",
+  desc:"The Judge often grows from feeling that love has to be earned. The remedy is letting yourself receive the Father's mercy, like the father running to the prodigal son in Luke 15. Confession is a place to meet that mercy, not just to list sins.",
+  practice:"When the Judge speaks, say, “That's the Judge, not God's voice.” Then answer it with one true line from Scripture."},
+ hyperachiever:{label:"The Hyper-Achiever",tag:"Worth built on performance",
+  desc:"This one says, “I'm only loved when I produce.” Look at Mary of Bethany in Luke 10:38-42, who simply sat at Jesus' feet. You are loved before you do anything.",
+  practice:"Schedule “useless” rest: time with God with nothing to show for it."},
+ pleaser:{label:"The Pleaser",tag:"Losing yourself to keep others happy",
+  desc:"The Pleaser can hide a lot of frustration and a lost sense of who you are. Remember you are God's beloved. Saying “no” can be an act of love and honesty, and it looks after the self God gave you.",
+  practice:"Once a week, give one honest “no” to something that doesn't fit your priorities or health."},
+ controller:{label:"The Controller",tag:"Anxiety turned into controlling outcomes",
+  desc:"The Controller finds it hard to trust that God is in charge. The cure is practicing surrender: naming what you're gripping and handing it over, one situation at a time.",
+  practice:"Each morning, name one thing you're trying to control and say, “Lord, I entrust this to You.”"},
+ avoider:{label:"The Avoider",tag:"Running from pain, conflict, and hard truth",
+  desc:"The Avoider often learned that facing hard things felt unsafe. Jesus says the truth sets us free (John 8:32). Being honest with God in prayer, even through the lament Psalms, is a safe place to start.",
+  practice:"Once a week, write down one feeling you've been avoiding, then bring it to prayer."},
+ victim:{label:"The Victim",tag:"Letting pain become your identity",
+  desc:"This pattern usually grows from real hurt. It can make pain feel like who you are. Jesus invites you to be a beloved child who suffers with Him, not alone. Offering your pain for someone else can change the story.",
+  practice:"Each morning, offer one struggle to God for a specific person."},
+ hyperrational:{label:"The Hyper-Rational",tag:"Using logic to stay safe from feelings and mystery",
+  desc:"This pattern is afraid of how vulnerable feelings and mystery can be. Slow, imaginative prayer can gently open what the head keeps locked. God is not a problem to be solved.",
+  practice:"Spend 10 minutes praying with one Bible verse. Let feelings come without analyzing them."}
+};
+
+/* ============================ STATE / HELPERS ==================== */
+var state={step:0,name:"",email:"",age:"",consent:false,sent:false,note:"",a:{}};
+var app=document.getElementById("app"),nav=document.getElementById("nav"),bar=document.getElementById("bar");
+var LAST=STEPS.length+1; /* results step */
+
+function load(){try{var s=localStorage.getItem(STORE_KEY);if(s){var o=JSON.parse(s);if(o&&typeof o==="object"){
+  state.name=o.name||"";state.email=o.email||"";state.age=o.age||"";state.consent=!!o.consent;state.sent=!!o.sent;state.note=o.note||"";state.a=o.a||{};state.step=Math.min(o.step||0,LAST);}}}catch(e){}}
 function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
 function wipe(){try{localStorage.removeItem(STORE_KEY);}catch(e){}}
-
+function clean(v){return typeof v==="string"?v.trim():"";}
 function el(tag,attrs){
   var n=document.createElement(tag);
   if(attrs){for(var k in attrs){if(!Object.prototype.hasOwnProperty.call(attrs,k))continue;
     if(k==="class")n.className=attrs[k];
     else if(k==="text")n.textContent=attrs[k];
+    else if(k==="html")n.innerHTML=attrs[k]; /* only ever static strings from this file */
     else if(k.slice(0,2)==="on")n.addEventListener(k.slice(2),attrs[k]);
     else n.setAttribute(k,attrs[k]);}}
   for(var i=2;i<arguments.length;i++){var c=arguments[i];if(c==null)continue;n.appendChild(typeof c==="string"?document.createTextNode(c):c);}
   return n;
 }
-
 function go(step){state.step=step;save();render();window.scrollTo(0,0);}
+function formValid(){return !!clean(state.name)&&/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(state.email))&&!!state.age&&state.consent;}
+function unanswered(qs){return qs.filter(function(q){return typeof state.a[q.id]!=="number";});}
 
-/* ---------- question widgets ---------- */
-function buildQuestion(q){
-  var wrap=el("div",{class:"card"});
-  var id="q_"+q.id;
-  wrap.appendChild(el("label",{class:"q","for":id,text:q.q}));
-  if(q.hint)wrap.appendChild(el("p",{class:"hint",text:q.hint}));
-  var val=state.a[q.id];
-
-  if(q.type==="text"){
-    var inp=el("input",{type:"text",id:id,maxlength:"120",autocomplete:"off"});
-    inp.value=val||"";
-    inp.addEventListener("input",function(){state.a[q.id]=inp.value;save();});
-    wrap.appendChild(inp);
-  }else if(q.type==="long"){
-    var ta=el("textarea",{id:id,maxlength:"1200"});
-    ta.value=val||"";
-    ta.addEventListener("input",function(){state.a[q.id]=ta.value;save();});
-    wrap.appendChild(ta);
-  }else if(q.type==="choice"){
-    var box=el("div",{class:"choices",role:"group","aria-label":q.q});
-    q.options.forEach(function(o){
-      var b=el("button",{type:"button",class:"choice","aria-pressed":String(val===o),text:o,onclick:function(){
-        state.a[q.id]=(state.a[q.id]===o)?"":o;save();
-        Array.prototype.forEach.call(box.children,function(c){c.setAttribute("aria-pressed",String(c.textContent===state.a[q.id]));});
-      }});
-      box.appendChild(b);
-    });
-    wrap.appendChild(box);
-  }else if(q.type==="multi"){
-    var cur=Array.isArray(val)?val.slice():[];
-    state.a[q.id]=cur;
-    var cb=el("div",{class:"chips",role:"group","aria-label":q.q});
-    q.options.forEach(function(o){
-      var c=el("button",{type:"button",class:"chip","aria-pressed":String(cur.indexOf(o)>-1),text:o,onclick:function(){
-        var arr=state.a[q.id],i=arr.indexOf(o);
-        if(i>-1)arr.splice(i,1);else{if(q.max&&arr.length>=q.max)return;arr.push(o);}
-        save();
-        Array.prototype.forEach.call(cb.children,function(x){x.setAttribute("aria-pressed",String(arr.indexOf(x.textContent)>-1));});
-      }});
-      cb.appendChild(c);
-    });
-    wrap.appendChild(cb);
-  }else if(q.type==="scale"){
-    var sc=el("div",{class:"scale",role:"group","aria-label":q.q});
-    [1,2,3,4,5].forEach(function(n){
-      sc.appendChild(el("button",{type:"button","aria-pressed":String(val===n),text:String(n),"aria-label":n+" of 5",onclick:function(){
-        state.a[q.id]=n;save();
-        Array.prototype.forEach.call(sc.children,function(x){x.setAttribute("aria-pressed",String(Number(x.textContent)===n));});
-      }}));
-    });
-    wrap.appendChild(sc);
-    wrap.appendChild(el("div",{class:"scale-ends"},el("span",{text:q.lo}),el("span",{text:q.hi})));
-  }
-  return wrap;
+/* scoring: percent of the maximum for each group, so groups of different size compare fairly */
+function scoreSet(qs){
+  var sums={},cnt={},order=[];
+  qs.forEach(function(q){if(!(q.g in sums)){sums[q.g]=0;cnt[q.g]=0;order.push(q.g);}sums[q.g]+=(state.a[q.id]||0);cnt[q.g]++;});
+  var arr=order.map(function(g,i){return {g:g,raw:sums[g],max:cnt[g]*5,pct:Math.round(sums[g]/(cnt[g]*5)*100),i:i};});
+  arr.sort(function(x,y){return (y.pct-x.pct)||(x.i-y.i);});
+  return arr;
 }
 
-/* ---------- screens ---------- */
+/* ============================ SCREENS ============================ */
 function renderWelcome(){
-  app.appendChild(el("p",{class:"kicker",text:"Rooted in Real Life \u00B7 For Teens"}));
+  app.appendChild(el("p",{class:"kicker",text:"Rooted in Real Life · For Teens"}));
   app.appendChild(el("h2",{text:"Your Soul Portrait"}));
-  app.appendChild(el("p",{class:"intro",text:"A quiet, honest look at who you are, where you've been, and where you're growing. About 10 minutes. There are no wrong answers, and you can skip anything."}));
+  app.appendChild(el("p",{class:"intro",text:"Four short assessments to help you discover your temperament, your predominant fault, your charism, and your saboteur. It takes about 12 minutes. Answer honestly and prayerfully. There are no wrong answers, only deeper invitations to grace."}));
+  app.appendChild(el("p",{class:"scripture",text:"“You are fearfully and wonderfully made.” Psalm 139:14"}));
 
   var c=el("div",{class:"card"});
   c.appendChild(el("label",{class:"q","for":"nm",text:"What should we call you?"}));
-  c.appendChild(el("p",{class:"hint",text:"First name or nickname is fine."}));
   var nm=el("input",{type:"text",id:"nm",maxlength:"40",autocomplete:"given-name"});
-  nm.value=state.name;
-  nm.addEventListener("input",function(){state.name=nm.value;save();updateNav();});
+  nm.value=state.name;nm.addEventListener("input",function(){state.name=nm.value;save();updateNav();});
   c.appendChild(nm);
   c.appendChild(el("label",{class:"q","for":"em",style:"margin-top:16px",text:"Your email address"}));
   c.appendChild(el("p",{class:"hint",text:"Required. Your coach will use this to reach you about your results."}));
   var em=el("input",{type:"email",id:"em",maxlength:"120",autocomplete:"email",inputmode:"email"});
-  em.value=state.email;
-  em.addEventListener("input",function(){state.email=em.value;save();updateNav();});
+  em.value=state.email;em.addEventListener("input",function(){state.email=em.value;save();updateNav();});
   c.appendChild(em);
   c.appendChild(el("label",{class:"q","for":"ag",style:"margin-top:16px",text:"How old are you?"}));
   var ag=el("select",{id:"ag"});
   ag.appendChild(el("option",{value:"",text:"Choose..."}));
   for(var i=13;i<=18;i++){ag.appendChild(el("option",{value:String(i),text:String(i)}));}
-  ag.value=state.age;
-  ag.addEventListener("change",function(){state.age=ag.value;save();updateNav();});
+  ag.value=state.age;ag.addEventListener("change",function(){state.age=ag.value;save();updateNav();});
   c.appendChild(ag);
   var row=el("label",{style:"display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-family:var(--sans);font-size:14px;color:var(--ink-light);cursor:pointer"});
   var cb=el("input",{type:"checkbox",id:"cn",style:"width:22px;height:22px;margin-top:1px;flex:none"});
-  cb.checked=state.consent;
-  cb.addEventListener("change",function(){state.consent=cb.checked;save();updateNav();});
+  cb.checked=state.consent;cb.addEventListener("change",function(){state.consent=cb.checked;save();updateNav();});
   row.appendChild(cb);
   row.appendChild(el("span",{text:"A parent or guardian knows I'm doing this, and I'm okay with my answers being sent to my coach, Cassandra."}));
   c.appendChild(row);
   app.appendChild(c);
 
-  app.appendChild(el("p",{class:"hint",text:"When you finish, your portrait is sent to your coach so she can get to know you before you start. Only she sees it."}));
-  var d=el("details",{class:"parents"},
+  app.appendChild(el("p",{class:"hint",text:"When you finish, your results are sent to your coach so she can get to know you before you start. Only she sees them."}));
+  app.appendChild(el("details",{class:"parents"},
     el("summary",{text:"For parents and guardians"}),
-    el("p",{text:"This is a reflective, faith-centered tool, not therapy or a diagnosis. While your teen fills it out, answers are saved only in this browser. When they finish, their name, email, and answers are emailed to their coach, Cassandra, and are not shared with anyone else. Your teen can also download their own copy. If your teen is struggling with their safety or mental health, please contact a licensed professional or call or text 988 (U.S.)."})
-  );
-  app.appendChild(d);
+    el("p",{text:"This is a reflective, faith-centered tool. It is not therapy and it is not a diagnosis. While your teen answers, their responses are saved only in this browser. When they finish, their name, email, age, and results are emailed to their coach, Cassandra, and are not shared with anyone else. Your teen can also download their own copy. If your teen is struggling with safety or mental health, please contact a licensed professional, or call or text 988 (U.S.)."})
+  ));
 }
 
-function renderSection(idx){
-  var s=SECTIONS[idx];
-  app.appendChild(el("p",{class:"kicker",text:"Part "+(idx+1)+" of "+SECTIONS.length}));
-  app.appendChild(el("h2",{text:s.title}));
-  app.appendChild(el("p",{class:"intro",text:s.intro}));
-  s.qs.forEach(function(q){app.appendChild(buildQuestion(q));});
-  var v=el("p",{class:"verse"},"\u201C"+s.verse[0]+"\u201D",el("small",{text:"\u2014 "+s.verse[1]}));
-  app.appendChild(v);
-}
-
-/* ---------- portrait generation ---------- */
-function clean(v){return (typeof v==="string")?v.trim():"";}
-function list(v){return Array.isArray(v)?v:[];}
-function buildPortrait(){
-  var nm=clean(state.name)||"Friend";
-  var scales=[];
-  SECTIONS.forEach(function(s){
-    s.qs.forEach(function(q){
-      if(q.type==="scale"&&typeof state.a[q.id]==="number"){scales.push({sec:s,q:q,v:state.a[q.id]});}
+function renderAssessment(idx){
+  var st=STEPS[idx];
+  app.appendChild(el("p",{class:"kicker",text:"Assessment "+(idx+1)+" of "+STEPS.length}));
+  app.appendChild(el("h2",{text:st.title}));
+  app.appendChild(el("p",{class:"intro",text:st.sub}));
+  app.appendChild(el("p",{class:"scripture",text:"“"+st.verse[0]+"” "+st.verse[1]}));
+  app.appendChild(el("p",{class:"hint",text:"Tap how true each statement is for you: 1 = not like me, 5 = very much like me."}));
+  app.appendChild(el("div",{class:"warn",id:"warn",role:"alert"}));
+  st.qs.forEach(function(q,i){
+    var card=el("div",{class:"card",id:"card_"+q.id});
+    card.appendChild(el("p",{class:"num",text:"Statement "+(i+1)+" of "+st.qs.length}));
+    card.appendChild(el("span",{class:"q",text:q.q}));
+    var sc=el("div",{class:"scale",role:"group","aria-label":q.q});
+    [1,2,3,4,5].forEach(function(n){
+      sc.appendChild(el("button",{type:"button","aria-pressed":String(state.a[q.id]===n),"aria-label":n+" of 5",text:String(n),onclick:function(){
+        state.a[q.id]=n;save();card.classList.remove("missing");
+        Array.prototype.forEach.call(sc.children,function(x){x.setAttribute("aria-pressed",String(Number(x.textContent)===n));});
+      }}));
     });
+    card.appendChild(sc);
+    card.appendChild(el("div",{class:"scale-ends"},el("span",{text:"Not like me"}),el("span",{text:"Very much like me"})));
+    app.appendChild(card);
   });
-  var strongest=null,tender=null;
-  scales.forEach(function(x){
-    if(!strongest||x.v>strongest.v)strongest=x;
-    if(!tender||x.v<tender.v)tender=x;
-  });
-  if(strongest&&tender&&strongest.v===tender.v){strongest=null;tender=null;}
-  var concern=false;
-  if(list(state.a.people).indexOf("Nobody right now")>-1)concern=true;
-  ["s_overflow","s_turning","s_election","s_dwelling"].forEach(function(k){if(typeof state.a[k]==="number"&&state.a[k]<=1)concern=true;});
-  return {name:nm,scales:scales,strongest:strongest,tender:tender,concern:concern};
+  if(st.key==="s"){
+    var nc=el("div",{class:"card"});
+    nc.appendChild(el("label",{class:"q","for":"note",text:"Anything you'd like your coach to know? (optional)"}));
+    var ta=el("textarea",{id:"note",maxlength:"1000"});
+    ta.value=state.note;ta.addEventListener("input",function(){state.note=ta.value;save();});
+    nc.appendChild(ta);
+    app.appendChild(nc);
+  }
 }
 
-function sectionSummary(s){
-  var out=[];
-  s.qs.forEach(function(q){
-    if(q.type==="scale")return;
-    var v=state.a[q.id];
-    if(Array.isArray(v)){if(v.length)out.push({q:q.q,a:v.join(", ")});}
-    else if(clean(v)){out.push({q:q.q,a:clean(v)});}
+function barRows(list,infoMap,topN){
+  var box=el("div",{});
+  list.forEach(function(r,i){
+    var label=infoMap?infoMap[r.g].label:"";
+    var row=el("div",{class:"barrow"});
+    if(infoMap)row.appendChild(el("div",{class:"bl"},el("span",{text:label+(i<topN?" ★":"")})));
+    var b=el("div",{class:"bar"});var f=el("div");f.style.width=r.pct+"%";b.appendChild(f);row.appendChild(b);
+    box.appendChild(row);
   });
-  return out;
+  return box;
 }
 
-function portraitText(p){
+function buildResults(){
+  var rT=scoreSet(T),rF=scoreSet(F),rC=scoreSet(C),rS=scoreSet(S);
+  return {rT:rT,rF:rF,rC:rC,rS:rS,
+    top:{temp:TEMP[rT[0].g].label,temp2:TEMP[rT[1].g].label,fault:FAULT[rF[0].g].label,
+      charisms:rC.slice(0,3).map(function(r){return CHARISM[r.g].label;}).join(", "),
+      sabs:rS.slice(0,2).map(function(r){return SAB[r.g].label;}).join(", ")}};
+}
+function summaryLine(list,map){return list.map(function(r){return map[r.g].label+": "+r.raw+"/"+r.max+" ("+r.pct+"%)";}).join(" | ");}
+
+function resultsText(R){
   var L=[];
-  L.push("SOUL PORTRAIT - "+p.name+(state.age?" (age "+state.age+")":""));
-  L.push("Email: "+clean(state.email));
-  L.push("Rooted in Real Life \u00B7 Teen Program");
-  L.push("");
-  if(p.strongest)L.push("Strongest root right now: "+p.strongest.sec.title);
-  if(p.tender)L.push("A spot that could use care: "+p.tender.sec.title);
-  L.push("");
-  SECTIONS.forEach(function(s){
-    L.push("== "+s.title.toUpperCase()+" ==");
-    sectionSummary(s).forEach(function(x){L.push(x.q);L.push("  -> "+x.a);});
-    s.qs.forEach(function(q){if(q.type==="scale"&&typeof state.a[q.id]==="number"){L.push(q.q);L.push("  -> "+state.a[q.id]+" / 5");}});
-    L.push("Reflect: "+s.prompt);
-    L.push("");
-  });
-  L.push("If things feel heavy, talk to a trusted adult. In the U.S. you can call or text 988 anytime.");
+  L.push("SOUL PORTRAIT RESULTS - "+clean(state.name)+" (age "+state.age+")");
+  L.push("Email: "+clean(state.email));L.push("");
+  L.push("Primary temperament: "+R.top.temp+" (secondary: "+R.top.temp2+")");
+  L.push("Predominant fault: "+R.top.fault);
+  L.push("Top charisms: "+R.top.charisms);
+  L.push("Main saboteurs: "+R.top.sabs);L.push("");
+  L.push("TEMPERAMENT - "+summaryLine(R.rT,TEMP));
+  L.push("PREDOMINANT FAULT - "+summaryLine(R.rF,FAULT));
+  L.push("CHARISM - "+summaryLine(R.rC,CHARISM));
+  L.push("SABOTEURS - "+summaryLine(R.rS,SAB));
+  if(clean(state.note)){L.push("");L.push("Note from teen: "+clean(state.note));}
   return L.join("\n");
 }
 
+function resBlock(title){return el("div",{class:"res"},el("h3",{text:title}));}
+
 function renderResults(){
-  var p=buildPortrait();
-  var head=el("div",{class:"portrait-head"},
-    el("div",{class:"cross","aria-hidden":"true",text:"\u271D"}),
+  var R=buildResults();
+  var nm=clean(state.name);
+  app.appendChild(el("div",{style:"text-align:center;margin-bottom:16px"},
+    el("div",{style:"color:var(--wheat);font-size:26px","aria-hidden":"true",text:"✝"}),
     el("p",{class:"kicker",text:"Your Soul Portrait"}),
-    el("h2",{text:p.name+", here's what you shared"}),
-    el("p",{class:"intro",text:"This is a starting snapshot, not a label. You are more than any answer on this page."})
-  );
-  app.appendChild(head);
+    el("h2",{text:"Thank you, "+nm}),
+    el("p",{class:"intro",text:"This is a starting snapshot of how God made you, not a label. You are more than any result on this page."})
+  ));
 
-  if(p.strongest){
-    var c1=el("div",{class:"callout"},
-      el("b",{text:"Your strongest root right now"}),
-      el("p",{text:p.strongest.sec.title+". This is where you feel the most steady right now. Keep leaning on it."}));
-    app.appendChild(c1);
-  }
-  if(p.tender){
-    app.appendChild(el("div",{class:"callout"},
-      el("b",{text:"A spot that could use some care"}),
-      el("p",{text:p.tender.sec.title+". That's not a failure. It's just where gentle attention will help you grow."})));
-  }
+  var status=el("p",{class:"status",role:"status"});
+  var retry=el("button",{type:"button",class:"btn solid",text:"Try sending again",style:"display:none;margin-bottom:14px",onclick:function(){send(R,status,retry);}});
+  app.appendChild(status);app.appendChild(retry);
 
-  SECTIONS.forEach(function(s){
-    var box=el("div",{class:"sec"},el("h3",{text:s.title}));
-    sectionSummary(s).forEach(function(x){
-      box.appendChild(el("span",{class:"label",text:x.q}));
-      box.appendChild(el("p",{class:"yours",text:x.a}));
+  if(SHOW_RESULT_NAMES){
+    var t=TEMP[R.rT[0].g],t2=TEMP[R.rT[1].g];
+    var b1=resBlock("I. YOUR TEMPERAMENT");
+    b1.appendChild(el("div",{class:"hl",text:t.label}));
+    b1.appendChild(el("p",{class:"tag-line",text:t.tag}));
+    b1.appendChild(el("p",{html:t.desc}));
+    b1.appendChild(el("span",{class:"lbl",text:"Saints with this temperament"}));
+    b1.appendChild(el("p",{text:t.saints.join(", ")}));
+    b1.appendChild(el("span",{class:"lbl",text:"Virtues to grow in"}));
+    var tg=el("div",{class:"tags"});t.virtues.forEach(function(v){tg.appendChild(el("span",{text:v}));});b1.appendChild(tg);
+    b1.appendChild(el("div",{class:"second"},el("span",{class:"lbl",text:"Your secondary temperament"}),el("p",{text:t2.label+": "+t2.tag+". Most people are a blend, and your secondary one shapes how your main temperament shows up."})));
+    b1.appendChild(barRows(R.rT,TEMP,2));
+    app.appendChild(b1);
+
+    var f=FAULT[R.rF[0].g];
+    var b2=resBlock("II. YOUR PREDOMINANT FAULT");
+    b2.appendChild(el("div",{class:"hl",text:f.label}));
+    b2.appendChild(el("p",{class:"tag-line",text:f.tag}));
+    b2.appendChild(el("p",{text:"Everyone has one. It isn't a verdict on you. Naming it is exactly how the saints began to grow."}));
+    b2.appendChild(el("span",{class:"lbl",text:"How to fight it"}));
+    b2.appendChild(el("p",{text:f.remedy}));
+    b2.appendChild(el("div",{class:"try"},el("b",{text:"Try this"}),document.createTextNode(f.practice)));
+    b2.appendChild(barRows(R.rF,FAULT,1));
+    app.appendChild(b2);
+
+    var b3=resBlock("III. YOUR CHARISMS");
+    R.rC.slice(0,2).forEach(function(r,i){
+      var c=CHARISM[r.g];
+      b3.appendChild(el("div",{class:"hl",text:c.label}));
+      b3.appendChild(el("p",{class:"tag-line",text:c.tag}));
+      b3.appendChild(el("p",{text:c.desc}));
     });
-    s.qs.forEach(function(q){
-      if(q.type==="scale"&&typeof state.a[q.id]==="number"){
-        box.appendChild(el("span",{class:"label",text:q.q}));
-        var g=el("div",{class:"gauge"});var f=el("div");f.style.width=(state.a[q.id]*20)+"%";g.appendChild(f);
-        box.appendChild(g);
-        box.appendChild(el("p",{class:"hint",text:state.a[q.id]+" out of 5"}));
-      }
+    b3.appendChild(barRows(R.rC,CHARISM,2));
+    app.appendChild(b3);
+
+    var s=SAB[R.rS[0].g];
+    var b4=resBlock("IV. YOUR SABOTEUR");
+    b4.appendChild(el("div",{class:"hl",text:s.label}));
+    b4.appendChild(el("p",{class:"tag-line",text:s.tag}));
+    b4.appendChild(el("p",{text:s.desc}));
+    b4.appendChild(el("div",{class:"try"},el("b",{text:"Try this"}),document.createTextNode(s.practice)));
+    var s2=SAB[R.rS[1].g];
+    b4.appendChild(el("div",{class:"second"},el("span",{class:"lbl",text:"Also showing up for you"}),el("p",{text:s2.label+": "+s2.tag+"."})));
+    b4.appendChild(barRows(R.rS,SAB,2));
+    app.appendChild(b4);
+
+    app.appendChild(el("div",{class:"closing",html:"Your coach will go through these results with you and help you understand what they mean for your life.<small>“Before I formed you in the womb I knew you.” Jeremiah 1:5</small>"}));
+  }else{
+    [["I. TEMPERAMENT",R.rT],["II. PREDOMINANT FAULT",R.rF],["III. CHARISMS",R.rC],["IV. SABOTEURS",R.rS]].forEach(function(p){
+      var b=resBlock(p[0]);b.appendChild(barRows(p[1],null,0));app.appendChild(b);
     });
-    box.appendChild(el("span",{class:"label",text:"Something to reflect on"}));
-    box.appendChild(el("p",{class:"prompt",text:s.prompt}));
-    app.appendChild(box);
-  });
-
-  app.appendChild(el("p",{class:"verse"},"\u201CYou are fearfully and wonderfully made.\u201D",el("small",{text:"\u2014 Psalm 139:14"})));
-
-  var care=el("div",{class:"care"});
-  care.appendChild(el("b",{text:p.concern?"A gentle check-in. ":"If things ever feel heavy. "}));
-  care.appendChild(document.createTextNode(
-    (p.concern?"Some of your answers suggest you might be carrying a lot right now, or not feeling supported. You don't have to carry it alone. ":"")+
-    "Please talk to a trusted adult, like a parent, mentor, counselor, or priest. In the U.S. you can call or text 988 anytime to reach the Suicide & Crisis Lifeline. If you are in immediate danger, call 911."));
-  app.appendChild(care);
-
-  var toast=el("div",{class:"toast",role:"status"});
-  var sendBox=el("div",{class:"care",style:"border-color:var(--green)"});
-  var sendMsg=el("span",{text:""});
-  var retry=el("button",{type:"button",class:"btn solid",text:"Try sending again",style:"margin-top:10px;display:none",onclick:function(){submitPortrait();}});
-  sendBox.appendChild(sendMsg);sendBox.appendChild(retry);
-  app.appendChild(sendBox);
-  function submitPortrait(){
-    if(state.sent){sendMsg.textContent="Sent! Your coach has your portrait and will be in touch at "+clean(state.email)+".";retry.style.display="none";return;}
-    if(!FORM_ENDPOINT){sendMsg.textContent="This page isn't connected to email yet, so your portrait hasn't been sent. Please download it below and send it to your coach.";retry.style.display="none";return;}
-    sendMsg.textContent="Sending your portrait to your coach...";retry.style.display="none";
-    var payload={_subject:"Teen Soul Portrait: "+p.name,name:p.name,email:clean(state.email),age:state.age,message:portraitText(p),_gotcha:""};
-    if(FORM_ACCESS_KEY)payload.access_key=FORM_ACCESS_KEY;
-    fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)})
-      .then(function(r){if(!r.ok)throw new Error("bad status");state.sent=true;save();sendMsg.textContent="Sent! Your coach has your portrait and will be in touch at "+clean(state.email)+".";})
-      .catch(function(){sendMsg.textContent="We couldn't send it just now. Check your connection and try again. You can still download your portrait below.";retry.style.display="inline-block";});
+    app.appendChild(el("div",{class:"closing",html:"Your Soul Portrait is being prepared personally for you. Cassandra will reach out to arrange delivery.<small>“Before I formed you in the womb I knew you.” Jeremiah 1:5</small>"}));
   }
-  submitPortrait();
-  var actions=el("div",{class:"actions"},
-    el("button",{type:"button",class:"btn solid",text:"Download my portrait",onclick:function(){
-      try{
-        var blob=new Blob([portraitText(p)],{type:"text/plain"});
-        var a=document.createElement("a");a.href=URL.createObjectURL(blob);
-        a.download="soul-portrait-"+(p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"teen")+".txt";
-        document.body.appendChild(a);a.click();document.body.removeChild(a);
-        toast.textContent="Saved. You can share this file with your coach if you want to.";
-      }catch(e){toast.textContent="Download didn't work here. Try Copy instead.";}
-    }}),
-    el("button",{type:"button",class:"btn line",text:"Copy text",onclick:function(){
-      var t=portraitText(p);
-      if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(t).then(function(){toast.textContent="Copied.";},function(){toast.textContent="Couldn't copy. Try Download.";});
-      }else{toast.textContent="Copy isn't available here. Try Download.";}
+
+  app.appendChild(el("div",{class:"care"},
+    el("b",{text:"If things ever feel heavy. "}),
+    document.createTextNode("These results are for reflection. They are not a diagnosis or a mental health test. If you are struggling, please talk to a trusted adult such as a parent, mentor, counselor, or priest. In the U.S. you can call or text 988 anytime for the Suicide & Crisis Lifeline. If you are in immediate danger, call 911.")));
+
+  var toast=el("p",{class:"status",role:"status"});
+  app.appendChild(el("div",{class:"actions"},
+    el("button",{type:"button",class:"btn solid",text:"Download my results",onclick:function(){
+      try{var blob=new Blob([resultsText(R)],{type:"text/plain"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);
+        a.download="soul-portrait-"+(nm.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"teen")+".txt";document.body.appendChild(a);a.click();document.body.removeChild(a);}
+      catch(e){toast.textContent="Download didn't work here.";}
     }}),
     el("button",{type:"button",class:"btn line",text:"Print",onclick:function(){window.print();}})
-  );
-  app.appendChild(actions);
+  ));
   app.appendChild(toast);
   app.appendChild(el("button",{type:"button",class:"btn line",text:"Clear my answers and start over",onclick:function(){
-    if(window.confirm("This erases everything you entered on this device. Continue?")){wipe();state={step:0,name:"",email:"",age:"",consent:false,sent:false,a:{}};render();window.scrollTo(0,0);}
+    if(window.confirm("This erases everything you entered on this device. Continue?")){wipe();state={step:0,name:"",email:"",age:"",consent:false,sent:false,note:"",a:{}};render();window.scrollTo(0,0);}
   }}));
+
+  send(R,status,retry);
 }
 
-/* ---------- nav + render ---------- */
-function formValid(){
-  return !!clean(state.name)&&/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(state.email))&&!!state.age&&state.consent;
+function send(R,status,retry){
+  if(state.sent){status.style.color="var(--green)";status.textContent="Sent! Your coach has your results and will be in touch at "+clean(state.email)+".";retry.style.display="none";return;}
+  if(!FORM_ENDPOINT){status.style.color="var(--rose)";status.textContent="This page isn't connected to email yet, so your results haven't been sent. Please download them below and send them to your coach.";return;}
+  status.style.color="var(--ink-light)";status.textContent="Sending your results to your coach...";retry.style.display="none";
+  var payload={
+    _subject:"New Teen Soul Portrait: "+clean(state.name),
+    email:clean(state.email),
+    "Client Name":clean(state.name),"Client Email":clean(state.email),"Age":state.age,
+    "Date Completed":new Date().toLocaleDateString(),
+    "Parent/guardian aware":"Yes (checked by teen)",
+    "Primary Temperament":R.top.temp,"Secondary Temperament":R.top.temp2,
+    "Predominant Fault":R.top.fault,"Top Charisms":R.top.charisms,"Primary Saboteurs":R.top.sabs,
+    "Temperament Scores":summaryLine(R.rT,TEMP),"Fault Scores":summaryLine(R.rF,FAULT),
+    "Charism Scores":summaryLine(R.rC,CHARISM),"Saboteur Scores":summaryLine(R.rS,SAB),
+    "Note from teen":clean(state.note)||"(none)",
+    _gotcha:""
+  };
+  fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)})
+    .then(function(r){if(!r.ok)throw new Error("bad status");state.sent=true;save();status.style.color="var(--green)";status.textContent="Sent! Your coach has your results and will be in touch at "+clean(state.email)+".";})
+    .catch(function(){status.style.color="var(--rose)";status.textContent="We couldn't send your results just now. Check your connection and try again, or contact "+COACH_CONTACT+". You can still download your results below.";retry.style.display="inline-block";});
+}
+
+/* ============================ NAV / RENDER ======================= */
+function tryNext(idx){
+  var missing=unanswered(STEPS[idx].qs);
+  if(missing.length){
+    var w=document.getElementById("warn");
+    w.textContent="Please answer every statement. "+missing.length+" left.";w.style.display="block";
+    missing.forEach(function(q){var c=document.getElementById("card_"+q.id);if(c)c.classList.add("missing");});
+    var first=document.getElementById("card_"+missing[0].id);
+    if(first&&first.scrollIntoView)first.scrollIntoView({block:"center"});
+    return;
+  }
+  go(state.step+1);
 }
 function updateNav(){
   nav.textContent="";
   var s=state.step;
   if(s===0){
-    var start=el("button",{type:"button",class:"btn primary",text:"Begin",onclick:function(){go(1);}});
-    if(!formValid())start.setAttribute("disabled","disabled");
-    nav.appendChild(start);
-  }else if(s<=SECTIONS.length){
+    var b=el("button",{type:"button",class:"btn primary",text:"Begin",onclick:function(){go(1);}});
+    if(!formValid())b.setAttribute("disabled","disabled");
+    nav.appendChild(b);
+  }else if(s<=STEPS.length){
     nav.appendChild(el("button",{type:"button",class:"btn ghost",text:"Back",onclick:function(){go(s-1);}}));
-    nav.appendChild(el("button",{type:"button",class:"btn primary",text:s===SECTIONS.length?"See my portrait":"Next",onclick:function(){go(s+1);}}));
+    nav.appendChild(el("button",{type:"button",class:"btn primary",text:s===STEPS.length?"See my results":"Next",onclick:function(){tryNext(s-1);}}));
   }else{
-    nav.appendChild(el("button",{type:"button",class:"btn ghost",text:"Back to my answers",onclick:function(){go(SECTIONS.length);}}));
+    nav.appendChild(el("button",{type:"button",class:"btn ghost",text:"Back to my answers",onclick:function(){go(STEPS.length);}}));
   }
 }
 function render(){
   app.textContent="";
   var s=state.step;
+  if(s>STEPS.length){
+    /* never show results unless every statement is answered and the form is valid */
+    var all=T.concat(F,C,S);
+    if(!formValid()||unanswered(all).length){state.step=0;s=0;}
+  }
   if(s===0)renderWelcome();
-  else if(s<=SECTIONS.length)renderSection(s-1);
+  else if(s<=STEPS.length)renderAssessment(s-1);
   else renderResults();
-  bar.style.width=Math.round(s/(TOTAL-1)*100)+"%";
+  bar.style.width=Math.round(s/LAST*100)+"%";
   updateNav();
 }
 
