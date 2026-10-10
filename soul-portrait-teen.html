@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Soul Portrait · Rooted in Real Life (Teens)</title>
+<style>
+:root{
+  --ink:#2A2230; --ink-light:#4A3F5C; --parchment:#FAF6F0; --parch-dk:#EDE5F5;
+  --purple:#6B5B8A; --mid-purple:#8B7BA8; --rose:#C47B8A; --wheat:#B8956A; --green:#5A7A5A;
+  --serif:'EB Garamond','Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --display:'Cinzel','Trajan Pro',Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--parchment);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.5}
+header.top{background:var(--mid-purple);color:#fff;text-align:center;padding:14px 16px 12px}
+header.top .cross{color:#F1DDB8;font-size:20px;line-height:1}
+header.top h1{margin:2px 0 0;font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:.04em}
+header.top p{margin:2px 0 0;font-style:italic;font-size:15px;opacity:.92}
+.progress{height:6px;background:var(--parch-dk)}
+.progress>div{height:100%;width:0;background:var(--wheat);transition:width .35s ease}
+main{max-width:640px;margin:0 auto;padding:22px 16px 90px}
+.kicker{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);font-weight:700;margin:0 0 6px}
+h2{font-family:var(--display);color:var(--purple);font-size:26px;line-height:1.2;margin:0 0 6px;font-weight:600}
+.intro{font-style:italic;color:var(--ink-light);margin:0 0 20px}
+.card{background:#fff;border:1px solid var(--parch-dk);border-radius:12px;padding:18px 16px;margin:0 0 16px;box-shadow:0 1px 0 rgba(42,34,48,.04)}
+.card label.q,.card .q{display:block;font-size:20px;color:var(--ink);margin:0 0 4px;font-weight:500}
+.hint{font-family:var(--sans);font-size:13px;color:#7a6f88;margin:0 0 12px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:18px;padding:12px;border:1.5px solid #d8cfe6;border-radius:10px;background:var(--parchment);color:var(--ink)}
+textarea{min-height:104px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid rgba(139,123,168,.45);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--sans);font-size:15px;padding:10px 14px;border-radius:999px;border:1.5px solid #d8cfe6;background:var(--parchment);color:var(--ink-light);cursor:pointer;min-height:44px}
+.chip[aria-pressed=true]{background:var(--purple);border-color:var(--purple);color:#fff}
+.choices{display:grid;gap:8px}
+.choice{font-family:var(--sans);font-size:16px;text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid #d8cfe6;background:var(--parchment);color:var(--ink);cursor:pointer;min-height:48px}
+.choice[aria-pressed=true]{background:var(--parch-dk);border-color:var(--purple);color:var(--purple);font-weight:600}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.scale button{font-family:var(--sans);font-size:18px;font-weight:600;padding:12px 0;border-radius:10px;border:1.5px solid #d8cfe6;background:var(--parchment);color:var(--ink-light);cursor:pointer;min-height:48px}
+.scale button[aria-pressed=true]{background:var(--rose);border-color:var(--rose);color:#fff}
+.scale-ends{display:flex;justify-content:space-between;font-family:var(--sans);font-size:12px;color:#7a6f88;margin-top:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--mid-purple);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center}
+.nav .inner{display:flex;gap:10px;width:100%;max-width:640px}
+.btn{font-family:var(--sans);font-size:16px;font-weight:700;border:0;border-radius:10px;padding:13px 18px;cursor:pointer;min-height:48px}
+.btn.primary{background:var(--wheat);color:#fff;flex:1}
+.btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)}
+.btn.solid{background:var(--purple);color:#fff}
+.btn.line{background:#fff;color:var(--purple);border:1.5px solid var(--purple)}
+.btn[disabled]{opacity:.5;cursor:default}
+details.parents{margin:16px 0 0;font-family:var(--sans);font-size:14px;color:var(--ink-light)}
+details.parents summary{cursor:pointer;color:var(--purple);font-weight:700}
+.verse{font-style:italic;color:var(--wheat);text-align:center;margin:26px 0 4px;font-size:21px}
+.verse small{display:block;font-style:normal;font-family:var(--sans);font-size:12px;color:#8a7f98;letter-spacing:.08em;margin-top:2px}
+/* results */
+.portrait-head{text-align:center;margin:0 0 18px}
+.portrait-head .cross{color:var(--wheat);font-size:26px}
+.sec{border-left:5px solid var(--purple);background:#fff;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 14px;border-top:1px solid var(--parch-dk);border-right:1px solid var(--parch-dk);border-bottom:1px solid var(--parch-dk)}
+.sec h3{font-family:var(--display);font-size:17px;color:var(--purple);margin:0 0 6px;font-weight:600}
+.sec p{margin:4px 0}
+.sec .label{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a7f98;font-weight:700;margin-top:10px;display:block}
+.sec .yours{background:var(--parchment);border-radius:8px;padding:8px 10px;font-style:italic}
+.sec .prompt{color:var(--green)}
+.gauge{height:8px;background:var(--parch-dk);border-radius:99px;overflow:hidden;margin:6px 0 2px}
+.gauge>div{height:100%;background:var(--rose)}
+.callout{background:var(--parch-dk);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.callout b{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);display:block}
+.care{background:#fff;border:1.5px solid var(--rose);border-radius:12px;padding:14px 16px;margin:18px 0;font-family:var(--sans);font-size:15px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.toast{font-family:var(--sans);font-size:13px;color:var(--green);min-height:18px}
+@media print{header.top,.progress,.nav,.actions,.toast{display:none}body{background:#fff}main{padding:0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="cross" aria-hidden="true">&#10013;</div>
+  <h1>Rooted and Known</h1>
+  <p>Rooted in Real Life &middot; Teen Soul Portrait</p>
+</header>
+<div class="progress" aria-hidden="true"><div id="bar"></div></div>
+<main id="app" aria-live="polite"></main>
+<div class="nav"><div class="inner" id="nav"></div></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ------------------------------------------------------------------
+   CONTENT
+   Each section quietly maps to one stage of the R.O.O.T.E.D. Model:
+   Reality, Origin, Overflow, Turning, Election, Dwelling.
+   The framework is never named on screen (public-facing = invisible).
+------------------------------------------------------------------- */
+var SECTIONS = [
+ { id:"reality", title:"Where I Am Right Now",
+   intro:"No right answers here. Just tell the truth about this season.",
+   verse:["Come to me, all you who are weary.","Matthew 11:28"],
+   prompt:"Pick one thing you noticed about yourself here. What would it feel like to say it out loud to someone safe?",
+   qs:[
+    {id:"weather",type:"choice",q:"If your life right now were weather, what would it be?",
+      options:["Sunny and clear","Partly cloudy","Foggy, hard to see","Stormy","Changes every hour"]},
+    {id:"words",type:"text",q:"Three words that describe this season of your life.",hint:"Example: busy, lonely, hopeful"},
+    {id:"headspace",type:"multi",q:"What has been taking up the most space in your head lately?",hint:"Pick as many as are true.",
+      options:["School","Friends","Family","How I look","Social media","My future","Faith","Money","Sports or activities","Dating or crushes","Loss or grief","Something else"]},
+    {id:"s_reality",type:"scale",q:"Most days I know what's going on inside me.",lo:"Not really",hi:"Very much"}
+   ]},
+ { id:"origin", title:"Where I Come From",
+   intro:"The people and moments that shaped you matter. Share what feels okay to share.",
+   verse:["You formed my inmost being.","Psalm 139:13"],
+   prompt:"Which message you picked up deserves a second look? Is it actually true, or just loud?",
+   qs:[
+    {id:"shaped",type:"long",q:"Who has shaped you the most, and how?",hint:"A parent, a friend, a coach, a grandparent, a hard season. Anything."},
+    {id:"messages",type:"multi",q:"Which messages have you picked up about who you have to be?",hint:"Pick any that sound familiar.",
+      options:["I'm too much","I'm not enough","I have to be the strong one","I have to be perfect","I'm the funny one","I'm the quiet one","I have to earn love","I'm fine, don't worry about me","I'm a disappointment","I'm only worth what I do"]},
+    {id:"faithhome",type:"choice",q:"Growing up, how was faith part of your home?",
+      options:["Central and really lived out","Present, but quiet","On and off","Not really part of it","It's complicated"]},
+    {id:"s_origin",type:"scale",q:"At least one person at home really knows and understands me.",lo:"Not really",hi:"Very much"}
+   ]},
+ { id:"overflow", title:"What Spills Out",
+   intro:"Big feelings always go somewhere. Let's notice where yours go, with no judgment.",
+   verse:["Cast all your anxiety on him.","1 Peter 5:7"],
+   prompt:"Your go-to reaction is not a flaw. It is a clue about what you need. What might yours be telling you?",
+   qs:[
+    {id:"stress",type:"multi",q:"When I'm stressed or hurt, I tend to...",hint:"Pick what's most like you.",
+      options:["Go quiet","Snap at people","Scroll or binge shows","Say yes to everything","Overwork","Cry","Joke it off","Stay super busy","Sleep a lot","Get really hard on myself"]},
+    {id:"whereigo",type:"choice",q:"After a really hard day, where do you usually go?",
+      options:["My room, alone","My phone","A friend","Family","Prayer or God","Honestly, nowhere"]},
+    {id:"adults",type:"long",q:"What do you wish the adults in your life understood about how you feel?"},
+    {id:"s_overflow",type:"scale",q:"When big feelings hit, I can name them and handle them without exploding or shutting down.",lo:"Rarely",hi:"Usually"}
+   ]},
+ { id:"turning", title:"What I Keep Turning Over",
+   intro:"Everyone has thoughts that loop. Bringing them into the light takes away some of their power.",
+   verse:["Take every thought captive.","2 Corinthians 10:5"],
+   prompt:"Try this: write the loop thought on paper, then write what you would say to a friend who thought it.",
+   qs:[
+    {id:"loop",type:"text",q:"A thought that keeps looping in my head lately is...",hint:"Short is fine."},
+    {id:"loopabout",type:"choice",q:"That thought is mostly about...",
+      options:["Me","Other people","My future","God","Something in my past"]},
+    {id:"kindtruth",type:"long",q:"If you could answer that thought with something kind and true, what would you say?",hint:"It's okay if you're not sure yet. Write what comes to mind."},
+    {id:"s_turning",type:"scale",q:"The way I talk to myself is mostly kind.",lo:"Rarely",hi:"Usually"}
+   ]},
+ { id:"election", title:"Who I'm Becoming",
+   intro:"You are not a problem to fix. You are someone who was chosen and made on purpose.",
+   verse:["I have called you by name; you are mine.","Isaiah 43:1"],
+   prompt:"Which strength do you downplay the most? What would change if you owned it?",
+   qs:[
+    {id:"strengths",type:"multi",q:"Which of these are true about you?",hint:"Choose up to five. Be generous with yourself.",max:5,
+      options:["Kind","Creative","Funny","Loyal","Curious","Brave","A natural leader","Good listener","Determined","Artistic","Athletic","Gentle","Organized","Faithful","Encouraging","Deep thinker"]},
+    {id:"himself",type:"long",q:"Describe a moment when you felt most like yourself."},
+    {id:"want",type:"choice",q:"Right now, what do you want most?",
+      options:["Confidence","Peace","Real friends","Clarity about my future","To feel closer to God","To feel understood","Freedom from anxiety"]},
+    {id:"s_election",type:"scale",q:"I believe I matter to God, even on my worst days.",lo:"Hard to believe",hi:"I believe it"}
+   ]},
+ { id:"dwelling", title:"Where I Rest",
+   intro:"Last stop. Let's look at where you find peace and who has your back.",
+   verse:["Be still, and know that I am God.","Psalm 46:10"],
+   prompt:"Rest is part of being rooted. What is one small way you could practice it this week?",
+   qs:[
+    {id:"prayer",type:"choice",q:"Which sounds closest to your prayer life?",
+      options:["I pray often","Sometimes","Mostly when I need something","I want to, but I don't know how","Not really right now"]},
+    {id:"people",type:"multi",q:"Who could you go to if you needed help?",hint:"Pick everyone who applies.",
+      options:["Mom","Dad","A sibling","A friend","A grandparent","A mentor or youth leader","A priest or youth minister","A counselor","Nobody right now"]},
+    {id:"goodday",type:"long",q:"What would a really good, peaceful day look like for you?"},
+    {id:"hope",type:"text",q:"One hope I have for the next six weeks.",hint:"Big or small."},
+    {id:"s_dwelling",type:"scale",q:"I have a place or people where I can fully relax and be myself.",lo:"Not really",hi:"Very much"}
+   ]}
+];
+
+var STORE_KEY="rirl_teen_soul_portrait_v1";
+/* ===== SETUP: where portraits are sent =====
+   Paste your form-service endpoint below (see setup note). Until it is set,
+   the page still works but cannot email you. */
+var FORM_ENDPOINT="https://formspree.io/f/xdeazlzl";   /* e.g. "https://api.web3forms.com/submit" or your Formspree URL */
+var FORM_ACCESS_KEY=""; /* Web3Forms only: your public access key. Leave empty for Formspree. */
+var state={step:0,name:"",email:"",age:"",consent:false,sent:false,a:{}};
+var app=document.getElementById("app"), nav=document.getElementById("nav"), bar=document.getElementById("bar");
+var TOTAL=SECTIONS.length+2; /* welcome + sections + results */
+
+function load(){try{var s=localStorage.getItem(STORE_KEY);if(s){var o=JSON.parse(s);if(o&&typeof o==="object"){state.name=o.name||"";state.email=o.email||"";state.age=o.age||"";state.consent=!!o.consent;state.sent=!!o.sent;state.a=o.a||{};state.step=Math.min(o.step||0,TOTAL-1);}}}catch(e){}}
+function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function wipe(){try{localStorage.removeItem(STORE_KEY);}catch(e){}}
+
+function el(tag,attrs){
+  var n=document.createElement(tag);
+  if(attrs){for(var k in attrs){if(!Object.prototype.hasOwnProperty.call(attrs,k))continue;
+    if(k==="class")n.className=attrs[k];
+    else if(k==="text")n.textContent=attrs[k];
+    else if(k.slice(0,2)==="on")n.addEventListener(k.slice(2),attrs[k]);
+    else n.setAttribute(k,attrs[k]);}}
+  for(var i=2;i<arguments.length;i++){var c=arguments[i];if(c==null)continue;n.appendChild(typeof c==="string"?document.createTextNode(c):c);}
+  return n;
+}
+
+function go(step){state.step=step;save();render();window.scrollTo(0,0);}
+
+/* ---------- question widgets ---------- */
+function buildQuestion(q){
+  var wrap=el("div",{class:"card"});
+  var id="q_"+q.id;
+  wrap.appendChild(el("label",{class:"q","for":id,text:q.q}));
+  if(q.hint)wrap.appendChild(el("p",{class:"hint",text:q.hint}));
+  var val=state.a[q.id];
+
+  if(q.type==="text"){
+    var inp=el("input",{type:"text",id:id,maxlength:"120",autocomplete:"off"});
+    inp.value=val||"";
+    inp.addEventListener("input",function(){state.a[q.id]=inp.value;save();});
+    wrap.appendChild(inp);
+  }else if(q.type==="long"){
+    var ta=el("textarea",{id:id,maxlength:"1200"});
+    ta.value=val||"";
+    ta.addEventListener("input",function(){state.a[q.id]=ta.value;save();});
+    wrap.appendChild(ta);
+  }else if(q.type==="choice"){
+    var box=el("div",{class:"choices",role:"group","aria-label":q.q});
+    q.options.forEach(function(o){
+      var b=el("button",{type:"button",class:"choice","aria-pressed":String(val===o),text:o,onclick:function(){
+        state.a[q.id]=(state.a[q.id]===o)?"":o;save();
+        Array.prototype.forEach.call(box.children,function(c){c.setAttribute("aria-pressed",String(c.textContent===state.a[q.id]));});
+      }});
+      box.appendChild(b);
+    });
+    wrap.appendChild(box);
+  }else if(q.type==="multi"){
+    var cur=Array.isArray(val)?val.slice():[];
+    state.a[q.id]=cur;
+    var cb=el("div",{class:"chips",role:"group","aria-label":q.q});
+    q.options.forEach(function(o){
+      var c=el("button",{type:"button",class:"chip","aria-pressed":String(cur.indexOf(o)>-1),text:o,onclick:function(){
+        var arr=state.a[q.id],i=arr.indexOf(o);
+        if(i>-1)arr.splice(i,1);else{if(q.max&&arr.length>=q.max)return;arr.push(o);}
+        save();
+        Array.prototype.forEach.call(cb.children,function(x){x.setAttribute("aria-pressed",String(arr.indexOf(x.textContent)>-1));});
+      }});
+      cb.appendChild(c);
+    });
+    wrap.appendChild(cb);
+  }else if(q.type==="scale"){
+    var sc=el("div",{class:"scale",role:"group","aria-label":q.q});
+    [1,2,3,4,5].forEach(function(n){
+      sc.appendChild(el("button",{type:"button","aria-pressed":String(val===n),text:String(n),"aria-label":n+" of 5",onclick:function(){
+        state.a[q.id]=n;save();
+        Array.prototype.forEach.call(sc.children,function(x){x.setAttribute("aria-pressed",String(Number(x.textContent)===n));});
+      }}));
+    });
+    wrap.appendChild(sc);
+    wrap.appendChild(el("div",{class:"scale-ends"},el("span",{text:q.lo}),el("span",{text:q.hi})));
+  }
+  return wrap;
+}
+
+/* ---------- screens ---------- */
+function renderWelcome(){
+  app.appendChild(el("p",{class:"kicker",text:"Rooted in Real Life \u00B7 For Teens"}));
+  app.appendChild(el("h2",{text:"Your Soul Portrait"}));
+  app.appendChild(el("p",{class:"intro",text:"A quiet, honest look at who you are, where you've been, and where you're growing. About 10 minutes. There are no wrong answers, and you can skip anything."}));
+
+  var c=el("div",{class:"card"});
+  c.appendChild(el("label",{class:"q","for":"nm",text:"What should we call you?"}));
+  c.appendChild(el("p",{class:"hint",text:"First name or nickname is fine."}));
+  var nm=el("input",{type:"text",id:"nm",maxlength:"40",autocomplete:"given-name"});
+  nm.value=state.name;
+  nm.addEventListener("input",function(){state.name=nm.value;save();updateNav();});
+  c.appendChild(nm);
+  c.appendChild(el("label",{class:"q","for":"em",style:"margin-top:16px",text:"Your email address"}));
+  c.appendChild(el("p",{class:"hint",text:"Required. Your coach will use this to reach you about your results."}));
+  var em=el("input",{type:"email",id:"em",maxlength:"120",autocomplete:"email",inputmode:"email"});
+  em.value=state.email;
+  em.addEventListener("input",function(){state.email=em.value;save();updateNav();});
+  c.appendChild(em);
+  c.appendChild(el("label",{class:"q","for":"ag",style:"margin-top:16px",text:"How old are you?"}));
+  var ag=el("select",{id:"ag"});
+  ag.appendChild(el("option",{value:"",text:"Choose..."}));
+  for(var i=13;i<=18;i++){ag.appendChild(el("option",{value:String(i),text:String(i)}));}
+  ag.value=state.age;
+  ag.addEventListener("change",function(){state.age=ag.value;save();updateNav();});
+  c.appendChild(ag);
+  var row=el("label",{style:"display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-family:var(--sans);font-size:14px;color:var(--ink-light);cursor:pointer"});
+  var cb=el("input",{type:"checkbox",id:"cn",style:"width:22px;height:22px;margin-top:1px;flex:none"});
+  cb.checked=state.consent;
+  cb.addEventListener("change",function(){state.consent=cb.checked;save();updateNav();});
+  row.appendChild(cb);
+  row.appendChild(el("span",{text:"A parent or guardian knows I'm doing this, and I'm okay with my answers being sent to my coach, Cassandra."}));
+  c.appendChild(row);
+  app.appendChild(c);
+
+  app.appendChild(el("p",{class:"hint",text:"When you finish, your portrait is sent to your coach so she can get to know you before you start. Only she sees it."}));
+  var d=el("details",{class:"parents"},
+    el("summary",{text:"For parents and guardians"}),
+    el("p",{text:"This is a reflective, faith-centered tool, not therapy or a diagnosis. While your teen fills it out, answers are saved only in this browser. When they finish, their name, email, and answers are emailed to their coach, Cassandra, and are not shared with anyone else. Your teen can also download their own copy. If your teen is struggling with their safety or mental health, please contact a licensed professional or call or text 988 (U.S.)."})
+  );
+  app.appendChild(d);
+}
+
+function renderSection(idx){
+  var s=SECTIONS[idx];
+  app.appendChild(el("p",{class:"kicker",text:"Part "+(idx+1)+" of "+SECTIONS.length}));
+  app.appendChild(el("h2",{text:s.title}));
+  app.appendChild(el("p",{class:"intro",text:s.intro}));
+  s.qs.forEach(function(q){app.appendChild(buildQuestion(q));});
+  var v=el("p",{class:"verse"},"\u201C"+s.verse[0]+"\u201D",el("small",{text:"\u2014 "+s.verse[1]}));
+  app.appendChild(v);
+}
+
+/* ---------- portrait generation ---------- */
+function clean(v){return (typeof v==="string")?v.trim():"";}
+function list(v){return Array.isArray(v)?v:[];}
+function buildPortrait(){
+  var nm=clean(state.name)||"Friend";
+  var scales=[];
+  SECTIONS.forEach(function(s){
+    s.qs.forEach(function(q){
+      if(q.type==="scale"&&typeof state.a[q.id]==="number"){scales.push({sec:s,q:q,v:state.a[q.id]});}
+    });
+  });
+  var strongest=null,tender=null;
+  scales.forEach(function(x){
+    if(!strongest||x.v>strongest.v)strongest=x;
+    if(!tender||x.v<tender.v)tender=x;
+  });
+  if(strongest&&tender&&strongest.v===tender.v){strongest=null;tender=null;}
+  var concern=false;
+  if(list(state.a.people).indexOf("Nobody right now")>-1)concern=true;
+  ["s_overflow","s_turning","s_election","s_dwelling"].forEach(function(k){if(typeof state.a[k]==="number"&&state.a[k]<=1)concern=true;});
+  return {name:nm,scales:scales,strongest:strongest,tender:tender,concern:concern};
+}
+
+function sectionSummary(s){
+  var out=[];
+  s.qs.forEach(function(q){
+    if(q.type==="scale")return;
+    var v=state.a[q.id];
+    if(Array.isArray(v)){if(v.length)out.push({q:q.q,a:v.join(", ")});}
+    else if(clean(v)){out.push({q:q.q,a:clean(v)});}
+  });
+  return out;
+}
+
+function portraitText(p){
+  var L=[];
+  L.push("SOUL PORTRAIT - "+p.name+(state.age?" (age "+state.age+")":""));
+  L.push("Email: "+clean(state.email));
+  L.push("Rooted in Real Life \u00B7 Teen Program");
+  L.push("");
+  if(p.strongest)L.push("Strongest root right now: "+p.strongest.sec.title);
+  if(p.tender)L.push("A spot that could use care: "+p.tender.sec.title);
+  L.push("");
+  SECTIONS.forEach(function(s){
+    L.push("== "+s.title.toUpperCase()+" ==");
+    sectionSummary(s).forEach(function(x){L.push(x.q);L.push("  -> "+x.a);});
+    s.qs.forEach(function(q){if(q.type==="scale"&&typeof state.a[q.id]==="number"){L.push(q.q);L.push("  -> "+state.a[q.id]+" / 5");}});
+    L.push("Reflect: "+s.prompt);
+    L.push("");
+  });
+  L.push("If things feel heavy, talk to a trusted adult. In the U.S. you can call or text 988 anytime.");
+  return L.join("\n");
+}
+
+function renderResults(){
+  var p=buildPortrait();
+  var head=el("div",{class:"portrait-head"},
+    el("div",{class:"cross","aria-hidden":"true",text:"\u271D"}),
+    el("p",{class:"kicker",text:"Your Soul Portrait"}),
+    el("h2",{text:p.name+", here's what you shared"}),
+    el("p",{class:"intro",text:"This is a starting snapshot, not a label. You are more than any answer on this page."})
+  );
+  app.appendChild(head);
+
+  if(p.strongest){
+    var c1=el("div",{class:"callout"},
+      el("b",{text:"Your strongest root right now"}),
+      el("p",{text:p.strongest.sec.title+". This is where you feel the most steady right now. Keep leaning on it."}));
+    app.appendChild(c1);
+  }
+  if(p.tender){
+    app.appendChild(el("div",{class:"callout"},
+      el("b",{text:"A spot that could use some care"}),
+      el("p",{text:p.tender.sec.title+". That's not a failure. It's just where gentle attention will help you grow."})));
+  }
+
+  SECTIONS.forEach(function(s){
+    var box=el("div",{class:"sec"},el("h3",{text:s.title}));
+    sectionSummary(s).forEach(function(x){
+      box.appendChild(el("span",{class:"label",text:x.q}));
+      box.appendChild(el("p",{class:"yours",text:x.a}));
+    });
+    s.qs.forEach(function(q){
+      if(q.type==="scale"&&typeof state.a[q.id]==="number"){
+        box.appendChild(el("span",{class:"label",text:q.q}));
+        var g=el("div",{class:"gauge"});var f=el("div");f.style.width=(state.a[q.id]*20)+"%";g.appendChild(f);
+        box.appendChild(g);
+        box.appendChild(el("p",{class:"hint",text:state.a[q.id]+" out of 5"}));
+      }
+    });
+    box.appendChild(el("span",{class:"label",text:"Something to reflect on"}));
+    box.appendChild(el("p",{class:"prompt",text:s.prompt}));
+    app.appendChild(box);
+  });
+
+  app.appendChild(el("p",{class:"verse"},"\u201CYou are fearfully and wonderfully made.\u201D",el("small",{text:"\u2014 Psalm 139:14"})));
+
+  var care=el("div",{class:"care"});
+  care.appendChild(el("b",{text:p.concern?"A gentle check-in. ":"If things ever feel heavy. "}));
+  care.appendChild(document.createTextNode(
+    (p.concern?"Some of your answers suggest you might be carrying a lot right now, or not feeling supported. You don't have to carry it alone. ":"")+
+    "Please talk to a trusted adult, like a parent, mentor, counselor, or priest. In the U.S. you can call or text 988 anytime to reach the Suicide & Crisis Lifeline. If you are in immediate danger, call 911."));
+  app.appendChild(care);
+
+  var toast=el("div",{class:"toast",role:"status"});
+  var sendBox=el("div",{class:"care",style:"border-color:var(--green)"});
+  var sendMsg=el("span",{text:""});
+  var retry=el("button",{type:"button",class:"btn solid",text:"Try sending again",style:"margin-top:10px;display:none",onclick:function(){submitPortrait();}});
+  sendBox.appendChild(sendMsg);sendBox.appendChild(retry);
+  app.appendChild(sendBox);
+  function submitPortrait(){
+    if(state.sent){sendMsg.textContent="Sent! Your coach has your portrait and will be in touch at "+clean(state.email)+".";retry.style.display="none";return;}
+    if(!FORM_ENDPOINT){sendMsg.textContent="This page isn't connected to email yet, so your portrait hasn't been sent. Please download it below and send it to your coach.";retry.style.display="none";return;}
+    sendMsg.textContent="Sending your portrait to your coach...";retry.style.display="none";
+    var payload={_subject:"Teen Soul Portrait: "+p.name,name:p.name,email:clean(state.email),age:state.age,message:portraitText(p),_gotcha:""};
+    if(FORM_ACCESS_KEY)payload.access_key=FORM_ACCESS_KEY;
+    fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)})
+      .then(function(r){if(!r.ok)throw new Error("bad status");state.sent=true;save();sendMsg.textContent="Sent! Your coach has your portrait and will be in touch at "+clean(state.email)+".";})
+      .catch(function(){sendMsg.textContent="We couldn't send it just now. Check your connection and try again. You can still download your portrait below.";retry.style.display="inline-block";});
+  }
+  submitPortrait();
+  var actions=el("div",{class:"actions"},
+    el("button",{type:"button",class:"btn solid",text:"Download my portrait",onclick:function(){
+      try{
+        var blob=new Blob([portraitText(p)],{type:"text/plain"});
+        var a=document.createElement("a");a.href=URL.createObjectURL(blob);
+        a.download="soul-portrait-"+(p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"teen")+".txt";
+        document.body.appendChild(a);a.click();document.body.removeChild(a);
+        toast.textContent="Saved. You can share this file with your coach if you want to.";
+      }catch(e){toast.textContent="Download didn't work here. Try Copy instead.";}
+    }}),
+    el("button",{type:"button",class:"btn line",text:"Copy text",onclick:function(){
+      var t=portraitText(p);
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(t).then(function(){toast.textContent="Copied.";},function(){toast.textContent="Couldn't copy. Try Download.";});
+      }else{toast.textContent="Copy isn't available here. Try Download.";}
+    }}),
+    el("button",{type:"button",class:"btn line",text:"Print",onclick:function(){window.print();}})
+  );
+  app.appendChild(actions);
+  app.appendChild(toast);
+  app.appendChild(el("button",{type:"button",class:"btn line",text:"Clear my answers and start over",onclick:function(){
+    if(window.confirm("This erases everything you entered on this device. Continue?")){wipe();state={step:0,name:"",email:"",age:"",consent:false,sent:false,a:{}};render();window.scrollTo(0,0);}
+  }}));
+}
+
+/* ---------- nav + render ---------- */
+function formValid(){
+  return !!clean(state.name)&&/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(state.email))&&!!state.age&&state.consent;
+}
+function updateNav(){
+  nav.textContent="";
+  var s=state.step;
+  if(s===0){
+    var start=el("button",{type:"button",class:"btn primary",text:"Begin",onclick:function(){go(1);}});
+    if(!formValid())start.setAttribute("disabled","disabled");
+    nav.appendChild(start);
+  }else if(s<=SECTIONS.length){
+    nav.appendChild(el("button",{type:"button",class:"btn ghost",text:"Back",onclick:function(){go(s-1);}}));
+    nav.appendChild(el("button",{type:"button",class:"btn primary",text:s===SECTIONS.length?"See my portrait":"Next",onclick:function(){go(s+1);}}));
+  }else{
+    nav.appendChild(el("button",{type:"button",class:"btn ghost",text:"Back to my answers",onclick:function(){go(SECTIONS.length);}}));
+  }
+}
+function render(){
+  app.textContent="";
+  var s=state.step;
+  if(s===0)renderWelcome();
+  else if(s<=SECTIONS.length)renderSection(s-1);
+  else renderResults();
+  bar.style.width=Math.round(s/(TOTAL-1)*100)+"%";
+  updateNav();
+}
+
+load();
+render();
+})();
+</script>
+</body>
+</html>
