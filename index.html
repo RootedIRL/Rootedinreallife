@@ -362,20 +362,6 @@ h2.section-title em{font-style:italic;color:var(--gold)}
   font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--gold-mid);
 }
-.t-label{
-  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--gold-mid);margin-bottom:28px;
-}
-.t-body{
-  font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.7vw,19px);
-  color:rgba(255,255,255,0.82);line-height:1.75;font-weight:300;
-  text-align:left;max-width:680px;margin:28px auto 0;
-}
-.t-body p{margin-bottom:16px;}
-.t-name{
-  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--gold);margin-top:28px;text-align:center;
-}
 
 /* ── MEET CASSANDRA ──────────────────────────────────────── */
 #coach{background:var(--parch-dark)}
@@ -720,6 +706,12 @@ footer{
   .support-btn{justify-content:center}
 }
 
+@media(max-width:600px){
+  nav{padding:0 12px}
+  .nav-portal{padding:8px 8px;margin-right:5px;font-size:8px;letter-spacing:.08em}
+  .nav-cta{padding:9px 9px;font-size:8px;letter-spacing:.08em}
+}
+
 /* ── Responsive ──────────────────────────────────────────── */
 @media(max-width:900px){
   nav{padding:0 24px}
@@ -740,6 +732,68 @@ footer{
   #hero{padding:100px 24px 64px}
 }
 
+
+/* ── LIGHT THEME + LITURGICAL STRIPES ─────────────────────── */
+.lit-stripe{height:4px;width:100%;display:block;
+  background:linear-gradient(90deg,#6B5B8A 0 20%,#C47B8A 20% 40%,#5A7A5A 40% 60%,#B8956A 60% 80%,#A8584F 80% 100%)}
+#hero{background:radial-gradient(ellipse at 50% 0%,#FFFFFF 0%,#FAF6F0 45%,#F1E8DA 100%)}
+.hero-roots{opacity:.22}
+h1.hero-title{color:var(--ink)}
+h1.hero-title em{color:#A67F52}
+.hero-subtitle{color:rgba(42,34,48,.72)}
+.hero-verse{color:#9C7A52}
+.btn-secondary{color:var(--purple);border:1px solid var(--border)}
+.btn-secondary:hover{background:rgba(107,91,138,.07);border-color:var(--purple-mid)}
+.hero-letters{box-shadow:0 8px 30px rgba(107,91,138,.18)}
+#for-you{background:#FFFFFF}
+#for-you .section-title{color:var(--ink)}
+#for-you .section-intro{color:var(--gray)}
+#for-you .section-label{color:#A67F52}
+.fy-card{background:var(--parchment);border:1px solid #EFE6D8;border-top-width:3px}
+.fy-card:hover{background:#F6EFE4}
+.fy-title{color:var(--ink)}
+.fy-body{color:rgba(42,34,48,.7)}
+.model-verse{background:var(--purple-light);border:1px solid var(--border)}
+.model-verse p{color:var(--ink)}
+.model-verse cite{color:#9C7A52}
+#testimonial{background:var(--gold-light)}
+.t-quote{color:var(--ink)}
+.t-attr{color:#9C7A52}
+#approach{background:var(--parchment)}
+#approach::before{color:rgba(184,149,106,.08)}
+.approach-label{color:#A67F52}
+.approach-label::before,.approach-label::after{background:#A67F52}
+.approach-title{color:var(--ink)}
+.approach-title em{color:#A67F52}
+.approach-intro{color:rgba(42,34,48,.7)}
+.ap-pillar{background:#FFFFFF;border-left:1px solid #EFE6D8;border-right:1px solid #EFE6D8;border-bottom:1px solid #EFE6D8}
+.ap-pillar:hover{background:#FDFAF5}
+.ap-word{color:var(--ink)}
+.ap-desc{color:rgba(42,34,48,.7)}
+.approach-verse{border-top:1px solid var(--border)}
+.approach-verse p{color:var(--ink)}
+.approach-verse cite{color:#9C7A52}
+#cta{background:var(--purple-light)}
+#cta::before{color:rgba(107,91,138,.06)}
+.cta-label{color:#9C7A52}
+.cta-title{color:var(--ink)}
+.cta-sub{color:rgba(42,34,48,.7)}
+.cta-input{border:1px solid var(--border);background:#FFFFFF;color:var(--ink)}
+.cta-input::placeholder{color:rgba(42,34,48,.4)}
+.cta-input:focus{border-color:var(--purple-mid)}
+.cta-btn{background:var(--purple);color:#FFFFFF}
+.cta-btn:hover{background:var(--deep)}
+.cta-note{color:var(--gray)}
+footer{background:var(--parch-dark);border-top:none}
+.footer-brand .fb-name{color:var(--ink)}
+.footer-brand .fb-sub{color:#9C7A52}
+.footer-brand .fb-desc{color:rgba(42,34,48,.62)}
+.footer-col-title{color:#9C7A52}
+.footer-col a{color:rgba(42,34,48,.68)}
+.footer-col a:hover{color:var(--purple)}
+.footer-bottom{border-top:1px solid var(--border)}
+.footer-copy{color:rgba(42,34,48,.5)}
+.footer-verse{color:#9C7A52}
 </style>
 </head>
 <body>
@@ -762,10 +816,12 @@ footer{
   </div>
   <div style="display:flex;align-items:center">
     <a href="/client-portal.html" class="nav-portal">Client Login</a>
+    <a href="/teen-portal.html" class="nav-portal">Teen Login</a>
     <a href="#cta" class="nav-cta">Work With Me</a>
   </div>
 </nav>
 
+<div class="lit-stripe" style="margin-top:0"></div>
 <!-- ── HERO ────────────────────────────────────────────────────────── -->
 <section id="hero">
 
@@ -845,13 +901,14 @@ footer{
 </div>
 
 <!-- ── FOR YOU ───────────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="for-you" class="section">
   <div class="section-inner">
     <div class="section-label reveal">Is This For You?</div>
     <h2 class="section-title reveal">
       She knows she is called<br>to <em>something more.</em>
     </h2>
-    <p class="section-intro reveal" style="color:rgba(240,234,248,0.55)">
+    <p class="section-intro reveal">
       This program is for the Catholic woman who loves God, 
       loves her family — and keeps losing herself somewhere in between.
     </p>
@@ -898,6 +955,7 @@ footer{
 </section>
 
 <!-- ── ROOTED MODEL ──────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="model" class="section">
   <div class="section-inner">
     <div class="section-label reveal">The Framework</div>
@@ -950,6 +1008,7 @@ footer{
 </section>
 
 <!-- ── HOW IT WORKS ──────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="how" class="section">
   <div class="section-inner">
     <div class="section-label reveal">The Process</div>
@@ -989,6 +1048,7 @@ footer{
 </section>
 
 <!-- ── BENEDICTINE APPROACH ──────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="approach">
   <div class="approach-inner">
     <div class="approach-label reveal">The Foundation</div>
@@ -1041,6 +1101,7 @@ footer{
 </section>
 
 <!-- ── PROGRAMS ──────────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="programs" class="section">
   <div class="section-inner">
     <div class="section-label reveal">The Programs</div>
@@ -1109,38 +1170,21 @@ footer{
 </section>
 
 <!-- ── TESTIMONIAL ───────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="testimonial">
   <div class="testimonial-inner reveal">
     <div class="t-cross">✝</div>
-    <div class="t-label">A Word From a Client</div>
     <p class="t-quote">
-      "Through ROOTED, I've learned so much more about myself — how I behave and
-      tend to react, and best of all, how to gently correct myself, all with Jesus
-      in the center."
+      "I finally have a name for what I've been carrying. 
+      And for the first time, I understand why I do what I do — 
+      and what God is actually asking me to do instead."
     </p>
-    <div class="t-body">
-      <p>
-        The last few years, my life was slowly disconnecting more and more from what I
-        thought was my well-established faith life — coping through subsequent life changes:
-        marriage, motherhood, moving across the country, far from my family and friends.
-        I was barely holding on to the basics.
-      </p>
-      <p>
-        Jesus, of course, never let go, and used all my little attempts to keep me going.
-        He guided me to Cassandra and her program, ROOTED. And praise God for that!
-      </p>
-      <p>
-        Through ROOTED, I've learned so much more about myself, how I behave and tend to
-        react, and best of all how to gently correct myself, all with Jesus in the center.
-        The results, thus far, have been most powerful in my marriage. Best of all, I was
-        able to move at my own pace and fit it all into my busy life.
-      </p>
-    </div>
-    <div class="t-name">— Lissette Slankard</div>
+    <div class="t-attr">— Testimonial Client &nbsp;·&nbsp; Everyday Holiness Program</div>
   </div>
 </section>
 
 <!-- ── MEET CASSANDRA ────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="coach" class="section">
   <div class="section-inner">
     <div class="section-label reveal">Your Coach</div>
@@ -1191,6 +1235,7 @@ footer{
 </section>
 
 <!-- ── CTA ──────────────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="cta">
   <div class="cta-inner reveal">
     <div class="cta-label">Begin Your Journey</div>
@@ -1209,6 +1254,7 @@ footer{
 </section>
 
 <!-- ── SUPPORT THIS WORK ────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <section id="support">
   <div class="support-inner reveal">
     <div class="support-cross">✝</div>
@@ -1256,6 +1302,7 @@ footer{
 </section>
 
 <!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+<div class="lit-stripe"></div>
 <footer>
   <div style="max-width:1120px;margin:0 auto">
     <div class="footer-top">
@@ -1286,6 +1333,7 @@ footer{
       <div class="footer-col">
         <div class="footer-col-title">Connect</div>
         <a href="/client-portal.html">Client Portal</a>
+        <a href="/teen-portal.html">Teen Portal</a>
         <a href="mailto:hello@rootedinreallife.com">hello@rootedinreallife.com</a>
         <a href="#">Chico, CA</a>
       </div>
