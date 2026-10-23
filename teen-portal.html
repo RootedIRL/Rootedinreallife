@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Teen Portal · Rooted in Real Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--purple:#6B5B8A;--purple-light:#EDE5F5;--purple-mid:#8B7BA8;--rose:#C47B8A;--rose-light:#F7ECEF;--green:#5A7A5A;--green-light:#EAF1EA;--gold:#B8956A;--gold-light:#F5EDE0;--ink:#2A2230;--deep:#3D3450;--parchment:#FAF6F0;--border:#D4C4E0;--gray:#7a7283;--soft:#F7F4FB}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'EB Garamond',Georgia,serif;font-size:17px;color:var(--ink);background:var(--parchment);min-height:100vh}
+button{font-family:inherit}
+.cz{font-family:'Cinzel',Georgia,serif}
+
+/* LOGIN */
+#login-screen{min-height:100vh;background:linear-gradient(160deg,var(--deep) 0%,#1A1430 55%,#2A1E3A 100%);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.login-box{background:rgba(255,255,255,.04);border:1px solid rgba(212,196,224,.15);padding:2.5rem 1.75rem;max-width:420px;width:100%;text-align:center}
+.login-cross{font-size:1.5rem;color:var(--gold);opacity:.8;margin-bottom:1rem}
+.login-brand{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(184,149,106,.75);margin-bottom:1.1rem}
+.login-title{font-family:'Cinzel',serif;font-size:1.55rem;font-weight:600;color:#F0EAF8;margin-bottom:.4rem}
+.login-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(184,149,106,.8);margin-bottom:1.75rem}
+.login-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(212,196,224,.6);display:block;margin-bottom:.45rem;text-align:left}
+.login-input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(212,196,224,.25);color:#F0EAF8;font-family:'EB Garamond',serif;font-size:1.05rem;padding:.8rem 1rem;margin-bottom:1.1rem;outline:none;border-radius:0}
+.login-input:focus{border-color:var(--gold)}
+.login-input::placeholder{color:rgba(240,234,248,.3)}
+.login-btn{width:100%;background:linear-gradient(135deg,var(--purple),var(--deep));color:#F0EAF8;border:1px solid rgba(212,196,224,.2);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:.95rem 1.5rem;cursor:pointer;margin-bottom:.75rem}
+.login-btn:disabled{opacity:.6;cursor:wait}
+.login-error{color:#E8A3B0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;margin-top:.4rem;display:none}
+.login-scripture{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(184,149,106,.55);margin-top:1.75rem;line-height:1.5}
+.login-note{font-size:.85rem;color:rgba(212,196,224,.5);margin-top:1rem;line-height:1.45}
+
+/* NAV + HEADER */
+#portal{display:none}
+.portal-nav{background:var(--deep);padding:0 1rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gold)}
+.nav-brand{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,234,248,.85)}
+.nav-brand span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-client{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(184,149,106,.85)}
+.nav-logout{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(212,196,224,.6);cursor:pointer;background:none;border:none;padding:.5rem 0}
+.subnav{background:#fff;border-bottom:1px solid var(--border);display:flex;overflow-x:auto;position:sticky;top:56px;z-index:90;-webkit-overflow-scrolling:touch}
+.subnav a{flex:0 0 auto;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);text-decoration:none;padding:.85rem 1rem;white-space:nowrap}
+.portal-header{background:linear-gradient(135deg,var(--deep) 0%,#2A1E3A 100%);padding:2.25rem 1.25rem 2rem;text-align:center}
+.portal-greeting{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:.55rem}
+.portal-title{font-family:'Cinzel',serif;font-size:1.65rem;font-weight:600;color:#F0EAF8;margin-bottom:.4rem}
+.portal-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(184,149,106,.85);margin:0 auto 1.4rem;max-width:34rem}
+.progress-wrap{max-width:480px;margin:0 auto}
+.progress-label{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(212,196,224,.55);margin-bottom:.4rem}
+.progress-track{height:5px;background:rgba(212,196,224,.15);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:3px;transition:width .5s ease;width:0}
+.portal-main{max-width:860px;margin:0 auto;padding:1.75rem 1rem 4rem}
+.section-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--purple-mid);margin:2rem 0 .75rem;display:flex;align-items:center;gap:.75rem;scroll-margin-top:110px}
+.section-label:first-child{margin-top:0}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* CARDS */
+.start-card{background:linear-gradient(135deg,var(--purple-light),#F0EAF8);border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.25rem 1.25rem}
+.start-card h3{font-family:'Cinzel',serif;font-size:.82rem;font-weight:600;color:var(--purple);letter-spacing:.08em;margin-bottom:.5rem}
+.start-card p{line-height:1.6;margin-bottom:.4rem}
+.start-steps{list-style:none;margin-top:.6rem}
+.start-steps li{display:flex;gap:.75rem;padding:.4rem 0;line-height:1.45;border-bottom:1px solid var(--border)}
+.start-steps li:last-child{border-bottom:none}
+.step-num{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;color:var(--gold);min-width:1.1rem;padding-top:3px}
+.snap{display:grid;gap:.75rem}
+.snap-card{background:#fff;border:1px solid var(--border);border-left:4px solid var(--purple);padding:1rem 1.15rem}
+.snap-card .k{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--purple-mid)}
+.snap-card .v{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--deep);margin:.25rem 0 .1rem;font-weight:600}
+.snap-card .t{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.02rem;margin-bottom:.4rem}
+.snap-card .d{line-height:1.55;font-size:1rem}
+.snap-card .more{margin-top:.5rem;font-size:.95rem;color:var(--ink-light,#4A3F5C)}
+.snap-card details{margin-top:.5rem}
+.snap-card summary{cursor:pointer;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
+.snap-card.sec{border-left-color:var(--mid,#8B7BA8);opacity:.97}
+.note-soft{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gray);font-size:1rem;margin-top:.6rem;line-height:1.5}
+
+/* WEEKS */
+.weeks-grid{display:flex;flex-direction:column;gap:1rem}
+.week-card{background:#fff;border:1px solid var(--border);overflow:hidden}
+.week-header{display:flex;align-items:center;gap:.9rem;padding:.9rem 1rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.week-header.open{border-bottom-color:var(--border)}
+.week-num{font-family:'Cinzel',serif;font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;padding:.4rem .6rem;flex-shrink:0;white-space:nowrap}
+.week-title-wrap{flex:1;min-width:0}
+.week-title{font-family:'Cinzel',serif;font-size:.9rem;font-weight:600;color:var(--ink);line-height:1.25}
+.week-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--gray);margin-top:.1rem}
+.week-progress{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-mid);flex-shrink:0}
+.week-chevron{color:var(--purple-mid);font-size:.9rem;transition:transform .2s;flex-shrink:0}
+.week-chevron.open{transform:rotate(180deg)}
+.week-body{display:none;padding:1.1rem 1rem 1.3rem}
+.week-body.open{display:block}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;margin-bottom:1.1rem;background:#1A1430}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.blk{margin-top:1.3rem}
+.blk-h{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--purple);margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:1px solid var(--border)}
+.big p{line-height:1.7;margin-bottom:.7rem}
+.verse{background:var(--purple-light);border-left:3px solid var(--purple);padding:.8rem 1rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;line-height:1.55;color:#4A3F55;margin:.9rem 0}
+.verse b{display:block;font-family:'Cinzel',serif;font-style:normal;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-top:.35rem;font-weight:600}
+.will{list-style:none}
+.will li{padding:.35rem 0 .35rem 1.4rem;position:relative;line-height:1.5}
+.will li::before{content:'✝';position:absolute;left:0;color:var(--gold);font-size:.8rem;top:.5rem}
+.fl{display:block;font-weight:500;margin:.9rem 0 .3rem;line-height:1.4}
+.fa,.fi{width:100%;border:1px solid var(--border);background:var(--soft);padding:.7rem .8rem;font-family:'EB Garamond',serif;font-size:1.05rem;color:var(--ink);line-height:1.5;border-radius:0;resize:vertical;outline:none}
+.fa:focus,.fi:focus{border-color:var(--purple);background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.2rem 0}
+.chip{border:1px solid var(--border);background:#fff;color:var(--purple);font-family:'EB Garamond',serif;font-size:.98rem;padding:.45rem .8rem;cursor:pointer;border-radius:999px}
+.chip.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+.tbl{width:100%;border-collapse:collapse;font-size:.98rem;margin:.4rem 0}
+.tbl td,.tbl th{border:1px solid var(--border);padding:.5rem .65rem;text-align:left;vertical-align:top;line-height:1.4}
+.tbl th{background:var(--purple);color:#fff;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.tbl td:first-child{font-weight:500;white-space:nowrap}
+.cardx{background:var(--soft);border:1px solid var(--border);border-left:4px solid var(--gold);padding:.9rem 1rem;margin:.7rem 0}
+.cardx h4{font-family:'Cinzel',serif;font-size:.8rem;color:var(--deep);margin-bottom:.3rem}
+.cardx p{line-height:1.55;margin-bottom:.35rem;font-size:1rem}
+.stage{display:flex;gap:.8rem;align-items:flex-start;margin-top:.7rem}
+.stage-l{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);width:1.8rem;text-align:center;line-height:1;padding-top:.15rem;font-weight:600}
+.stage-b{flex:1}
+.stage-b .nm{font-weight:500}
+.stage-b .q{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gray);font-size:.98rem}
+.day{border:1px solid var(--border);background:#fff;padding:.7rem .8rem;margin-top:.6rem}
+.day .dn{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin-bottom:.1rem}
+.day .fl{margin:.5rem 0 .2rem;font-size:.95rem}
+.day .fi{padding:.55rem .7rem}
+.chkrow{display:flex;align-items:center;gap:.6rem;margin-top:.6rem;cursor:pointer;user-select:none}
+.resource-check{width:22px;height:22px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:transparent;background:#fff}
+.resource-check.checked{background:var(--green);border-color:var(--green);color:#fff}
+.resource-list{display:flex;flex-direction:column;gap:.5rem}
+.resource-item{display:flex;align-items:center;gap:.8rem;padding:.65rem .85rem;background:var(--soft);border:1px solid var(--border);cursor:pointer}
+.resource-title{font-weight:500;line-height:1.3}
+.resource-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.92rem;color:var(--gray)}
+.btn{display:inline-block;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;background:var(--purple);color:#fff;border:none;padding:.8rem 1.2rem;cursor:pointer}
+.btn.gold{background:var(--gold)}
+.btn.ghost{background:none;border:1px solid var(--purple);color:var(--purple)}
+.btn:disabled{opacity:.55}
+.saved{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--green);margin-left:.6rem;font-size:1rem}
+.sendbox{background:var(--gold-light);border:1px solid #E5D3B6;padding:1rem;margin-top:1.4rem}
+.sendbox p{line-height:1.5;margin-bottom:.6rem;font-size:1rem}
+
+/* TOOLS */
+.tool{background:#fff;border:1px solid var(--border);padding:1.1rem 1rem 1.3rem;margin-bottom:1.1rem}
+.tool h3{font-family:'Cinzel',serif;font-size:.95rem;color:var(--deep);margin-bottom:.25rem}
+.tool .sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gray);font-size:1.02rem;margin-bottom:.4rem}
+.tstep{border-left:3px solid var(--gold);padding-left:.85rem;margin-top:1rem}
+.tstep .tn{font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.tstep .th{font-weight:500;margin:.1rem 0 .1rem}
+.bridge{display:flex;gap:.5rem;align-items:stretch;margin:.8rem 0}
+.bridge>div{flex:1}
+.bridge .arrow{flex:0 0 auto;align-self:center;font-family:'Cinzel',serif;color:var(--gold);font-size:1.2rem}
+.logitem{border:1px solid var(--border);background:var(--soft);padding:.7rem .85rem;margin-top:.55rem;position:relative;font-size:1rem;line-height:1.45}
+.logitem .dt{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple-mid)}
+.logitem .x{position:absolute;right:.4rem;top:.2rem;background:none;border:none;color:var(--gray);font-size:1.2rem;padding:.3rem;cursor:pointer}
+.logitem b{color:var(--deep)}
+.ex{display:block;width:100%;text-align:left;background:#fff;border:1px dashed var(--border);padding:.55rem .75rem;margin-top:.4rem;font-family:'EB Garamond',serif;font-size:.98rem;cursor:pointer;line-height:1.4;color:var(--ink)}
+.ex i{color:var(--purple)}
+.cards-dl{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.dl{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--border);padding:1rem;text-align:center;cursor:pointer}
+.dl .ic{font-size:1.5rem}
+.dl .tt{font-family:'Cinzel',serif;font-size:.78rem;color:var(--deep);margin:.3rem 0 .15rem}
+.dl .ss{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gray);font-size:.95rem}
+.safety{background:var(--rose-light);border-left:4px solid var(--rose);padding:1rem 1.1rem;margin-top:2rem;line-height:1.55;font-size:.98rem}
+select.fi{appearance:auto}
+@media(min-width:640px){.portal-main{padding:2.25rem 1.5rem 4rem}.portal-title{font-size:1.9rem}.week-body{padding:1.4rem 1.4rem 1.5rem}.snap{grid-template-columns:1fr 1fr}.snap-card.wide{grid-column:1/-1}}
+@media(max-width:420px){.week-progress{display:none}.bridge{flex-direction:column}.bridge .arrow{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-cross">✝</div>
+    <div class="login-brand">Rooted in Real Life · Teen Portal</div>
+    <h1 class="login-title">Welcome Back</h1>
+    <p class="login-sub">Enter your first name and access code.</p>
+    <label class="login-label" for="name-in">Your First Name</label>
+    <input type="text" id="name-in" class="login-input" placeholder="Your first name" autocomplete="off" autocapitalize="none" spellcheck="false">
+    <label class="login-label" for="pw-in">Access Code</label>
+    <input type="password" id="pw-in" class="login-input" placeholder="Enter your code" autocomplete="off" autocapitalize="none" spellcheck="false">
+    <button class="login-btn" id="login-btn" type="button">Enter My Portal →</button>
+    <div class="login-error" id="login-error"></div>
+    <p class="login-note">Your code was given to you by Cassandra. It opens your own private space.</p>
+    <p class="login-scripture">"Before I formed you in the womb I knew you." — Jeremiah 1:5</p>
+  </div>
+</div>
+
+<div id="portal">
+  <nav class="portal-nav">
+    <div class="nav-brand">Rooted in <span>Real Life</span> · Teen</div>
+    <div class="nav-right"><div class="nav-client" id="nav-name"></div><button class="nav-logout" type="button" id="logout-btn">Sign Out</button></div>
+  </nav>
+  <div class="subnav">
+    <a href="#sec-snapshot">My Snapshot</a><a href="#sec-weeks">My 6 Weeks</a><a href="#sec-tools">Tools</a><a href="#sec-prep">Session Prep</a><a href="#sec-finish">Finish Line</a>
+  </div>
+  <div class="portal-header">
+    <div class="portal-greeting">Rooted in Real Life · Your Space</div>
+    <h1 class="portal-title" id="hello">Welcome</h1>
+    <p class="portal-sub">Six weeks to know who God made you to be, and to live it in your real life.</p>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Your Progress</span><span id="prog-pct">0% complete</span></div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+    </div>
+  </div>
+
+  <div class="portal-main">
+    <div class="start-card">
+      <h3>✝ How This Works</h3>
+      <p>This is your own private space for the six weeks. Everything you write saves on this phone or computer as you type.</p>
+      <ul class="start-steps">
+        <li><span class="step-num">1</span><span>Start with <b>My Soul Snapshot</b>, then open each week in order.</span></li>
+        <li><span class="step-num">2</span><span>Each week has a short lesson, a worksheet, a daily check-in, and a reflection.</span></li>
+        <li><span class="step-num">3</span><span>Tap the circles when you finish something. Your progress saves.</span></li>
+        <li><span class="step-num">4</span><span>Use the <b>Tools</b> any time things get hard. They're yours to keep.</span></li>
+        <li><span class="step-num">5</span><span>Nothing goes to Cassandra unless you press a <b>Send</b> button.</span></li>
+      </ul>
+    </div>
+
+    <div class="section-label" id="sec-snapshot">My Soul Snapshot</div>
+    <div id="snapshot"></div>
+
+    <div class="section-label" id="sec-weeks">My 6-Week Program</div>
+    <div class="weeks-grid" id="weeks"></div>
+
+    <div class="section-label" id="sec-tools">My Tools</div>
+    <div id="tools"></div>
+
+    <div class="section-label" id="sec-prep">Get Ready for My 1:1</div>
+    <div id="prep"></div>
+
+    <div class="section-label" id="sec-finish">Finish Line</div>
+    <div id="finish"></div>
+
+    <div class="section-label">Keep &amp; Share</div>
+    <div class="cards-dl">
+      <a class="dl" id="dl-journal"><div class="ic">📓</div><div class="tt">Download My Journal</div><div class="ss">Everything I've written, as a text file</div></a>
+      <a class="dl" href="https://rootedirl.live" target="_blank" rel="noopener"><div class="ic">✝</div><div class="tt">Back to Main Site</div><div class="ss">rootedirl.live</div></a>
+    </div>
+
+    <div class="safety"><b>If something here feels heavy.</b> This portal is for reflection. It isn't a test or a diagnosis. If something brings up big or painful feelings, please talk to a parent, a youth leader, a counselor, or a priest. In the U.S. you can call or text <b>988</b> any time. If you are in danger, call <b>911</b>.</div>
+  </div>
+</div>
+
+<div id="autosaved" style="position:fixed;bottom:14px;right:14px;background:var(--deep);color:#F0EAF8;font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.55rem .8rem;opacity:0;transition:opacity .3s;pointer-events:none;z-index:200">Saved ✓</div>
+<script src="teen-data.js?v=1"></script>
+<script>
+var TEMP={
+ choleric:{label:"Choleric",tag:"The Leader: bold, driven, decisive",
+  desc:"<strong>Strengths:</strong> a natural leader, decisive, energetic, and goal-driven. You can inspire people to act.<br><br><strong>Your path:</strong> God is shaping your drive into service. The virtue to grow in is <em>meekness</em>, which is not weakness but strength under God's control. Your impatience with what's wrong can become holy zeal, and your boldness can become courage.<br><br><strong>Watch out for:</strong> pride, bossiness, impatience, anger, and treating people like tools for the goal.",
+  saints:["St. Paul","St. Ignatius of Loyola","St. Catherine of Siena","St. Thomas More"],virtues:["Meekness","Humility","Patience","Kindness to the weak"]},
+ melancholic:{label:"Melancholic",tag:"The Idealist: deep, reflective, ordered",
+  desc:"<strong>Strengths:</strong> a deep thinker, sensitive to beauty and truth, idealistic, and faithful. You are capable of real depth in prayer.<br><br><strong>Your path:</strong> you are called to receive <em>joy</em> as a gift, trusting that God is good even when something feels unfinished inside. Your capacity to feel deeply can unite you to Christ, and your love of truth makes you a natural contemplative.<br><br><strong>Watch out for:</strong> being too hard on yourself, self-pity, worry, and having trouble forgiving yourself or others.",
+  saints:["St. John the Apostle","St. Teresa of Avila","Bl. John Henry Newman","St. Therese of Lisieux"],virtues:["Joy","Trust","Self-forgiveness","Surrender to God's plan"]},
+ sanguine:{label:"Sanguine",tag:"The Enthusiast: warm, expressive, present",
+  desc:"<strong>Strengths:</strong> naturally joyful and relational. You make people feel loved and welcome, and you're a great encourager and community-builder.<br><br><strong>Your path:</strong> you are called to deepen your joy through <em>quiet time with God</em> and faithfulness, so that your love for people is shaped by seeking God's face, not just people's approval. Your warmth can become real charity and your enthusiasm holy fervor.<br><br><strong>Watch out for:</strong> being scattered, staying on the surface, skipping prayer, craving attention, and avoiding small sacrifices.",
+  saints:["St. Peter","St. Philip Neri","St. Francis de Sales","Bl. Pier Giorgio Frassati"],virtues:["Quiet recollection","Faithfulness","Small sacrifices","Consistency"]},
+ phlegmatic:{label:"Phlegmatic",tag:"The Peacemaker: steady, loyal, serene",
+  desc:"<strong>Strengths:</strong> deeply faithful, patient, and consistent. You listen well and hold groups together through quiet steadiness.<br><br><strong>Your path:</strong> you are called to move past spiritual <em>laziness</em> through brave love: not waiting to feel like it, but choosing to act for God and others. Your peace can become real contemplative calm and your loyalty heroic perseverance.<br><br><strong>Watch out for:</strong> spiritual laziness, indifference, stubborn passivity, dodging necessary conflict, and waiting for others to start.",
+  saints:["St. Joseph","St. Bernadette","St. John XXIII","St. Thomas Aquinas"],virtues:["Holy zeal","Courage","Generosity","Taking initiative for good"]}
+};
+var FAULT={
+ pride:{label:"Pride",tag:"Disordered self-importance",
+  remedy:"Grow in humility: welcome correction, say sorry quickly, and serve in small hidden ways. Ask God for the grace to “decrease” so Christ can increase. The Litany of Humility is a great prayer for this.",
+  practice:"Once a day, take correction without defending yourself."},
+ vanity:{label:"Vanity",tag:"Needing human approval",
+  remedy:"Practice doing things for God's eyes alone. When you feel the pull for approval, pray, “Lord, I'm doing this for You.” Let go of how it turns out.",
+  practice:"Do one kind thing a day that nobody will ever know about."},
+ sloth:{label:"Spiritual Sloth",tag:"Resisting the good things of the spiritual life",
+  remedy:"Don't wait to feel like praying. Pick a set time and show up, especially when it's dry. Faithfulness matters more than feelings.",
+  practice:"Pray 10 minutes in silence each day, even when it feels boring."},
+ sensuality:{label:"Love of Comfort",tag:"Too attached to ease and pleasure",
+  remedy:"Small chosen sacrifices train your will. They aren't punishment. Practice choosing the harder thing in little ways so you're strong when it counts.",
+  practice:"Pick one daily comfort to give up for a little while, like your phone for the first 20 minutes of the morning."},
+ anger:{label:"Anger & Resentment",tag:"Holding onto hurt",
+  remedy:"Take a slow breath before you respond. Forgiveness is a decision you can make again and again, even when your feelings lag behind.",
+  practice:"Pray for someone who hurt you, by name, for 30 days."},
+ fear:{label:"Fear & Control",tag:"Relying on yourself instead of trusting God",
+  remedy:"Practice trusting God with specific things. Naming what you're trying to control, and handing it to Him, builds trust over time.",
+  practice:"Each morning write: “Lord, I surrender ___ to You today.”"}
+};
+var CHARISM={
+ teaching:{label:"Teaching",tag:"Helping others truly understand the truth",
+  desc:"You help people meet God through understanding. This could look like explaining faith to friends, leading a small group, writing, or mentoring younger kids."},
+ encouragement:{label:"Encouragement",tag:"Waking up hope and purpose in others",
+  desc:"You lift people up. Look for ways to be the friend who helps others keep going: in youth group, on your team, or one-on-one."},
+ mercy:{label:"Mercy",tag:"Serving Christ in people who are hurting",
+  desc:"You come alive when you're helping someone in need. Service projects, visiting the lonely or sick, and food drives are places your gift can grow."},
+ prophecy:{label:"Prophecy",tag:"Speaking truth that redirects and convicts",
+  desc:"You feel God's heart on issues and feel pushed to speak. Learn to speak with love as well as courage. Writing, speaking, and standing up for others are natural channels."},
+ administration:{label:"Administration",tag:"Bringing order for the sake of the mission",
+  desc:"You see how things could work better. Planning events, organizing a service project, or leading a team can be real ministry for you."},
+ intercession:{label:"Intercession",tag:"Praying with power for others",
+  desc:"Prayer isn't a chore for you. It's a calling. Adoration, prayer groups, and being the friend people ask to pray for them are your places to shine."},
+ hospitality:{label:"Hospitality",tag:"Making people feel they belong",
+  desc:"You make people feel at home. Welcoming new kids, hosting, and helping others feel included are how God uses you."},
+ wisdom:{label:"Wisdom",tag:"Seeing clearly and guiding others",
+  desc:"You see beneath the surface. Friends and family may come to you when things get complicated. Pray for discernment, and stay humble about your gift."}
+};
+var SAB={
+ judge:{label:"The Judge",tag:"The inner critic that condemns you and others",
+  desc:"The Judge often grows from feeling that love has to be earned. The remedy is letting yourself receive the Father's mercy, like the father running to the prodigal son in Luke 15. Confession is a place to meet that mercy, not just to list sins.",
+  practice:"When the Judge speaks, say, “That's the Judge, not God's voice.” Then answer it with one true line from Scripture."},
+ hyperachiever:{label:"The Hyper-Achiever",tag:"Worth built on performance",
+  desc:"This one says, “I'm only loved when I produce.” Look at Mary of Bethany in Luke 10:38-42, who simply sat at Jesus' feet. You are loved before you do anything.",
+  practice:"Schedule “useless” rest: time with God with nothing to show for it."},
+ pleaser:{label:"The Pleaser",tag:"Losing yourself to keep others happy",
+  desc:"The Pleaser can hide a lot of frustration and a lost sense of who you are. Remember you are God's beloved. Saying “no” can be an act of love and honesty, and it looks after the self God gave you.",
+  practice:"Once a week, give one honest “no” to something that doesn't fit your priorities or health."},
+ controller:{label:"The Controller",tag:"Anxiety turned into controlling outcomes",
+  desc:"The Controller finds it hard to trust that God is in charge. The cure is practicing surrender: naming what you're gripping and handing it over, one situation at a time.",
+  practice:"Each morning, name one thing you're trying to control and say, “Lord, I entrust this to You.”"},
+ avoider:{label:"The Avoider",tag:"Running from pain, conflict, and hard truth",
+  desc:"The Avoider often learned that facing hard things felt unsafe. Jesus says the truth sets us free (John 8:32). Being honest with God in prayer, even through the lament Psalms, is a safe place to start.",
+  practice:"Once a week, write down one feeling you've been avoiding, then bring it to prayer."},
+ victim:{label:"The Wounded One",tag:"Letting pain become your identity",
+  desc:"This pattern usually grows from real hurt. It can make pain feel like who you are. Jesus invites you to be a beloved child who suffers with Him, not alone. Offering your pain for someone else can change the story.",
+  practice:"Each morning, offer one struggle to God for a specific person."},
+ hyperrational:{label:"The Hyper-Rational",tag:"Using logic to stay safe from feelings and mystery",
+  desc:"This pattern is afraid of how vulnerable feelings and mystery can be. Slow, imaginative prayer can gently open what the head keeps locked. God is not a problem to be solved.",
+  practice:"Spend 10 minutes praying with one Bible verse. Let feelings come without analyzing them."}
+};
+
+
+/* ============================ CONFIG ============================ */
+var FORM_ENDPOINT="https://formspree.io/f/xdeazlzl";
+var COACH_CONTACT="cassandra@rootedirl.live";
+/* WEEKLY VIDEOS: paste a YouTube link (or just the video ID) between the quotes.
+   While a week is blank, no video box shows for that week. */
+var VIDEOS={1:"",2:"",3:"",4:"",5:"",6:""};
+var PBKDF_ITER_DEFAULT=310000;
+
+/* ============================ HELPERS ============================ */
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function $(id){return document.getElementById(id)}
+function L(a){a=a.slice();if(a.length<2)return a.join("");if(a.length==2)return a[0]+" and "+a[1];return a.slice(0,-1).join(", ")+", and "+a[a.length-1]}
+function b64d(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function hex(buf){return Array.prototype.map.call(new Uint8Array(buf),function(x){return("0"+x.toString(16)).slice(-2)}).join("")}
+function normName(s){return String(s||"").trim().toLowerCase().replace(/[^a-z0-9]/g,"")}
+function normPw(s){return String(s||"").trim().toLowerCase().replace(/\s+/g,"-")}
+async function teenId(name){var d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("rirl-teen:"+normName(name)));return hex(d).slice(0,16)}
+async function decryptRecord(entry,pw){
+  var km=await crypto.subtle.importKey("raw",new TextEncoder().encode(normPw(pw)),"PBKDF2",false,["deriveKey"]);
+  var key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64d(entry.s),iterations:entry.n||PBKDF_ITER_DEFAULT,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"]);
+  var pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64d(entry.i)},key,b64d(entry.c));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function ytEmbed(v){
+  if(!v)return"";v=String(v).trim();var m=v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
+  var id=m?m[1]:(/^[A-Za-z0-9_-]{11}$/.test(v)?v:"");
+  return id?"https://www.youtube-nocookie.com/embed/"+id+"?rel=0":"";
+}
+var DAYS7=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+var FAULT_VIRTUE={pride:"Humility",vanity:"Humility",sloth:"Diligence",sensuality:"Self-control",anger:"Meekness",fear:"Trust"};
+var FAULT_PRAYER={pride:"Jesus, meek and humble of heart, make my heart like Yours.",vanity:"Lord, I'm doing this for You.",sloth:"Lord, help me begin, even when I don't feel like it.",sensuality:"Lord, give me strength to choose the harder good.",anger:"Jesus, help me forgive and let this go.",fear:"Jesus, I trust in You."};
+var FAULT_FIRST={pride:"Pride is thinking I'm on my own and I know best.",vanity:"Vanity is living for other people's approval.",sloth:"Spiritual Sloth is putting off the things that help me grow.",sensuality:"Love of Comfort is leaning on ease and pleasure.",anger:"Anger and Resentment is holding onto hurt.",fear:"Fear and Control is trusting myself more than God."};
+var SAB_BRIDGE={
+ judge:["I'm so stupid. Everyone can see it.","I made a mistake, and I'm still worth loving."],
+ hyperachiever:["I'm only worth what I get done.","I'm loved before I do anything."],
+ pleaser:["If I say no, they won't like me.","I can be kind and still be honest."],
+ controller:["If I don't handle it all, everything will fall apart.","I can do my part and trust God with the rest."],
+ avoider:["If I ignore it, it will go away.","This is hard, and I can face one small piece of it."],
+ victim:["Nothing ever goes right for me.","This is hard right now, and I'm not alone."],
+ hyperrational:["If I can't figure it out, I can't trust it.","I don't have to understand everything to trust God."]
+};
+var BRIDGE_GENERIC=["I'm not good at school.","I'm still learning, and this is still new to me."];
+var GIFT_IDEAS={
+ encouragement:"Text a friend who's having a hard week. Tell someone what you admire about them. Write a note.",
+ mercy:"Sit with someone who's alone at lunch. Check on a friend who's struggling. Help someone without being asked.",
+ intercession:"Pray for three people by name each night. Ask a friend what you can pray for. Offer a decade of the Rosary for someone.",
+ teaching:"Explain something you've learned to a younger kid or a friend. Help someone with homework. Share one thing about the faith that you love.",
+ prophecy:"Notice something that isn't right and think about how to speak up kindly. Stand with someone who's being left out. Write down what's stirring in you.",
+ administration:"Plan something small for your friends or youth group. Make a simple plan for a project. Help organize a service day.",
+ hospitality:"Welcome someone new. Invite a friend who's usually left out. Make someone feel at home in the room.",
+ wisdom:"When a friend is stuck, ask good questions before giving advice. Pray before you speak. Share what you noticed, gently."
+};
+var FEELINGS=["Excited","Content","Peaceful","Grateful","Hopeful","Anxious","Insecure","Ashamed","Worried","Nervous","Lonely","Hurt","Abandoned","Hopeless","Frustrated","Irritated","Overwhelmed","Resentful","Bored","Numb","Envious"];
+var PRAYERS=["Jesus, I trust in You.","Holy Spirit, I need You.","Lord, help me.","Mary, pray for me.","Come, Holy Spirit.","Jesus, I'm Yours."];
+
+/* ============================ STATE ============================ */
+var S={id:null,T:null,data:{},prog:{},log:[],bridge:[],weeks:[],labels:{},order:[]};
+function K(s){return"rirl_teenportal_"+S.id+"_"+s}
+function lsGet(k,d){try{var v=localStorage.getItem(K(k));return v?JSON.parse(v):d}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(K(k),JSON.stringify(v))}catch(e){}}
+var saveT=null;
+function saveData(){clearTimeout(saveT);saveT=setTimeout(function(){lsSet("data",S.data);flashSaved()},350)}
+function flashSaved(){var el=$("autosaved");if(!el)return;el.style.opacity=1;clearTimeout(flashSaved.t);flashSaved.t=setTimeout(function(){el.style.opacity=0},1400)}
+
+/* ============================ FIELD BUILDERS ============================ */
+function reg(id,label){S.labels[id]=label;S.order.push(id)}
+function ta(id,label,rows){reg(id,label);return'<label class="fl" for="f_'+id+'">'+label+'</label><textarea class="fa" id="f_'+id+'" data-f="'+id+'" rows="'+(rows||3)+'">'+esc(S.data[id]||"")+'</textarea>'}
+function inp(id,label,ph){reg(id,label);return'<label class="fl" for="f_'+id+'">'+label+'</label><input class="fi" id="f_'+id+'" data-f="'+id+'" type="text" placeholder="'+esc(ph||"")+'" value="'+esc(S.data[id]||"")+'">'}
+function pick(id,label,opts){reg(id,label);var cur=S.data[id]||"";var h='<span class="fl">'+label+'</span><div class="chips">';
+  opts.forEach(function(o){h+='<button type="button" class="chip'+(cur===o?" on":"")+'" data-pick="'+id+'" data-v="'+esc(o)+'">'+esc(o)+'</button>'});return h+'</div>'}
+function chk(id,label){reg(id,label);var on=S.data[id]==="yes";return'<div class="chkrow" data-chk="'+id+'"><div class="resource-check'+(on?" checked":"")+'">'+(on?"✓":"")+'</div><span>'+label+'</span></div>'}
+function blk(h,inner){return'<div class="blk"><div class="blk-h">'+h+'</div>'+inner+'</div>'}
+function dailyBlock(n,intro,cols){
+  var h='<p class="note-soft" style="margin-top:0">'+intro+'</p>';
+  DAYS7.forEach(function(d,di){
+    h+='<div class="day"><div class="dn">'+d+'</div>';
+    cols.forEach(function(c,ci){var id="w"+n+"_d"+di+"_c"+ci;
+      if(c[1]==="check")h+=chk(id,d+": "+c[0]);else h+=inp(id,d+": "+c[0]).replace('<label class="fl"','<label class="fl"');
+    });h+='</div>';
+  });return h;
+}
+/* the daily input labels repeat the day name for the journal export; hide it visually */
+function stripDay(h){return h.replace(/(<label class="fl" for="f_w\d_d\d_c\d">)(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday): /g,"$1")}
+
+/* ============================ WEEK CONTENT ============================ */
+function faultNames(T){return T.faults.map(function(k){return FAULT[k].label})}
+function charNames(T){return T.charisms.map(function(k){return CHARISM[k].label})}
+function sabNames(T){return T.sabs.map(function(k){return SAB[k].label})}
+function tempLine(T){return TEMP[T.temps[0]].label+(T.temps[1]?" (main), "+TEMP[T.temps[1]].label+" (second)":"")}
+
+function buildWeeks(T){
+  var fn=faultNames(T),cn=charNames(T),sn=sabNames(T);
+  var tied=T.faults.length>1;
+  var W=[];
+
+  /* ---- Week 1 ---- */
+  W.push({n:1,color:"#6B5B8A",title:"Meeting Yourself",sub:"What your assessments are, and what they mean",letter:"R · Reality",
+   big:["You took four short assessments. Think of them as four mirrors, each showing a different part of you.",
+    "<b>Temperament</b> is how God wired you to respond to the world. <b>Predominant fault</b> is the one pattern that most often trips you up, and it's where God's grace is aimed at you. <b>Charism</b> is a gift of the Holy Spirit that is meant for other people. A <b>saboteur</b> is a thought pattern that undermines your peace and your mission.",
+    "None of these are labels. Nobody is only one thing. Saints had every temperament, and every one of them had faults too. The goal is not to fix you. The goal is to know you, so you can grow into who God made you to be."],
+   verse:["I praise you, for I am fearfully and wonderfully made.","Psalm 139:14"],
+   will:["Read my Soul Snapshot once each day.","Notice one time this week when a result shows up in real life.","Be kind to myself every time I notice something."],
+   ws:function(){return ta("w1_own","In my own words, the big idea this week is...",3)+ta("w1_a","Which result felt the most like me, and why?")+ta("w1_b","Which result surprised me?")+ta("w1_c","Is there a result I wanted to push back on? What would I say to it?")+ta("w1_d","Things I love about how God made me",4)},
+   daily:["Each day, jot down one small moment when you noticed something about yourself.",[["Today I felt...","text"],["A moment I noticed (and which result it connects to)","text"],["Something kind I told myself","check"]]],
+   reflect:[["w1_r1","What do I hope to learn about myself in these six weeks?"],["w1_r2","What is one thing I'm already good at that I don't give myself credit for?"]],
+   prep:[["w1_p1","One thing I want to talk about:"],["w1_p2","One thing I'm proud of this week:"],["w1_p3","One question I have about my results:"]]});
+
+  /* ---- Week 2 ---- */
+  W.push({n:2,color:"#B8956A",title:"The R.O.O.T.E.D. Model",sub:"A path through any hard or confusing moment",letter:"O · Origin",
+   big:["Life gets confusing. Friends say something that stings, school piles up, and you can't tell why you reacted the way you did. The R.O.O.T.E.D. Model is a path you can walk through any moment like that. It has six steps, one for each letter.",
+    "<b>R · Reality.</b> What is actually happening? Say it plainly, before you try to fix it or judge it.<br><b>O · Origin.</b> Where is this coming from? Name the pattern or old story behind it.<br><b>O · Overflow.</b> What am I feeling, and where do I feel it in my body?<br><b>T · Turning.</b> Turn toward God before you act. One sentence is enough.<br><b>E · Election.</b> Choose the one next right thing, on purpose, not by reaction.<br><b>D · Dwelling.</b> Settle in. Stay with God and with the choice you made, and let it shape how you live.",
+    "You don't have to do it perfectly. Most of the time you'll only get partway, and that is a good start."],
+   verse:["He is like a tree planted by water, that sends out its roots by the stream.","Jeremiah 17:8"],
+   will:["Notice one moment a day that I could walk through the six steps.","Practice the first step out loud: say what's happening in one plain sentence.","Try all six steps once, in writing."],
+   ws:function(){
+     var st=[["R","Reality","What actually happened? Just the facts.","real"],["O","Origin","What pattern or old story is behind this?","orig"],["O","Overflow","What did I feel? Where did I feel it in my body?","over"],["T","Turning","What one sentence could I say to God?","turn"],["E","Election","What is the one next right thing?","elec"],["D","Dwelling","How can I stay with that choice and with God?","dwel"]];
+     var h=inp("w2_moment","Pick one real moment from this week, big or small. Write it here:");
+     st.forEach(function(s){var id="w2_"+s[3];reg(id,s[0]+" · "+s[1]+": "+s[2]);h+='<div class="stage"><div class="stage-l">'+s[0]+'</div><div class="stage-b"><div class="nm">'+s[1]+'</div><div class="q">'+s[2]+'</div><textarea class="fa" id="f_'+id+'" data-f="'+id+'" rows="2">'+esc(S.data[id]||"")+'</textarea></div></div>'});
+     return h},
+   daily:["Each day, catch one moment and see how far through the six steps you got.",[["A moment I noticed","text"],["Steps I got to (like R, O, O)","text"],["Notes","text"]]],
+   reflect:[["w2_r1","Which step is easiest for me? Which is hardest?"],["w2_r2","When I slow down and look at what's really happening, what do I notice?"],["w2_r3","Where in my life could I use this path the most?"]],
+   prep:[["w2_p1","One thing I want to talk about:"],["w2_p2","One moment I walked through:"],["w2_p3","A step I'm stuck on:"]]});
+
+  /* ---- Week 3 ---- */
+  W.push({n:3,color:"#C47B8A",title:"The Stress Response",sub:"What happens when you're stressed, and the Bridge Thought",letter:"O · Overflow",
+   big:["When something stressful happens, your body reacts before your thinking brain catches up. Your heart pounds, you say something sharp, you shut down, or you try to please everyone. That is not a sin. Feelings are information. The Church teaches that our emotions are not good or bad in themselves. What matters is what we choose to do with them.",
+    "This week you'll use two tools, and you'll find both in the <b>Tools</b> section. The <b>Hard-Moment Protocol</b> is for the moment of stress: <b>Name it. Pray. Elect.</b> (Elect means choose the next right thing.) The <b>Bridge Thought</b> is for the thoughts that keep playing afterward.",
+    "A Bridge Thought is when you notice an unkind thought, like <i>\"I'm not good at school,\"</i> and you cross the bridge to a kinder one: <i>\"I'm still learning, and this is still new to me.\"</i> You are not lying to yourself. You are choosing a thought that is kinder and still honest."],
+   verse:["For God gave us a spirit not of fear but of power and love and self-control.","2 Timothy 1:7"],
+   will:["Name what I feel when I'm stressed, using the feelings list.","Use Name It, Pray, Elect at least once.","Catch at least three unkind thoughts and cross the bridge on each one."],
+   ws:function(){
+     var h='<p style="line-height:1.55">When you\'re stressed, your body picks a response automatically. Which one is the most like you?</p>';
+     h+='<table class="tbl" style="margin-top:.6rem"><tr><th>Response</th><th>It looks like</th><th>Often linked to</th></tr><tr><td>Fight</td><td>You push back, take control, argue to win.</td><td>The Judge, The Controller</td></tr><tr><td>Flight</td><td>You escape, get busy, or distract yourself.</td><td>The Hyper-Achiever, The Avoider</td></tr><tr><td>Freeze</td><td>You shut down and go numb.</td><td>The Avoider, The Wounded One</td></tr><tr><td>Fawn</td><td>You please people and make yourself small.</td><td>The Pleaser, The Avoider</td></tr></table>';
+     h+='<p class="note-soft">Your saboteur patterns are '+L(sn)+'. Notice which stress response goes with each one.</p>';
+     h+=pick("w3_resp","My main stress response is:",["Fight","Flight","Freeze","Fawn"]);
+     h+='<div class="blk-h" style="margin-top:1.2rem">Name the feeling</div><table class="tbl"><tr><td>Joy</td><td>Excited · Content · Peaceful · Grateful · Hopeful</td></tr><tr><td>Fear</td><td>Anxious · Insecure · Ashamed · Worried · Nervous</td></tr><tr><td>Sadness</td><td>Lonely · Grieving · Hurt · Abandoned · Hopeless</td></tr><tr><td>Anger</td><td>Frustrated · Irritated · Overwhelmed · Resentful · Bitter</td></tr><tr><td>Disgust</td><td>Bored · Apathetic · Indifferent · Envious</td></tr></table>';
+     h+=inp("w3_feel","The feeling I'm naming this week:")+inp("w3_body","Where I feel it in my body:")+inp("w3_set","What set it off:");
+     h+='<div class="cardx" style="margin-top:1.1rem"><h4>My Bridge Thoughts this week</h4><p>Saved so far: <b id="w3-bridge-count">0</b>. Add more in the <a href="#sec-tools" style="color:var(--purple)">Tools</a> section.</p></div>';
+     return h},
+   daily:["Each day, name one feeling and catch one unkind thought. Then check the box if you used Name It, Pray, Elect.",[["Feeling + where I felt it","text"],["Unkind thought → kinder thought","text"],["Used the protocol","check"]]],
+   reflect:[["w3_r1","What does my body do when I'm stressed? Which of Fight, Flight, Freeze, or Fawn is mine?"],["w3_r2","What was my favorite Bridge Thought this week? How did it feel to cross?"],["w3_r3","What happened when I named a feeling instead of pushing it away?"]],
+   prep:[["w3_p1","One thing I want to talk about:"],["w3_p2","A hard moment I used the protocol in:"],["w3_p3","A thought I couldn't cross yet:"]]});
+
+  /* ---- Week 4 ---- */
+  var fbig=tied
+   ?"Your assessment showed "+L(fn.map(function(x){return"<b>"+x+"</b>"}))+" at the top, so they're tied. Having a fault is not a failure. It's exactly where God's grace is aimed at you. This week you and Cassandra will decide which one to practice against first."
+   :"Your assessment showed <b>"+fn[0]+"</b> at the top. Having a fault is not a failure. It's exactly where God's grace is aimed at you. This week you'll learn how it works and start practicing the virtue that answers it.";
+  if(T.near&&T.near.length)fbig+=" "+L(T.near.map(function(k){return FAULT[k].label}))+" also scored high, so keep an eye on "+(T.near.length>1?"them":"it")+" too.";
+  W.push({n:4,color:"#5A7A5A",title:"Virtue & Predominant Fault",sub:"Where you need God's help most, and how you grow",letter:"T · Turning",
+   big:["A <b>virtue</b> is a good habit that gets stronger the more you practice it, like a muscle. Every fault has an opposite virtue, and growing means practicing the virtue, not just fighting the fault.",fbig,
+    "St. Therese of Lisieux grew by doing small things with great love, often where nobody would see. Small and hidden is a very good place to start."],
+   verse:["Whoever is faithful in a very little is also faithful in much.","Luke 16:10"],
+   will:["Read about "+(tied?"both faults and decide which one feels most true":"my fault and how it shows up")+".","Do one small practice every day, even when it's boring.","Notice how it feels to choose the virtue."],
+   ws:function(){
+     var h="";
+     T.faults.concat(T.near||[]).forEach(function(k,i){var f=FAULT[k];var near=i>=T.faults.length;
+       h+='<div class="cardx"><h4>'+esc(f.label.toUpperCase())+(near?' <span style="font-weight:400;color:var(--gray)">(also close)</span>':'')+'</h4><p><i>'+esc(f.tag)+'</i></p><p><b>Opposite virtue:</b> '+FAULT_VIRTUE[k]+'</p><p>'+esc(f.remedy)+'</p><p><b>Practice:</b> '+esc(f.practice)+'</p><p><b>Prayer:</b> "'+esc(FAULT_PRAYER[k])+'"</p></div>'});
+     T.faults.forEach(function(k){h+=ta("w4_where_"+k,"Where does "+FAULT[k].label+" show up for me (at school, online, with friends)?")});
+     if(tied)h+=pick("w4_first","The fault I'll practice against first (decide with Cassandra):",fn);
+     if(tied)h+=ta("w4_why","Why that one?",2);
+     return h},
+   daily:["Each day, check what you did, then write how it felt. Be gentle with yourself.",[["I did my practice","check"],["How it felt / what I noticed","text"]]],
+   reflect:[["w4_r1","When did I feel the pull of my fault this week? What did I do?"],["w4_r2","How did the practice change my day, even a little?"],["w4_r3","Where could I ask God for help this week?"]],
+   prep:[["w4_p1","One thing I want to talk about:"],["w4_p2","The fault I want to work on first:"],["w4_p3","A practice I want to change or add:"]]});
+
+  /* ---- Week 5 ---- */
+  W.push({n:5,color:"#8B7BA8",title:"Charisms & Your Mission",sub:"Your gifts, and what they are for",letter:"E · Election",
+   big:["A <b>charism</b> is a gift from the Holy Spirit. It isn't just for you. It's given \"for the common good.\" Your gifts are part of how God loves other people through you.",
+    "Yours are "+L(cn.map(function(x){return"<b>"+x+"</b>"}))+". Your mission is probably closer to you than you think: a friend who's down, a classmate who's left out, someone who needs help or prayer.",
+    "Gifts grow when you use them. This week you'll try each one on purpose, in small ways."],
+   verse:["To each is given the manifestation of the Spirit for the common good.","1 Corinthians 12:7"],
+   will:["Use each of my gifts at least once.","Notice what gives me energy and what drains me.","Start writing my own mission sentence."],
+   ws:function(){
+     var h="";
+     T.charisms.forEach(function(k){var c=CHARISM[k];
+       h+='<div class="cardx"><h4>'+esc(c.label.toUpperCase())+'</h4><p><i>'+esc(c.tag)+'</i></p><p>'+esc(c.desc)+'</p><p><b>Ideas:</b> '+esc(GIFT_IDEAS[k]||"")+'</p></div>'+ta("w5_plan_"+k,"My plan to use "+c.label+" this week:",2)});
+     h+=blk("My mission sentence (a first draft)",'<p class="note-soft" style="margin-top:0">It\'s okay if it changes.</p>'
+       +inp("w5_m1","God made me...","how God made you, in your words")+inp("w5_m2","...so that I can...","what you can do")+inp("w5_m3","...for...","who it's for"));
+     h+=ta("w5_person","Who is one person in my life I could use my gifts for this month?",2)+ta("w5_energy","What gives me energy when I use my gifts? What drains me?",3)+ta("w5_parish","What would it look like to use my gifts in my parish or youth group?",3);
+     return h},
+   daily:["Each day, check if you used a gift on purpose. Then write what you did and how it felt.",[["Gift I used","text"],["What I did and how it felt","text"],["I used a gift today","check"]]],
+   reflect:[["w5_r1","Which gift felt most natural? Which one stretched me?"],["w5_r2","Was there a moment this week when someone really needed what I had to give?"],["w5_r3","How does knowing my mission change how I see myself?"]],
+   prep:[["w5_p1","One thing I want to talk about:"],["w5_p2","A gift I want to grow:"],["w5_p3","A person I want to help:"]]});
+
+  /* ---- Week 6 ---- */
+  var wk6=["You've learned a lot about yourself. Now the real question: how do you live this in the middle of your real life, with your phone buzzing, tests coming up, friendships changing, and a lot of voices telling you who to be?",
+   "Jesus said, <i>\"I am the vine; you are the branches.\"</i> Being rooted means staying connected to Him while everything else moves fast. You now have tools for the hard moments: Name It, Pray, Elect, and the Bridge Thought.",
+   "This week is about making a plan you'll actually use after the six weeks end."];
+  W.push({n:6,color:"#3D3450",title:"Rooted in Today's World",sub:"Living this out with your phone, school, and friends",letter:"D · Dwelling",
+   big:wk6,
+   verse:["I am the vine; you are the branches.","John 15:5"],
+   will:["Notice how I feel before and after time on my phone.","Use the protocol or a Bridge Thought at least once in the real world.","Build my Rooted Plan."],
+   ws:function(){
+     return ta("w6_a","What do I feel after I spend a long time on my phone or social media?")+ta("w6_b","Where do I try to get my worth from (grades, likes, friends, being helpful)? What does God say about it?")+ta("w6_c","Which friendships help me become who God made me to be? Which ones pull me away?")+ta("w6_d","What is my Bridge Thought for the comparison I feel online or at school?")
+      +blk("My Rooted Plan",ta("w6_plan1","My daily anchor (3 small things I'll do every day):")+ta("w6_plan2","My weekly rhythm (Mass, prayer, time with people who help me grow):")+ta("w6_plan3","My go-to tools when I'm stressed (protocol, Bridge Thoughts, Scripture):")+ta("w6_plan4","My trusted adults (people I can talk to when it's hard):")+ta("w6_plan5","What I'll do when I slip (because I will, and that's okay):"))},
+   daily:["Each day, check in on your real life. You're practicing for after the six weeks end.",[["Phone: how I felt after","text"],["A tool I used (protocol, bridge, prayer)","text"],["One good thing happened","check"]]],
+   reflect:[["w6_r1","What did I learn about myself in these six weeks?"],["w6_r2","What is one thing I'm proud of?"],["w6_r3","What do I want to keep doing?"]],
+   prep:[["w6_p1","One thing I want to talk about:"],["w6_p2","What I'll take with me:"],["w6_p3","What I still have questions about:"]]});
+  return W;
+}
+
+/* ============================ RENDER ============================ */
+function renderSnapshot(T){
+  var m=TEMP[T.temps[0]],h="";
+  h+='<div class="snap">';
+  h+='<div class="snap-card wide"><div class="k">Temperament</div><div class="v">'+esc(tempLine(T))+'</div><div class="t">'+esc(m.tag)+'</div><div class="d">'+m.desc.split("<br><br>")[0]+'</div><details><summary>More about my main temperament</summary><div class="more">'+m.desc.split("<br><br>").slice(1).join("<br><br>")+'<br><br><b>Saints who share it:</b> '+esc(m.saints.join(", "))+'<br><b>Virtues to grow in:</b> '+esc(m.virtues.join(", "))+'</div></details>'
+   +(T.temps[1]?'<details><summary>My second temperament: '+esc(TEMP[T.temps[1]].label)+'</summary><div class="more"><i>'+esc(TEMP[T.temps[1]].tag)+'</i><br>'+TEMP[T.temps[1]].desc.split("<br><br>")[0]+'</div></details>':'')+'</div>';
+  var fa=T.faults.map(function(k){return FAULT[k]});
+  h+='<div class="snap-card"><div class="k">Predominant Fault</div><div class="v">'+esc(L(fa.map(function(f){return f.label}))+(fa.length>1?" (tied)":""))+'</div>'+fa.map(function(f){return'<div class="d" style="margin-top:.35rem"><b>'+esc(f.label)+':</b> <i>'+esc(f.tag)+'</i></div>'}).join("")+(T.near&&T.near.length?'<div class="note-soft">Also close: '+esc(L(T.near.map(function(k){return FAULT[k].label})))+'.</div>':'')+'<div class="note-soft">You\'ll look at this closely in Week 4.</div></div>';
+  h+='<div class="snap-card"><div class="k">Charisms</div><div class="v">'+esc(L(charNames(T)))+'</div>'+T.charisms.map(function(k){return'<div class="d" style="margin-top:.35rem"><b>'+esc(CHARISM[k].label)+':</b> <i>'+esc(CHARISM[k].tag)+'</i></div>'}).join("")+'<div class="note-soft">Gifts the Holy Spirit gave you for other people. Week 5.</div></div>';
+  h+='<div class="snap-card wide"><div class="k">Saboteurs</div><div class="v">'+esc(sabNames(T)[0])+(T.sabs.length>1?' <span style="font-weight:400;font-size:.9rem;color:var(--gray)">(main)</span>':'')+'</div><div class="t">'+esc(SAB[T.sabs[0]].tag)+'</div><div class="d">'+esc(SAB[T.sabs[0]].desc)+'</div><div class="d" style="margin-top:.4rem"><b>Try this:</b> '+esc(SAB[T.sabs[0]].practice)+'</div>'+(T.sabs.length>1?'<details><summary>My other patterns</summary><div class="more">'+T.sabs.slice(1).map(function(k){return'<p style="margin-bottom:.5rem"><b>'+esc(SAB[k].label)+':</b> <i>'+esc(SAB[k].tag)+'</i><br>'+esc(SAB[k].practice)+'</p>'}).join("")+'</div></details>':'')+'</div>';
+  h+='</div><p class="note-soft">These are starting points, not labels. You get to decide what feels true.</p>';
+  $("snapshot").innerHTML=h;
+}
+
+function weekItems(w){
+  var it=[];
+  if(ytEmbed(VIDEOS[w.n]))it.push(["video","Watch the video"]);
+  it.push(["lesson","Read the lesson"],["ws","Do the worksheet"],["daily","Do the daily check-ins"],["ref","Reflect and prepare for my 1:1"]);
+  return it;
+}
+function renderWeeks(){
+  var out="";
+  S.weeks.forEach(function(w,wi){
+    var items=weekItems(w),done=items.filter(function(i){return S.prog[w.n+"_"+i[0]]}).length;
+    var vid=ytEmbed(VIDEOS[w.n]);
+    var body="";
+    if(vid)body+='<div class="video-wrap"><iframe src="'+vid+'" title="Week '+w.n+' video" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
+    body+=blk("This week's lesson",'<div class="big">'+w.big.map(function(p){return"<p>"+p+"</p>"}).join("")+'</div><div class="verse">"'+esc(w.verse[0])+'"<b>'+esc(w.verse[1])+'</b></div><div class="blk-h" style="margin-top:1rem;border:none;margin-bottom:.2rem">This week I will</div><ul class="will">'+w.will.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>');
+    body+=blk("Worksheet",w.ws());
+    body+=blk("Daily check-in",stripDay(dailyBlock(w.n,w.daily[0],w.daily[1])));
+    body+=blk("Reflect",w.reflect.map(function(r){return ta(r[0],r[1],3)}).join("")+'<p style="margin-top:1rem"><button class="btn ghost" type="button" data-gotoprep="'+w.n+'">Get ready for my 1:1 ↓</button></p>');
+    body+='<div class="blk"><div class="blk-h">Check off what I\'ve finished</div><div class="resource-list">'+items.map(function(i){var on=!!S.prog[w.n+"_"+i[0]];return'<div class="resource-item" data-prog="'+w.n+'_'+i[0]+'"><div class="resource-check'+(on?" checked":"")+'">'+(on?"✓":"")+'</div><div class="resource-title">'+i[1]+'</div></div>'}).join("")+'</div></div>';
+    var fields=S.order.filter(function(id){return id.indexOf("w"+w.n+"_")===0});
+    out+='<div class="week-card" id="wk'+w.n+'"><div class="week-header'+(wi===0?" open":"")+'"><div class="week-num" style="background:'+w.color+'">Week '+w.n+'</div><div class="week-title-wrap"><div class="week-title">'+esc(w.title)+'</div><div class="week-subtitle">'+esc(w.sub)+'</div></div><div class="week-progress">'+done+'/'+items.length+' done</div><div class="week-chevron'+(wi===0?" open":"")+'">▾</div></div><div class="week-body'+(wi===0?" open":"")+'">'+body+'</div></div>';
+  });
+  $("weeks").innerHTML=out;
+  updateBridgeCount();
+}
+
+function renderPrep(){
+  var h='<div class="tool"><h3>Get ready for my 1:1</h3><div class="sub">Fill this in before each session. It helps us use our time well.</div>';
+  h+='<span class="fl">Which week is my session about?</span><div class="chips" id="prep-chips">'+S.weeks.map(function(w){return'<button type="button" class="chip'+(w.n===S.prepWeek?" on":"")+'" data-prepweek="'+w.n+'">Week '+w.n+'</button>'}).join("")+'</div>';
+  S.weeks.forEach(function(w){h+='<div class="prepset" id="prepset'+w.n+'" style="display:'+(w.n===S.prepWeek?"block":"none")+'"><div class="blk-h" style="margin-top:1rem">Week '+w.n+': '+esc(w.title)+'</div>'+w.prep.map(function(p){return ta(p[0],p[1],2)}).join("")+'<div class="sendbox"><p><b>Send Week '+w.n+' to Cassandra.</b> This sends what I wrote this week (worksheet, check-ins, reflection, and prep) so we can talk about it. Only press this when you\'re ready.</p><button class="btn gold" type="button" data-send="'+w.n+'">Send Week '+w.n+' to Cassandra</button><span class="saved" id="sendmsg'+w.n+'"></span></div></div>'});
+  $("prep").innerHTML=h+'</div>';
+}
+
+function renderTools(){
+  var T=S.T,ex=[];
+  T.sabs.forEach(function(k){if(SAB_BRIDGE[k])ex.push([SAB[k].label,SAB_BRIDGE[k][0],SAB_BRIDGE[k][1]])});
+  ex.push(["Everyday",BRIDGE_GENERIC[0],BRIDGE_GENERIC[1]]);
+  var h='<div class="tool" id="tool-protocol"><h3>The Hard-Moment Protocol</h3><div class="sub">For the moment something hard is happening. Three steps: Name it. Pray. Elect.</div>'
+   +'<div class="tstep"><div class="tn">Step 1</div><div class="th">Name it</div><div class="note-soft" style="margin-top:0">Say what is happening inside you, out loud if you can.</div>'
+   +'<label class="fl" for="pr-name">What\'s happening? What\'s the pattern?</label><textarea class="fa" id="pr-name" rows="2" placeholder="Example: This is the Controller. I\'m anxious right now."></textarea>'
+   +'<span class="fl">I\'m feeling... (tap any)</span><div class="chips" id="pr-feel">'+FEELINGS.map(function(f){return'<button type="button" class="chip" data-feel="'+f+'">'+f+'</button>'}).join("")+'</div></div>'
+   +'<div class="tstep"><div class="tn">Step 2</div><div class="th">Pray</div><div class="note-soft" style="margin-top:0">One sentence, before you act.</div><div class="chips" id="pr-pray">'+PRAYERS.map(function(f){return'<button type="button" class="chip" data-pray="'+esc(f)+'">'+esc(f)+'</button>'}).join("")+'</div>'
+   +'<input class="fi" id="pr-prayer" type="text" placeholder="Or write your own..." style="margin-top:.5rem"></div>'
+   +'<div class="tstep"><div class="tn">Step 3</div><div class="th">Elect</div><div class="note-soft" style="margin-top:0">Choose the one next right thing you\'ll be at peace with tomorrow. Not perfect. Just chosen.</div><textarea class="fa" id="pr-elect" rows="2" placeholder="My next right thing is..."></textarea></div>'
+   +'<p style="margin-top:1rem"><button class="btn" type="button" id="pr-save">Save to my log</button><span class="saved" id="pr-msg"></span></p><div id="pr-log"></div></div>';
+  h+='<div class="tool" id="tool-bridge"><h3>The Bridge Thought</h3><div class="sub">Notice an unkind thought. Cross the bridge to a kinder one that is still honest.</div>'
+   +'<div class="bridge"><div><label class="fl" for="br-bad" style="margin-top:0">The unkind thought</label><textarea class="fa" id="br-bad" rows="3" placeholder="Example: I\'m not good at school."></textarea></div><div class="arrow">⟶</div><div><label class="fl" for="br-good" style="margin-top:0">The kinder thought</label><textarea class="fa" id="br-good" rows="3" placeholder="Example: I\'m still learning, and this is still new to me."></textarea></div></div>'
+   +'<p><button class="btn" type="button" id="br-save">Save my Bridge Thought</button><span class="saved" id="br-msg"></span></p>'
+   +'<details style="margin-top:1rem"><summary class="cz" style="cursor:pointer;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)">Need ideas? Tap one to try it</summary>'
+   +ex.map(function(e,i){return'<button type="button" class="ex" data-ex="'+i+'"><b>'+esc(e[0])+':</b> <i>"'+esc(e[1])+'"</i> → "'+esc(e[2])+'"</button>'}).join("")+'</details><div id="br-log"></div></div>';
+  $("tools").innerHTML=h;S.ex=ex;
+  renderLogs();
+}
+function renderLogs(){
+  var pl=S.log.slice().reverse().map(function(x,i){var idx=S.log.length-1-i;return'<div class="logitem"><button class="x" type="button" data-dellog="'+idx+'" aria-label="Delete">×</button><div class="dt">'+esc(x.d)+'</div>'+(x.name?'<div><b>Named:</b> '+esc(x.name)+'</div>':'')+(x.feel&&x.feel.length?'<div><b>Feeling:</b> '+esc(x.feel.join(", "))+'</div>':'')+(x.pray?'<div><b>Prayed:</b> '+esc(x.pray)+'</div>':'')+(x.elect?'<div><b>Elected:</b> '+esc(x.elect)+'</div>':'')+'</div>'}).join("");
+  $("pr-log").innerHTML=S.log.length?'<div class="blk-h" style="margin-top:1.2rem">My protocol log ('+S.log.length+')</div>'+pl:"";
+  var bl=S.bridge.slice().reverse().map(function(x,i){var idx=S.bridge.length-1-i;return'<div class="logitem"><button class="x" type="button" data-delbr="'+idx+'" aria-label="Delete">×</button><div class="dt">'+esc(x.d)+'</div><div>"'+esc(x.bad)+'"</div><div style="color:var(--gold)">⟶</div><div><b>"'+esc(x.good)+'"</b></div></div>'}).join("");
+  $("br-log").innerHTML=S.bridge.length?'<div class="blk-h" style="margin-top:1.2rem">My Bridge Thoughts ('+S.bridge.length+')</div>'+bl:"";
+  updateBridgeCount();
+}
+function updateBridgeCount(){var e=$("w3-bridge-count");if(e)e.textContent=S.bridge.length}
+
+function renderFinish(){
+  $("finish").innerHTML='<div class="tool"><h3>A Note to Future Me</h3><div class="sub">Write a short letter to yourself. Tell yourself what you learned, what you want to remember, and what you hope for.</div>'+ta("future","My note to future me:",8)+'<div class="verse" style="margin-top:1rem">"Be still, and know that I am God."<b>Psalm 46:10</b></div>'
+   +'<div class="chkrow" data-prog="done_all" style="margin-top:1rem"><div class="resource-check'+(S.prog.done_all?" checked":"")+'">'+(S.prog.done_all?"✓":"")+'</div><span><b>I finished my six weeks.</b> You did the work. Receive it.</span></div></div>';
+}
+
+/* ============================ PROGRESS ============================ */
+function allProgIds(){var ids=[];S.weeks.forEach(function(w){weekItems(w).forEach(function(i){ids.push(w.n+"_"+i[0])})});ids.push("done_all");return ids}
+function updateProgress(){
+  var ids=allProgIds(),d=ids.filter(function(i){return S.prog[i]}).length,p=Math.round(d/ids.length*100);
+  $("prog-fill").style.width=p+"%";$("prog-pct").textContent=p+"% complete";
+  S.weeks.forEach(function(w){var items=weekItems(w),done=items.filter(function(i){return S.prog[w.n+"_"+i[0]]}).length;var c=document.querySelector("#wk"+w.n+" .week-progress");if(c)c.textContent=done+"/"+items.length+" done"});
+}
+
+/* ============================ SENDING / EXPORT ============================ */
+function weekText(n){
+  var lines=[];S.order.forEach(function(id){if(id.indexOf("w"+n+"_")!==0)return;var v=S.data[id];if(v&&String(v).trim()){lines.push(S.labels[id].replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday): /,"")+(/_d\d_c\d$/.test(id)?" ["+DAYS7[+id.match(/_d(\d)_/)[1]]+"]":"")+"\n"+(v==="yes"?"Yes":v)+"\n")}});
+  if(n===3&&S.bridge.length){lines.push("MY BRIDGE THOUGHTS\n"+S.bridge.map(function(b){return'"'+b.bad+'"  ->  "'+b.good+'"'}).join("\n")+"\n")}
+  return lines.join("\n");
+}
+async function sendWeek(n){
+  var msgEl=$("sendmsg"+n),txt=weekText(n);
+  if(!txt.trim()){msgEl.style.color="var(--rose)";msgEl.textContent="Write something in Week "+n+" first.";return}
+  msgEl.style.color="var(--green)";msgEl.textContent="Sending...";
+  try{
+    var r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({_subject:"Teen Portal · "+S.T.name+" · Week "+n,name:S.T.name,week:"Week "+n+": "+S.weeks[n-1].title,message:txt,_gotcha:""})});
+    if(!r.ok)throw 0;msgEl.textContent="✓ Sent to Cassandra.";
+  }catch(e){msgEl.style.color="var(--rose)";msgEl.textContent="That didn't send. Check your connection and try again, or show Cassandra on your screen."}
+}
+function buildJournalText(){
+  var o="ROOTED IN REAL LIFE · "+S.T.name.toUpperCase()+"'S JOURNAL\n\n";
+  S.weeks.forEach(function(w){var t=weekText(w.n);if(t.trim())o+="=== WEEK "+w.n+": "+w.title+" ===\n\n"+t+"\n"});
+  if(S.log.length)o+="=== HARD-MOMENT PROTOCOL LOG ===\n\n"+S.log.map(function(x){return x.d+"\nNamed: "+x.name+"\nFeeling: "+(x.feel||[]).join(", ")+"\nPrayed: "+x.pray+"\nElected: "+x.elect+"\n"}).join("\n")+"\n";
+  if(S.bridge.length)o+="=== BRIDGE THOUGHTS ===\n\n"+S.bridge.map(function(b){return b.d+"\n\""+b.bad+"\" -> \""+b.good+"\"\n"}).join("\n")+"\n";
+  if(S.data.future)o+="=== NOTE TO FUTURE ME ===\n\n"+S.data.future+"\n";
+  return o;
+}
+function downloadJournal(){
+  var blob=new Blob([buildJournalText()],{type:"text/plain"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download=S.T.name+"-journal.txt";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+}
+
+/* ============================ EVENTS ============================ */
+function today(){var d=new Date();return d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}
+document.addEventListener("input",function(e){var t=e.target;if(t.dataset&&t.dataset.f){S.data[t.dataset.f]=t.value;saveData()}});
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-pick],[data-chk],[data-prog],[data-gotoprep],[data-prepweek],[data-send],[data-feel],[data-pray],[data-ex],[data-dellog],[data-delbr],.week-header");if(!t)return;
+  if(t.classList.contains("week-header")){var b=t.nextElementSibling,o=!b.classList.contains("open");b.classList.toggle("open",o);t.classList.toggle("open",o);t.querySelector(".week-chevron").classList.toggle("open",o);return}
+  var d=t.dataset;
+  if(d.pick){var id=d.pick;S.data[id]=(S.data[id]===d.v)?"":d.v;saveData();document.querySelectorAll('[data-pick="'+id+'"]').forEach(function(c){c.classList.toggle("on",c.dataset.v===S.data[id])});return}
+  if(d.chk){var on=S.data[d.chk]==="yes";S.data[d.chk]=on?"":"yes";saveData();var c=t.querySelector(".resource-check");c.classList.toggle("checked",!on);c.textContent=on?"":"✓";return}
+  if(d.prog){S.prog[d.prog]=!S.prog[d.prog];lsSet("prog",S.prog);var c2=t.querySelector(".resource-check");c2.classList.toggle("checked",!!S.prog[d.prog]);c2.textContent=S.prog[d.prog]?"✓":"";updateProgress();return}
+  if(d.gotoprep){S.prepWeek=+d.gotoprep;showPrepWeek();$("sec-prep").scrollIntoView({behavior:"smooth"});return}
+  if(d.prepweek){S.prepWeek=+d.prepweek;showPrepWeek();return}
+  if(d.send){sendWeek(+d.send);return}
+  if(d.feel){t.classList.toggle("on");return}
+  if(d.pray){$("pr-prayer").value=d.pray;return}
+  if(d.ex!==undefined){var x=S.ex[+d.ex];$("br-bad").value=x[1];$("br-good").value=x[2];$("br-bad").focus();return}
+  if(d.dellog!==undefined){if(confirm("Delete this entry?")){S.log.splice(+d.dellog,1);lsSet("log",S.log);renderLogs()}return}
+  if(d.delbr!==undefined){if(confirm("Delete this entry?")){S.bridge.splice(+d.delbr,1);lsSet("bridge",S.bridge);renderLogs()}return}
+});
+function showPrepWeek(){
+  document.querySelectorAll("[data-prepweek]").forEach(function(c){c.classList.toggle("on",+c.dataset.prepweek===S.prepWeek)});
+  S.weeks.forEach(function(w){var e=$("prepset"+w.n);if(e)e.style.display=(w.n===S.prepWeek)?"block":"none"});
+}
+function flash(id,msg){var e=$(id);e.textContent=msg;clearTimeout(e._t);e._t=setTimeout(function(){e.textContent=""},2200)}
+document.addEventListener("click",function(e){
+  if(e.target.id==="pr-save"){
+    var name=$("pr-name").value.trim(),prayer=$("pr-prayer").value.trim(),el=$("pr-elect").value.trim();
+    var feel=[].map.call(document.querySelectorAll("#pr-feel .chip.on"),function(c){return c.dataset.feel});
+    if(!name&&!prayer&&!el&&!feel.length){flash("pr-msg","Fill in at least one step.");return}
+    S.log.push({d:today(),name:name,feel:feel,pray:prayer,elect:el});lsSet("log",S.log);
+    $("pr-name").value="";$("pr-prayer").value="";$("pr-elect").value="";document.querySelectorAll("#pr-feel .chip.on").forEach(function(c){c.classList.remove("on")});
+    renderLogs();flash("pr-msg","✓ Saved");
+  }
+  if(e.target.id==="br-save"){
+    var bad=$("br-bad").value.trim(),good=$("br-good").value.trim();
+    if(!bad||!good){flash("br-msg","Write both thoughts.");return}
+    S.bridge.push({d:today(),bad:bad,good:good});lsSet("bridge",S.bridge);$("br-bad").value="";$("br-good").value="";renderLogs();flash("br-msg","✓ Saved");
+  }
+  if(e.target.closest("#dl-journal")){e.preventDefault();downloadJournal()}
+});
+
+/* ============================ LOGIN ============================ */
+function showErr(m){var e=$("login-error");e.textContent=m;e.style.display="block"}
+async function attemptLogin(){
+  var name=$("name-in").value,pw=$("pw-in").value,btn=$("login-btn");
+  $("login-error").style.display="none";
+  if(!normName(name)){showErr("Please enter your first name.");return}
+  if(!pw.trim()){showErr("Please enter your access code.");return}
+  if(!window.crypto||!crypto.subtle){showErr("This browser can't open the portal securely. Please open it in Safari or Chrome with the https address.");return}
+  if(typeof TEEN_DATA==="undefined"){showErr("The portal data didn't load. Please refresh and try again.");return}
+  btn.disabled=true;btn.textContent="Opening...";
+  try{
+    var id=await teenId(name),entry=TEEN_DATA[id];
+    if(!entry)throw 0;
+    var T=await decryptRecord(entry,pw);
+    startSession(id,T);
+  }catch(e){showErr("That name and code don't match. Please check with Cassandra.")}
+  btn.disabled=false;btn.textContent="Enter My Portal →";
+}
+function startSession(id,T){
+  S.id=id;S.T=T;S.data=lsGet("data",{});S.prog=lsGet("prog",{});S.log=lsGet("log",[]);S.bridge=lsGet("bridge",[]);S.labels={};S.order=[];S.prepWeek=1;
+  S.weeks=buildWeeks(T);
+  $("nav-name").textContent=T.name;$("hello").textContent="Welcome, "+T.name;
+  renderSnapshot(T);renderWeeks();renderTools();renderPrep();renderFinish();updateProgress();
+  $("login-screen").style.display="none";$("portal").style.display="block";window.scrollTo(0,0);
+}
+function logout(){
+  S.id=null;S.T=null;S.data={};$("portal").style.display="none";$("login-screen").style.display="flex";
+  $("pw-in").value="";$("name-in").value="";["weeks","snapshot","tools","prep","finish"].forEach(function(i){$(i).innerHTML=""});window.scrollTo(0,0);
+}
+$("login-btn").addEventListener("click",attemptLogin);
+$("pw-in").addEventListener("keydown",function(e){if(e.key==="Enter")attemptLogin()});
+$("name-in").addEventListener("keydown",function(e){if(e.key==="Enter")$("pw-in").focus()});
+$("logout-btn").addEventListener("click",logout);
+
+</script>
+</body>
+</html>

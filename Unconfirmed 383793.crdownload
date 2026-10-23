@@ -1,0 +1,6 @@
+/* Teen portal data. Each teen's results are locked with her own access code.
+   To add a teen, use teen-admin.html and paste the line it gives you just above the closing brace. */
+window.TEEN_DATA={
+  "9bbfd13fd139f058": {"s":"lbg+4g3Q8NazLBaypCgayQ==","i":"XEqeRrUYFqWnSAuN","n":310000,"c":"Uc68SJkkLrjG68gE9O8WheVPUSZjWeRJa8FTE12zwsjriHtiqtAzAH42oorDorkFsZY/z7nNy6OJSex89B0w5l48/wVxM68xSJ2w1lcZshwUIe//Nn+PuVcrCoqLpKQxPuy2zviOVhii9PabD29T/2MD5bChw+XjAewRukSi7fWMVQ5t9OeFSmRRZNrbqxRoSBBEYH8UbU363P6QslXacoK24YMtcVthLRF/6bKdAKMn+UIYWCAW4VjT5iyU2uNjho9wtQ1OGLETjLPbK6WUZHfVA1IfU6nao/W5kv7xuKuV"}, /* 9bbfd13fd139f058 */
+  "9fefaecaf59a6030": {"s":"cRjKapbWN9w+2NiPFrDHvA==","i":"AH/ajqGYPYSVEUXE","n":310000,"c":"o4MWP0DIvKIMEUqql9iaVVNNzBCoeDhtNqzWUKQcLCRh9Z1mS9lxSnLywXnvOaXTfgoaA3GXaugWXBQhhtTX6ukpK6dgTCQMok7Xp51LQeUv0DMHP7Es7zJLryNyx7gRZc7v6FhtyhgVAFTh5mPzzbakhp6a0DHev08iqSLQIUQJxFbkH8jWGbzSU30LyNUkDgMGQ9qPk857WkbCF8SplugrMHJ2vFbDtRmWS7wLtPRUhtGLRrmHo/UlfmQihoe52ZlGF/TG"}, /* 9fefaecaf59a6030 */
+};
