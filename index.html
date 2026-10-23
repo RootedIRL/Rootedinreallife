@@ -794,6 +794,15 @@ footer{background:var(--parch-dark);border-top:none}
 .footer-bottom{border-top:1px solid var(--border)}
 .footer-copy{color:rgba(42,34,48,.5)}
 .footer-verse{color:#9C7A52}
+.pl-price{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.pl-opt{border:1px solid var(--border);background:var(--parchment);padding:16px 16px 14px;border-radius:2px}
+.pl-opt-feature{border-color:var(--gold);background:var(--gold-light)}
+.pl-opt-label{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.pl-opt-price{font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1;color:var(--ink);margin-bottom:8px}
+.pl-opt-desc{font-family:'EB Garamond',serif;font-size:14px;line-height:1.55;color:rgba(42,34,48,.72)}
+.pl-price-link{display:inline-block;margin-top:14px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);border-bottom:1px solid var(--border);padding-bottom:2px}
+.pl-price-link:hover{color:var(--deep);border-color:var(--purple-mid)}
+@media(max-width:600px){.pl-price{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1126,6 +1135,19 @@ footer{background:var(--parch-dark);border-top:none}
             all woven into six weeks of coaching using the R.O.O.T.E.D. Model. 
             This is where every woman begins.</p>
           <div class="pl-weeks">6 weeks · Weekly sessions · Personalized journal</div>
+          <div class="pl-price">
+            <div class="pl-opt">
+              <div class="pl-opt-label">The Course</div>
+              <div class="pl-opt-price">$97</div>
+              <div class="pl-opt-desc">Six weeks of video lessons and worksheets, at your own pace.</div>
+            </div>
+            <div class="pl-opt pl-opt-feature">
+              <div class="pl-opt-label">Course + Coaching</div>
+              <div class="pl-opt-price">$497</div>
+              <div class="pl-opt-desc">Everything in the course, plus six 1:1 sessions with Cassandra and a journal built from your Soul Portrait.</div>
+            </div>
+          </div>
+          <a class="pl-price-link" href="#cta">Begin with the free Soul Portrait →</a>
         </div>
       </div>
       <div class="pl-card reveal" style="transition-delay:.08s">
