@@ -90,6 +90,7 @@ button{font-family:inherit}
 .week-body.open{display:block}
 .video-wrap{position:relative;padding-bottom:56.25%;height:0;margin-bottom:1.1rem;background:#1A1430}
 .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-ph{position:relative;padding:3.2rem 1rem;margin-bottom:1.1rem;text-align:center;background:linear-gradient(160deg,var(--deep),#2A1E3A);border:1px solid var(--border)}.vp-play{width:54px;height:54px;border-radius:50%;border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-size:1.2rem;padding-left:4px}.vp-t{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#F0EAF8}.vp-s{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(184,149,106,.9);margin-top:.3rem}
 .blk{margin-top:1.3rem}
 .blk-h{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--purple);margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:1px solid var(--border)}
 .big p{line-height:1.7;margin-bottom:.7rem}
@@ -321,7 +322,7 @@ var SAB={
 var FORM_ENDPOINT="https://formspree.io/f/xdeazlzl";
 var COACH_CONTACT="cassandra@rootedirl.live";
 /* WEEKLY VIDEOS: paste a YouTube link (or just the video ID) between the quotes.
-   While a week is blank, no video box shows for that week. */
+   While a week is blank, a "coming soon" box shows for that week. */
 var VIDEOS={1:"",2:"",3:"",4:"",5:"",6:""};
 var PBKDF_ITER_DEFAULT=310000;
 
@@ -544,9 +545,10 @@ function renderWeeks(){
     var items=weekItems(w),done=items.filter(function(i){return S.prog[w.n+"_"+i[0]]}).length;
     var vid=ytEmbed(VIDEOS[w.n]);
     var body="";
+    if(!vid)body+='<div class="video-ph"><div class="vp-play">▶</div><div class="vp-t">Week '+w.n+' video</div><div class="vp-s">Coming soon. Cassandra will add it here.</div></div>';
     if(vid)body+='<div class="video-wrap"><iframe src="'+vid+'" title="Week '+w.n+' video" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
     body+=blk("This week's lesson",'<div class="big">'+w.big.map(function(p){return"<p>"+p+"</p>"}).join("")+'</div><div class="verse">"'+esc(w.verse[0])+'"<b>'+esc(w.verse[1])+'</b></div><div class="blk-h" style="margin-top:1rem;border:none;margin-bottom:.2rem">This week I will</div><ul class="will">'+w.will.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>');
-    body+=blk("Worksheet",w.ws());
+    body+=blk("Worksheet",'<p style="margin-bottom:.4rem"><a class="btn ghost" style="text-decoration:none" href="teen-week'+w.n+'-worksheet.pdf" target="_blank" rel="noopener">⬇ Download printable worksheet (PDF)</a></p><p class="note-soft" style="margin-top:.3rem">Prefer paper? Print it and watch the video with a pen. Or fill it in right here.</p>'+w.ws());
     body+=blk("Daily check-in",stripDay(dailyBlock(w.n,w.daily[0],w.daily[1])));
     body+=blk("Reflect",w.reflect.map(function(r){return ta(r[0],r[1],3)}).join("")+'<p style="margin-top:1rem"><button class="btn ghost" type="button" data-gotoprep="'+w.n+'">Get ready for my 1:1 ↓</button></p>');
     body+='<div class="blk"><div class="blk-h">Check off what I\'ve finished</div><div class="resource-list">'+items.map(function(i){var on=!!S.prog[w.n+"_"+i[0]];return'<div class="resource-item" data-prog="'+w.n+'_'+i[0]+'"><div class="resource-check'+(on?" checked":"")+'">'+(on?"✓":"")+'</div><div class="resource-title">'+i[1]+'</div></div>'}).join("")+'</div></div>';
