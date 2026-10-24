@@ -38,6 +38,9 @@ small{color:#7a7283}
 <input type="text" id="pw" placeholder="Click Make a code, or type your own">
 <button type="button" id="gen">Make a code</button> <small>Three words and a number. Capitals and spaces don't matter when she types it.</small>
 
+<label for="jn">Personalized journal file name (optional, the PDF you upload to the site)</label>
+<input type="text" id="jn" placeholder="sofia-6-week-journal.pdf">
+
 <h2>2. Her Soul Portrait results</h2>
 <label for="t1">Main temperament</label>
 <select id="t1"><option value="">Choose...</option><option value="choleric">Choleric</option><option value="melancholic">Melancholic</option><option value="sanguine">Sanguine</option><option value="phlegmatic">Phlegmatic</option></select>
@@ -93,7 +96,7 @@ $("mk").onclick=async function(){
   if(!name)err.push("a first name");if(!pw||pw.length<8)err.push("an access code (8+ characters)");if(!t1)err.push("a main temperament");if(!f.length)err.push("a predominant fault");if(!c.length)err.push("charisms");if(!sabSeq.length)err.push("saboteurs");
   if(err.length){$("out").innerHTML='<div class="warn">Please add: '+err.join(", ")+'.</div>';return}
   var nm=name.charAt(0).toUpperCase()+name.slice(1);
-  var rec={name:nm,temps:[t1].concat(t2&&t2!==t1?[t2]:[]),faults:f,near:n.filter(function(x){return f.indexOf(x)<0}),charisms:c,sabs:sabSeq.slice()};
+  var rec={name:nm,temps:[t1].concat(t2&&t2!==t1?[t2]:[]),faults:f,near:n.filter(function(x){return f.indexOf(x)<0}),charisms:c,sabs:sabSeq.slice()};var jn=$("jn").value.trim();if(jn)rec.journal=jn;
   var id=await teenId(name),entry=await encrypt(rec,pw);
   var line='  "'+id+'": '+JSON.stringify(entry)+', /* '+id+' */\n';
   $("out").innerHTML='<div class="codebox"><b>Sign-in:</b> '+nm+'<br><b>Access code:</b> '+pw.replace(/</g,"&lt;")+'</div><small>Give her those two things. Keep a copy of the code: the page can\'t show it to you again.</small>'

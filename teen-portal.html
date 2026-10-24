@@ -230,7 +230,8 @@ select.fi{appearance:auto}
 
     <div class="section-label">Keep &amp; Share</div>
     <div class="cards-dl">
-      <a class="dl" id="dl-journal"><div class="ic">📓</div><div class="tt">Download My Journal</div><div class="ss">Everything I've written, as a text file</div></a>
+      <a class="dl" id="dl-pjournal" href="#"><div class="ic">📓</div><div class="tt">My Personalized Journal</div><div class="ss">My 6-week journal, built from my Soul Portrait (PDF)</div></a>
+      <a class="dl" id="dl-journal" href="#"><div class="ic">✍️</div><div class="tt">Download What I Wrote</div><div class="ss">Everything I've typed in my portal (PDF)</div></a>
       <a class="dl" href="https://rootedirl.live" target="_blank" rel="noopener"><div class="ic">✝</div><div class="tt">Back to Main Site</div><div class="ss">rootedirl.live</div></a>
     </div>
 
@@ -623,17 +624,73 @@ async function sendWeek(n){
     if(!r.ok)throw 0;msgEl.textContent="✓ Sent to Cassandra.";
   }catch(e){msgEl.style.color="var(--rose)";msgEl.textContent="That didn't send. Check your connection and try again, or show Cassandra on your screen."}
 }
-function buildJournalText(){
-  var o="ROOTED IN REAL LIFE · "+S.T.name.toUpperCase()+"'S JOURNAL\n\n";
-  S.weeks.forEach(function(w){var t=weekText(w.n);if(t.trim())o+="=== WEEK "+w.n+": "+w.title+" ===\n\n"+t+"\n"});
-  if(S.log.length)o+="=== HARD-MOMENT PROTOCOL LOG ===\n\n"+S.log.map(function(x){return x.d+"\nNamed: "+x.name+"\nFeeling: "+(x.feel||[]).join(", ")+"\nPrayed: "+x.pray+"\nElected: "+x.elect+"\n"}).join("\n")+"\n";
-  if(S.bridge.length)o+="=== BRIDGE THOUGHTS ===\n\n"+S.bridge.map(function(b){return b.d+"\n\""+b.bad+"\" -> \""+b.good+"\"\n"}).join("\n")+"\n";
-  if(S.data.future)o+="=== NOTE TO FUTURE ME ===\n\n"+S.data.future+"\n";
-  return o;
+var HW={32:278,33:278,34:355,35:556,36:556,37:889,38:667,39:191,40:333,41:333,42:389,43:584,44:278,45:333,46:278,47:278,58:278,59:278,60:584,61:584,62:584,63:556,64:1015,65:667,66:667,67:722,68:722,69:667,70:611,71:778,72:722,73:278,74:500,75:667,76:556,77:833,78:722,79:778,80:667,81:778,82:722,83:667,84:611,85:722,86:667,87:944,88:667,89:667,90:611,91:278,92:278,93:278,94:469,95:556,96:333,97:556,98:556,99:500,100:556,101:556,102:278,103:556,104:556,105:222,106:222,107:500,108:222,109:833,110:556,111:556,112:556,113:556,114:333,115:500,116:278,117:556,118:500,119:722,120:500,121:500,122:500,123:334,124:260,125:334,126:584};
+for(var d=48;d<=57;d++)HW[d]=556;
+function pdfClean(s){
+  return String(s==null?"":s).replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,"-").replace(/…/g,"...").replace(/→|⟶/g,"->").replace(/·/g,"-").replace(/\r/g,"")
+   .replace(/[^\n\x20-\x7E]/g,function(c){var k=c.charCodeAt(0);return(k>=160&&k<=255)?c:""});
+}
+function tw(t,size,bold){var w=0;for(var i=0;i<t.length;i++){w+=(HW[t.charCodeAt(i)]||556)}return w*size/1000*(bold?1.08:1)}
+function wrapPdf(text,size,bold,maxw){
+  var out=[];pdfClean(text).split("\n").forEach(function(par){
+    if(!par.trim()){out.push("");return}
+    var words=par.split(" "),line="";
+    words.forEach(function(w){var test=line?line+" "+w:w;if(tw(test,size,bold)<=maxw||!line){line=test}else{out.push(line);line=w}});
+    out.push(line);
+  });return out;
+}
+function pdfEsc(s){return s.replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)")}
+function buildPdf(blocks,footer){
+  var PW=612,PH=792,M=54,TOP=738,BOT=62,maxw=PW-2*M,pages=[[]],y=TOP;
+  function np(){pages.push([]);y=TOP}
+  function line(f,sz,col,txt,lead,x){if(y-lead<BOT)np();pages[pages.length-1].push({f:f,s:sz,c:col,t:txt,x:x||M,y:y});y-=lead}
+  var PUR="0.42 0.36 0.54",INK="0.16 0.13 0.19",GOLD="0.72 0.58 0.42",GREY="0.5 0.47 0.55";
+  blocks.forEach(function(b){
+    if(b.k==="title"){wrapPdf(b.s,20,true,maxw).forEach(function(l){line(2,20,PUR,l,26)});y-=4;if(b.sub){wrapPdf(b.sub,11,false,maxw).forEach(function(l){line(1,11,GREY,l,15)})}y-=10}
+    else if(b.k==="h"){if(y-60<BOT)np();y-=10;wrapPdf(b.s,14,true,maxw).forEach(function(l){line(2,14,PUR,l,19)});pages[pages.length-1].push({rule:1,y:y+4,x:M,w:maxw});y-=6}
+    else if(b.k==="label"){if(y-50<BOT)np();y-=4;wrapPdf(b.s,10.5,true,maxw).forEach(function(l){line(2,10.5,INK,l,14)})}
+    else{wrapPdf(b.s,11,false,maxw).forEach(function(l){line(1,11,INK,l,14.5)});y-=6}
+  });
+  var objs=[],off=[];
+  function add(s){objs.push(s);return objs.length}
+  add("<< /Type /Catalog /Pages 2 0 R >>");add("");add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+  var kids=[];
+  pages.forEach(function(pg,pi){
+    var cs="";
+    pg.forEach(function(it){
+      if(it.rule){cs+="q "+GOLD+" RG 0.7 w "+it.x+" "+it.y.toFixed(1)+" m "+(it.x+it.w)+" "+it.y.toFixed(1)+" l S Q\n"}
+      else if(it.t){cs+="BT /F"+it.f+" "+it.s+" Tf "+it.c+" rg "+it.x+" "+it.y.toFixed(1)+" Td ("+pdfEsc(it.t)+") Tj ET\n"}
+    });
+    cs+="BT /F1 8 Tf "+GREY+" rg "+M+" 36 Td ("+pdfEsc(pdfClean(footer))+"   |   Page "+(pi+1)+" of "+pages.length+") Tj ET\n";
+    var cid=add("<< /Length "+cs.length+" >>\nstream\n"+cs+"endstream");
+    var pid=add("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 "+PW+" "+PH+"] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents "+cid+" 0 R >>");
+    kids.push(pid+" 0 R");
+  });
+  objs[1]="<< /Type /Pages /Kids ["+kids.join(" ")+"] /Count "+kids.length+" >>";
+  var out="%PDF-1.4\n";
+  objs.forEach(function(o,i){off.push(out.length);out+=(i+1)+" 0 obj\n"+o+"\nendobj\n"});
+  var xr=out.length;out+="xref\n0 "+(objs.length+1)+"\n0000000000 65535 f \n";
+  off.forEach(function(o){out+=("0000000000"+o).slice(-10)+" 00000 n \n"});
+  out+="trailer\n<< /Size "+(objs.length+1)+" /Root 1 0 R >>\nstartxref\n"+xr+"\n%%EOF";
+  var u=new Uint8Array(out.length);for(var i=0;i<out.length;i++)u[i]=out.charCodeAt(i)&255;return u;
+}
+function weekPairs(n){
+  var r=[];S.order.forEach(function(id){if(id.indexOf("w"+n+"_")!==0)return;var v=S.data[id];if(v&&String(v).trim()){var lab=S.labels[id].replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday): /,"");if(/_d\d_c\d$/.test(id))lab+=" ("+DAYS7[+id.match(/_d(\d)_/)[1]]+")";r.push([lab,v==="yes"?"Yes":v])}});return r;
+}
+function journalBlocks(){
+  var B=[{k:"title",s:S.T.name+"'s Six-Week Journal",sub:"Rooted in Real Life  -  everything I wrote in my portal"}];
+  S.weeks.forEach(function(w){var pr=weekPairs(w.n),br=(w.n===3?S.bridge:[]);if(!pr.length&&!br.length)return;
+    B.push({k:"h",s:"Week "+w.n+": "+w.title});pr.forEach(function(p){B.push({k:"label",s:p[0]});B.push({k:"p",s:p[1]})});
+    if(br.length){B.push({k:"label",s:"My Bridge Thoughts"});br.forEach(function(b){B.push({k:"p",s:'"'+b.bad+'"  ->  "'+b.good+'"'})})}});
+  if(S.log.length){B.push({k:"h",s:"My Hard-Moment Protocol Log"});S.log.forEach(function(x){B.push({k:"label",s:x.d});B.push({k:"p",s:"Named: "+(x.name||"")+"\nFeeling: "+(x.feel||[]).join(", ")+"\nPrayed: "+(x.pray||"")+"\nElected: "+(x.elect||"")})})}
+  if(S.bridge.length){B.push({k:"h",s:"My Bridge Thoughts"});S.bridge.forEach(function(b){B.push({k:"label",s:b.d});B.push({k:"p",s:'"'+b.bad+'"  ->  "'+b.good+'"'})})}
+  if(S.data.future&&S.data.future.trim()){B.push({k:"h",s:"A Note to Future Me"});B.push({k:"p",s:S.data.future})}
+  if(B.length===1)B.push({k:"p",s:"Nothing written yet. Come back after you've filled in some of your weeks."});
+  return B;
 }
 function downloadJournal(){
-  var blob=new Blob([buildJournalText()],{type:"text/plain"}),a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);a.download=S.T.name+"-journal.txt";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  var blob=new Blob([buildPdf(journalBlocks(),"Rooted in Real Life  -  "+S.T.name+"'s journal")],{type:"application/pdf"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download=S.T.name+"-my-writing.pdf";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);
 }
 
 /* ============================ EVENTS ============================ */
@@ -698,7 +755,7 @@ async function attemptLogin(){
 function startSession(id,T){
   S.id=id;S.T=T;S.data=lsGet("data",{});S.prog=lsGet("prog",{});S.log=lsGet("log",[]);S.bridge=lsGet("bridge",[]);S.labels={};S.order=[];S.prepWeek=1;
   S.weeks=buildWeeks(T);
-  $("nav-name").textContent=T.name;$("hello").textContent="Welcome, "+T.name;
+  $("nav-name").textContent=T.name;var pj=$("dl-pjournal");if(pj){if(T.journal){pj.href=T.journal;pj.target="_blank";pj.rel="noopener";pj.onclick=null}else{pj.removeAttribute("href");pj.onclick=function(e){e.preventDefault();alert("Your personalized journal will be ready soon.")}}}$("hello").textContent="Welcome, "+T.name;
   renderSnapshot(T);renderWeeks();renderTools();renderPrep();renderFinish();updateProgress();
   $("login-screen").style.display="none";$("portal").style.display="block";window.scrollTo(0,0);
 }
