@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>What's Your Temperament? · Rooted in Real Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2A2230;--ink2:#4A3F5C;--parch:#FAF6F0;--lav:#EDE5F5;--purple:#6B5B8A;--mid:#8B7BA8;--rose:#C47B8A;--gold:#B8956A;--green:#5A7A5A;
+--serif:'EB Garamond',Georgia,serif;--display:'Cinzel',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--parch);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.5}
+header{background:var(--mid);color:#fff;text-align:center;padding:14px 16px 12px}
+header .x{color:#F1DDB8;font-size:20px;line-height:1}
+header h1{margin:2px 0 0;font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.04em}
+.bar{height:6px;background:var(--lav)}.bar>div{height:100%;width:0;background:var(--gold);transition:width .3s}
+main{max-width:600px;margin:0 auto;padding:22px 16px 60px}
+.kick{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);font-weight:700;margin:0 0 6px}
+h2{font-family:var(--display);color:var(--purple);font-size:25px;line-height:1.2;margin:0 0 8px;font-weight:600}
+.q{font-size:22px;font-weight:500;margin:0 0 14px}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:19px;background:#fff;border:1.5px solid #d8cfe6;border-radius:12px;padding:13px 14px;margin:0 0 10px;color:var(--ink);cursor:pointer}
+.opt:active,.opt:hover{border-color:var(--purple);background:var(--lav)}
+.btn{font-family:var(--sans);font-weight:700;font-size:16px;background:var(--purple);color:#fff;border:0;border-radius:10px;padding:13px 22px;cursor:pointer}
+.btn.alt{background:#fff;color:var(--purple);border:1.5px solid var(--purple)}
+.note{font-style:italic;color:var(--ink2)}
+.res{background:#fff;border:1px solid var(--lav);border-left:6px solid var(--purple);border-radius:12px;padding:16px;margin:0 0 14px}
+.res h3{font-family:var(--display);margin:0 0 2px;font-size:24px;color:var(--purple)}
+.tag{font-style:italic;color:var(--ink2);margin:0 0 10px}
+.res b{font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.res p{margin:2px 0 10px}
+.mini{display:grid;grid-template-columns:90px 1fr 34px;gap:8px;align-items:center;font-family:var(--sans);font-size:14px;margin:6px 0}
+.mini i{display:block;height:12px;border-radius:6px;background:var(--lav);overflow:hidden}.mini i span{display:block;height:100%}
+.hid{display:none}
+</style>
+</head>
+<body>
+<header><div class="x">&#10013;</div><h1>Rooted in Real Life</h1></header>
+<div class="bar"><div id="pb"></div></div>
+<main>
+<section id="start">
+<p class="kick">Youth quiz &middot; about 2 minutes</p>
+<h2>What's your temperament?</h2>
+<p>God gave each of us a natural way of being: how we think, feel, and react. The old name for it is <b>temperament</b>. There are four, and none is better than another.</p>
+<p>Eight quick questions. Pick the answer that sounds most like you <i>most of the time</i>, not who you wish you were. No names, nothing is saved or sent. It all stays on your phone.</p>
+<button class="btn" id="go">Start</button>
+</section>
+<section id="quiz" class="hid">
+<p class="kick" id="cnt"></p>
+<p class="q" id="qt"></p>
+<div id="opts"></div>
+</section>
+<section id="out" class="hid"></section>
+</main>
+<script>
+var T={
+ choleric:{n:"Choleric",tag:"The Leader: bold, driven, decisive",c:"#C47B8A",
+  gift:"You see a goal and go. You're confident, decisive, and people follow you when things get chaotic.",
+  edge:"Impatience, anger, and needing to be right or in charge. Slow down and listen before you decide.",
+  saint:"St. Paul, St. Peter, St. Teresa of Avila",tip:"Ask God this week: \"Who needs me to listen more than lead?\""},
+ sanguine:{n:"Sanguine",tag:"The Encourager: warm, fun, lively",c:"#B8956A",
+  gift:"You bring joy into a room. You make friends easily, forgive fast, and lift people up.",
+  edge:"Staying scattered, talking more than listening, and wanting everyone to like you. Practice finishing things and sitting in quiet.",
+  saint:"St. Francis of Assisi, St. Philip Neri, St. John Paul II",tip:"Ask God this week: \"Who is overlooked, and how can I include them?\""},
+ melancholic:{n:"Melancholic",tag:"The Thinker: deep, loyal, careful",c:"#6B5B8A",
+  gift:"You feel things deeply and notice what others miss. You're faithful, thoughtful, and hold high standards.",
+  edge:"Perfectionism, self-criticism, and replaying mistakes. Remember that God's love is not a grade.",
+  saint:"St. Therese of Lisieux, St. Thomas Aquinas, St. Jerome",tip:"Ask God this week: \"What would it look like to be gentle with myself?\""},
+ phlegmatic:{n:"Phlegmatic",tag:"The Peacemaker: calm, steady, kind",c:"#5A7A5A",
+  gift:"You're steady and easy to be around. You listen well, keep the peace, and stay calm when others panic.",
+  edge:"Avoiding conflict, putting things off, and going along just to keep things quiet. Practice saying what you really think.",
+  saint:"St. Joseph, St. Therese Couderc, Bl. Pier Giorgio Frassati",tip:"Ask God this week: \"Where am I staying quiet when I should speak?\""}
+};
+var Q=[
+ {q:"A group project is starting. You usually...",a:[["choleric","Take charge and assign jobs"],["sanguine","Get everyone laughing and talking ideas"],["melancholic","Start planning the details so it's done right"],["phlegmatic","Go with the flow and help wherever needed"]]},
+ {q:"After a long week, you most want to...",a:[["sanguine","Hang out with a big group"],["melancholic","Have quiet time alone to think"],["choleric","Work toward a goal or compete at something"],["phlegmatic","Relax at home, no plans, no pressure"]]},
+ {q:"When someone upsets you, you tend to...",a:[["choleric","Say it right away, and maybe too strongly"],["sanguine","Get upset, then get over it quickly"],["melancholic","Go quiet and replay it for days"],["phlegmatic","Let it go to avoid a fight"]]},
+ {q:"Which sounds most like you?",a:[["melancholic","I notice details and hold high standards"],["phlegmatic","I'm calm when everyone else is stressed"],["sanguine","I make friends everywhere I go"],["choleric","I get things done and I don't quit"]]},
+ {q:"Your friends would probably say you're...",a:[["sanguine","Fun and outgoing"],["phlegmatic","Easygoing and a good listener"],["choleric","Strong-willed and direct"],["melancholic","Deep, loyal, and thoughtful"]]},
+ {q:"Your biggest struggle is probably...",a:[["phlegmatic","Putting things off or avoiding hard stuff"],["choleric","Being impatient or bossy"],["melancholic","Being too hard on myself"],["sanguine","Staying focused and finishing things"]]},
+ {q:"At Mass or prayer time, you are most drawn to...",a:[["melancholic","Silence, reflection, and thinking about meaning"],["sanguine","Music, joy, and being with the community"],["choleric","Action: serving, doing something about it"],["phlegmatic","Peace and routine, the comfort of the familiar"]]},
+ {q:"When a big decision comes up, you...",a:[["choleric","Decide fast and trust your gut"],["melancholic","Think it through from every angle"],["phlegmatic","Wait and see; you hate pressure"],["sanguine","Ask friends and go with what feels exciting"]]}
+];
+var i=0,score={choleric:0,sanguine:0,melancholic:0,phlegmatic:0},order=[];
+function $(x){return document.getElementById(x)}
+function shuffle(a){a=a.slice();for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=a[k];a[k]=a[j];a[j]=t}return a}
+function show(){
+  $("cnt").textContent="Question "+(i+1)+" of "+Q.length;$("pb").style.width=(i/Q.length*100)+"%";
+  $("qt").textContent=Q[i].q;var h=$("opts");h.innerHTML="";
+  shuffle(Q[i].a).forEach(function(o){var b=document.createElement("button");b.className="opt";b.textContent=o[1];b.onclick=function(){score[o[0]]++;i++;i<Q.length?show():done()};h.appendChild(b)});
+}
+function card(k,label){var t=T[k];return '<div class="res" style="border-left-color:'+t.c+'"><div class="kick" style="color:'+t.c+'">'+label+'</div><h3 style="color:'+t.c+'">'+t.n+'</h3><p class="tag">'+t.tag+'</p><b>Your gift</b><p>'+t.gift+'</p><b>Watch out for</b><p>'+t.edge+'</p><b>Saints like you</b><p>'+t.saint+'</p><b>Try this</b><p>'+t.tip+'</p></div>'}
+function done(){
+  $("pb").style.width="100%";$("quiz").className="hid";
+  var ks=Object.keys(score).sort(function(a,b){return score[b]-score[a]});
+  var g1=ks.filter(function(k){return score[k]===score[ks[0]]});
+  var rest=ks.filter(function(k){return g1.indexOf(k)<0});
+  var g2=g1.length===1?rest.filter(function(k){return score[k]===score[rest[0]]}):[];
+  var names=function(g){return g.map(function(k){return T[k].n}).join(" and ")};
+  var h='<p class="kick">Your result</p>';
+  if(g1.length>1){
+    h+='<h2>Your top temperaments: '+names(g1)+'</h2><p class="note">You tied, which is very normal. Read each one below and see which feels more like you. That one is probably your main, and the other your second.</p>';
+    g1.forEach(function(k){h+=card(k,"Tied for your top")});
+  }else{
+    h+='<h2>Main: '+T[ks[0]].n+'<br>Second: '+names(g2)+'</h2>';
+    h+=card(ks[0],"Your main temperament");
+    g2.forEach(function(k){h+=card(k,g2.length>1?"Tied for your second":"Your second temperament")});
+  }
+  h+='<div class="res" style="border-left-color:var(--mid)"><div style="margin-bottom:6px"><b>Your scores</b></div>';
+  ks.forEach(function(k){h+='<div class="mini"><span>'+T[k].n+'</span><i><span style="width:'+(score[k]/Q.length*100)+'%;background:'+T[k].c+'"></span></i><span>'+score[k]+'/'+Q.length+'</span></div>'});
+  h+='</div><p class="note">This is a quick, fun starting point, not a label or a test. Nobody is only one thing. Every temperament has gifts, every one has weak spots, and saints came from all four. God made you on purpose.</p>';
+  h+='<p style="margin-top:16px"><button class="btn alt" id="again">Take it again</button></p>';
+  $("out").innerHTML=h;$("out").className="";window.scrollTo(0,0);$("again").onclick=function(){location.reload()};
+}
+$("go").onclick=function(){$("start").className="hid";$("quiz").className="";show()};
+</script>
+</body>
+</html>
