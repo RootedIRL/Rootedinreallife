@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepare the Path · Rooted in Real Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple:       #6B5B8A;
+  --purple-light: #EDE5F5;
+  --purple-mid:   #8B7BA8;
+  --rose:         #C47B8A;
+  --rose-light:   #F7ECEF;
+  --green:        #5A7A5A;
+  --green-light:  #EAF1EA;
+  --gold:         #B8956A;
+  --gold-light:   #F5EDE0;
+  --gold-mid:     #D4A96A;
+  --ink:          #2A2230;
+  --deep:         #3D3450;
+  --parchment:    #FAF6F0;
+  --parch-dark:   #EEE4D5;
+  --border:       #D4C4E0;
+  --gray:         #888888;
+  --soft:         #F7F4FB;
+}
+
+body {
+  font-family: 'EB Garamond', serif;
+  color: var(--ink);
+  background: var(--parchment);
+  min-height: 100vh;
+}
+
+/* ── LOGIN SCREEN ─────────────────────────────────────────────────────── */
+#login-screen {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--deep) 0%, #1A1430 55%, #2A1E3A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(212,196,224,0.15);
+  padding: 3rem 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-cross {
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.login-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(184,149,106,0.7);
+  margin-bottom: 1.25rem;
+}
+
+.login-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #F0EAF8;
+  margin-bottom: 0.4rem;
+}
+
+.login-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(184,149,106,0.75);
+  margin-bottom: 2rem;
+}
+
+.login-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(212,196,224,0.5);
+  display: block;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.login-input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,196,224,0.2);
+  color: #F0EAF8;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.login-input:focus { border-color: var(--gold); }
+.login-input::placeholder { color: rgba(240,234,248,0.25); }
+
+.login-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--purple), var(--deep));
+  color: #F0EAF8;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-bottom: 0.75rem;
+}
+.login-btn:hover { opacity: 0.88; }
+
+.login-error {
+  color: var(--rose);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.login-scripture {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(184,149,106,0.45);
+  margin-top: 2rem;
+  line-height: 1.5;
+}
+
+/* ── PORTAL ───────────────────────────────────────────────────────────── */
+#portal { display: none; }
+
+/* Nav */
+.portal-nav {
+  background: var(--deep);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--gold);
+}
+
+.nav-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240,234,248,0.8);
+}
+
+.nav-brand span { color: var(--gold); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-client {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(184,149,106,0.75);
+}
+
+.nav-logout {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(212,196,224,0.45);
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.2s;
+}
+.nav-logout:hover { color: var(--rose); }
+
+/* Portal header */
+.portal-header {
+  background: linear-gradient(135deg, var(--deep) 0%, #2A1E3A 100%);
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.portal-greeting {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 0.6rem;
+}
+
+.portal-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #F0EAF8;
+  margin-bottom: 0.4rem;
+}
+
+.portal-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(184,149,106,0.75);
+  margin-bottom: 1.5rem;
+}
+
+/* Progress bar */
+.progress-wrap {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(212,196,224,0.4);
+  margin-bottom: 0.4rem;
+}
+.progress-track {
+  height: 4px;
+  background: rgba(212,196,224,0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple), var(--gold));
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* Main content */
+.portal-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* Section label */
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Start here card */
+.start-card {
+  background: linear-gradient(135deg, var(--purple-light), #F0EAF8);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+}
+.start-card h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--purple);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+.start-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.start-steps {
+  margin: 0.75rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+.start-steps li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.35rem 0;
+  font-size: 0.97rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+.start-steps li:last-child { border-bottom: none; }
+.step-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 1.2rem;
+  padding-top: 2px;
+}
+
+/* Week cards */
+.weeks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.week-card {
+  background: white;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.week-card:hover { box-shadow: 0 4px 20px rgba(107,91,138,0.1); }
+
+.week-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.week-header.open { border-bottom-color: var(--border); }
+
+.week-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--purple);
+  padding: 0.35rem 0.65rem;
+  flex-shrink: 0;
+}
+
+.week-title-wrap { flex: 1; }
+
+.week-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+.week-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-top: 0.1rem;
+}
+
+.week-progress {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  flex-shrink: 0;
+}
+
+.week-chevron {
+  color: var(--border);
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.week-chevron.open { transform: rotate(180deg); }
+
+.week-body {
+  display: none;
+  padding: 1.25rem;
+}
+.week-body.open { display: block; }
+
+/* Resource items */
+.resource-list { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.resource-item:hover { background: var(--purple-light); }
+
+.resource-check {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: transparent;
+  transition: all 0.2s;
+}
+.resource-check.checked {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.resource-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.resource-info { flex: 1; }
+
+.resource-title {
+  font-family: 'EB Garamond', serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.resource-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-top: 0.1rem;
+}
+
+.resource-action {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  border: 1px solid var(--purple);
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  background: none;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.resource-action:hover {
+  background: var(--purple);
+  color: white;
+}
+.resource-action.gold {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.resource-action.gold:hover {
+  background: var(--gold);
+  color: white;
+}
+
+/* Downloads section */
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.download-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.download-card:hover {
+  box-shadow: 0 4px 16px rgba(107,91,138,0.12);
+  border-color: var(--purple-mid);
+}
+
+.download-icon { font-size: 1.75rem; margin-bottom: 0.6rem; display: block; }
+
+.download-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+.download-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--gray);
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.1rem;
+}
+
+/* Notes area */
+.notes-wrap {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.notes-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  margin-bottom: 0.5rem;
+}
+
+.notes-area {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 0.75rem;
+  resize: vertical;
+  outline: none;
+  line-height: 1.6;
+}
+.notes-area:focus { border-color: var(--purple); }
+
+.notes-save {
+  margin-top: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--green);
+  border: none;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.notes-save:hover { opacity: 0.85; }
+
+.notes-saved {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--green);
+  margin-left: 0.75rem;
+  display: none;
+}
+
+/* Foundation videos */
+.fv-intro {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+.fv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.fv-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(154,138,176,0.12);
+}
+.fv-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--deep);
+}
+.fv-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.fv-body { padding: 0.85rem 1rem 1.1rem; }
+.fv-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.fv-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.fv-desc {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+.fv-bonus { border-left: 4px solid var(--gold); }
+
+/* Video placeholder */
+.video-placeholder {
+  background: var(--deep);
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+.video-play { font-size: 2.5rem; opacity: 0.3; }
+.video-coming {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(184,149,106,0.5);
+}
+
+/* Examen section */
+.examen-card {
+  background: var(--gold-light);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  padding: 1.25rem 1.5rem;
+  margin-top: 0.75rem;
+}
+.examen-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.examen-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.65;
+  margin-bottom: 0.35rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold-mid);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+/* ── DAILY CHECK-IN ────────────────────────────────────────────────────── */
+.checkin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.checkin-date {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.checkin-streak {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  color: var(--rose);
+  font-weight: 600;
+}
+
+/* Progress ring */
+.ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0 1.5rem;
+  gap: 0.5rem;
+}
+.ring-svg { width: 120px; height: 120px; }
+.ring-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gray);
+  text-align: center;
+}
+
+/* Section accordion */
+.ci-section {
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+  background: white;
+  overflow: hidden;
+}
+.ci-section-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  background: var(--soft);
+  border-bottom: 1px solid transparent;
+  transition: background 0.2s;
+}
+.ci-section-hd:hover { background: var(--purple-light); }
+.ci-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+.ci-icon { font-size: 1.1rem; }
+.ci-section-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.ci-done-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--green);
+  padding: 0.25rem 0.6rem;
+}
+.ci-chevron {
+  color: var(--border);
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+.ci-chevron.open { transform: rotate(180deg); }
+.ci-section-body {
+  display: none;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.ci-section-body.open { display: block; }
+.ci-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 1rem;
+}
+
+/* R.O.O.T.E.D. grid */
+.rooted-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.rooted-letter {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.letter-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.letter-content { flex: 1; }
+.letter-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  margin-bottom: 0.15rem;
+}
+.letter-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+}
+.letter-input {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  font-family: 'EB Garamond', serif;
+  font-size: 0.97rem;
+  color: var(--ink);
+  padding: 0.5rem 0.75rem;
+  resize: vertical;
+  outline: none;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+}
+.letter-input:focus { border-color: var(--purple); background: white; }
+
+/* Virtue chips */
+.virtue-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.virtue-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.18s;
+  position: relative;
+}
+.virtue-chip:hover { border-color: var(--purple-mid); background: var(--purple-light); }
+.virtue-chip.checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+.vchip-icon { font-size: 1rem; }
+.vchip-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  transition: color 0.18s;
+}
+.virtue-chip.checked .vchip-label { color: white; }
+.vchip-check {
+  font-size: 0.75rem;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+.virtue-chip.checked .vchip-check { opacity: 1; }
+
+/* Surrender */
+.surrender-wrap { margin-bottom: 1rem; }
+.surrender-label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.4rem;
+}
+.surrender-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  color: var(--ink);
+  padding: 0.65rem 0.9rem;
+  outline: none;
+  margin-bottom: 0.9rem;
+  transition: border-color 0.2s;
+}
+.surrender-input:focus { border-color: var(--gold); background: white; }
+.surrender-check-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.surrender-check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.sur-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.18s;
+}
+.sur-circle.checked {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: white;
+}
+
+/* Save button + message */
+.ci-save-btn {
+  background: var(--purple);
+  color: white;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 0.25rem;
+}
+.ci-save-btn:hover { opacity: 0.85; }
+.ci-saved-msg {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--green);
+  margin-top: 0.4rem;
+  min-height: 1.2rem;
+}
+
+/* Day complete card */
+.day-complete {
+  background: linear-gradient(135deg, var(--deep), #1A1430);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  margin-top: 1rem;
+}
+.day-complete-cross {
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.day-complete-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #F0EAF8;
+  margin-bottom: 0.4rem;
+}
+.day-complete-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(240,234,248,0.7);
+  margin-bottom: 0.75rem;
+}
+.day-complete-verse {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+
+@media (max-width: 600px) {
+  .portal-main { padding: 1.5rem 1rem 3rem; }
+  .portal-title { font-size: 1.4rem; }
+  .week-header { gap: 0.75rem; padding: 0.85rem 1rem; }
+  .week-title { font-size: 0.85rem; }
+  .downloads-grid { grid-template-columns: 1fr 1fr; }
+  .nav-client { display: none; }
+  .virtue-grid { gap: 0.4rem; }
+  .virtue-chip { padding: 0.4rem 0.7rem; }
+  .vchip-label { font-size: 0.55rem; }
+  .rooted-letter { flex-direction: column; gap: 0.4rem; }
+  .letter-badge { width: 28px; height: 28px; font-size: 0.75rem; }
+}
+
+/* ── PRAYER TRACKER ─────────────────────────────────────────────────────── */
+.prayer-card {
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+.prayer-card:hover { background: var(--gold-light); border-color: var(--gold); }
+.prayer-card.checked { background: var(--gold-light); border-left: 4px solid var(--gold); border-color: var(--gold); }
+.prayer-card-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;
+}
+.prayer-time-badge {
+  font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gold);
+}
+.prayer-check-circle {
+  width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: transparent; transition: all 0.2s;
+}
+.prayer-check-circle.checked { background: var(--gold); border-color: var(--gold); color: white; }
+.prayer-label {
+  font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.06em; color: var(--ink); margin-bottom: 0.4rem;
+}
+.prayer-text {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1rem; color: var(--ink); line-height: 1.65; margin-bottom: 0.4rem;
+}
+.prayer-scripture {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; color: var(--gold);
+}
+.prayer-history-wrap {
+  margin: 1rem 0 0.75rem; padding: 0.75rem;
+  background: var(--soft); border: 1px solid var(--border);
+}
+.prayer-history-label {
+  font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--purple-mid); margin-bottom: 0.6rem;
+}
+.prayer-history-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.prayer-day-dot { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.prayer-dot-label {
+  font-family: 'Cinzel', serif; font-size: 0.45rem; letter-spacing: 0.08em;
+  color: var(--gray); text-transform: uppercase;
+}
+.prayer-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 0.65rem;
+}
+.prayer-dot.both { background: var(--gold); border-color: var(--gold); color: white; }
+.prayer-dot.morning-only { background: var(--gold-light); border-color: var(--gold); color: var(--gold); }
+.prayer-dot.evening-only { background: var(--purple-light); border-color: var(--purple); color: var(--purple); }
+.prayer-dot.none { background: white; color: var(--border); }
+
+/* ── PAST RESPONSES ─────────────────────────────────────────────────────── */
+.past-responses-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.past-nav-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  transition: all 0.2s;
+}
+.past-nav-btn:hover { color: var(--purple); }
+.past-nav-btn.active { color: var(--purple); border-bottom-color: var(--purple); font-weight: 600; }
+
+.past-tab { display: none; }
+.past-tab.active { display: block; }
+
+.past-day-card {
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+.past-day-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background: var(--soft);
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.2s;
+}
+.past-day-hd:hover { background: var(--purple-light); }
+.past-day-hd.open { border-bottom-color: var(--border); }
+.past-day-date {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--purple);
+}
+.past-day-preview {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--gray);
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.past-day-body {
+  display: none;
+  padding: 1rem;
+}
+.past-day-body.open { display: block; }
+.past-entry {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.past-entry:last-child { border-bottom: none; margin-bottom: 0; }
+.past-entry-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  margin-bottom: 0.3rem;
+}
+.past-entry-value {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.past-empty {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--gray);
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  background: var(--soft);
+}
+
+.wellness-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.wellness-card {
+  background: white;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.wellness-card-hd {
+  background: var(--soft);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--purple);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wellness-card-body { padding: 1rem; }
+
+/* Water tracker */
+.water-glasses {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.water-glass {
+  font-size: 1.4rem;
+  cursor: pointer;
+  opacity: 0.25;
+  transition: opacity 0.18s, transform 0.18s;
+  user-select: none;
+}
+.water-glass.filled { opacity: 1; transform: scale(1.1); }
+.water-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--gray);
+}
+
+/* Meal tracker */
+.meal-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.meal-row:last-child { border-bottom: none; }
+.meal-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  min-width: 70px;
+  padding-top: 4px;
+}
+.meal-input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.97rem;
+  color: var(--ink);
+  outline: none;
+  padding: 2px 4px;
+}
+.meal-input:focus { border-bottom-color: var(--gold); }
+.meal-cal {
+  width: 55px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.97rem;
+  color: var(--purple);
+  outline: none;
+  padding: 2px 4px;
+  text-align: right;
+}
+.meal-cal:focus { border-bottom-color: var(--purple); }
+
+/* Calorie counter */
+.cal-display {
+  text-align: center;
+  padding: 0.75rem 0;
+}
+.cal-number {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--purple);
+  line-height: 1;
+}
+.cal-goal {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--gray);
+  margin-top: 0.2rem;
+}
+.cal-bar-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.6rem 0 0.4rem;
+}
+.cal-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+.cal-bar-fill.over { background: linear-gradient(90deg, var(--gold), var(--rose)); }
+
+/* Movement */
+.movement-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.movement-row:last-child { border-bottom: none; }
+.movement-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.movement-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: transparent;
+  transition: all 0.18s;
+  flex-shrink: 0;
+}
+.movement-check.checked {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+.movement-mins {
+  width: 48px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.97rem;
+  color: var(--green);
+  text-align: center;
+  outline: none;
+}
+
+/* Weight log */
+.weight-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.weight-input {
+  width: 80px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: var(--purple);
+  text-align: center;
+  padding: 0.4rem;
+  outline: none;
+}
+.weight-input:focus { border-color: var(--purple); }
+.weight-unit {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+.weight-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.weight-entry-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  color: var(--gray);
+  padding: 0.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.weight-entry-row span:first-child { color: var(--purple); font-weight: 500; }
+
+/* Mood + energy */
+.mood-sliders { display: flex; flex-direction: column; gap: 0.75rem; }
+.mood-row { display: flex; flex-direction: column; gap: 0.3rem; }
+.mood-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mood-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+}
+.mood-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--purple);
+}
+.mood-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+.mood-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--purple);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(107,91,138,0.3);
+}
+
+.wellness-save-btn {
+  width: 100%;
+  background: var(--purple);
+  color: white;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: opacity 0.2s;
+}
+.wellness-save-btn:hover { opacity: 0.85; }
+.wellness-saved {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--green);
+  text-align: center;
+  margin-top: 0.3rem;
+  min-height: 1rem;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-cross">✝</div>
+    <div class="login-brand">Rooted in Real Life · Prepare the Path</div>
+    <h1 class="login-title">Welcome</h1>
+    <p class="login-sub">Enter your name and access code to continue.</p>
+
+    <label class="login-label">Your First Name</label>
+    <input type="text" id="client-name-input" class="login-input" placeholder="Your first name" autocomplete="off">
+
+    <label class="login-label">Access Code</label>
+    <input type="password" id="password-input" class="login-input" placeholder="Enter your code" autocomplete="off">
+
+    <button class="login-btn" onclick="attemptLogin()">Enter My Portal →</button>
+    <div class="login-error" id="login-error">That code doesn't match. Please check with Cassandra.</div>
+
+    <p class="login-scripture">"Prepare the way of the Lord." — Isaiah 40:3</p>
+  </div>
+</div>
+
+<!-- PORTAL -->
+<div id="portal">
+
+  <nav class="portal-nav">
+    <div class="nav-brand">Rooted in <span>Real Life</span></div>
+    <div class="nav-right">
+      <div class="nav-client" id="nav-client-name"></div>
+      <button class="nav-logout" onclick="logout()">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="portal-header">
+    <div class="portal-greeting">Prepare the Path · Advent 2026</div>
+    <h1 class="portal-title" id="portal-greeting-name">Welcome, friend</h1>
+    <p class="portal-sub">A Prep Week and four weeks of Advent, built around who God made you to be.</p>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Your Progress</span>
+        <span id="progress-pct">0% complete</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="portal-main">
+
+    <div class="section-label">Start Here</div>
+    <div class="start-card">
+      <h3>✝ How to Navigate Your Portal</h3>
+      <p>This is your personal space for Prepare the Path. Go at a gentle pace. You cannot do this wrong.</p>
+      <ul class="start-steps" id="start-steps"></ul>
+    </div>
+
+    <div class="section-label">Welcome</div>
+    <div class="fv-grid" id="welcome-video"></div>
+
+    <div class="section-label">Getting Started Videos · Watch Before Prep Week</div>
+    <p class="fv-intro">Before Prep Week begins, watch these six short videos in order. You do not need to take notes. Just watch and receive. They explain the tools your personalized journal is built on.</p>
+    <div class="fv-grid" id="foundation-videos"></div>
+
+    <div class="section-label">Your Advent Journey</div>
+    <div class="weeks-grid" id="weeks-container"></div>
+
+    <div class="section-label">Your Reflection Notes</div>
+    <div class="notes-wrap">
+      <div class="notes-label">Your private notes · saved automatically in your browser</div>
+      <textarea class="notes-area" id="journal-notes" placeholder="What is stirring this Advent? What landed from the video? What are you noticing about yourself in the ordinary moments?"></textarea>
+      <div>
+        <button class="notes-save" onclick="saveNotes()">Save Notes</button>
+        <span class="notes-saved" id="notes-saved-msg">✓ Saved</span>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:2rem">Your Resources · Download &amp; Keep</div>
+    <div class="downloads-grid" id="downloads"></div>
+
+  </div>
+</div>
+
+<script src="advent-clients.js"></script>
+<script>
+var CFG = window.ADVENT_CONFIG || {};
+var ROSTER = window.ADVENT_CLIENTS || {};
+var clientName = '';
+var client = null;
+var progress = {};
+
+var FOUNDATION_VIDEOS = [
+  { n: 1, id: '6Ios1LuERyw', title: 'The Four Temperaments', desc: 'How God wired your soul to engage the world.' },
+  { n: 2, id: '-fK8pFYcfCs', title: 'The Predominant Fault', desc: 'The one root pattern beneath the struggle.' },
+  { n: 3, id: 'qaXEHtSouxE', title: 'The Charisms', desc: 'The gifts God placed in you for others.' },
+  { n: 4, id: 'rkddcAUDoL4', title: 'The Saboteurs', desc: 'The inner patterns that block the gifts.' },
+  { n: 5, id: '0-iXhPKAjL8', title: 'The R.O.O.T.E.D. Model', desc: 'The framework for the whole journey.' },
+  { n: 6, id: 'MKa7tzVjLj0', title: 'The Stress Response', desc: 'What your body does, and what to do instead of reacting.' }
+];
+
+/* Weeks. Items marked sessions:true show only for the $147 option. */
+var WEEKS = [
+  { key: 'prep',  num: 'Prep', color: '#B8956A', title: 'Prep Week', subtitle: 'November 22 to 28 · Making ready',
+    items: [
+      { id: 'prep-video',   type: 'video', icon: '▶', title: 'Prep Week Lesson', desc: 'How to begin Advent slowly and well' },
+      { id: 'prep-journal', type: 'note',  icon: '📓', title: 'Prep Week pages in your journal', desc: 'Work through each evening with the R.O.O.T.E.D. Examen' }
+    ] },
+  { key: 'hope',  num: 1, color: '#6B5B8A', title: 'Hope', subtitle: 'Begins November 29',
+    items: [
+      { id: 'hope-video',   type: 'video', icon: '▶', title: 'Week 1 Lesson: Hope', desc: 'Your weekly lesson' },
+      { id: 'hope-journal', type: 'note',  icon: '📓', title: 'Morning and evening pages', desc: 'Daily pages in your journal, a little each day' },
+      { id: 'hope-mid',     type: 'note',  icon: '✝', title: 'Midweek check-in and weekly reflection', desc: 'In your journal' },
+      { id: 'hope-s1',      type: 'note',  icon: '🗓', title: '1:1 Session 1', desc: 'Schedule with Cassandra', sessions: true }
+    ] },
+  { key: 'peace', num: 2, color: '#5A7A5A', title: 'Peace', subtitle: 'Begins December 6',
+    items: [
+      { id: 'peace-video',   type: 'video', icon: '▶', title: 'Week 2 Lesson: Peace', desc: 'Your weekly lesson' },
+      { id: 'peace-journal', type: 'note',  icon: '📓', title: 'Morning and evening pages', desc: 'Daily pages in your journal, a little each day' },
+      { id: 'peace-mid',     type: 'note',  icon: '✝', title: 'Midweek check-in and weekly reflection', desc: 'In your journal' }
+    ] },
+  { key: 'joy',   num: 3, color: '#C47B8A', title: 'Joy', subtitle: 'Begins December 13',
+    items: [
+      { id: 'joy-video',   type: 'video', icon: '▶', title: 'Week 3 Lesson: Joy', desc: 'Your weekly lesson' },
+      { id: 'joy-journal', type: 'note',  icon: '📓', title: 'Morning and evening pages', desc: 'Daily pages in your journal, a little each day' },
+      { id: 'joy-mid',     type: 'note',  icon: '✝', title: 'Midweek check-in and weekly reflection', desc: 'In your journal' },
+      { id: 'joy-s2',      type: 'note',  icon: '🗓', title: '1:1 Session 2', desc: 'Schedule with Cassandra', sessions: true }
+    ] },
+  { key: 'love',  num: 4, color: '#3D3450', title: 'Love', subtitle: 'December 20 to 24',
+    items: [
+      { id: 'love-video',   type: 'video', icon: '▶', title: 'Week 4 Lesson: Love', desc: 'Your weekly lesson' },
+      { id: 'love-journal', type: 'note',  icon: '📓', title: 'Morning and evening pages', desc: 'Daily pages in your journal, a little each day' },
+      { id: 'love-mid',     type: 'note',  icon: '✝', title: 'Weekly reflection', desc: 'In your journal' },
+      { id: 'love-complete', type: 'complete', icon: '✝', title: 'Mark Advent Complete', desc: 'You walked the path. Receive it.' }
+    ] }
+];
+
+function weekItems(w) {
+  return w.items.filter(function(i){ return !i.sessions || (client && client.tier === 'sessions'); });
+}
+function allItems() {
+  var out = [];
+  WEEKS.forEach(function(w){ weekItems(w).forEach(function(i){ out.push(i); }); });
+  return out;
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function getKey(id) { return 'ril_advent_' + clientName + '_' + id; }
+function embed(id, title, extra) {
+  return '<iframe src="https://www.youtube-nocookie.com/embed/' + esc(id) + (extra || '') + '" title="' + esc(title) + '" ' +
+    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+}
+
+/* progress + notes */
+function loadProgress() {
+  try { var s = localStorage.getItem(getKey('progress')); progress = s ? JSON.parse(s) : {}; } catch(e) { progress = {}; }
+}
+function saveProgress() {
+  try { localStorage.setItem(getKey('progress'), JSON.stringify(progress)); } catch(e) {}
+  updateProgressBar();
+}
+function updateProgressBar() {
+  var items = allItems();
+  var done = items.filter(function(i){ return progress[i.id]; }).length;
+  var pct = items.length ? Math.round(done / items.length * 100) : 0;
+  var f = document.getElementById('progress-fill'), l = document.getElementById('progress-pct');
+  if (f) f.style.width = pct + '%';
+  if (l) l.textContent = pct + '% complete';
+}
+function saveNotes() {
+  try {
+    localStorage.setItem(getKey('notes'), document.getElementById('journal-notes').value);
+    var m = document.getElementById('notes-saved-msg');
+    m.style.display = 'inline';
+    setTimeout(function(){ m.style.display = 'none'; }, 2000);
+  } catch(e) {}
+}
+function loadNotes() {
+  try { var s = localStorage.getItem(getKey('notes')); if (s) document.getElementById('journal-notes').value = s; } catch(e) {}
+}
+setInterval(function(){ if (clientName) saveNotes(); }, 30000);
+
+/* start steps */
+function renderStartSteps() {
+  var due = function(d){ return d ? ' (by ' + esc(d) + ')' : ''; };
+  var steps = [
+    'Watch the welcome video and the six getting-started videos below before Prep Week begins.',
+    'Take your assessments' + due(CFG.assessmentsDue) + '. Cassandra will send you your Soul Portrait when your results are ready.',
+    'Fill in the goal worksheet Cassandra sends you' + due(CFG.worksheetDue) + ' and send it back. It sets your three Advent goals.',
+    'Your personalized journal appears under Your Resources' + (CFG.journalReady ? ' on ' + esc(CFG.journalReady) : ' once it is ready') + '. Fill it in on your computer or print it.',
+    'Each week, watch the lesson, then use the morning and evening pages in your journal. Tick the circle on each item when you finish. Your progress saves automatically.'
+  ];
+  if (client && client.tier === 'sessions') steps.push('Your plan includes two 1:1 sessions with Cassandra. She will schedule them with you.');
+  document.getElementById('start-steps').innerHTML = steps.map(function(t, i){
+    return '<li><span class="step-num">' + (i + 1) + '</span>' + t + '</li>';
+  }).join('');
+}
+
+/* videos */
+function renderWelcome() {
+  var el = document.getElementById('welcome-video');
+  var inner = CFG.welcomeVideoId
+    ? '<div class="fv-embed">' + embed(CFG.welcomeVideoId, 'Welcome to Prepare the Path') + '</div>'
+    : '<div class="video-placeholder"><div class="video-play">▶</div><div class="video-coming">Welcome video coming soon</div></div>';
+  el.innerHTML = '<div class="fv-card">' + inner +
+    '<div class="fv-body"><div class="fv-num">Start here</div><div class="fv-title">Welcome to Prepare the Path</div>' +
+    '<div class="fv-desc">A short welcome from Cassandra.</div></div></div>';
+}
+function renderFoundationVideos() {
+  document.getElementById('foundation-videos').innerHTML = FOUNDATION_VIDEOS.map(function(v){
+    return '<div class="fv-card"><div class="fv-embed">' + embed(v.id, v.title) + '</div>' +
+      '<div class="fv-body"><div class="fv-num">Video ' + v.n + '</div><div class="fv-title">' + esc(v.title) + '</div>' +
+      '<div class="fv-desc">' + esc(v.desc) + '</div></div></div>';
+  }).join('');
+}
+
+/* weeks */
+function buildWeeks() {
+  var container = document.getElementById('weeks-container');
+  container.innerHTML = '';
+  WEEKS.forEach(function(week, wi) {
+    var items = weekItems(week);
+    var done = items.filter(function(i){ return progress[i.id]; }).length;
+    var isOpen = wi === 0;
+    var vid = (CFG.weekVideoIds || {})[week.key] || '';
+
+    var card = document.createElement('div');
+    card.className = 'week-card';
+    card.id = 'week-card-' + week.key;
+
+    var header = document.createElement('div');
+    header.className = 'week-header' + (isOpen ? ' open' : '');
+    header.innerHTML =
+      '<div class="week-num" style="background:' + week.color + '">' + (week.num === 'Prep' ? 'Prep' : 'Week ' + week.num) + '</div>' +
+      '<div class="week-title-wrap"><div class="week-title">' + esc(week.title) + '</div><div class="week-subtitle">' + esc(week.subtitle) + '</div></div>' +
+      '<div class="week-progress">' + done + '/' + items.length + ' done</div>' +
+      '<div class="week-chevron ' + (isOpen ? 'open' : '') + '">▾</div>';
+
+    var body = document.createElement('div');
+    body.className = 'week-body' + (isOpen ? ' open' : '');
+
+    var html = vid
+      ? '<div class="week-video-wrap" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#2A2230;margin-bottom:1rem">' +
+        embed(vid, week.title + ' lesson video', '?rel=0&modestbranding=1').replace('<iframe ', '<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" ') + '</div>'
+      : '<div class="video-placeholder"><div class="video-play">▶</div><div class="video-coming">Lesson video coming soon · Cassandra will add it when ready</div></div>';
+    html += '<div class="resource-list">';
+    items.forEach(function(item) {
+      var on = !!progress[item.id];
+      html += '<div class="resource-item">' +
+        '<div class="resource-check ' + (on ? 'checked' : '') + '" onclick="toggleItem(\'' + item.id + '\', this, ' + wi + ')">' + (on ? '✓' : '') + '</div>' +
+        '<div class="resource-icon">' + item.icon + '</div>' +
+        '<div class="resource-info"><div class="resource-title">' + esc(item.title) + '</div><div class="resource-desc">' + esc(item.desc) + '</div></div>' +
+        '</div>';
+    });
+    html += '</div>';
+    body.innerHTML = html;
+
+    header.onclick = function() {
+      var open = body.classList.contains('open');
+      body.classList.toggle('open', !open);
+      header.classList.toggle('open', !open);
+      header.querySelector('.week-chevron').classList.toggle('open', !open);
+    };
+    card.appendChild(header);
+    card.appendChild(body);
+    container.appendChild(card);
+  });
+}
+function toggleItem(id, el, wi) {
+  var was = el.classList.contains('checked');
+  el.classList.toggle('checked', !was);
+  el.textContent = was ? '' : '✓';
+  progress[id] = !was;
+  saveProgress();
+  var week = WEEKS[wi], items = weekItems(week);
+  var done = items.filter(function(i){ return progress[i.id]; }).length;
+  var lbl = document.querySelector('#week-card-' + week.key + ' .week-progress');
+  if (lbl) lbl.textContent = done + '/' + items.length + ' done';
+}
+
+/* downloads */
+function renderDownloads() {
+  var cards = [];
+  function dl(icon, title, sub, link, soon) {
+    if (link) cards.push('<a class="download-card" href="' + esc(link) + '" target="_blank"><span class="download-icon">' + icon + '</span><div class="download-title">' + title + '</div><div class="download-sub">' + sub + '</div><div class="download-btn">Download PDF</div></a>');
+    else cards.push('<a class="download-card" href="#" onclick="comingSoon(event)"><span class="download-icon">' + icon + '</span><div class="download-title">' + title + '</div><div class="download-sub">' + soon + '</div><div class="download-btn">Coming soon</div></a>');
+  }
+  dl('📓', 'Your Personalized Journal', 'Built on your Soul Portrait and your three goals', client.journal, 'Available once your journal is ready');
+  dl('🎯', 'Your Goal Worksheet', 'Your three Advent goals', client.worksheet, 'Cassandra sends this after your results are ready');
+  dl('📖', 'Your Soul Portrait', 'Your four assessment results', client.portrait, 'Cassandra sends this when your results are ready');
+  cards.push('<a class="download-card" href="' + esc(CFG.assessmentUrl || 'https://rootedirl.live') + '" target="_blank"><span class="download-icon">✦</span><div class="download-title">Take Your Assessments</div><div class="download-sub">Your four assessments</div><div class="download-btn">Open</div></a>');
+  cards.push('<a class="download-card" href="https://rootedirl.live" target="_blank"><span class="download-icon">✝</span><div class="download-title">Back to Main Site</div><div class="download-sub">rootedirl.live</div><div class="download-btn">Visit Site</div></a>');
+  document.getElementById('downloads').innerHTML = cards.join('');
+}
+function comingSoon(e) {
+  e.preventDefault();
+  alert("This will be available soon. Cassandra will let you know when it's ready. ✝");
+}
+
+/* login */
+function attemptLogin() {
+  var name = document.getElementById('client-name-input').value.trim().toLowerCase();
+  var pw = document.getElementById('password-input').value.trim().toLowerCase();
+  var err = document.getElementById('login-error');
+  if (!name) { err.style.display = 'block'; err.textContent = 'Please enter your first name.'; return; }
+  var c = ROSTER[name];
+  if (!c || pw !== String(c.pw).toLowerCase()) {
+    err.style.display = 'block';
+    err.textContent = "That code doesn't match. Please check with Cassandra.";
+    return;
+  }
+  err.style.display = 'none';
+  try { localStorage.setItem('rooted_advent_user', name); } catch(e) {}
+  startPortal(name);
+}
+function startPortal(name) {
+  clientName = name;
+  client = ROSTER[name];
+  var display = name.charAt(0).toUpperCase() + name.slice(1);
+  document.getElementById('nav-client-name').textContent = display;
+  document.getElementById('portal-greeting-name').textContent = 'Welcome, ' + display;
+  loadProgress();
+  loadNotes();
+  renderStartSteps();
+  renderWelcome();
+  renderFoundationVideos();
+  buildWeeks();
+  renderDownloads();
+  updateProgressBar();
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('portal').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+function logout() {
+  clientName = ''; client = null; progress = {};
+  try { localStorage.removeItem('rooted_advent_user'); } catch(e) {}
+  document.getElementById('portal').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('password-input').value = '';
+  document.getElementById('client-name-input').value = '';
+}
+document.getElementById('password-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') attemptLogin(); });
+document.getElementById('client-name-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('password-input').focus(); });
+
+/* stay logged in on this device */
+(function() {
+  try {
+    var saved = localStorage.getItem('rooted_advent_user');
+    if (saved && ROSTER[saved]) startPortal(saved);
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
