@@ -15,6 +15,7 @@
 window.ADVENT_CLIENTS = {
   // Preview login so you can look around. Delete this line when you are done.
   'preview': { pw: 'advent2026', tier: 'sessions', journal: '', worksheet: '', portrait: '' },
+   'caitlin': { pw: 'caitlin2026', tier: 'sessions', journal: '', worksheet: '', portrait: '' },
   // 'firstname': { pw: 'firstname2026', tier: 'self', journal: '', worksheet: '', portrait: '' },
 };
 
