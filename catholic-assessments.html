@@ -568,7 +568,7 @@
     <span class="icon">🕊️</span>
     <h2>Charism Assessment</h2>
     <p>The specific gifts of the Holy Spirit given to you for others</p>
-    <p class="scripture">"To each is given the manifestation of the Spirit for the common good." — 1 Corinthians 12:7</p>
+    <p class="scripture">"To each individual the manifestation of the Spirit is given for some benefit." — 1 Corinthians 12:7</p>
   </div>
 
   <p style="color:var(--gold-pale); font-style:italic; font-size:0.95rem; margin-bottom:1.5rem; text-align:center; opacity:0.75;">
@@ -589,7 +589,7 @@
     <span class="icon">🛡️</span>
     <h2>Saboteur Assessment</h2>
     <p>Mental patterns rooted in wounds that undermine your mission</p>
-    <p class="scripture">"Be sober, be watchful. Your adversary the devil prowls around like a roaring lion." — 1 Peter 5:8</p>
+    <p class="scripture">"Be sober and vigilant. Your opponent the devil is prowling around like a roaring lion looking for someone to devour." — 1 Peter 5:8</p>
   </div>
 
   <p style="color:var(--gold-pale); font-style:italic; font-size:0.95rem; margin-bottom:1.5rem; text-align:center; opacity:0.75;">
@@ -865,7 +865,7 @@ renderQuestions(charismQs, 'c-questions');
 renderQuestions(saboteurQs, 's-questions');
 
 // Set today's date
-document.getElementById('clientDate').valueAsDate = new Date();
+(function(){var d=new Date();document.getElementById('clientDate').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})();
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
@@ -1167,7 +1167,7 @@ async function autoSendResults(name, email, date, sortedT, sortedF, sortedC, sor
   } catch(e) {
     status.style.display = 'block';
     status.style.color = 'var(--rose)';
-    status.textContent = 'There was an issue sending your results. Please contact Cassandra directly at cassandra@rootedinreallife.com';
+    status.textContent = 'There was an issue sending your results. Please contact Cassandra directly at cassandra@rootedirl.live';
   }
 }
 
