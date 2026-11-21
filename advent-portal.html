@@ -1495,6 +1495,29 @@ body {
   margin-top: 0.3rem;
   min-height: 1rem;
 }
+
+/* fun trackers */
+.trk-card{margin-bottom:1.6rem;background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem}
+.trk-title{font-family:'Cormorant Garamond',Georgia,serif;color:var(--deep);font-size:1.15rem;text-align:center;margin-bottom:.2rem}
+.trk-sub{text-align:center;font-size:.8rem;color:var(--gray);margin-bottom:.9rem}
+.path-row{display:flex;align-items:flex-end;justify-content:space-between;position:relative;padding:0 .2rem}
+.path-row:before{content:"";position:absolute;left:8%;right:8%;bottom:22px;border-top:3px dotted #D4C4E0}
+.path-stop{position:relative;z-index:1;text-align:center;flex:1;font-size:.7rem;color:var(--gray)}
+.path-stone{width:38px;height:38px;border-radius:50%;margin:0 auto .25rem;display:flex;align-items:center;justify-content:center;font-size:1.15rem;background:#F1ECF6;border:2px dashed #D4C4E0;filter:grayscale(1);opacity:.7;transition:all .3s}
+.path-stop.on .path-stone{background:#FFF3D6;border:2px solid #E0A93B;filter:none;opacity:1;transform:scale(1.08)}
+.path-stop.on{color:var(--ink);font-weight:600}
+.path-walker{position:absolute;top:-4px;font-size:1.3rem;transition:left .5s;transform:translateX(-50%)}
+.trk-two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.6rem}
+@media(max-width:560px){.trk-two{grid-template-columns:1fr}}
+.grow-emoji{font-size:3rem;text-align:center;line-height:1.1}
+.grow-cap{text-align:center;font-size:.85rem;color:var(--gray);margin-top:.3rem;font-style:italic}
+.root-letters{display:flex;justify-content:center;gap:.35rem;margin:.4rem 0}
+.root-letters span{width:30px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.1rem;background:#F1ECF6;color:#B9AEC9;border:1px solid #E2D8EC;transition:all .3s}
+.root-letters span.on{background:#6B5B8A;color:#fff;border-color:#6B5B8A}
+.badge-row{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.badge{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:#F1ECF6;filter:grayscale(1);opacity:.45;border:2px dashed #D4C4E0}
+.badge.on{filter:none;opacity:1;background:#FFF3D6;border:2px solid #E0A93B}
+
 /* wreath */
 .wreath-card{margin-bottom:1.6rem;background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.2rem 1rem 1rem;text-align:center}
 .wreath-card svg{width:100%;max-width:560px;height:auto;display:block;margin:0 auto}
@@ -1585,6 +1608,8 @@ body {
 
     <div class="section-label" id="wreath-label">Your Advent Wreath</div>
     <div class="wreath-card" id="wreath"></div>
+    <div class="trk-card" id="trk-path"></div>
+    <div class="trk-two"><div class="trk-card" id="trk-grow" style="margin:0"></div><div class="trk-card" id="trk-badges" style="margin:0"></div></div>
 
     <div class="section-label">Welcome</div>
     <div class="fv-grid" id="welcome-video"></div>
@@ -1887,6 +1912,36 @@ function renderWreath(){
   var legend = cs.map(function(c){ var s=st[c.key]; return '<span><b>'+c.name+'</b> '+s.done+'/'+s.total+(s.all?' ✓':'')+'</span>'; }).join('') +
     '<span><b>Prep</b> '+prep.done+'/'+prep.total+(prep.all?' ✓':'')+'</span>';
   el.innerHTML = svg + '<div class="wreath-cap">'+cap+'</div><div class="wreath-legend">'+legend+'</div>';
+  renderTrackers();
+}
+
+/* fun trackers: path, growing plant, R.O.O.T.E.D. letters, badges */
+function renderTrackers(){
+  var keys=['prep','hope','peace','joy','love'], names={prep:'Prep',hope:'Hope',peace:'Peace',joy:'Joy',love:'Love'};
+  var icons={prep:'🌱',hope:'⚓',peace:'🕊️',joy:'🌹',love:'❤️'};
+  var st={}, doneW=0;
+  keys.forEach(function(k){ st[k]=weekDone(k); if(st[k].all) doneW++; });
+  var items=allItems(), d=items.filter(function(i){return progress[i.id];}).length;
+  var pct=items.length?d/items.length:0;
+  var p=document.getElementById('trk-path');
+  if(p){
+    var stops=keys.map(function(k){ return '<div class="path-stop'+(st[k].all?' on':'')+'"><div class="path-stone">'+(k==='love'?'⭐':icons[k])+'</div>'+names[k]+'</div>'; }).join('');
+    var left=(8+pct*84).toFixed(1);
+    p.innerHTML='<div class="trk-title">The Path to Bethlehem</div><div class="trk-sub">'+(doneW===5?'You have arrived. Glory to God in the highest.':'Every finished week lights a stone along the road.')+'</div><div style="position:relative;padding-top:34px"><div class="path-walker" style="left:'+left+'%">🚶‍♀️</div><div class="path-row">'+stops+'</div></div>';
+  }
+  var g=document.getElementById('trk-grow');
+  if(g){
+    var stage=pct>=1?'🌹':pct>=.75?'🌷':pct>=.5?'🌿':pct>=.2?'🌱':'🫘';
+    var cap=pct>=1?'In full bloom':pct>=.75?'Budding':pct>=.5?'Growing strong':pct>=.2?'Roots taking hold':'A seed, planted';
+    g.innerHTML='<div class="trk-title">Rooted &amp; Growing</div><div class="grow-emoji">'+stage+'</div><div class="grow-cap">'+cap+' · '+Math.round(pct*100)+'%</div>';
+  }
+  var b=document.getElementById('trk-badges');
+  if(b){
+    var pr=st.prep, n=pr.total||6, got=Math.min(6,Math.round(pr.done/n*6));
+    var letters='ROOTED'.split('').map(function(c,i){ return '<span class="'+(i<got?'on':'')+'">'+c+'</span>'; }).join('');
+    var bd=keys.map(function(k){ return '<div class="badge'+(st[k].all?' on':'')+'" title="'+names[k]+'">'+icons[k]+'</div>'; }).join('');
+    b.innerHTML='<div class="trk-title">Prep Week &amp; Badges</div><div class="root-letters">'+letters+'</div><div class="badge-row">'+bd+'</div>';
+  }
 }
 function jumpWeek(key){
   var card = document.getElementById('week-card-'+key); if(!card) return;

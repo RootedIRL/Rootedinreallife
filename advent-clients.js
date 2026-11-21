@@ -26,7 +26,7 @@ window.ADVENT_CLIENTS = {
       charism:     { max: 15, top: 4, items: [['Teaching',10],['Encouragement',9],['Mercy',9],['Wisdom / Discernment',9],['Hospitality',8],['Administration',7],['Prophecy',6],['Intercession',6]] },
       saboteur:    { max: 15, top: 2, items: [['The Judge',13],['Hyper-Achiever',10],['The Controller',10],['The Avoider',10],['Hyper-Rational',10],['The Victim',6],['The Pleaser',4]] }
     } },
-  'caitlin': { pw: 'caitlin2026', tier: 'self', journal: 'caitlin-journal.pdf', worksheet: 'caitlin-goal-worksheet.pdf', portrait: 'caitlin-soul-portrait.pdf',
+  'caitlin': { pw: 'caitlin2026', tier: 'sessions', journal: 'caitlin-journal.pdf', worksheet: 'caitlin-goal-worksheet.pdf', portrait: 'caitlin-soul-portrait.pdf',
     goals: ["Let the Lord into the wound with my mother, even though I do not yet know exactly where it is.",
             "Move my body more, and make room for silence.",
             "Entrust my mother to the Lord, because I cannot heal her and He can."],
@@ -37,7 +37,7 @@ window.ADVENT_CLIENTS = {
       charism:     { max: 10, top: 3, items: [['Prophecy',9],['Administration',9],['Hospitality',9],['Encouragement',8],['Teaching',7],['Wisdom / Discernment',7],['Intercession',3],['Mercy',2]] },
       saboteur:    { max: 10, top: 2, items: [['The Judge',10],['The Controller',9],['The Hyper-Achiever',7],['The Avoider',4],['The Pleaser',2],['The Victim',2],['The Hyper-Rational',2]] }
     } },
-  'samira': { pw: 'samira2026', tier: 'self', journal: 'samira-journal.pdf', worksheet: 'samira-goal-worksheet.pdf', portrait: 'samira-soul-portrait.pdf',
+  'samira': { pw: 'samira2026', tier: 'sessions', journal: 'samira-journal.pdf', worksheet: 'samira-goal-worksheet.pdf', portrait: 'samira-soul-portrait.pdf',
     goals: ["Let go of my own barriers and insufficiencies, and give it all to Him.",
             "Set aside time for myself: once a week in adoration and at least fifteen minutes of silence at home each day, giving my anger and lack of gentleness to our Lord.",
             "Offer up the little chores I can accomplish at home, like laundry, cleaning and putting laundry away."],
@@ -48,7 +48,18 @@ window.ADVENT_CLIENTS = {
       charism:     { max: 10, top: 3, items: [['Encouragement',9],['Intercession',8],['Hospitality',8],['Wisdom / Discernment',8],['Teaching',7],['Administration',6],['Mercy',5],['Prophecy',4]] },
       saboteur:    { max: 10, top: 2, items: [['The Judge',9],['The Avoider',9],['The Pleaser',8],['The Hyper-Achiever',6],['The Controller',5],['The Victim',5],['The Hyper-Rational',2]] }
     } },
-  // 'firstname': { pw: 'firstname2026', tier: 'self', journal: '', worksheet: '', portrait: '' },
+  'cassandra': { pw: 'cassandra2026', tier: 'sessions', journal: 'cassandra-journal.pdf', worksheet: 'cassandra-goal-worksheet.pdf', portrait: 'cassandra-soul-portrait.pdf',
+    goals: ["Work the way God needs me to, know what that is, and learn how to be of the most help.",
+            "Scroll and watch less, and use that time to crochet, read and pray, so I can teach my children with a good rhythm, mostly through the catechism.",
+            "Have land for a homestead, and teach my children the way God needs them for the lives ahead of them."],
+    scores: {
+      glance: [['Choleric','Melancholic'],['Fear & Control','Pride'],['Administration','Encouragement'],['The Hyper-Achiever','The Controller']],
+      temperament: { max: 40, top: 2, items: [['Choleric',34],['Melancholic',25],['Sanguine',24],['Phlegmatic',17]] },
+      fault:       { max: 20, top: 2, items: [['Fear & Control',20],['Pride',17],['Vanity',14],['Anger & Resentment',11],['Spiritual Sloth',7],['Sensuality',6]] },
+      charism:     { max: 15, top: 3, items: [['Administration',15],['Encouragement',13],['Teaching',13],['Wisdom / Discernment',11],['Intercession',9],['Prophecy',7],['Hospitality',6],['Mercy',3]] },
+      saboteur:    { max: 15, top: 2, items: [['The Hyper-Achiever',15],['The Controller',15],['The Avoider',13],['The Pleaser',10],['The Victim',9],['The Judge',7],['The Hyper-Rational',6]] }
+    } },
+  // 'firstname': { pw: 'firstname2026', tier: 'sessions', journal: '', worksheet: '', portrait: '' },
 };
 
 /* Program settings. Leave a value '' and the portal simply leaves it out. */
