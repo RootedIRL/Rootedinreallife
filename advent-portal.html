@@ -1495,6 +1495,33 @@ body {
   margin-top: 0.3rem;
   min-height: 1rem;
 }
+/* wreath */
+.wreath-card{margin-bottom:1.6rem;background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.2rem 1rem 1rem;text-align:center}
+.wreath-card svg{width:100%;max-width:560px;height:auto;display:block;margin:0 auto}
+.wreath-cap{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:var(--deep);font-size:1.05rem;margin-top:.4rem}
+.wreath-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem .9rem;margin-top:.7rem;font-size:.78rem;color:var(--gray)}
+.wreath-legend span b{color:var(--ink)}
+.flame{transform-origin:center bottom;animation:flick 1.6s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.08,1.14) rotate(2deg)}}
+.candle-hit{cursor:pointer}
+@media (prefers-reduced-motion:reduce){.flame{animation:none}}
+/* scores + goals */
+.pf-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:1rem}
+.pf-h{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.6rem}
+.pf-row{display:grid;grid-template-columns:150px 1fr 48px;gap:.6rem;align-items:center;margin:.32rem 0;font-size:.88rem;color:var(--ink)}
+.pf-row.top{font-weight:700}
+.pf-track{height:9px;background:var(--purple-light);border-radius:6px;overflow:hidden}
+.pf-fill{height:100%;border-radius:6px}
+.pf-num{font-size:.75rem;color:var(--gray);text-align:right}
+.pf-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1rem}
+.pf-tile{border-radius:10px;overflow:hidden;border:1px solid var(--border);text-align:center;background:var(--soft)}
+.pf-tile .t{color:#fff;font-size:.62rem;letter-spacing:.12em;font-weight:700;padding:.3rem}
+.pf-tile .p{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;color:var(--purple);padding:.5rem .3rem .1rem;font-size:1.05rem}
+.pf-tile .s{font-size:.72rem;color:var(--gray);padding:0 .3rem .5rem}
+.goal-card{border-radius:12px;border:1px solid var(--border);margin-bottom:.8rem;overflow:hidden;background:#fff}
+.goal-head{color:#fff;padding:.5rem .9rem;font-size:.72rem;letter-spacing:.12em;font-weight:700}
+.goal-text{padding:.8rem 1rem;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:1.15rem;line-height:1.45;color:var(--ink)}
+@media (max-width:560px){.pf-row{grid-template-columns:105px 1fr 42px}.pf-strip{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -1516,7 +1543,7 @@ body {
     <button class="login-btn" onclick="attemptLogin()">Enter My Portal →</button>
     <div class="login-error" id="login-error">That code doesn't match. Please check with Cassandra.</div>
 
-    <p class="login-scripture">"Prepare the way of the Lord." — Isaiah 40:3</p>
+    <p class="login-scripture">"In the wilderness prepare the way of the LORD!" — Isaiah 40:3</p>
   </div>
 </div>
 
@@ -1556,6 +1583,9 @@ body {
       <ul class="start-steps" id="start-steps"></ul>
     </div>
 
+    <div class="section-label" id="wreath-label">Your Advent Wreath</div>
+    <div class="wreath-card" id="wreath"></div>
+
     <div class="section-label">Welcome</div>
     <div class="fv-grid" id="welcome-video"></div>
 
@@ -1565,6 +1595,15 @@ body {
 
     <div class="section-label">Your Advent Journey</div>
     <div class="weeks-grid" id="weeks-container"></div>
+
+    <div id="portrait-section" style="display:none">
+      <div class="section-label">Your Soul Portrait · Your Scores</div>
+      <div id="scores"></div>
+    </div>
+    <div id="goals-section" style="display:none">
+      <div class="section-label">Your Three Advent Goals</div>
+      <div id="goals"></div>
+    </div>
 
     <div class="section-label">Your Reflection Notes</div>
     <div class="notes-wrap">
@@ -1775,6 +1814,7 @@ function toggleItem(id, el, wi) {
   var done = items.filter(function(i){ return progress[i.id]; }).length;
   var lbl = document.querySelector('#week-card-' + week.key + ' .week-progress');
   if (lbl) lbl.textContent = done + '/' + items.length + ' done';
+  renderWreath();
 }
 
 /* downloads */
@@ -1787,6 +1827,7 @@ function renderDownloads() {
   dl('📓', 'Your Personalized Journal', 'Built on your Soul Portrait and your three goals', client.journal, 'Available once your journal is ready');
   dl('🎯', 'Your Goal Worksheet', 'Your three Advent goals', client.worksheet, 'Cassandra sends this after your results are ready');
   dl('📖', 'Your Soul Portrait', 'Your four assessment results', client.portrait, 'Cassandra sends this when your results are ready');
+  dl('🕊️', 'Hard-Moment Protocol', 'Name it, pray, elect: what to do before you react', 'hard-moment-protocol-advent.pdf', '');
   cards.push('<a class="download-card" href="' + esc(CFG.assessmentUrl || 'https://rootedirl.live') + '" target="_blank"><span class="download-icon">✦</span><div class="download-title">Take Your Assessments</div><div class="download-sub">Your four assessments</div><div class="download-btn">Open</div></a>');
   cards.push('<a class="download-card" href="https://rootedirl.live" target="_blank"><span class="download-icon">✝</span><div class="download-title">Back to Main Site</div><div class="download-sub">rootedirl.live</div><div class="download-btn">Visit Site</div></a>');
   document.getElementById('downloads').innerHTML = cards.join('');
@@ -1794,6 +1835,92 @@ function renderDownloads() {
 function comingSoon(e) {
   e.preventDefault();
   alert("This will be available soon. Cassandra will let you know when it's ready. ✝");
+}
+
+/* advent wreath: a candle lights when every item in its week is done */
+function weekDone(key){
+  var w = WEEKS.filter(function(x){return x.key===key;})[0];
+  var it = weekItems(w), d = it.filter(function(i){return progress[i.id];}).length;
+  return {done:d, total:it.length, all: it.length>0 && d===it.length};
+}
+function renderWreath(){
+  var el = document.getElementById('wreath'); if(!el) return;
+  var cs = [
+    {key:'hope', name:'Hope', col:'#6B5B8A', x:90},
+    {key:'peace',name:'Peace',col:'#6B5B8A', x:170},
+    {key:'joy',  name:'Joy',  col:'#C47B8A', x:250},
+    {key:'love', name:'Love', col:'#6B5B8A', x:330}
+  ];
+  var st = {}, lit = 0;
+  cs.forEach(function(c){ st[c.key]=weekDone(c.key); if(st[c.key].all) lit++; });
+  var prep = weekDone('prep');
+  var xmas = lit===4 && prep.all;
+  function candle(x, top, col, on, key, label){
+    var h = 56, y = top;
+    var g = '<g class="candle-hit" onclick="jumpWeek(\''+key+'\')"><title>'+label+'</title>' +
+      '<rect x="'+(x-11)+'" y="'+y+'" width="22" height="'+h+'" rx="3" fill="'+col+'"/>' +
+      '<rect x="'+(x-11)+'" y="'+y+'" width="7" height="'+h+'" rx="3" fill="#fff" opacity=".18"/>' +
+      '<rect x="'+(x-1)+'" y="'+(y-9)+'" width="2" height="9" fill="#2A2230"/>';
+    if(on){
+      g += '<g class="flame"><ellipse cx="'+x+'" cy="'+(y-22)+'" rx="14" ry="20" fill="#F7D774" opacity=".28"/>' +
+        '<path d="M'+x+' '+(y-38)+' C'+(x+9)+' '+(y-24) +' '+(x+8)+' '+(y-9)+' '+x+' '+(y-9)+' C'+(x-8)+' '+(y-9)+' '+(x-9)+' '+(y-24)+' '+x+' '+(y-38)+'Z" fill="#F4A93B"/>' +
+        '<path d="M'+x+' '+(y-30)+' C'+(x+4)+' '+(y-22)+' '+(x+4)+' '+(y-12)+' '+x+' '+(y-12)+' C'+(x-4)+' '+(y-12)+' '+(x-4)+' '+(y-22)+' '+x+' '+(y-30)+'Z" fill="#FFF3B0"/></g>';
+    } else {
+      g += '<path d="M'+x+' '+(y-9)+' q2 -4 0 -7" stroke="#B9AEC9" stroke-width="1.5" fill="none" stroke-dasharray="2 2"/>';
+    }
+    return g + '</g>';
+  }
+  var svg = '<svg viewBox="20 68 380 190" role="img" aria-label="Advent wreath with '+lit+' of 4 candles lit">';
+  svg += '<ellipse cx="210" cy="190" rx="185" ry="52" fill="#4E6B4E"/><ellipse cx="210" cy="190" rx="185" ry="52" fill="none" stroke="#3B543B" stroke-width="3"/>';
+  for(var k=0;k<34;k++){
+    var a=k/34*Math.PI*2, rx=176*Math.cos(a)+210, ry=44*Math.sin(a)+190;
+    svg += '<ellipse cx="'+rx.toFixed(1)+'" cy="'+ry.toFixed(1)+'" rx="13" ry="6" fill="'+(k%3?'#5A7A5A':'#6E8F6E')+'" transform="rotate('+(a*180/Math.PI+90).toFixed(0)+' '+rx.toFixed(1)+' '+ry.toFixed(1)+')" opacity=".9"/>';
+  }
+  for(var b=0;b<9;b++){ var ba=(b/9)*Math.PI*2+0.3; svg += '<circle cx="'+(210+170*Math.cos(ba)).toFixed(1)+'" cy="'+(190+42*Math.sin(ba)).toFixed(1)+'" r="3.4" fill="#B2677A"/>'; }
+  svg += '<ellipse cx="210" cy="190" rx="140" ry="30" fill="#FAF6F0" opacity=".0"/>';
+  svg += candle(210, 108, '#FAF6F0', xmas, 'love', 'Christ candle · lights when every week is complete').replace('<rect x="199" y="108" width="22" height="56" rx="3" fill="#FAF6F0"/>','<rect x="199" y="108" width="22" height="56" rx="3" fill="#FAF6F0" stroke="#D4C4E0"/>');
+  cs.forEach(function(c,i){ var top = (i===0||i===3)?160:(i===1||i===2)?152:160; svg += candle(c.x, top, c.col, st[c.key].all, c.key, c.name+' · '+st[c.key].done+'/'+st[c.key].total); });
+  svg += '</svg>';
+  var cap = xmas ? 'Christ is born. Every candle is lit. Merry Christmas ✝'
+    : lit===0 ? 'Finish a week’s checklist and its candle lights. Tap a candle to jump to that week.'
+    : lit+' of 4 candles are lit. Keep going gently.';
+  var legend = cs.map(function(c){ var s=st[c.key]; return '<span><b>'+c.name+'</b> '+s.done+'/'+s.total+(s.all?' ✓':'')+'</span>'; }).join('') +
+    '<span><b>Prep</b> '+prep.done+'/'+prep.total+(prep.all?' ✓':'')+'</span>';
+  el.innerHTML = svg + '<div class="wreath-cap">'+cap+'</div><div class="wreath-legend">'+legend+'</div>';
+}
+function jumpWeek(key){
+  var card = document.getElementById('week-card-'+key); if(!card) return;
+  var body = card.querySelector('.week-body'), hd = card.querySelector('.week-header');
+  if(body && !body.classList.contains('open')) hd.click();
+  card.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* scores + goals (only shown for women whose roster entry includes them) */
+function renderPortrait(){
+  var sc = client.scores, sec = document.getElementById('portrait-section');
+  if(!sc){ sec.style.display='none'; return; }
+  sec.style.display='block';
+  var h='';
+  if(sc.glance){
+    var cols=['#6B5B8A','#C47B8A','#5A7A5A','#B8956A'], hd=['TEMPERAMENT','FAULT','CHARISM','SABOTEUR'];
+    h+='<div class="pf-strip">'+sc.glance.map(function(g,i){return '<div class="pf-tile"><div class="t" style="background:'+cols[i]+'">'+hd[i]+'</div><div class="p">'+esc(g[0])+'</div><div class="s">+ '+esc(g[1])+'</div></div>';}).join('')+'</div>';
+  }
+  [['temperament','Temperament','#6B5B8A'],['fault','Faults','#C47B8A'],['charism','Charisms','#5A7A5A'],['saboteur','Saboteurs','#B8956A']].forEach(function(g){
+    var grp=sc[g[0]]; if(!grp) return;
+    h+='<div class="pf-card"><div class="pf-h" style="color:'+g[2]+'">'+g[1]+'</div>'+grp.items.map(function(r,i){
+      return '<div class="pf-row'+(i<(grp.top||1)?' top':'')+'"><span>'+esc(r[0])+'</span><div class="pf-track"><div class="pf-fill" style="width:'+Math.round(r[1]/grp.max*100)+'%;background:'+g[2]+'"></div></div><span class="pf-num">'+r[1]+' / '+grp.max+'</span></div>';
+    }).join('')+'</div>';
+  });
+  document.getElementById('scores').innerHTML=h;
+}
+function renderGoals(){
+  var gs=client.goals, sec=document.getElementById('goals-section');
+  if(!gs||!gs.length){ sec.style.display='none'; return; }
+  sec.style.display='block';
+  var meta=[['KING GOAL','#6B5B8A'],['QUEEN GOAL','#C47B8A'],['LOAVES & FISHES · MIRACLE GOAL','#5A7A5A']];
+  document.getElementById('goals').innerHTML=gs.map(function(t,i){
+    return '<div class="goal-card"><div class="goal-head" style="background:'+meta[i][1]+'">♥ '+meta[i][0].replace('&','&amp;')+'</div><div class="goal-text">'+esc(t)+'</div></div>';
+  }).join('');
 }
 
 /* login */
@@ -1825,6 +1952,9 @@ function startPortal(name) {
   renderFoundationVideos();
   buildWeeks();
   renderDownloads();
+  renderPortrait();
+  renderGoals();
+  renderWreath();
   updateProgressBar();
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('portal').style.display = 'block';
