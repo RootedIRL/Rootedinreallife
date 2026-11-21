@@ -289,6 +289,96 @@
   .result-desc { font-size: 1rem; line-height: 1.7; color: #333; }
   .result-desc strong { color: var(--deep); }
 
+  /* Instant results — named cards */
+  .ir-name-banner {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.3rem, 4vw, 1.9rem);
+    color: var(--deep); text-align: center;
+    margin: 0.5rem 0 0.3rem; letter-spacing: 0.06em;
+  }
+  .ir-tagline {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.08rem; color: var(--royal); text-align: center; margin-bottom: 1.4rem;
+  }
+  .ir-section-label {
+    font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .ir-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(184,149,106,0.3); }
+  .ir-primary-name {
+    font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.15rem;
+  }
+  .ir-primary-sub {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1rem; color: var(--royal); margin-bottom: 0.9rem;
+  }
+  .ir-body {
+    font-size: 0.98rem; line-height: 1.75; color: #3A3045; margin-bottom: 1rem;
+  }
+  .ir-first-step {
+    background: rgba(107,91,138,0.07); border-left: 3px solid var(--advent-purple);
+    padding: 0.9rem 1.1rem; border-radius: 0 4px 4px 0; margin-top: 0.5rem;
+  }
+  .ir-first-step .step-label {
+    font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.14em;
+    color: var(--advent-purple); text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .ir-first-step p {
+    font-size: 0.97rem; line-height: 1.65; color: #3A3045; font-style: italic;
+  }
+  .ir-secondary-row {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+  }
+  .ir-secondary-chip {
+    background: white; border: 1px solid #D4C4E0; border-radius: 3px;
+    padding: 0.4rem 0.9rem; font-family: 'Cinzel', serif; font-size: 0.75rem;
+    color: var(--royal); letter-spacing: 0.05em;
+  }
+  .ir-bar-row { margin: 0.6rem 0; }
+  .ir-bar-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'Cinzel', serif; font-size: 0.78rem; color: #666; margin-bottom: 0.2rem;
+  }
+  .ir-bar-label .ir-bar-name { color: var(--deep); font-size: 0.82rem; }
+  .ir-bar-bg { height: 8px; background: #EDE5F5; border-radius: 5px; overflow: hidden; }
+  .ir-bar-fill { height: 100%; border-radius: 5px; transition: width 1.2s ease; width: 0;
+    background: linear-gradient(90deg, var(--advent-purple), var(--rose)); }
+  .ir-cta-block {
+    background: linear-gradient(145deg, var(--deep) 0%, #6B5B8A 60%, var(--royal) 100%);
+    border-radius: 6px; padding: 2.2rem 2rem; text-align: center; margin-top: 1rem;
+    border: 1px solid rgba(212,184,150,0.25);
+  }
+  .ir-cta-block .cross { font-size: 1.5rem; color: var(--gold-light); margin-bottom: 0.6rem; display: block; }
+  .ir-cta-block h3 {
+    font-family: 'Cinzel', serif; font-size: 1.15rem; color: #F0EAF8;
+    letter-spacing: 0.08em; margin-bottom: 0.6rem;
+  }
+  .ir-cta-block p {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.05rem; color: rgba(240,234,248,0.85); line-height: 1.75;
+    max-width: 480px; margin: 0 auto 1.4rem;
+  }
+  .ir-cta-btn {
+    display: inline-block; font-family: 'Cinzel', serif; letter-spacing: 0.1em;
+    background: linear-gradient(135deg, var(--gold) 0%, #D4A96A 100%);
+    color: var(--deep); border: none; padding: 0.9rem 2.4rem;
+    font-size: 0.88rem; border-radius: 4px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(184,149,106,0.4); text-decoration: none;
+    transition: all 0.25s; font-weight: 700;
+  }
+  .ir-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(184,149,106,0.5); }
+  .ir-cta-sub {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 0.88rem; color: rgba(240,234,248,0.5); margin-top: 1rem;
+  }
+  .ir-free-badge {
+    display: inline-block; background: rgba(90,122,90,0.3); border: 1px solid var(--green);
+    color: #A8C8A8; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.1em;
+    padding: 0.2rem 0.7rem; border-radius: 2px; margin-bottom: 0.8rem;
+  }
+
   .bar-wrap { margin: 0.5rem 0 1rem; }
   .bar-label {
     display: flex; justify-content: space-between;
@@ -790,22 +880,55 @@ function showSection(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ─── Charism first steps (free, no payment required) ─────────────────────────
+
+const charismFirstStep = {
+  teaching:       'This week, choose one truth of the faith you love and explain it to someone in your life — a child, a friend, a stranger. Notice where your words land. That is your charism at work.',
+  encouragement:  'This week, reach out to one person who is struggling and speak a word of hope over them — not advice, just truth about who they are. Watch what happens in them and in you.',
+  mercy:          'This week, do one act of service for someone who cannot repay you — a meal, a visit, an errand. As you serve, notice if it feels like coming home. That feeling is your charism.',
+  prophecy:       'This week, notice when you feel a strong sense of what needs to be said in a situation. Write it down before you speak it. Ask God: "Is this Your word, or mine?" Practice the pause.',
+  administration: 'This week, look at one area of your home, parish, or community that feels chaotic. Sketch (even roughly) how it could function better. You are not fixing it yet — just noticing how your mind works.',
+  intercession:   'This week, commit to praying specifically for one person every day — not a general prayer, but naming them before God and staying in prayer until you feel a release. This is your gift.',
+  hospitality:    'This week, invite someone who feels on the outside into your home, your table, or even just a coffee. Notice how naturally you help them feel seen. That ease is a gift, not a personality quirk.',
+  wisdom:         'This week, when a friend or family member faces a decision, offer to listen and reflect — not to give advice, but to ask questions that help them hear God. Notice where insight rises in you.',
+};
+
+const faultFirstStep = {
+  pride:      'Each evening this week, recall one moment where you defended yourself or felt superior. Bring it to prayer and simply say: "Lord, I was wrong. I receive your mercy." Just that — no explaining.',
+  vanity:     'Each day this week, do one act of service or goodness that no one will see or know about. Offer it silently to God. Notice how it feels to act for His eyes alone.',
+  sloth:      'Set a 15-minute prayer appointment for each morning this week — even if dry, even if you are distracted. Show up. Fidelity, not feeling, is what this fault needs from you.',
+  sensuality: 'Choose one small mortification per day this week: skip a snack, take a cold rinse at the end of your shower, sit with discomfort without reaching for your phone. Offer it up.',
+  anger:      'Name one person you carry resentment toward. Pray for their blessing — genuinely, even if it is hard — once per day for seven days. You do not have to feel it; just choose it.',
+  fear:       'Each morning this week, write: "Lord, I surrender ___ to You today." Name the specific thing you are gripping. Leave it on the page. Do not pick it back up.',
+};
+
+const saboteurFirstStep = {
+  judge:         'When your inner critic speaks this week, pause and name it: "That is the Judge — not God\'s voice." Then find one Scripture truth to speak back. Write it on a card you can see.',
+  hyperachiever: 'Schedule one hour this week of "holy uselessness" — time you give to God with no output, no task, no productivity. Just be. If guilt rises, offer it. That\'s the work.',
+  pleaser:       'Practice one honest "no" this week to something that conflicts with your call, your health, or your family. Say it kindly. Notice that the world does not end. That is freedom.',
+  controller:    'Each morning this week, name one situation you are trying to control. Say aloud: "Lord, I entrust this to You." Then physically open your hands as a gesture of release.',
+  avoider:       'Once this week, name one emotion in your journal that you have been avoiding — anger, grief, fear, whatever it is. Write it without judging it. Then bring it to prayer, as it is.',
+  victim:        'Each morning this week, offer your suffering to God with a specific intention for someone else. Shift the narrative from "this is happening to me" to "I unite this to the Cross for ___."',
+  hyperrational: 'Spend 10 minutes this week in Lectio Divina with a single verse. Read it slowly, let a word or phrase catch you, and sit with it without analyzing. Let feeling rise without explaining it away.',
+};
+
 // ─── Generate results ────────────────────────────────────────────────────────
 
 function generateResults() {
   const name = document.getElementById('clientName').value || 'Friend';
   const email = document.getElementById('clientEmail').value || '';
   const date = document.getElementById('clientDate').value;
-  const coach = document.getElementById('coachName').value;
 
   // Require name and email
   if (!name || name === 'Friend') {
     alert('Please enter your full name before submitting.');
+    showSection('intro');
     document.getElementById('clientName').focus();
     return;
   }
   if (!email) {
     alert('Please enter your email address before submitting.');
+    showSection('intro');
     document.getElementById('clientEmail').focus();
     return;
   }
@@ -825,78 +948,159 @@ function generateResults() {
   const sortedC = Object.entries(cScores).sort((a,b) => b[1]-a[1]);
   const sortedS = Object.entries(sScores).sort((a,b) => b[1]-a[1]);
 
+  const firstName = name.split(' ')[0];
+
+  // Top results
+  const topT  = sortedT[0][0];
+  const topF  = sortedF[0][0];
+  const topC  = sortedC[0][0];
+  const topC2 = sortedC[1] ? sortedC[1][0] : null;
+  const topS  = sortedS[0][0];
+
   let html = '';
 
-  // ─ Warm intro ─
+  // ─── Welcome banner ───
   html += `
-    <div style="
-      text-align:center; padding:1.5rem 1rem 1.25rem;
-      border-bottom:1px solid #D4C4E0; margin-bottom:1.5rem;
-    ">
-      <div style="font-size:1.4rem; color:#B8956A; margin-bottom:0.6rem;">✝</div>
-      <p style="
-        font-family:'Cormorant Garamond',serif; font-style:italic;
-        font-size:1.15rem; color:#4A3F55; line-height:1.75;
-        max-width:520px; margin:0 auto;
-      ">
-        Thank you for completing the assessment, ${name}.<br>
-        Your scores have been sent to Cassandra.<br>
-        She will be in touch soon with your full Soul Portrait.
+    <div style="text-align:center; padding:1.6rem 1rem 1.4rem; border-bottom:1px solid #D4C4E0; margin-bottom:1.8rem;">
+      <div style="font-size:1.6rem; color:var(--gold); margin-bottom:0.5rem;">✝</div>
+      <div class="ir-name-banner">${name}</div>
+      <div class="ir-tagline">Your Assessment Results — Rooted & Known</div>
+      <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:#666; line-height:1.7; max-width:480px; margin:0 auto;">
+        These results are yours to keep. Each section below names what God revealed through your answers
+        and gives you one free first step to take — no payment required.
       </p>
     </div>`;
 
-  // ─ Section helper: bars only, no numbers, no labels ─
-  function scoreSection(icon, title, sorted, qArray) {
-    let s = `
-      <div class="result-block">
-        <h3>${icon} &nbsp;${title}</h3>`;
-    sorted.forEach(([g, v], i) => {
-      const max = getMax(qArray, g);
-      const pct = Math.round(v / max * 100);
-      s += `
-        <div class="bar-wrap">
-          <div class="bar-bg" style="margin-top:0.4rem;">
-            <div class="bar-fill" style="width:${pct}%"></div>
-          </div>
-        </div>`;
-    });
-    s += `</div>`;
-    return s;
-  }
-
-  html += scoreSection('✝',  'I. TEMPERAMENT',       sortedT, temperamentQs);
-  html += scoreSection('⚖️', 'II. PREDOMINANT FAULT', sortedF, faultQs);
-  html += scoreSection('🕊️', 'III. CHARISMS',         sortedC, charismQs);
-  html += scoreSection('🛡️', 'IV. SABOTEURS',         sortedS, saboteurQs);
-
-  // ─ Closing message ─
+  // ─── I. TEMPERAMENT ───
+  const tInfo = temperamentInfo[topT];
+  const t2Info = sortedT[1] ? temperamentInfo[sortedT[1][0]] : null;
   html += `
-    <div style="
-      background: linear-gradient(135deg, #3D3450 0%, #6B5B8A 100%);
-      border-radius:4px; padding:2rem; text-align:center; margin-top:0.5rem;
-    ">
-      <p style="
-        font-family:'Cormorant Garamond',serif; font-style:italic;
-        font-size:1.1rem; color:rgba(240,234,248,0.9);
-        line-height:1.8; max-width:460px; margin:0 auto 0.75rem;
-      ">
-        Your Soul Portrait is being prepared personally for you.<br>
-        Cassandra will reach out to arrange delivery.
+    <div class="result-block">
+      <div class="ir-section-label">I. Temperament &nbsp;🜂</div>
+      <div class="ir-primary-name">${tInfo.label}</div>
+      <div class="ir-primary-sub">${tInfo.tagline}</div>
+      <div class="ir-body">${tInfo.desc}</div>
+      <div style="margin:0.8rem 0 0.4rem;">
+        <div style="font-family:'Cinzel',serif; font-size:0.78rem; color:var(--gold); letter-spacing:0.08em; margin-bottom:0.5rem;">VIRTUES TO CULTIVATE</div>
+        <div class="ir-secondary-row">
+          ${tInfo.virtues.map(v => `<span class="ir-secondary-chip">${v}</span>`).join('')}
+        </div>
+      </div>
+      <div style="margin:0.8rem 0 0.4rem;">
+        <div style="font-family:'Cinzel',serif; font-size:0.78rem; color:var(--gold); letter-spacing:0.08em; margin-bottom:0.5rem;">KINDRED SAINTS</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.97rem; color:#555;">${tInfo.saints}</div>
+      </div>
+      ${t2Info ? `<div style="margin-top:1rem; padding-top:0.8rem; border-top:1px solid #E8DFF0; font-size:0.93rem; color:#666; font-style:italic;">
+        Secondary temperament: <strong style="color:var(--deep);">${t2Info.label}</strong> — ${t2Info.tagline}
+      </div>` : ''}
+      <div class="ir-first-step">
+        <div class="step-label">✦ Your Free First Step</div>
+        <p>As a ${tInfo.label}: ${tInfo.virtues[0].toLowerCase()} is your invitation this season. This week, notice one moment when your natural temperament pulls you away from this virtue. Pause. Offer that moment to God. That noticing is the beginning.</p>
+      </div>
+    </div>`;
+
+  // ─── II. PREDOMINANT FAULT ───
+  const fInfo = faultInfo[topF];
+  html += `
+    <div class="result-block">
+      <div class="ir-section-label">II. Predominant Fault &nbsp;⚖️</div>
+      <div class="ir-primary-name">${fInfo.label}</div>
+      <div class="ir-primary-sub">${fInfo.tagline}</div>
+      <div class="ir-body">
+        Your scores point most strongly toward <strong>${fInfo.label}</strong> as your chief obstacle to holiness.
+        This is not condemnation — it is a gift of clarity. The saints who fought this same fault became great
+        because they knew their battlefield.
+      </div>
+      <div style="margin:0.8rem 0 0.6rem; font-size:0.97rem; color:#3A3045; line-height:1.7;">
+        <strong style="color:var(--deep);">The remedy:</strong> ${fInfo.remedy}
+      </div>
+      <div class="ir-first-step">
+        <div class="step-label">✦ Your Free First Step</div>
+        <p>${faultFirstStep[topF]}</p>
+      </div>
+    </div>`;
+
+  // ─── III. CHARISMS ───
+  const cInfo = charismInfo[topC];
+  const c2Info = topC2 ? charismInfo[topC2] : null;
+  html += `
+    <div class="result-block">
+      <div class="ir-section-label">III. Charisms &nbsp;🕊️</div>
+      <div class="ir-primary-name">${cInfo.label}</div>
+      <div class="ir-primary-sub">${cInfo.tagline}</div>
+      <div class="ir-body">
+        ${cInfo.desc}
+      </div>
+      ${c2Info ? `
+      <div style="margin-top:1rem; padding-top:0.9rem; border-top:1px solid #E8DFF0;">
+        <div class="ir-section-label" style="margin-bottom:0.4rem;">Also strong: ${c2Info.label}</div>
+        <div style="font-size:0.95rem; color:#555; font-style:italic; line-height:1.65;">${c2Info.desc}</div>
+      </div>` : ''}
+      <div style="margin-top:1rem;">
+        <div style="font-family:'Cinzel',serif; font-size:0.78rem; color:var(--gold); letter-spacing:0.08em; margin-bottom:0.5rem;">ALL YOUR CHARISM SCORES</div>
+        ${sortedC.map(([g,v]) => {
+          const max = getMax(charismQs, g);
+          const pct = Math.round(v/max*100);
+          return `<div class="ir-bar-row">
+            <div class="ir-bar-label">
+              <span class="ir-bar-name">${charismInfo[g].label}</span>
+              <span>${pct}%</span>
+            </div>
+            <div class="ir-bar-bg"><div class="ir-bar-fill" data-width="${pct}%"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="ir-first-step">
+        <div class="step-label">✦ Your Free First Step</div>
+        <p>${charismFirstStep[topC]}</p>
+      </div>
+    </div>`;
+
+  // ─── IV. SABOTEURS ───
+  const sInfo = saboteurInfo[topS];
+  html += `
+    <div class="result-block">
+      <div class="ir-section-label">IV. Primary Saboteur &nbsp;🛡️</div>
+      <div class="ir-primary-name">${sInfo.label}</div>
+      <div class="ir-primary-sub">${sInfo.tagline}</div>
+      <div class="ir-body">${sInfo.spiritual}</div>
+      <div style="margin-top:0.8rem; font-size:0.97rem; line-height:1.7; color:#3A3045;">
+        <strong style="color:var(--deep);">Daily practice:</strong> ${sInfo.practice}
+      </div>
+      <div class="ir-first-step">
+        <div class="step-label">✦ Your Free First Step</div>
+        <p>${saboteurFirstStep[topS]}</p>
+      </div>
+    </div>`;
+
+  // ─── CTA block ───
+  html += `
+    <div class="ir-cta-block">
+      <span class="cross">✝</span>
+      <div class="ir-free-badge">FREE RESULTS — NO PAYMENT REQUIRED</div>
+      <h3>Everyday Holiness</h3>
+      <p>
+        These results give you a beginning — a map of how God made you.
+        The <em>Everyday Holiness</em> program goes deeper: a hand-delivered Soul Portrait,
+        a personal deep dive call, and six weeks of one-on-one coaching built around exactly
+        who you are and the season God has placed you in.
       </p>
-      <p style="
-        font-family:'Cormorant Garamond',serif; font-style:italic;
-        font-size:0.92rem; color:rgba(184,149,106,0.8);
-        margin-top:1rem; padding-top:1rem;
-        border-top:1px solid rgba(255,255,255,0.1);
-      ">
+      <a class="ir-cta-btn" href="https://rootedirl.live" target="_blank">Learn More →</a>
+      <div class="ir-cta-sub">
         "Before I formed you in the womb I knew you." — Jeremiah 1:5
-      </p>
+      </div>
     </div>`;
 
   document.getElementById('results-content').innerHTML = html;
 
-  // Animate bars
+  // Animate bars using data-width
   requestAnimationFrame(() => {
+    document.querySelectorAll('.ir-bar-fill[data-width]').forEach(b => {
+      const w = b.getAttribute('data-width');
+      b.style.width = '0';
+      requestAnimationFrame(() => { b.style.width = w; });
+    });
+    // also any legacy bar-fills
     document.querySelectorAll('.bar-fill').forEach(b => {
       const w = b.style.width;
       b.style.width = '0';
@@ -907,7 +1111,7 @@ function generateResults() {
   showSection('results');
   document.querySelectorAll('.nav-btn.results-btn').forEach(b => b.classList.add('active'));
 
-  // Auto-send to Cassandra without requiring her to click
+  // Auto-send to Cassandra
   autoSendResults(name, email, date, sortedT, sortedF, sortedC, sortedS);
 }
 
