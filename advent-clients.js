@@ -14,7 +14,6 @@
      portrait  link or file name for her Soul Portrait PDF ('' until ready)       */
 window.ADVENT_CLIENTS = {
   // Preview login so you can look around. Delete this line when you are done.
-  'preview': { pw: 'advent2026', tier: 'sessions', journal: '', worksheet: '', portrait: '' },
   'tiana': { pw: 'tiana2026', tier: 'sessions', journal: 'tiana-journal.pdf', worksheet: 'tiana-goal-worksheet.pdf', portrait: 'tiana-soul-portrait.pdf',
     goals: ["Know how the Lord sees me, and receive His love, so that my cup can overflow to others.",
             "Spend guided time with the Lord each day, without distractions and obligations crowding it out.",
@@ -64,10 +63,10 @@ window.ADVENT_CLIENTS = {
 
 /* Program settings. Leave a value '' and the portal simply leaves it out. */
 window.ADVENT_CONFIG = {
-  assessmentUrl:  'https://youareknown.netlify.app/',  // where she takes her assessments
+  assessmentUrl:  'https://rootedirl.live/catholic-assessments.html',  // where she takes her assessments
   assessmentsDue: '',   // e.g. 'Wednesday, November 18'
   worksheetDue:   '',   // e.g. 'Friday, November 20'
   journalReady:   '',   // e.g. 'Friday, November 27'
-  welcomeVideoId: '',   // YouTube ID of your Advent welcome video (the part after youtu.be/)
+  welcomeVideoId: 'iiFZqnShqu0',   // YouTube ID of your Advent welcome video (the part after youtu.be/)
   weekVideoIds:   { prep: 'mb8Pbtek0PU', hope: 'UuOJHhkdlqo', peace: 'R_b2UgE2M30', joy: 'Vprjlz1of9I', love: 'SUIv2A1bvT0' }  // weekly lesson video IDs
 };

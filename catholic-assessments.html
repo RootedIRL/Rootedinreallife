@@ -925,8 +925,8 @@ const saboteurFirstStep = {
 // ─── Generate results ────────────────────────────────────────────────────────
 
 function generateResults() {
-  const name = document.getElementById('clientName').value || 'Friend';
-  const email = document.getElementById('clientEmail').value || '';
+  const name = (document.getElementById('clientName').value || '').trim() || 'Friend';
+  const email = (document.getElementById('clientEmail').value || '').trim();
   const date = document.getElementById('clientDate').value;
 
   // Require name and email
@@ -936,8 +936,8 @@ function generateResults() {
     document.getElementById('clientName').focus();
     return;
   }
-  if (!email) {
-    alert('Please enter your email address before submitting.');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Please enter a valid email address before submitting.');
     showSection('intro');
     document.getElementById('clientEmail').focus();
     return;
