@@ -11,7 +11,8 @@
                'sessions'  = $147 with two 1:1 sessions
      journal   link or file name for her personalized journal PDF ('' until ready)
      worksheet link or file name for her goal worksheet PDF ('' until ready)
-     portrait  link or file name for her Soul Portrait PDF ('' until ready)       */
+     portrait  link or file name for her Soul Portrait PDF ('' until ready)
+     companion (optional) link or file name for a Prep Week Companion PDF       */
 window.ADVENT_CLIENTS = {
   // Preview login so you can look around. Delete this line when you are done.
   'tiana': { pw: 'tiana2026', tier: 'sessions', journal: 'tiana-journal.pdf', worksheet: 'tiana-goal-worksheet.pdf', portrait: 'tiana-soul-portrait.pdf',
@@ -57,6 +58,25 @@ window.ADVENT_CLIENTS = {
       fault:       { max: 20, top: 2, items: [['Fear & Control',20],['Pride',17],['Vanity',14],['Anger & Resentment',11],['Spiritual Sloth',7],['Sensuality',6]] },
       charism:     { max: 15, top: 3, items: [['Administration',15],['Encouragement',13],['Teaching',13],['Wisdom / Discernment',11],['Intercession',9],['Prophecy',7],['Hospitality',6],['Mercy',3]] },
       saboteur:    { max: 15, top: 2, items: [['The Hyper-Achiever',15],['The Controller',15],['The Avoider',13],['The Pleaser',10],['The Victim',9],['The Judge',7],['The Hyper-Rational',6]] }
+    } },
+  'aileen': { pw: 'aileen2026', tier: 'self', journal: 'aileen-journal.pdf', companion: 'aileen-prep-week-companion.pdf', worksheet: 'aileen-goal-worksheet.pdf', portrait: 'aileen-soul-portrait.pdf',
+    goals: ["Grow in deeper joy, peace and acceptance in what the Lord is doing in my life.",
+            "Make more intentional time to workout and pray.",
+            "Become more selfless, free and joyful in the way I love in my vocation."],
+    scores: {
+      glance: [['Melancholic','Phlegmatic'],['Pride','Vanity'],['Hospitality','Prophecy'],['The Judge','The Hyper-Achiever']],
+      temperament: { max: 25, top: 2, items: [['Melancholic',22],['Phlegmatic',18],['Choleric',13],['Sanguine',11]] },
+      fault:       { max: 15, top: 1, items: [['Pride',10],['Vanity',8],['Anger & Resentment',8],['Fear & Control',7],['Sensuality',5],['Spiritual Sloth',4]] },
+      charism:     { max: 10, top: 3, items: [['Hospitality',10],['Prophecy',9],['Encouragement',8],['Wisdom / Discernment',8],['Teaching',7],['Administration',7],['Intercession',7],['Mercy',6]] },
+      saboteur:    { max: 10, top: 2, items: [['The Judge',9],['The Hyper-Achiever',9],['The Pleaser',8],['The Controller',7],['The Avoider',5],['The Victim',5],['The Hyper-Rational',2]] }
+    } },
+  'sophia': { pw: 'sophia2026', tier: 'self', journal: '', worksheet: 'sophia-goal-worksheet.pdf', portrait: 'sophia-soul-portrait.pdf',
+    scores: {
+      glance: [['Phlegmatic','Melancholic'],['Sensuality','Fear & Control'],['Hospitality','Wisdom / Discernment'],['The Hyper-Achiever','The Pleaser']],
+      temperament: { max: 25, top: 2, items: [['Phlegmatic',24],['Melancholic',18],['Sanguine',7],['Choleric',6]] },
+      fault:       { max: 15, top: 2, items: [['Sensuality',10],['Fear & Control',10],['Pride',9],['Vanity',8],['Spiritual Sloth',8],['Anger & Resentment',2]] },
+      charism:     { max: 10, top: 3, items: [['Hospitality',6],['Wisdom / Discernment',6],['Prophecy',5],['Encouragement',4],['Administration',4],['Teaching',3],['Mercy',3],['Intercession',3]] },
+      saboteur:    { max: 10, top: 2, items: [['The Hyper-Achiever',9],['The Pleaser',8],['The Controller',8],['The Judge',7],['The Avoider',7],['The Victim',7],['The Hyper-Rational',4]] }
     } },
   // 'firstname': { pw: 'firstname2026', tier: 'sessions', journal: '', worksheet: '', portrait: '' },
 };

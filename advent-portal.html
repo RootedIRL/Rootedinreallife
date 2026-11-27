@@ -1852,6 +1852,7 @@ function renderDownloads() {
   dl('📓', 'Your Personalized Journal', 'Built on your Soul Portrait and your three goals', client.journal, 'Available once your journal is ready');
   dl('🎯', 'Your Goal Worksheet', 'Your three Advent goals', client.worksheet, 'Cassandra sends this after your results are ready');
   dl('📖', 'Your Soul Portrait', 'Your four assessment results', client.portrait, 'Cassandra sends this when your results are ready');
+  if (client.companion) dl('🌿', 'Prep Week Companion', 'Walk the R.O.O.T.E.D. Model alongside Week 1', client.companion, '');
   dl('🕊️', 'Hard-Moment Protocol', 'Name it, pray, elect: what to do before you react', 'hard-moment-protocol-advent.pdf', '');
   cards.push('<a class="download-card" href="' + esc(CFG.assessmentUrl || 'https://rootedirl.live') + '" target="_blank"><span class="download-icon">✦</span><div class="download-title">Take Your Assessments</div><div class="download-sub">Your four assessments</div><div class="download-btn">Open</div></a>');
   cards.push('<a class="download-card" href="https://rootedirl.live" target="_blank"><span class="download-icon">✝</span><div class="download-title">Back to Main Site</div><div class="download-sub">rootedirl.live</div><div class="download-btn">Visit Site</div></a>');
